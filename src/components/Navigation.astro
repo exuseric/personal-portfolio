@@ -1,34 +1,36 @@
 ---
 import { Image } from "astro:assets";
-import data from "@data/navigation.json";
-import socialLinksData from "@data/links.json";
+import data from "@/data/navigation.json";
+import socialLinksData from "@/data/links.json";
 import { Icon } from "astro-icon/components";
 // const data = await getCollection("navigation");
 const { nav } = data;
 const { links: socialLinks } = socialLinksData;
+import LogoImage from "@/images/logo.png";
 ---
 
 <header class="primary_nav">
     <div class="container primary_nav__container grid">
         <a href="/" class="primary_nav__logo col-span-4">
             <Image
-                src={nav.logo.img}
-                width={150}
-                height={60}
+                src={LogoImage}
+                width={LogoImage.width}
+                height={LogoImage.height}
                 alt={nav.logo.text}
+                loading="eager"
+                decoding="sync"
                 class="primary_nav__logo_img"
             />
         </a>
         <nav
+            data-nav
             class="primary_nav__links col-span-12"
             aria-label="Main Navigation"
-            role="navigation"
         >
             <ul
                 class="primary_nav__list"
                 data-menu
                 data-is-open="false"
-                aria-expanded="false"
                 aria-label="Main Navigation Links"
             >
                 {
@@ -37,6 +39,8 @@ const { links: socialLinks } = socialLinksData;
                             <a
                                 href={link.url}
                                 class={`primary_nav__link btn ${index === nav.links.length - 1 ? "btn-primary" : "btn-ghost"}`}
+                                title={link.label}
+                                aria-label={link.label}
                             >
                                 {link.label}
                             </a>
@@ -92,11 +96,12 @@ const { links: socialLinks } = socialLinksData;
 </header>
 <style>
     .primary_nav {
-        position: fixed;
+        position: sticky;
         top: 0;
         width: 100%;
         height: auto;
         z-index: 1000;
+        padding: var(--space-2) 0;
         background-color: var(--color-bg);
     }
     .primary_nav__logo {
@@ -106,6 +111,7 @@ const { links: socialLinks } = socialLinksData;
     .primary_nav__logo_img {
         object-fit: contain;
         object-position: center;
+        max-height: 50px;
     }
     .primary_nav__links {
         position: relative;
@@ -208,29 +214,30 @@ const { links: socialLinks } = socialLinksData;
     }
 </style>
 <script>
-    const toggleButton = document.querySelector(
-        "[data-toggle-button]",
-    ) as HTMLButtonElement;
-    const menu = document.querySelector("[data-menu]") as HTMLElement;
+    document.addEventListener("DOMContentLoaded", () => {
+        const toggleButton = document.querySelector(
+            "[data-toggle-button]",
+        ) as HTMLButtonElement;
+        const menu = document.querySelector("[data-menu]") as HTMLElement;
 
-    if (toggleButton && menu) {
-        toggleButton.addEventListener("click", () => {
-            const toggleIcons = document.querySelectorAll(
-                "[data-toggle-icon]",
-            ) as NodeListOf<HTMLElement>;
-            const isOpen = menu.dataset.isOpen === "true";
-            const newState = !isOpen;
+        if (toggleButton && menu) {
+            toggleButton.addEventListener("click", () => {
+                const toggleIcons = document.querySelectorAll(
+                    "[data-toggle-icon]",
+                ) as NodeListOf<HTMLElement>;
+                const isOpen = menu.dataset.isOpen === "true";
+                const newState = !isOpen;
 
-            // Update menu state
-            menu.dataset.isOpen = String(newState);
-            menu.setAttribute("aria-expanded", String(newState));
-            toggleButton.setAttribute("aria-expanded", String(newState));
+                // Update menu state
+                menu.dataset.isOpen = String(newState);
+                toggleButton.setAttribute("aria-expanded", String(newState));
 
-            // Toggle icons visibility
-            toggleIcons.forEach((icon) => {
-                const isVisible = icon.dataset.isVisible === "true";
-                icon.dataset.isVisible = String(!isVisible);
+                // Toggle icons visibility
+                toggleIcons.forEach((icon) => {
+                    const isVisible = icon.dataset.isVisible === "true";
+                    icon.dataset.isVisible = String(!isVisible);
+                });
             });
-        });
-    }
+        }
+    });
 </script>
