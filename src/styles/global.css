@@ -135,6 +135,13 @@ html {
   margin-inline: auto;
 }
 
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  gap: var(--space-6);
+}
+
 .content {
   width: var(--content-width);
   margin-inline: auto;
