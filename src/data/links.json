@@ -1,0 +1,14 @@
+{
+    "links": [
+        {
+            "name": "github",
+            "url": "https://github.com/exuseric",
+            "icon": "mdi:github"
+        },
+        {
+            "name": "behance", 
+            "url": "https://be.net/exuseric",
+            "icon": "mdi:behance"
+        }
+    ]
+}

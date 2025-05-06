@@ -1,0 +1,48 @@
+{
+    "nav": {
+      "logo": {
+        "text": "Eric Gathoni",
+        "url": "/",
+        "img": "/images/logo.png"
+      },
+      "links": [
+        {
+          "label": "Home",
+          "url": "/",
+          "type": "internal"
+        },
+        {
+          "label": "Projects",
+          "url": "/projects",
+          "type": "internal"
+        },
+        {
+          "label": "About",
+          "url": "/about",
+          "type": "internal"
+        },
+        {
+          "label": "Blog",
+          "url": "/blog",
+          "type": "internal"
+        },
+        {
+          "label": "Contact",
+          "url": "/contact",
+          "type": "internal",
+          "highlight": true
+        }
+      ],
+      "cta": {
+        "label": "Hire Me",
+        "url": "/contact",
+        "type": "internal",
+        "style": "button" 
+      },
+      "mobile": {
+        "menuLabel": "Menu",
+        "closeLabel": "Close"
+      }
+    }
+  }
+  

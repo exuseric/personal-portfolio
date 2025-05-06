@@ -1,148 +1,162 @@
 @import url("./reset.css");
 
-/* Minimal Design System: Core Variables */
+/* Minimal Design System with Carbon Inspiration: Core Variables */
 :root {
-  /* Color System - Monochromatic & Minimal */
-  --brand-accent: #8937A4;
+  /* Brand Color - Maintained from Original */
+  --brand-accent: #9C68F2;
   
-  /* Neutral Palette - Intentionally Limited */
+  /* Carbon-inspired Neutral Palette */
   --color-bg: #ffffff;
-  --color-text: #333333;
-  --color-text-muted: #767676;
-  --color-border: #e0e0e0;
-  --color-surface: #f7f7f7;
+  --color-text: #161616;        /* Carbon uses darker text for accessibility */
+  --color-text-muted: #525252;  /* Carbon gray-60 */
+  --color-border: #e0e0e0;      /* Carbon gray-20 */
+  --color-surface: #f4f4f4;     /* Carbon gray-10 */
   --color-surface-raised: #ffffff;
   
-  /* Limited Accent Tints */
-  --accent-light: color-mix(in srgb, var(--brand-accent) 20%, white);
-  --accent-lighter: color-mix(in srgb, var(--brand-accent) 10%, white);
-  --accent-dark: color-mix(in srgb, var(--brand-accent) 85%, black);
+  /* Carbon-inspired Accent Tints */
+  --accent-lighter: oklch(from var(--brand-accent) calc(l + .20) c h); /* lightest */
+  --accent-light: oklch(from var(--brand-accent) calc(l + .10) c h);
+  --color-2: var(--brand-accent);
+  --accent-dark: oklch(from var(--brand-accent) calc(l - .10) c h);
+  --accent-darker: oklch(from var(--brand-accent) calc(l - .20) c h); /* darkest */
   
-  /* Minimal Gray Scale - Fewer Options */
-  --gray-100: #f7f7f7;
-  --gray-200: #e0e0e0;
-  --gray-300: #c7c7c7;
-  --gray-400: #a0a0a0;
-  --gray-500: #767676;
-  --gray-600: #595959;
-  --gray-700: #404040;
-  --gray-800: #333333;
-  --gray-900: #1a1a1a;
+  /* Carbon Gray Scale */
+  --gray-100: #f4f4f4;  /* Carbon gray-10 */
+  --gray-200: #e0e0e0;  /* Carbon gray-20 */
+  --gray-300: #c6c6c6;  /* Carbon gray-30 */
+  --gray-400: #a8a8a8;  /* Carbon gray-40 */
+  --gray-500: #8d8d8d;  /* Carbon gray-50 */
+  --gray-600: #525252;  /* Carbon gray-60 */
+  --gray-700: #393939;  /* Carbon gray-70 */
+  --gray-800: #262626;  /* Carbon gray-80 */
+  --gray-900: #161616;  /* Carbon gray-90 */
   
-  /* Typography - Clean & Minimal */
-  /* --font-sans: 'Inter', system-ui, sans-serif;
-  --font-mono: 'SF Mono', 'JetBrains Mono', monospace; */
+  /* Typography - Carbon IBM Plex Sans Inspired */
+  /* --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'SF Mono', monospace; */
   
-  /* Simplified Font Scale */
+  /* Carbon-inspired Font Scale */
   --fs-base: 1rem;      /* 16px */
-  --fs-sm: 0.875rem;    /* 14px */
-  --fs-xs: 0.75rem;     /* 12px */
+  --fs-sm: 0.875rem;    /* 14px - Carbon body copy */
+  --fs-xs: 0.75rem;     /* 12px - Carbon caption */
   --fs-lg: 1.125rem;    /* 18px */
-  --fs-xl: 1.375rem;    /* 22px */
-  --fs-2xl: 1.75rem;    /* 28px */
-  --fs-3xl: 2.25rem;    /* 36px */
+  --fs-xl: 1.25rem;     /* 20px - Carbon heading-03 */
+  --fs-2xl: 1.75rem;    /* 28px - Carbon heading-05 */
+  --fs-3xl: 2.625rem;   /* 42px - Carbon heading-07 */
   
-  /* Spacing - Minimal Grid */
+  /* Carbon-inspired Spacing - 8px base */
   --space-unit: 0.5rem; /* 8px base unit */
-  --space-1: calc(var(--space-unit) * 0.5); /* 4px */
-  --space-2: var(--space-unit);             /* 8px */
-  --space-3: calc(var(--space-unit) * 1.5); /* 12px */
-  --space-4: calc(var(--space-unit) * 2);   /* 16px */
-  --space-6: calc(var(--space-unit) * 3);   /* 24px */
-  --space-8: calc(var(--space-unit) * 4);   /* 32px */
-  --space-12: calc(var(--space-unit) * 6);  /* 48px */
-  --space-16: calc(var(--space-unit) * 8);  /* 64px */
+  --space-1: 0.25rem;   /* 4px - Carbon spacing-01 */
+  --space-2: 0.5rem;    /* 8px - Carbon spacing-03 */
+  --space-3: 0.75rem;   /* 12px - Carbon spacing-04 */
+  --space-4: 1rem;      /* 16px - Carbon spacing-05 */
+  --space-6: 1.5rem;    /* 24px - Carbon spacing-06 */
+  --space-8: 2rem;      /* 32px - Carbon spacing-07 */
+  --space-12: 3rem;     /* 48px - Carbon spacing-09 */
+  --space-16: 4rem;     /* 64px - Carbon spacing-11 */
   
-  /* Border Radii - Minimal */
-  --radius-sm: 2px;
-  --radius-md: 4px;
-  --radius-lg: 8px;
+  /* Carbon-inspired Border Radii */
+  --radius-sm: 0;       /* Carbon uses mostly sharp corners */
+  --radius-md: 0;       /* Carbon uses mostly sharp corners */
+  --radius-lg: 0;       /* Carbon uses mostly sharp corners */
   
-  /* Reduced Shadow System */
+  /* Carbon-inspired Shadow System */
   --shadow-color: 0deg 0% 0%;
-  --shadow-strength: 3%;
-  --shadow-sm: 0 1px 2px hsl(var(--shadow-color) / calc(var(--shadow-strength)));
-  --shadow-md: 0 3px 8px hsl(var(--shadow-color) / calc(var(--shadow-strength)));
+  --shadow-strength: 10%;
+  --shadow-sm: 0 2px 6px hsl(var(--shadow-color) / calc(var(--shadow-strength)));
+  --shadow-md: 0 4px 8px hsl(var(--shadow-color) / calc(var(--shadow-strength)));
   
-  /* Clean Transitions */
-  --transition-all: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  /* Carbon-inspired Transitions */
+  --transition-all: 110ms cubic-bezier(0.2, 0, 0.38, 0.9); /* Carbon's standard easing */
   
-  /* Minimal Layout */
+  /* Layout */
   --content-width: min(100% - 2rem, 680px);
   --site-width: min(100% - 2rem, 1200px);
   
-  /* Line Heights */
-  --line-height-tight: 1.2;
-  --line-height-normal: 1.5;
+  /* Line Heights - Carbon Inspired */
+  --line-height-tight: 1.25;    /* Carbon's heading line height */
+  --line-height-normal: 1.5;    /* Carbon's body line height */
   --line-height-relaxed: 1.7;
   
   /* Component Variables */
-  --header-height: 64px;
+  --header-height: 48px;        /* Carbon header is 48px */
   
-  /* Button System Variables */
-  --button-height-sm: 28px;
-  --button-height-md: 36px;
-  --button-height-lg: 44px;
+  /* Button System Variables - Carbon Inspired */
+  --button-height-sm: 32px;     /* Carbon small button */
+  --button-height-md: 40px;     /* Carbon default button */
+  --button-height-lg: 48px;     /* Carbon large button */
   
-  --icon-button-sm: 28px;
-  --icon-button-md: 36px;
-  --icon-button-lg: 44px;
+  --icon-button-sm: 32px;
+  --icon-button-md: 40px;
+  --icon-button-lg: 48px;
   
-  --button-radius: 2px;      /* Sharper corners */
+  --button-radius: 0;           /* Carbon uses sharp corners */
   --button-border-width: 1px;
   
-  --button-font-weight: 500;
-  --button-letter-spacing: 0.01em;
+  --button-font-weight: 400;    /* Carbon buttons are typically regular weight */
+  --button-letter-spacing: 0;
   
-  --button-transition: 150ms ease;
+  --button-transition: 110ms cubic-bezier(0.2, 0, 0.38, 0.9);
   
   --button-icon-gap: var(--space-2);
   
-  --focus-ring-color: color-mix(in srgb, var(--brand-accent) 70%, transparent);
+  --focus-ring-color: #ffffff;  /* Carbon uses white focus rings */
   --focus-ring-width: 2px;
   --focus-ring-offset: 1px;
 }
 
-/* Dark Theme - Minimal Contrast */
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: #121212;
-    --color-text: #e0e0e0;
-    --color-text-muted: #a0a0a0;
-    --color-border: #333333;
-    --color-surface: #1e1e1e;
-    --color-surface-raised: #2a2a2a;
-    
-    --shadow-strength: 10%;
-    --shadow-color: 220deg 40% 2%;
-  }
+/* Dark Theme - Carbon Inspired */
+/* .dark {
+  --color-bg: #161616;
+  --color-text: #f4f4f4;        
+  --color-text-muted: #a8a8a8;  
+  --color-border: #393939;      
+  --color-surface: #262626;     
+  --color-surface-raised: #393939;
+  
+  --shadow-strength: 30%;
+  --shadow-color: 220deg 40% 2%;
+  
+  --focus-ring-color: #ffffff;
 } */
 
-/* Manual Dark Class */
-.dark {
-  --color-bg: #121212;
-  --color-text: #e0e0e0;
-  --color-text-muted: #a0a0a0;
-  --color-border: #333333;
-  --color-surface: #1e1e1e;
-  --color-surface-raised: #2a2a2a;
-  
-  --shadow-strength: 10%;
-  --shadow-color: 220deg 40% 2%;
-}
-
-/* Base Styles - Minimal & Clean */
+/* Base Styles - Carbon Inspired */
 html {
   font-family: var(--font-sans);
   color: var(--color-text);
   background-color: var(--color-bg);
   line-height: var(--line-height-normal);
+  font-weight: 400;             /* Carbon uses 400 for body text */
 }
 
 /* Core Layout Elements */
 .container {
-  width: var(--site-width);
-  margin-inline: auto;
+  --padding-inline: 1rem;
+  --content-max-width: 1200px;
+  --breakout-max-width: 85ch;
+  --breakout-size: calc((var(--breakout-max-width) - var(--content-max-width)) / 2);
+  
+      display: grid;
+      grid-template-columns: [full-width-start] minmax(var(--padding-inline),1fr) [breakout-start] minmax(0, var(--breakout-size)) [content-start] min(100% - (var(--padding-inline) * 2), var(--content-max-width)) [content-end] minmax(0, var(--breakout-size)) [breakout-end] minmax(var(--padding-inline), 1fr) [full-width-end];
+  }
+  
+  .container > :not(.breakout, .full-width) {
+      grid-column: content;
+  }
+  
+  .container > .breakout {
+      grid-column: breakout;
+  }
+  
+  .container > .full-width {
+      grid-column: full-width;
+  }
+ 
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  gap: var(--space-6);
 }
 
 .content {
@@ -150,14 +164,17 @@ html {
   margin-inline: auto;
 }
 
-/* Typography Base Styles */
+/* Typography Base Styles - Carbon Inspired */
 h1, h2, h3, h4, h5 {
   line-height: var(--line-height-tight);
   margin-bottom: var(--space-4);
-  font-weight: 600;
+  font-weight: 400;             /* Carbon uses 400 for headings */
 }
 
-h1 { font-size: var(--fs-3xl); }
+h1 { 
+  font-size: var(--fs-3xl);
+  font-weight: 300;             /* Carbon uses lighter weight for largest headings */
+}
 h2 { font-size: var(--fs-2xl); }
 h3 { font-size: var(--fs-xl); }
 h4 { font-size: var(--fs-lg); }
@@ -165,18 +182,23 @@ h5 { font-size: var(--fs-base); }
 
 p, ul, ol {
   margin-bottom: var(--space-4);
+  font-size: var(--fs-sm);      /* Carbon uses 14px for body text */
 }
 
 small {
-  font-size: var(--fs-sm);
+  font-size: var(--fs-xs);
   color: var(--color-text-muted);
 }
 
 a {
-  color: var(--brand-accent);
+  color: var(--color-text);
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition: border-color var(--transition-all);
+}
+
+a:not([class]) {
+  color: var(--accent-darker);
 }
 
 a:hover {
@@ -194,7 +216,7 @@ a:hover {
 .text-muted { color: var(--color-text-muted); }
 .text-accent { color: var(--brand-accent); }
 
-/* Layout Utilities - Minimal Set */
+/* Layout Utilities */
 .flex { display: flex; }
 .flex-col { flex-direction: column; }
 .items-center { align-items: center; }
@@ -209,10 +231,10 @@ a:hover {
 .mb-4 { margin-bottom: var(--space-4); }
 .mb-8 { margin-bottom: var(--space-8); }
 
-/* Components - Minimalist Versions */
+/* Components - Carbon Inspired */
 .card {
   background-color: var(--color-surface-raised);
-  border-radius: var(--radius-md);
+  border-radius: 0;             /* Carbon uses sharp corners */
   padding: var(--space-4);
   border: 1px solid var(--color-border);
   transition: transform var(--transition-all), box-shadow var(--transition-all);
@@ -223,7 +245,7 @@ a:hover {
   box-shadow: var(--shadow-sm);
 }
 
-/* Base Button Styles */
+/* Base Button Styles - Carbon Inspired */
 .btn {
   /* Layout */
   display: inline-flex;
@@ -232,13 +254,14 @@ a:hover {
   height: var(--button-height-md);
   padding-inline: var(--space-4);
   white-space: nowrap;
+  min-width: 78px;              /* Carbon has min-width */
   
   /* Shape */
   border-radius: var(--button-radius);
   border: var(--button-border-width) solid transparent;
   
   /* Typography */
-  font-size: var(--fs-sm);
+  font-size: var(--fs-sm);      /* Carbon uses 14px */
   font-weight: var(--button-font-weight);
   letter-spacing: var(--button-letter-spacing);
   
@@ -255,73 +278,77 @@ a:hover {
   text-decoration: none;
 }
 
-/* Button Focus Handling */
+/* Carbon Focus Style */
 .btn:focus-visible {
-  outline: var(--focus-ring-width) solid var(--focus-ring-color);
-  outline-offset: var(--focus-ring-offset);
+  outline: var(--focus-ring-width) solid var(--brand-accent);
+  outline-offset: var(--focus-ring-width);
 }
 
-/* Disabled State */
+/* Disabled State - Carbon Style */
 .btn:disabled,
 .btn[aria-disabled="true"] {
-  opacity: 0.5;
+  opacity: 0.3;                 /* Carbon uses 30% opacity */
   pointer-events: none;
 }
 
-/* Button Sizes */
-.btn-sm {
+/* Button Sizes - Carbon Inspired */
+.btn--sm {
   height: var(--button-height-sm);
   padding-inline: var(--space-2);
   font-size: var(--fs-xs);
+  min-width: 60px;              /* Carbon has min-width */
 }
 
-.btn-lg {
+.btn--lg {
   height: var(--button-height-lg);
   padding-inline: var(--space-6);
   font-size: var(--fs-base);
+  min-width: 96px;              /* Carbon has min-width */
 }
 
-/* Button Variants */
+/* Button Variants - Carbon Inspired */
 .btn-primary {
   background-color: var(--brand-accent);
   color: white;
 }
 
 .btn-primary:hover {
-  filter: brightness(0.95);
+  background-color: var(--accent-dark);
 }
 
 .btn-primary:active {
-  filter: brightness(0.9);
+  background-color: color-mix(in srgb, var(--accent-dark) 70%, black);
 }
 
+/* Carbon Secondary Button */
 .btn-minimal {
   background-color: transparent;
   color: var(--color-text);
-  border: var(--button-border-width) solid var(--color-border);
+  border: var(--button-border-width) solid var(--color-text);
 }
 
 .btn-minimal:hover {
-  border-color: var(--color-text-muted);
-  background-color: var(--color-surface);
+  background-color: var(--accent-lighter);
 }
 
 .btn-minimal:active {
-  background-color: var(--gray-200);
+  background-color: var(--gray-300);
 }
 
+/* Carbon Tertiary Button */
 .btn-text {
   background-color: transparent;
-  color: var(--color-text);
+  color: var(--brand-accent);
   padding-inline: var(--space-2);
   height: auto;
   border: none;
 }
 
 .btn-text:hover {
-  color: var(--brand-accent);
+  text-decoration: underline;   /* Carbon uses underline on hover */
 }
 
+/* Carbon Ghost Button */
 .btn-accent {
   background-color: transparent;
   color: var(--brand-accent);
@@ -332,35 +359,36 @@ a:hover {
   background-color: var(--accent-lighter);
 }
 
-/* Icon Button Variations */
+/* Icon Button Variations - Carbon Inspired */
 .btn-icon {
-  /* Make square instead of rectangular */
   width: var(--icon-button-md);
   height: var(--icon-button-md);
   padding: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-width: auto;              /* Override min-width for icon buttons */
 }
 
-.btn-icon-sm {
+.btn-icon--sm {
   width: var(--icon-button-sm);
   height: var(--icon-button-sm);
   padding: 0;
+  min-width: auto;
 }
 
-.btn-icon-lg {
+.btn-icon--lg {
   width: var(--icon-button-lg);
   height: var(--icon-button-lg);
   padding: 0;
+  min-width: auto;
 }
 
-/* Icon Only Square with Primary Style */
 .btn-icon.btn-primary {
   color: white;
 }
 
-/* Icon Only Transparent Style */
+/* Carbon-inspired Ghost Button */
 .btn-icon.btn-ghost {
   background-color: transparent;
   color: var(--color-text);
@@ -371,18 +399,16 @@ a:hover {
   background-color: var(--color-surface);
 }
 
-/* Icon Only with Border */
 .btn-icon.btn-outline {
   background-color: transparent;
   color: var(--color-text);
-  border: var(--button-border-width) solid var(--color-border);
+  border: var(--button-border-width) solid var(--color-text);
 }
 
 .btn-icon.btn-outline:hover {
-  border-color: var(--color-text);
+  background-color: var(--color-surface);
 }
 
-/* Icon Button Accent Style */
 .btn-icon.btn-accent-icon {
   background-color: transparent;
   color: var(--brand-accent);
@@ -393,14 +419,13 @@ a:hover {
   background-color: var(--accent-lighter);
 }
 
-/* Icon with Text Buttons */
+/* Icon with Text Buttons - Carbon Style */
 .btn-with-icon {
   display: inline-flex;
   align-items: center;
   gap: var(--button-icon-gap);
 }
 
-/* Icon Positioning */
 .btn-with-icon .icon-left {
   margin-right: var(--space-1);
 }
@@ -409,31 +434,24 @@ a:hover {
   margin-left: var(--space-1);
 }
 
-/* Sharp Functional Button Variation */
+/* Carbon uses sharp corners already */
 .btn-sharp {
   border-radius: 0;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-size: calc(var(--fs-sm) - 1px);
+  text-transform: none;        /* Carbon doesn't use text transform */
+  letter-spacing: 0;
+  font-size: var(--fs-sm);
 }
 
-/* Group Buttons (Side by Side) */
+/* Button Group - Carbon Style */
 .btn-group {
   display: inline-flex;
 }
 
 .btn-group .btn:not(:first-child) {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
   margin-left: -1px; /* Collapse borders */
 }
 
-.btn-group .btn:not(:last-child) {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-/* Loading State */
+/* Loading State - Carbon Style */
 .btn-loading {
   position: relative;
   color: transparent;
@@ -459,24 +477,26 @@ a:hover {
   }
 }
 
-/* Subtle Tag/Badge */
+/* Tag/Badge - Carbon Style */
 .tag {
   display: inline-flex;
   align-items: center;
-  padding: var(--space-1) var(--space-2);
-  border-radius: var(--radius-sm);
+  padding: 0 var(--space-2);
+  height: 24px;                /* Carbon tag height */
+  border-radius: 0;            /* Carbon tags have sharp corners */
   font-size: var(--fs-xs);
   background-color: var(--color-surface);
-  color: var(--color-text-muted);
+  color: var(--color-text);
   border: 1px solid var(--color-border);
 }
 
-/* Header - Minimal Navigation */
+/* Header - Carbon Navigation Style */
 .header {
   height: var(--header-height);
   border-bottom: 1px solid var(--color-border);
   display: flex;
   align-items: center;
+  background-color: var(--color-surface);
 }
 
 .nav-link {
@@ -485,7 +505,10 @@ a:hover {
   padding: var(--space-2);
   margin-inline: var(--space-2);
   transition: color var(--transition-all);
-  border-bottom: none;
+  border-bottom: 2px solid transparent;
+  height: var(--header-height);
+  display: inline-flex;
+  align-items: center;
 }
 
 .nav-link:hover {
@@ -493,27 +516,28 @@ a:hover {
 }
 
 .nav-link.active {
-  font-weight: 500;
-  color: var(--brand-accent);
+  border-bottom: 2px solid var(--brand-accent);
+  color: var(--color-text);     /* Carbon keeps text color the same */
 }
 
-/* Form Elements - Minimal */
+/* Form Elements - Carbon Style */
 .input {
   height: var(--button-height-md);
   padding-inline: var(--space-2);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  background-color: var(--color-surface);
+  border: none;                 /* Carbon inputs have bottom border only */
+  border-bottom: 1px solid var(--color-border);
+  border-radius: 0;             /* Carbon inputs have no border radius */
+  background-color: var(--color-bg);
   font-size: var(--fs-sm);
   transition: border-color var(--transition-all);
 }
 
 .input:focus {
   outline: none;
-  border-color: var(--brand-accent);
+  border-bottom: 2px solid var(--brand-accent);
 }
 
-/* Dividers */
+/* Dividers - Carbon Style */
 .divider {
   width: 100%;
   height: 1px;
@@ -521,22 +545,658 @@ a:hover {
   margin-block: var(--space-8);
 }
 
-/* Code Display */
+/* Code Display - Carbon Style */
 code {
   font-family: var(--font-mono);
   font-size: var(--fs-sm);
   background-color: var(--color-surface);
   padding: var(--space-1) var(--space-2);
-  border-radius: var(--radius-sm);
+  border-radius: 0;            /* Carbon uses sharp corners */
 }
 
 .code-block {
   padding: var(--space-4);
-  border-radius: var(--radius-md);
+  border-radius: 0;            /* Carbon uses sharp corners */
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   font-family: var(--font-mono);
   font-size: var(--fs-sm);
   overflow-x: auto;
   margin-bottom: var(--space-4);
+}
+
+/* Carbon-specific Additions */
+
+/* Toggle - Carbon Style */
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 24px;
+}
+
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--gray-300);
+  transition: var(--transition-all);
+  border-radius: 24px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: var(--transition-all);
+  border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+  background-color: var(--brand-accent);
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(24px);
+}
+
+/* Checkbox - Carbon Style */
+.checkbox {
+  position: relative;
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+}
+
+.checkbox input {
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
+
+.checkbox-mark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  background-color: transparent;
+  border: 1px solid var(--color-border);
+}
+
+.checkbox input:checked + .checkbox-mark {
+  background-color: var(--brand-accent);
+  border-color: var(--brand-accent);
+}
+
+.checkbox-mark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 5px;
+  top: 1px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox input:checked + .checkbox-mark:after {
+  display: block;
+}
+
+/* Radio Button - Carbon Style */
+.radio {
+  position: relative;
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+}
+
+.radio input {
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
+
+.radio-mark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  background-color: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+}
+
+.radio input:checked + .radio-mark {
+  border: 1px solid var(--brand-accent);
+}
+
+.radio-mark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  top: 3px;
+  left: 3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--brand-accent);
+}
+
+.radio input:checked + .radio-mark:after {
+  display: block;
+}
+/* Carbon-inspired Grid System
+ * Based on 16-column grid with fluid gutters
+ * Simplified for portfolio use but maintains Carbon principles
+ */
+
+/* Grid Container */
+.grid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(16, 1fr);
+  column-gap: var(--space-4);
+  row-gap: var(--space-4);
+}
+
+/* Responsive breakpoints - Carbon inspired */
+:root {
+  --breakpoint-sm: 320px;   /* Small - Carbon mobile */
+  --breakpoint-md: 672px;   /* Medium - Carbon tablet */
+  --breakpoint-lg: 1056px;  /* Large - Carbon laptop/desktop */
+  --breakpoint-xl: 1312px;  /* XLarge - Carbon wide screens */
+  --breakpoint-max: 1584px; /* Max - Carbon maximum width */
+  
+  /* Responsive margin units for different breakpoints */
+  --margin-sm: var(--space-2);
+  --margin-md: var(--space-4);
+  --margin-lg: var(--space-6);
+  --margin-xl: var(--space-8);
+}
+
+/* Grid column span utilities */
+.col-span-1 { grid-column: span 1; }
+.col-span-2 { grid-column: span 2; }
+.col-span-4 { grid-column: span 4; }
+.col-span-6 { grid-column: span 6; }
+.col-span-8 { grid-column: span 8; }
+.col-span-12 { grid-column: span 12; }
+.col-span-16 { grid-column: span 16; }
+
+/* Responsive column spans */
+@media (max-width: 671px) {
+  .col-sm-span-4 { grid-column: span 4; }  
+  .col-sm-span-2 { grid-column: span 2; }
+  .col-sm-span-4 { grid-column: span 4; }
+  .container { padding-inline: var(--margin-sm); }
+  .grid { column-gap: var(--space-2); }
+}
+
+@media (min-width: 672px) and (max-width: 1055px) {
+  .col-md-span-4 { grid-column: span 4; }
+  .col-md-span-8 { grid-column: span 8; }
+  .container { padding-inline: var(--margin-md); }
+}
+
+@media (min-width: 1056px) {
+  .col-lg-span-4 { grid-column: span 4; }
+  .col-lg-span-6 { grid-column: span 6; }
+  .col-lg-span-8 { grid-column: span 8; }
+  .col-lg-span-12 { grid-column: span 12; }
+  .container { padding-inline: var(--margin-lg); }
+}
+
+/* Carbon-inspired Responsive Utilities */
+.hide-sm {
+  @media (max-width: 671px) {
+    display: none !important;
+  }
+}
+
+.hide-md {
+  @media (min-width: 672px) and (max-width: 1055px) {
+    display: none !important;
+  }
+}
+
+.hide-lg {
+  @media (min-width: 1056px) {
+    display: none !important;
+  }
+}
+
+/* Responsive spacing utilities */
+@media (max-width: 671px) {
+  .mt-sm-2 { margin-top: var(--space-2); }
+  .mb-sm-2 { margin-bottom: var(--space-2); }
+  .p-sm-2 { padding: var(--space-2); }
+}
+
+@media (min-width: 672px) {
+  .mt-md-4 { margin-top: var(--space-4); }
+  .mb-md-4 { margin-bottom: var(--space-4); }
+  .p-md-4 { padding: var(--space-4); }
+}
+
+/* ---- Carbon-inspired Additional Components ---- */
+
+/* Tile Component - Carbon uses tiles extensively */
+.tile {
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  padding: var(--space-4);
+  height: 100%;
+}
+
+.tile--clickable {
+  cursor: pointer;
+  transition: background-color var(--transition-all);
+}
+
+.tile--clickable:hover {
+  background-color: var(--color-surface);
+}
+
+.tile--selectable {
+  position: relative;
+  padding-left: var(--space-8);
+}
+
+.tile--selectable::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background-color: transparent;
+  transition: background-color var(--transition-all);
+}
+
+.tile--selectable:hover::before,
+.tile--selectable.selected::before {
+  background-color: var(--brand-accent);
+}
+
+/* Modal - Simplified Carbon Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(22, 22, 22, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  width: 100%;
+  max-width: 48rem;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-body {
+  padding: var(--space-4);
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.modal-footer {
+  padding: var(--space-4);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
+/* Notification - Carbon Style */
+.notification {
+  display: flex;
+  align-items: flex-start;
+  padding: var(--space-4);
+  border-left: 3px solid var(--brand-accent);
+  background-color: var(--color-surface);
+  margin-bottom: var(--space-4);
+}
+
+.notification-icon {
+  margin-right: var(--space-4);
+  flex-shrink: 0;
+}
+
+.notification-content {
+  flex-grow: 1;
+}
+
+.notification-title {
+  font-weight: 600;
+  margin-bottom: var(--space-1);
+}
+
+.notification-close {
+  margin-left: var(--space-4);
+  flex-shrink: 0;
+}
+
+.notification--info {
+  border-left-color: #0072c3; /* Carbon blue-60 */
+}
+
+.notification--success {
+  border-left-color: #24a148; /* Carbon green-60 */
+}
+
+.notification--warning {
+  border-left-color: #f1c21b; /* Carbon yellow-30 */
+}
+
+.notification--error {
+  border-left-color: #da1e28; /* Carbon red-60 */
+}
+
+/* Data Table - Simplified Carbon Data Table */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th {
+  text-align: left;
+  padding: var(--space-2) var(--space-4);
+  font-weight: 600;
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+}
+
+.data-table td {
+  padding: var(--space-2) var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.data-table tr:hover {
+  background-color: var(--color-surface);
+}
+
+.data-table--compact td,
+.data-table--compact th {
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--fs-xs);
+}
+
+/* Tabs - Carbon Style */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.tab {
+  padding: var(--space-2) var(--space-4);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: border-color var(--transition-all);
+}
+
+.tab:hover {
+  border-bottom-color: var(--gray-300);
+}
+
+.tab.active {
+  border-bottom-color: var(--brand-accent);
+  color: var(--color-text);
+}
+
+.tab-panel {
+  padding: var(--space-4) 0;
+}
+
+/* Accordion - Carbon Style */
+.accordion-item {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.accordion-header {
+  padding: var(--space-4);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.accordion-body {
+  padding: 0 var(--space-4) var(--space-4);
+}
+
+/* Progress Indicator - Carbon Style */
+.progress-indicator {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.progress-step {
+  display: flex;
+  min-height: 32px;
+  position: relative;
+}
+
+.progress-step::before {
+  content: "";
+  width: 1px;
+  position: absolute;
+  top: 24px;
+  bottom: 0;
+  left: 7px;
+  background-color: var(--color-border);
+}
+
+.progress-step:last-child::before {
+  display: none;
+}
+
+.progress-circle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg);
+  margin-right: var(--space-2);
+}
+
+.progress-step.completed .progress-circle {
+  background-color: var(--brand-accent);
+  border-color: var(--brand-accent);
+}
+
+.progress-step.current .progress-circle {
+  border: 2px solid var(--brand-accent);
+}
+
+.progress-label {
+  flex-grow: 1;
+  margin-top: -4px;
+}
+
+/* Tooltip - Carbon Style */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-trigger {
+  text-decoration: underline dotted;
+  cursor: help;
+}
+
+.tooltip-content {
+  position: absolute;
+  z-index: 10;
+  background-color: var(--color-text);
+  color: var(--color-bg);
+  padding: var(--space-2);
+  font-size: var(--fs-xs);
+  max-width: 200px;
+  border-radius: 0;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity var(--transition-all);
+}
+
+.tooltip:hover .tooltip-content {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Breadcrumb - Carbon Style */
+.breadcrumb {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb-item::after {
+  content: "/";
+  margin: 0 var(--space-2);
+  color: var(--color-text-muted);
+}
+
+.breadcrumb-item:last-child::after {
+  display: none;
+}
+
+.breadcrumb-link {
+  color: var(--color-text-muted);
+  text-decoration: none;
+}
+
+.breadcrumb-item:last-child .breadcrumb-link {
+  color: var(--color-text);
+  font-weight: 400;
+}
+
+/* Pagination - Carbon Style */
+.pagination {
+  display: flex;
+  align-items: center;
+}
+
+.pagination-button {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.pagination-button.active {
+  border-bottom: 2px solid var(--brand-accent);
+}
+
+/* Loading Animation (Inline Loader) - Carbon Style */
+.inline-loading {
+  display: inline-flex;
+  align-items: center;
+}
+
+.loading-spinner {
+  animation: rotate 1s linear infinite;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--color-text-muted);
+  border-radius: 50%;
+  border-top-color: var(--brand-accent);
+  margin-right: var(--space-2);
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Skeleton - Carbon Style */
+.skeleton {
+  width: 100%;
+  height: 1em;
+  background-color: var(--color-surface);
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Multi-line skeleton text */
+.skeleton-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.skeleton-text .skeleton:nth-child(3) {
+  width: 75%;
 }
