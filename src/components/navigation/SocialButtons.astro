@@ -1,0 +1,31 @@
+---
+import { Icon } from "astro-icon/components";
+import socialLinksData from "@/data/links.json";
+const { links: socialLinks } = socialLinksData;
+---
+
+<div class="primary_nav__social">
+    {
+        socialLinks.map((link) => (
+            <a
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="primary_nav__cta btn btn-icon btn-icon--sm"
+                title={link.name}
+                aria-label={link.name}
+            >
+                <Icon name={link.icon} aria-hidden="true" focusable="false" />
+            </a>
+        ))
+    }
+</div>
+
+<style>
+    .primary_nav__social {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        gap: var(--space-3);
+    }
+</style>

@@ -3,7 +3,7 @@
 /* Minimal Design System with Carbon Inspiration: Core Variables */
 :root {
   /* Brand Color - Maintained from Original */
-  --brand-accent: #8849A5;
+  --brand-accent: #9C68F2;
   
   /* Carbon-inspired Neutral Palette */
   --color-bg: #ffffff;
@@ -131,10 +131,27 @@ html {
 
 /* Core Layout Elements */
 .container {
-  width: var(--site-width);
-  margin-inline: auto;
-}
-
+  --padding-inline: 1rem;
+  --content-max-width: 1200px;
+  --breakout-max-width: 85ch;
+  --breakout-size: calc((var(--breakout-max-width) - var(--content-max-width)) / 2);
+  
+      display: grid;
+      grid-template-columns: [full-width-start] minmax(var(--padding-inline),1fr) [breakout-start] minmax(0, var(--breakout-size)) [content-start] min(100% - (var(--padding-inline) * 2), var(--content-max-width)) [content-end] minmax(0, var(--breakout-size)) [breakout-end] minmax(var(--padding-inline), 1fr) [full-width-end];
+  }
+  
+  .container > :not(.breakout, .full-width) {
+      grid-column: content;
+  }
+  
+  .container > .breakout {
+      grid-column: breakout;
+  }
+  
+  .container > .full-width {
+      grid-column: full-width;
+  }
+ 
 .page-wrapper {
   display: flex;
   flex-direction: column;
@@ -174,10 +191,14 @@ small {
 }
 
 a {
-  color: var(--brand-accent);
+  color: var(--color-text);
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition: border-color var(--transition-all);
+}
+
+a:not([class]) {
+  color: var(--accent-darker);
 }
 
 a:hover {
