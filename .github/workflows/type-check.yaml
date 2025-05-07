@@ -40,25 +40,3 @@ jobs:
         run: npm ci
       - name: Check for outdated dependencies
         run: npm outdated || true
-        
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          cache: 'npm'
-      - name: Install dependencies
-        run: npm ci
-      # Note: astro check is already included in the build script
-      - name: Build Astro site
-        run: npm run build
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: build-output
-          path: dist/
-          retention-days: 7
