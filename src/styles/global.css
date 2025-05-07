@@ -178,7 +178,7 @@ html {
 .container {
   --padding-inline: 1rem;
   --content-max-width: 1200px;
-  --breakout-max-width: 85ch;
+  --breakout-max-width: 300px;
   --breakout-size: calc((var(--breakout-max-width) - var(--content-max-width)) / 2);
 
   display: grid;
@@ -927,10 +927,6 @@ input:checked+.toggle-slider:before {
     grid-column: span 4;
   }
 
-  .container {
-    padding-inline: var(--margin-sm);
-  }
-
   .grid {
     column-gap: var(--space-2);
   }
@@ -943,10 +939,6 @@ input:checked+.toggle-slider:before {
 
   .col-md-span-8 {
     grid-column: span 8;
-  }
-
-  .container {
-    padding-inline: var(--margin-md);
   }
 }
 
@@ -965,10 +957,6 @@ input:checked+.toggle-slider:before {
 
   .col-lg-span-12 {
     grid-column: span 12;
-  }
-
-  .container {
-    padding-inline: var(--margin-lg);
   }
 }
 
