@@ -4,7 +4,7 @@
         <p>I'm Eric Maina—a frontend heavy fullstack developer who cares about fast, accessible, and beautiful websites.</p>
     </article>
 
-    <article class="hero__content">
+    <article class="hero__content full-width">
         <h2>Let's build something that works harder and loads faster.</h2>
         <div class="btn-group">
             <a href="" class="btn btn--mid btn--minimal">Projects</a>
@@ -19,32 +19,43 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: var(--space-1);
-
+    
     text-align: center;
     
     justify-self: center;
     
     width: 100%;
-    max-width: max-content;
+    /* max-width: max-content; */
     height: max-content;
+
     
     position: relative;
     z-index: 2;
 }
 
 .hero .hero__content:nth-child(1) {
-    height: 300px;
+    gap: var(--space-1);
+    height: 400px;
+    padding: var(--space-12) var(--space-4);
+}
+.hero .hero__content:nth-child(1) p {
+    margin: 0;
 }
 .hero .hero__content:nth-child(2) {
     
-    padding: var(--space-8);
+    /* padding: var(--space-8); */
+    gap: var(--space-8);
+    padding: var(--space-8) var(--space-4);
     
     background-color: var(--accent-lighter);
+}
+.hero__content h2 {
+    margin: 0;
 }
 .hero__title {
     /* font-weight: 700; */
     color: var(--accent-dark);
+    margin: 0;
 }
 </style>
 
