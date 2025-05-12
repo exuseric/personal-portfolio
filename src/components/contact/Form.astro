@@ -1,0 +1,80 @@
+<form class="contact__form" method="post">
+    <div class="form__label">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required />
+    </div>
+    <div class="form__label">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+    </div>
+
+    <div class="form__label">
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows={4} required></textarea>
+    </div>
+
+    <button class="btn btn--primary" type="submit">Submit</button>
+</form>
+
+<script>
+    document.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const form = event.target as HTMLFormElement;
+        if (!form.checkValidity()) {
+            console.log("Form is invalid");
+            return;
+        }
+        const formData = new FormData(form);
+        // console.log("FormData:", formData);
+        console.log("Target:", form);
+        const data = Object.fromEntries(formData.entries());
+
+        fetch("/api/feedback", {
+            method: "POST",
+            body: formData,
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Success:", data);
+                form.reset();
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+    });
+</script>
+
+<style>
+    .contact__form {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4);
+        width: 100%;
+        max-width: 400px;
+
+        margin-block: var(--space-8);
+    }
+
+    .contact__form label {
+        display: block;
+        margin-bottom: var(--space-1);
+    }
+
+    .contact__form input,
+    .contact__form textarea {
+        display: block;
+        width: 100%;
+        padding: var(--space-2);
+        border: 1px solid var(--color-border);
+        border-radius: var(--border-radius);
+    }
+
+    .contact__form button:hover {
+        background-color: var(--accent-lighter);
+    }
+
+    .contact__form input:user-invalid,
+    .contact__form textarea:user-invalid {
+        border-color: red;
+    }
+</style>
