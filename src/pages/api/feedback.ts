@@ -19,7 +19,6 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const data = JSON.stringify({
-<<<<<<< HEAD
         sender: { name: import.meta.env.SENDER_NAME, email: import.meta.env.SENDER_EMAIL },
         to: [{ name: import.meta.env.RECEIVER_NAME, email: import.meta.env.RECEIVER_EMAIL }],
         subject: "Feedback from your website",
@@ -49,24 +48,6 @@ export const POST: APIRoute = async ({ request }) => {
         </td>
     </tr>
 </table>`,
-=======
-        sender: { name: "Eric Gathoni", email: "info@ericmaina.me" },
-        to: [{ name: "Eric Gathoni", email: "ericmaina.gathoni@gmail.com" }],
-        subject: "Feedback from your website",
-        htmlContent: `<table cellpadding="0" cellspacing="0" border="0" style="width:100%; font-family:Arial, sans-serif; font-size:14px; color:#000;">
-                            <tr>
-                                <td style="padding:8px 0;"><strong>From Name:</strong> ${name}</td>
-                            </tr>
-                            <tr>
-                                <td style="padding:8px 0;"><strong>From Email:</strong> <span style="color:purple;">${email}</span></td>
-                            </tr>
-                            <tr>
-                                <td style="padding:8px 0;"><strong>Message:</strong><br>
-                                ${message}
-                                </td>
-                            </tr>
-                        </table>`,
->>>>>>> d5688705e4831cc95144ff80b027f2aa525da811
     });
 
     const res = await fetch("https://api.brevo.com/v3/smtp/email", {
@@ -75,11 +56,7 @@ export const POST: APIRoute = async ({ request }) => {
             "api-key": import.meta.env.BREVO_API_KEY,
             "Content-Type": "application/json",
             "Accept": "application/json",
-<<<<<<< HEAD
-            "X-Sib-Sandbox": "drop", // Enables Sandbox mode
-=======
-            //"X-Sib-Sandbox": "drop", // Enables Sandbox mode
->>>>>>> d5688705e4831cc95144ff80b027f2aa525da811
+            // "X-Sib-Sandbox": "drop", // Enables Sandbox mode
         },
         body: data
     });
@@ -90,14 +67,13 @@ export const POST: APIRoute = async ({ request }) => {
         return new Response(JSON.stringify({ success: false, error }), { status: 500 });
     }
 
-<<<<<<< HEAD
     const sendThankYouEmail = await fetch("https://api.brevo.com/v3/smtp/email", {
         method: "POST",
         headers: {
             "api-key": import.meta.env.BREVO_API_KEY,
             "Content-Type": "application/json",
             "Accept": "application/json",
-            "X-Sib-Sandbox": "drop", // Enables Sandbox mode
+            // "X-Sib-Sandbox": "drop", // Enables Sandbox mode
         },
         body: JSON.stringify({
             to: [{ name, email }],
@@ -112,8 +88,5 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // stringify the data, then return a success response
-=======
-    // Do something with the data, then return a success response
->>>>>>> d5688705e4831cc95144ff80b027f2aa525da811
     return new Response(JSON.stringify({ success: true }), { status: 200 });
 };

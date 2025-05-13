@@ -1,5 +1,10 @@
 <form class="contact__form" method="post">
-<<<<<<< HEAD
+    <!-- Form status messages -->
+    <div class="form__status form__status--submitting" hidden>
+        <div class="spinner"></div>
+        <p>Submitting your message...</p>
+    </div>
+    
     <div class="form__status form__status--success" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
@@ -22,24 +27,15 @@
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required />
         <span class="error-message" data-for="name"></span>
-=======
-    <div class="form__label">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required />
->>>>>>> d5688705e4831cc95144ff80b027f2aa525da811
     </div>
     <div class="form__label">
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required />
-<<<<<<< HEAD
         <span class="error-message" data-for="email"></span>
-=======
->>>>>>> d5688705e4831cc95144ff80b027f2aa525da811
     </div>
 
     <div class="form__label">
         <label for="message">Message:</label>
-<<<<<<< HEAD
         <textarea id="message" name="message" rows="4" required></textarea>
         <span class="error-message" data-for="message"></span>
     </div>
@@ -208,6 +204,7 @@
                 }, 5000);
                 
             } catch (error) {
+                // Hide submitting state
                 
                 // Show error state
                 statusError.hidden = false;
@@ -223,39 +220,6 @@
                 console.error("Error:", error);
             }
         });
-=======
-        <textarea id="message" name="message" rows={4} required></textarea>
-    </div>
-
-    <button class="btn btn--primary" type="submit">Submit</button>
-</form>
-
-<script>
-    document.addEventListener("submit", (event) => {
-        event.preventDefault();
-        const form = event.target as HTMLFormElement;
-        if (!form.checkValidity()) {
-            console.log("Form is invalid");
-            return;
-        }
-        const formData = new FormData(form);
-        // console.log("FormData:", formData);
-        console.log("Target:", form);
-        const data = Object.fromEntries(formData.entries());
-
-        fetch("/api/feedback", {
-            method: "POST",
-            body: formData,
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log("Success:", data);
-                form.reset();
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
->>>>>>> d5688705e4831cc95144ff80b027f2aa525da811
     });
 </script>
 
@@ -266,22 +230,14 @@
         gap: var(--space-4);
         width: 100%;
         max-width: 400px;
-<<<<<<< HEAD
         margin-block: var(--space-8);
         position: relative;
-=======
-
-        margin-block: var(--space-8);
->>>>>>> d5688705e4831cc95144ff80b027f2aa525da811
     }
 
     .contact__form label {
         display: block;
         margin-bottom: var(--space-1);
-<<<<<<< HEAD
         font-weight: 500;
-=======
->>>>>>> d5688705e4831cc95144ff80b027f2aa525da811
     }
 
     .contact__form input,
@@ -291,7 +247,6 @@
         padding: var(--space-2);
         border: 1px solid var(--color-border);
         border-radius: var(--border-radius);
-<<<<<<< HEAD
         transition: border-color 0.2s ease;
     }
 
@@ -316,17 +271,11 @@
     }
 
     .contact__form button:hover:not(:disabled) {
-=======
-    }
-
-    .contact__form button:hover {
->>>>>>> d5688705e4831cc95144ff80b027f2aa525da811
         background-color: var(--accent-lighter);
     }
 
     .contact__form input:user-invalid,
     .contact__form textarea:user-invalid {
-<<<<<<< HEAD
         border-color: var(--color-error, #dc3545);
     }
 
@@ -393,8 +342,5 @@
 
     @keyframes spin {
         to { transform: rotate(360deg); }
-=======
-        border-color: red;
->>>>>>> d5688705e4831cc95144ff80b027f2aa525da811
     }
 </style>
