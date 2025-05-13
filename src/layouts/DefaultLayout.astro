@@ -3,6 +3,7 @@ import seo from "@/data/seo.json";
 import { AstroFont } from "astro-font";
 import Navigation from "@/components/navigation/Navigation.astro";
 import "@/styles/global.css";
+import Footer from "@/components/footer/Footer.astro";
 ---
 
 <html lang="en">
@@ -78,5 +79,6 @@ import "@/styles/global.css";
     <main id="main-content" class="page-wrapper">
       <slot />
     </main>
+    <Footer />
   </body>
 </html>
