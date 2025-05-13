@@ -1,25 +1,22 @@
+---
+// import Form from "./Form.tsx";
+import Form from "./Form.astro";
+---
+
 <div class="contact container">
     <header class="contact__header">
         <h2>Let's Talk</h2>
-        <p>If you're looking for a developer who can code it, design it, and optimize it, I’d love to hear from you. I take on projects that challenge me, clients who trust the process, and teams that value thoughtful collaboration.</p>
+        <p>
+            If you're looking for a developer who can code it, design it, and
+            optimize it, I'd love to hear from you. I take on projects that
+            challenge me, clients who trust the process, and teams that value
+            thoughtful collaboration.
+        </p>
     </header>
-    <form class="contact__form">
-        <div class="form__label">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
+    <div class="contact__form_wrapper">
+        <!-- <Form client:load /> -->
+        <Form />
         </div>
-        <div class="form__label">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-
-        <div class="form__label">
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
-        </div>
-
-        <button class="btn btn--primary" type="submit">Submit</button>
-    </form>
 </div>
 
 <style>
@@ -46,15 +43,6 @@
         border: 1px solid var(--color-border);
         border-radius: var(--border-radius);
     }
-
-    /* .contact__form button {
-        background-color: var(--brand-accent);
-        color: white;
-        border: none;
-        padding: var(--space-2);
-        border-radius: var(--border-radius);
-        cursor: pointer;
-    } */
 
     .contact__form button:hover {
         background-color: var(--accent-lighter);
