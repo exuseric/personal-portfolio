@@ -1,5 +1,4 @@
 ---
-// import Form from "./Form.tsx";
 import Form from "./Form.astro";
 ---
 
@@ -14,13 +13,12 @@ import Form from "./Form.astro";
         </p>
     </header>
     <div class="contact__form_wrapper">
-        <!-- <Form client:load /> -->
         <Form />
-        </div>
+    </div>
 </div>
 
 <style>
-   .contact__form {
+    .contact__form {
         display: flex;
         flex-direction: column;
         gap: var(--space-4);
