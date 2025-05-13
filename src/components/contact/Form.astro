@@ -1,0 +1,346 @@
+<form class="contact__form" method="post">
+    <!-- Form status messages -->
+    <div class="form__status form__status--submitting" hidden>
+        <div class="spinner"></div>
+        <p>Submitting your message...</p>
+    </div>
+    
+    <div class="form__status form__status--success" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+        <p>Thank you! Your message has been sent successfully.</p>
+    </div>
+    
+    <div class="form__status form__status--error" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <p>There was an error sending your message. Please try again.</p>
+        <p class="error-details"></p>
+    </div>
+
+    <div class="form__label">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required />
+        <span class="error-message" data-for="name"></span>
+    </div>
+    <div class="form__label">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+        <span class="error-message" data-for="email"></span>
+    </div>
+
+    <div class="form__label">
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+        <span class="error-message" data-for="message"></span>
+    </div>
+
+    <button class="btn btn--primary" type="submit">
+        <span class="btn-text">Submit</span>
+    </button>
+</form>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Type definitions based on server response structure
+        type FormResponse = {
+            success?: boolean;
+            message?: string;
+            error?: {
+                code?: string;
+                message?: string;
+                [key: string]: any;
+            };
+        };
+
+        // DOM element selections with proper TypeScript types
+        const form = document.querySelector(".contact__form") as HTMLFormElement;
+        const statusSuccess = document.querySelector(".form__status--success") as HTMLDivElement;
+        const statusError = document.querySelector(".form__status--error") as HTMLDivElement;
+        const errorDetails = document.querySelector(".error-details") as HTMLParagraphElement;
+        const submitButton = form.querySelector("button[type='submit']") as HTMLButtonElement;
+        const buttonText = submitButton.querySelector(".btn-text") as HTMLSpanElement;
+        const errorMessages = document.querySelectorAll(".error-message") as NodeListOf<HTMLSpanElement>;
+        
+        // Function to show form validation errors
+        const showValidationErrors = (): void => {
+            const inputs = form.querySelectorAll("input, textarea") as NodeListOf<HTMLInputElement | HTMLTextAreaElement>;
+            inputs.forEach((input: HTMLInputElement | HTMLTextAreaElement) => {
+                const errorMessage = form.querySelector(`.error-message[data-for="${input.name}"]`) as HTMLSpanElement | null;
+                if (errorMessage) {
+                    if (!input.validity.valid) {
+                        if (input.validity.valueMissing) {
+                            errorMessage.textContent = `${input.name.charAt(0).toUpperCase() + input.name.slice(1)} is required`;
+                        } else if (input.validity.typeMismatch && input.type === "email") {
+                            errorMessage.textContent = "Please enter a valid email address";
+                        } else {
+                            errorMessage.textContent = "This field is invalid";
+                        }
+                        errorMessage.classList.add("active");
+                    } else {
+                        errorMessage.textContent = "";
+                        errorMessage.classList.remove("active");
+                    }
+                }
+            });
+        };
+        
+        // Function to clear all form statuses
+        const clearFormStatuses = (): void => {
+            statusSuccess.hidden = true;
+            statusError.hidden = true;
+            errorDetails.textContent = "";
+            errorMessages.forEach((msg: HTMLSpanElement) => {
+                msg.textContent = "";
+                msg.classList.remove("active");
+            });
+        };
+        
+        // Handle input events to clear error messages when user types
+        const inputs = form.querySelectorAll("input, textarea") as NodeListOf<HTMLInputElement | HTMLTextAreaElement>;
+        inputs.forEach((input: HTMLInputElement | HTMLTextAreaElement) => {
+            input.addEventListener("input", () => {
+                const errorMessage = form.querySelector(`.error-message[data-for="${input.name}"]`) as HTMLSpanElement | null;
+                if (errorMessage) {
+                    errorMessage.textContent = "";
+                    errorMessage.classList.remove("active");
+                }
+            });
+        });
+
+        form.addEventListener("submit", async (event: SubmitEvent) => {
+            event.preventDefault();
+            
+            // Clear previous states
+            clearFormStatuses();
+            
+            // Client-side validation (to match server-side validation)
+            const nameField = form.querySelector('#name') as HTMLInputElement;
+            const emailField = form.querySelector('#email') as HTMLInputElement;
+            const messageField = form.querySelector('#message') as HTMLTextAreaElement;
+            
+            let hasError = false;
+            
+            // Check required fields manually to match server validation
+            if (!nameField.value.trim()) {
+                const errorMessage = form.querySelector(`.error-message[data-for="name"]`) as HTMLSpanElement;
+                errorMessage.textContent = "Name is required";
+                errorMessage.classList.add("active");
+                hasError = true;
+            }
+            
+            if (!emailField.value.trim()) {
+                const errorMessage = form.querySelector(`.error-message[data-for="email"]`) as HTMLSpanElement;
+                errorMessage.textContent = "Email is required";
+                errorMessage.classList.add("active");
+                hasError = true;
+            }
+            
+            if (!messageField.value.trim()) {
+                const errorMessage = form.querySelector(`.error-message[data-for="message"]`) as HTMLSpanElement;
+                errorMessage.textContent = "Message is required";
+                errorMessage.classList.add("active");
+                hasError = true;
+            }
+            
+            // Check form validity for other validation rules (like email format)
+            if (!form.checkValidity() || hasError) {
+                showValidationErrors();
+                return;
+            }
+            
+            try {
+                // Show submitting state
+                submitButton.disabled = true;
+                buttonText.textContent = "Submitting...";
+                
+                const formData = new FormData(form);
+                
+                const response = await fetch("/api/feedback", {
+                    method: "POST",
+                    body: formData,
+                });
+                
+                const data = await response.json() as FormResponse;
+                
+                // Hide submitting state
+                
+                if (!response.ok) {
+                    // Extract specific error message from the response
+                    let errorMessage = "Something went wrong. Please try again.";
+                    
+                    if (data.message) {
+                        errorMessage = data.message;
+                    } else if (data.error && typeof data.error === 'object') {
+                        if (data.error.message) {
+                            errorMessage = data.error.message;
+                        } else if (data.error.code) {
+                            errorMessage = `Error code: ${data.error.code}`;
+                        }
+                    }
+                    
+                    throw new Error(errorMessage);
+                }
+                
+                // Show success state
+                statusSuccess.hidden = false;
+                
+                // Update success message to mention that they'll receive a confirmation email
+                const successMsg = statusSuccess.querySelector("p") as HTMLParagraphElement;
+                successMsg.textContent = "Thank you! Your message has been sent successfully. You'll receive a confirmation email shortly.";
+                
+                form.reset();
+                
+                // Reset button after 5 seconds to give user time to read the thank you message
+                setTimeout(() => {
+                    submitButton.disabled = false;
+                    buttonText.textContent = "Submit";
+                    statusSuccess.hidden = true;
+                }, 5000);
+                
+            } catch (error) {
+                // Hide submitting state
+                
+                // Show error state
+                statusError.hidden = false;
+                
+                // Handle error message display
+                const errorMessage = error instanceof Error ? error.message : "An unknown error occurred";
+                errorDetails.textContent = errorMessage;
+                
+                // Reset button
+                submitButton.disabled = false;
+                buttonText.textContent = "Submit";
+                
+                console.error("Error:", error);
+            }
+        });
+    });
+</script>
+
+<style>
+    .contact__form {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4);
+        width: 100%;
+        max-width: 400px;
+        margin-block: var(--space-8);
+        position: relative;
+    }
+
+    .contact__form label {
+        display: block;
+        margin-bottom: var(--space-1);
+        font-weight: 500;
+    }
+
+    .contact__form input,
+    .contact__form textarea {
+        display: block;
+        width: 100%;
+        padding: var(--space-2);
+        border: 1px solid var(--color-border);
+        border-radius: var(--border-radius);
+        transition: border-color 0.2s ease;
+    }
+
+    .contact__form input:focus,
+    .contact__form textarea:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.2);
+    }
+
+    .contact__form button {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+    }
+
+    .contact__form button:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+
+    .contact__form button:hover:not(:disabled) {
+        background-color: var(--accent-lighter);
+    }
+
+    .contact__form input:user-invalid,
+    .contact__form textarea:user-invalid {
+        border-color: var(--color-error, #dc3545);
+    }
+
+    /* Form status styles */
+    .form__status {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: var(--space-4);
+        border-radius: var(--border-radius);
+        margin-bottom: var(--space-4);
+        text-align: center;
+    }
+
+    .form__status[hidden] {
+        display: none !important;
+    }
+
+    .form__status svg {
+        margin-bottom: var(--space-2);
+    }
+
+    .form__status--submitting {
+        background-color: var(--color-info-bg, #e8f4fd);
+        color: var(--color-info, #0d6efd);
+    }
+
+    .form__status--success {
+        background-color: var(--color-success-bg, #d1e7dd);
+        color: var(--color-success, #198754);
+    }
+
+    .form__status--error {
+        background-color: var(--color-error-bg, #f8d7da);
+        color: var(--color-error, #dc3545);
+    }
+
+    .error-message {
+        color: var(--color-error, #dc3545);
+        font-size: 0.875rem;
+        margin-top: var(--space-1);
+        display: none;
+    }
+
+    .error-message.active {
+        display: block;
+    }
+
+    .error-details {
+        font-size: 0.875rem;
+        margin-top: var(--space-2);
+    }
+
+    /* Spinner */
+    .spinner {
+        width: 24px;
+        height: 24px;
+        border: 3px solid rgba(var(--accent-rgb), 0.3);
+        border-radius: 50%;
+        border-top-color: var(--accent);
+        animation: spin 1s ease-in-out infinite;
+        margin-bottom: var(--space-2);
+    }
+
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+</style>
