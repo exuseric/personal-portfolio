@@ -3,11 +3,26 @@
 /* Minimal Design System with Carbon Inspiration: Core Variables */
 :root {
   /* Brand Color - Maintained from Original */
-  --brand-accent: #9C68F2;
-  /* --brand-accent: #6F456E; */
+  --color-brand: #9c68f2;
+  /*oklch(0.64 0.20 298)*/
+  --color-secondary: #5f7eff;
+
+  /* Brand lightest */
+  --color-brand-darker: #010006;
+  --color-brand-dark: #240052;
+  --color-brand-light: #f1c2ff;
+  --color-brand-lighter: #fff9ff;
+  /* Brand darkest */
+
+  /* Secondary lightest */
+  --color-secondary-darker: #000008;
+  --color-secondary-dark: #0b005d;
+  --color-secondary-light: #b0d8ff;
+  --color-secondary-lighter: #f2feff;
+  /* Secondary darkest */
 
   /* Carbon-inspired Neutral Palette */
-  --color-bg: #ffffff;
+  --color-bg: #FFFFF;
   --color-text: #161616;
   /* Carbon uses darker text for accessibility */
   --color-text-muted: #525252;
@@ -17,15 +32,6 @@
   --color-surface: #f4f4f4;
   /* Carbon gray-10 */
   --color-surface-raised: #ffffff;
-
-  /* Carbon-inspired Accent Tints */
-  --accent-lighter: oklch(from var(--brand-accent) calc(l + .20) c h);
-  /* lightest */
-  --accent-light: oklch(from var(--brand-accent) calc(l + .10) c h);
-  --color-2: var(--brand-accent);
-  --accent-dark: oklch(from var(--brand-accent) calc(l - .10) c h);
-  --accent-darker: oklch(from var(--brand-accent) calc(l - .20) c h);
-  /* darkest */
 
   /* Carbon Gray Scale */
   --gray-100: #f4f4f4;
@@ -144,7 +150,7 @@
 
   --button-icon-gap: var(--space-2);
 
-  --focus-ring-color: #ffffff;
+  --focus-ring-color: var(--color-secondary);
   /* Carbon uses white focus rings */
   --focus-ring-width: 2px;
   --focus-ring-offset: 1px;
@@ -168,8 +174,8 @@
 /* Base Styles - Carbon Inspired */
 html {
   font-family: var(--font-sans);
-  color: var(--color-text);
-  background-color: var(--color-bg);
+  color: oklch(from var(--color-brand-lighter) calc(l - .90) c h);
+  background-color: var(--color-brand-lighter);
   line-height: var(--line-height-normal);
   font-weight: 400;
   /* Carbon uses 400 for body text */
@@ -219,16 +225,20 @@ html {
 }
 
 [data-highlight] {
-  --bg-color: var(--accent-lighter);
-  color:  oklch(from var(--bg-color) calc(l - .60) c h);
+  --bg-color: var(--color-brand-dark);
+  color: oklch(from var(--bg-color) calc(l + .90) c h);
   background-color: var(--bg-color);
+}
+
+[data-highlight] a.btn {
+  color: currentColor;
 }
 
 /* [data-content-wrapper] em {
   padding: var(--space-1);
 
   color: var(--gray-100);
-  background-color: var(--accent-dark);
+  background-color: var(--color-brand-dark);
 } */
 
 /* Typography Base Styles - Carbon Inspired */
@@ -287,7 +297,7 @@ a {
 }
 
 a:not([class]) {
-  color: var(--accent-darker);
+  color: var(--color-brand-darker);
 }
 
 a:hover {
@@ -329,7 +339,7 @@ p {
 }
 
 .text-accent {
-  color: var(--brand-accent);
+  color: var(--color-brand);
 }
 
 /* Layout Utilities */
@@ -433,7 +443,7 @@ p {
 
 /* Carbon Focus Style */
 .btn:focus-visible {
-  outline: var(--focus-ring-width) solid var(--brand-accent);
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
   outline-offset: var(--focus-ring-width);
 }
 
@@ -464,27 +474,27 @@ p {
 
 /* Button Variants - Carbon Inspired */
 .btn--primary {
-  background-color: var(--brand-accent);
-  color: white;
+  background-color: var(--color-brand);
+  color: oklch(from var(--color-brand) calc(l - .90) c h);
 }
 
 .btn--primary:hover {
-  background-color: var(--accent-dark);
+  background-color: var(--color-brand-dark);
 }
 
 .btn--primary:active {
-  background-color: color-mix(in srgb, var(--accent-dark) 70%, black);
+  background-color: color-mix(in srgb, var(--color-brand-dark) 70%, black);
 }
 
 /* Carbon Secondary Button */
 .btn--minimal {
   background-color: transparent;
   color: var(--color-text);
-  border: var(--button-border-width) solid var(--color-text);
+  border: var(--button-border-width) solid currentColor;
 }
 
 .btn--minimal:hover {
-  background-color: var(--accent-lighter);
+  background-color: var(--color-brand-lighter);
 }
 
 .btn--minimal:active {
@@ -494,7 +504,7 @@ p {
 /* Carbon Tertiary Button */
 .btn--text {
   background-color: transparent;
-  color: var(--brand-accent);
+  color: var(--color-brand);
   padding-inline: var(--space-2);
   height: auto;
   border: none;
@@ -506,14 +516,14 @@ p {
 }
 
 /* Carbon Ghost Button */
-.btn--accent {
+.btn--color-brand {
   background-color: transparent;
-  color: var(--brand-accent);
-  border: var(--button-border-width) solid var(--brand-accent);
+  color: var(--color-brand);
+  border: var(--button-border-width) solid var(--color-brand);
 }
 
-.btn--accent:hover {
-  background-color: var(--accent-lighter);
+.btn--color-brand:hover {
+  background-color: var(--color-brand-lighter);
 }
 
 /* Icon Button Variations - Carbon Inspired */
@@ -567,14 +577,14 @@ p {
   background-color: var(--color-surface);
 }
 
-.btn--icon.btn--accent--icon {
+.btn--icon.btn--color-brand--icon {
   background-color: transparent;
-  color: var(--brand-accent);
+  color: var(--color-brand);
   border: none;
 }
 
-.btn--icon.btn--accent--icon:hover {
-  background-color: var(--accent-lighter);
+.btn--icon.btn--color-brand--icon:hover {
+  background-color: var(--color-brand-lighter);
 }
 
 /* Icon with Text Buttons - Carbon Style */
@@ -676,11 +686,11 @@ p {
 }
 
 .nav-link:hover {
-  color: var(--brand-accent);
+  color: var(--color-brand);
 }
 
 .nav-link.active {
-  border-bottom: 2px solid var(--brand-accent);
+  border-bottom: 2px solid var(--color-brand);
   color: var(--color-text);
   /* Carbon keeps text color the same */
 }
@@ -701,7 +711,7 @@ p {
 
 .input:focus {
   outline: none;
-  border-bottom: 2px solid var(--brand-accent);
+  border-bottom: 2px solid var(--color-brand);
 }
 
 /* Dividers - Carbon Style */
@@ -775,7 +785,7 @@ code {
 }
 
 input:checked+.toggle-slider {
-  background-color: var(--brand-accent);
+  background-color: var(--color-brand);
 }
 
 input:checked+.toggle-slider:before {
@@ -807,8 +817,8 @@ input:checked+.toggle-slider:before {
 }
 
 .checkbox input:checked+.checkbox-mark {
-  background-color: var(--brand-accent);
-  border-color: var(--brand-accent);
+  background-color: var(--color-brand);
+  border-color: var(--color-brand);
 }
 
 .checkbox-mark:after {
@@ -854,7 +864,7 @@ input:checked+.toggle-slider:before {
 }
 
 .radio input:checked+.radio-mark {
-  border: 1px solid var(--brand-accent);
+  border: 1px solid var(--color-brand);
 }
 
 .radio-mark:after {
@@ -866,7 +876,7 @@ input:checked+.toggle-slider:before {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--brand-accent);
+  background: var(--color-brand);
 }
 
 .radio input:checked+.radio-mark:after {
@@ -1068,7 +1078,7 @@ input:checked+.toggle-slider:before {
 
 .tile--selectable:hover::before,
 .tile--selectable.selected::before {
-  background-color: var(--brand-accent);
+  background-color: var(--color-brand);
 }
 
 /* Modal - Simplified Carbon Modal */
@@ -1122,7 +1132,7 @@ input:checked+.toggle-slider:before {
   display: flex;
   align-items: flex-start;
   padding: var(--space-4);
-  border-left: 3px solid var(--brand-accent);
+  border-left: 3px solid var(--color-brand);
   background-color: var(--color-surface);
   margin-bottom: var(--space-4);
 }
@@ -1218,7 +1228,7 @@ table.data-table {
 }
 
 .tab.active {
-  border-bottom-color: var(--brand-accent);
+  border-bottom-color: var(--color-brand);
   color: var(--color-text);
 }
 
@@ -1280,12 +1290,12 @@ table.data-table {
 }
 
 .progress-step.completed .progress-circle {
-  background-color: var(--brand-accent);
-  border-color: var(--brand-accent);
+  background-color: var(--color-brand);
+  border-color: var(--color-brand);
 }
 
 .progress-step.current .progress-circle {
-  border: 2px solid var(--brand-accent);
+  border: 2px solid var(--color-brand);
 }
 
 .progress-label {
@@ -1377,7 +1387,7 @@ table.data-table {
 }
 
 .pagination-button.active {
-  border-bottom: 2px solid var(--brand-accent);
+  border-bottom: 2px solid var(--color-brand);
 }
 
 /* Loading Animation (Inline Loader) - Carbon Style */
@@ -1392,7 +1402,7 @@ table.data-table {
   height: 16px;
   border: 2px solid var(--color-text-muted);
   border-radius: 50%;
-  border-top-color: var(--brand-accent);
+  border-top-color: var(--color-brand);
   margin-right: var(--space-2);
 }
 
