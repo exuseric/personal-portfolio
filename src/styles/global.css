@@ -4,6 +4,7 @@
 :root {
   /* Brand Color - Maintained from Original */
   --brand-accent: #9C68F2;
+  /* --brand-accent: #6F456E; */
 
   /* Carbon-inspired Neutral Palette */
   --color-bg: #ffffff;
@@ -214,11 +215,13 @@ html {
   gap: var(--space-4);
   align-items: flex-start;
 
-  padding-block: var(--space-12);
+  /* padding-block: var(--space-12); */
 }
 
 [data-highlight] {
-  background-color: var(--accent-lighter);
+  --bg-color: var(--accent-lighter);
+  color:  oklch(from var(--bg-color) calc(l - .60) c h);
+  background-color: var(--bg-color);
 }
 
 /* [data-content-wrapper] em {
