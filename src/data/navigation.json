@@ -13,22 +13,17 @@
         },
         {
           "label": "Projects",
-          "url": "/projects",
+          "url": "#projects",
           "type": "internal"
         },
         {
           "label": "About",
-          "url": "/about",
-          "type": "internal"
-        },
-        {
-          "label": "Blog",
-          "url": "/blog",
+          "url": "#about",
           "type": "internal"
         },
         {
           "label": "Contact",
-          "url": "/contact",
+          "url": "#contact",
           "type": "internal",
           "highlight": true
         }

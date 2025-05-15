@@ -77,7 +77,8 @@ import SocialButtons from "@/components/navigation/SocialButtons.astro";
         width: 100%;
         padding: var(--space-2) var(--space-6);
         outline: 2px solid var(--gray-100);
-        background-color: var(--color-bg);
+        color: oklch(from var(--color-brand-lighter) calc(l +.90) c h);
+        background-color: var(--color-brand-lighter);
     }
     .primary_nav__logo {
         display: inline-flex;
