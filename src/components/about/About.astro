@@ -5,7 +5,7 @@
     
     <div class="about__content" data-content-wrapper>
         <article>
-            <h2>I've been building on the web for <em>over half a decade</em>, and in that time, I've learned what makes a great site tick.</h2>
+            <h2>I've been building on the web for <em>half a decade<sup>*</sup></em>, and in that time, I've learned what makes a great site tick.</h2>
         </article>
         <p>My background blends development, UI/UX design, and a solid dash of branding—from building polished storefronts in Shopify to deploying lightning-fast landing pages with Astro and Pocketbase.</p>
         <p>I've worked solo, in teams, and alongside agencies. I'm comfortable diving into performance audits, biannual design refreshes, or sprinting toward a product launch. No matter the project, I bring clean code, smart design decisions, and a sense of calm when things get hectic.</p>
@@ -19,5 +19,9 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+    }
+
+    article em  {
+        text-decoration: 4px underline var(--color-secondary);
     }
 </style>
