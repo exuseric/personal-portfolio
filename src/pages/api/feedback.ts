@@ -2,12 +2,14 @@ export const prerender = false; // Not needed in 'server' mode
 import type { APIRoute } from "astro";
 
 export const POST: APIRoute = async ({ request }) => {
-    const formData = await request.formData();
+    // const formData = await request.formData();
 
-    const name = formData.get("name");
-    const email = formData.get("email");
-    const message = formData.get("message");
+    // const name = formData.get("name");
+    // const email = formData.get("email");
+    // const message = formData.get("message");
 
+    const {name, email, message} = await request.json();
+    console.log(await request.json())
     // Validate the data
     if (!name || !email || !message) {
         return new Response(
@@ -56,7 +58,7 @@ export const POST: APIRoute = async ({ request }) => {
             "api-key": import.meta.env.BREVO_API_KEY,
             "Content-Type": "application/json",
             "Accept": "application/json",
-            // "X-Sib-Sandbox": "drop", // Enables Sandbox mode
+            "X-Sib-Sandbox": "drop", // Enables Sandbox mode
         },
         body: data
     });
