@@ -226,11 +226,12 @@ html {
 
 [data-highlight] {
   --bg-color: var(--color-brand-dark);
-  color: oklch(from var(--bg-color) calc(l + .90) c h);
+  color: oklch(from var(--bg-color) calc(l + .60) c h);
   background-color: var(--bg-color);
 }
 
-[data-highlight] a.btn {
+[data-highlight] a:not(:hover),
+[data-highlight] .btn---minimal:not(:hover) {
   color: currentColor;
 }
 
@@ -475,11 +476,13 @@ p {
 /* Button Variants - Carbon Inspired */
 .btn--primary {
   background-color: var(--color-brand);
-  color: oklch(from var(--color-brand) calc(l - .90) c h);
+  color: oklch(from var(--color-brand) calc(l - .60) c h);
 }
 
 .btn--primary:hover {
-  background-color: var(--color-brand-dark);
+  --bg-color: var(--color-brand-dark);
+  color: oklch(from var(--bg-color) calc(l + .60) c h);
+  background-color: var(--bg-color);
 }
 
 .btn--primary:active {
@@ -488,13 +491,14 @@ p {
 
 /* Carbon Secondary Button */
 .btn--minimal {
-  background-color: transparent;
-  color: var(--color-text);
+  --bg-color: transparent;
+  background-color: var(--bg-color);
+  color: oklch(from var(--bg-color) calc(l - .60) c h);
   border: var(--button-border-width) solid currentColor;
 }
 
 .btn--minimal:hover {
-  background-color: var(--color-brand-lighter);
+  --bg-color: var(--color-brand-lighter);
 }
 
 .btn--minimal:active {
