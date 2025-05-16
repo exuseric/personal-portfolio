@@ -1,6 +1,9 @@
 interface ImportMetaEnv {
-  readonly DB_PASSWORD: string;
-  readonly PUBLIC_POKEAPI: string;
+  readonly BREVO_API_KEY: string;
+  readonly SENDER_EMAIL: string;
+  readonly SENDER_NAME: string;
+  readonly RECEIVER_EMAIL: string;
+  readonly RECEIVER_NAME: string;
   // more env variables...
 }
 
