@@ -4,7 +4,7 @@ import Form from "./Form.astro";
 const {id} = Astro.props;
 ---
 
-<div class="contact container" id={id}>
+<div class="contact container" id={id} data-content-wrapper data-parent-container>
     <header class="contact__header">
         <h2>Let's Talk</h2>
         <p>
@@ -51,5 +51,10 @@ const {id} = Astro.props;
     .contact__form input:user-invalid,
     .contact__form textarea:user-invalid {
         border-color: red;
+    }
+
+    .contact__form_wrapper {
+        /* outline: 2px solid var(--color-border); */
+        width: 100%;
     }
 </style>

@@ -39,7 +39,7 @@ const projects = [rsvpProject, bookMeProject];
 const { id } = Astro.props;
 ---
 
-<div class="featured container" id={id}>
+<div class="featured container" id={id} data-parent-container>
     <header class="featured__header">
         <h2>Featured Projects</h2>
     </header>
@@ -99,7 +99,7 @@ const { id } = Astro.props;
     .featured__projects {
         display: flex;
         flex-direction: column;
-        gap: var(--space-4);
+        gap: var(--space-8);
 
         padding: var(--space-4) 0;
     }

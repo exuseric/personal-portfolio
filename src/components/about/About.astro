@@ -2,7 +2,7 @@
 const { id } = Astro.props;
 ---
 
-<div class="about container" data-highlight>
+<div class="about container" data-highlight data-parent-container>
     <!-- <header class="about__header">
         <h2>About Me</h2>
     </header> -->
@@ -18,7 +18,7 @@ const { id } = Astro.props;
 
 <style>
     .about__content {
-        min-height: 500px;
+        /* min-height: 500px; */
 
         display: flex;
         flex-direction: column;
