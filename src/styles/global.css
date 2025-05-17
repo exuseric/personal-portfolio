@@ -178,6 +178,8 @@ html {
   background-color: var(--color-brand-lighter);
   line-height: var(--line-height-normal);
   font-weight: 400;
+
+  scroll-behavior: smooth;
   /* Carbon uses 400 for body text */
 }
 
@@ -210,6 +212,10 @@ html {
   flex-direction: column;
   min-height: 100vh;
   gap: var(--space-6);
+}
+
+[data-parent-container] {
+  padding-block: var(--space-12);
 }
 
 [data-content-wrapper] {
@@ -658,6 +664,7 @@ p {
   display: inline-flex;
   align-items: center;
   padding: 0 var(--space-2);
+  width: max-content;
   height: 24px;
   /* Carbon tag height */
   border-radius: 0;

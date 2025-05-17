@@ -1,26 +1,45 @@
 ---
 import { Image } from "astro:assets";
 
-const rsvpProject = {
+type Project = {
+    title: string;
+    description: string;
+    image: string;
+    tags: string[];
+    status: string;
+    links?: { name: string; url: string }[];
+};
+
+const rsvpProject: Project = {
     title: "Toast or Ghost",
     description:
         "<p>A streamlined RSVP management app built with Next.js, Supabase, and Postgres (via Xata). Designed for event organizers who enjoy clean UX and not chasing people down in group chats.</p> <p>Organizers can create events, send out branded invites, and track RSVPs in real-time. Attendees can RSVP in two clicks and even update their responses later — because people love changing their minds.</p>",
     image: "https://placehold.co/700x400.webp",
     tags: ["Next.js", "Supabase", "Postgres"],
+    status: "In Progress",
+    links: [
+        {
+            name: "GitHub",
+            url: "https://github.com/exuseric/toast-or-ghost",
+        },
+    ],
 };
 
-const bookMeProject = {
+const bookMeProject: Project = {
     title: "BookMeMaybe",
     description:
         "A booking platform for solo service providers: tutors, dog walkers, life coaches (don't @ me). Create a custom booking page, manage your availability, and accept payments without crying.",
     image: "https://placehold.co/700x400.webp",
     tags: ["Next.js", "Clerk", "Postgres"],
+    status: "Backlog",
 };
 
 const projects = [rsvpProject, bookMeProject];
+
+const { id } = Astro.props;
 ---
 
-<div class="featured container">
+<div class="featured container" id={id} data-parent-container>
     <header class="featured__header">
         <h2>Featured Projects</h2>
     </header>
@@ -38,11 +57,30 @@ const projects = [rsvpProject, bookMeProject];
                         />
                     </div>
 
-                    <article class="featured__project_card__body" data-content-wrapper>
-                        <h3>{project.title}</h3>
+                    <article
+                        class="featured__project_card__body"
+                        data-content-wrapper
+                    >
+                        <h3>
+                            {project.title}
+                            <div class="btn-group">
+                                <span class="tag">{project.status}</span>
+                                {project?.links &&
+                                    project.links.map((link) => (
+                                        <a
+                                            href={link.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="btn btn--text"
+                                        >
+                                            {link.name}
+                                        </a>
+                                    ))}
+                            </div>
+                        </h3>
 
                         <div class="featured__project_card__description">
-                            <slot set:html={project.description}></slot>
+                            <slot set:html={project.description} />
                         </div>
 
                         <ul class="featured__project_card__tech">
@@ -61,7 +99,7 @@ const projects = [rsvpProject, bookMeProject];
     .featured__projects {
         display: flex;
         flex-direction: column;
-        gap: var(--space-4);
+        gap: var(--space-8);
 
         padding: var(--space-4) 0;
     }
@@ -89,6 +127,12 @@ const projects = [rsvpProject, bookMeProject];
         list-style-type: none;
     }
 
+    .featured__project_card__body h3 {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
+    }
+
     @media (min-width: 768px) {
         .featured__project_card {
             display: grid;
@@ -98,7 +142,7 @@ const projects = [rsvpProject, bookMeProject];
             align-items: center;
         }
 
-        .featured__project_card > *{
+        .featured__project_card > * {
             grid-row: 1 / -1;
             height: 100%;
         }
@@ -109,10 +153,12 @@ const projects = [rsvpProject, bookMeProject];
             justify-content: center;
         }
 
-        .featured__project_card:nth-child(even)> .featured__project_card__image {
+        .featured__project_card:nth-child(even)
+            > .featured__project_card__image {
             grid-column: 2 / -1;
         }
-        .featured__project_card:nth-child(even)> .featured__project_card__body {
+        .featured__project_card:nth-child(even)
+            > .featured__project_card__body {
             grid-column: 1 / 2;
         }
     }
