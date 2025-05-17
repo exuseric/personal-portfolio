@@ -40,10 +40,19 @@ const faqs = [
             {
                 faqs.map((faq, index) => (
                     <div class="accordion_item">
-                        <details open={index === 0} class="accordion_details" data-index={index}>
+                        <details
+                            open={index === 0}
+                            class="accordion_details"
+                            data-index={index}
+                        >
                             <summary class="accordion_summary">
                                 <h3 class="accordion_title">{faq.question}</h3>
-                                <Icon name="mdi:caret" class="accordion_icon" aria-hidden="true" focusable="false" />
+                                <Icon
+                                    name="mdi:caret"
+                                    class="accordion_icon"
+                                    aria-hidden="true"
+                                    focusable="false"
+                                />
                             </summary>
                             <div class="accordion_body">
                                 <p>{faq.answer}</p>
@@ -57,97 +66,122 @@ const faqs = [
 </div>
 
 <style>
-/* FAQ Accordion - Carbon-inspired styles */
-.accordion_container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-}
-
-/* Remove default details marker */
-details summary {
-    list-style: none;
-}
-details summary::-webkit-details-marker {
-    display: none;
-}
-
-details > * {
-    margin: 0;
-}
-
-details::details-content {
-    overflow: hidden;
-    block-size: 0;
-    transition: block-size var(--transition-all), content-visibility var(--transition-all);
-    transition-behavior: allow-discrete;
-}
-
-.accordion_item {
-    border-top: 1px solid var(--color-border);
-    width: 100%;
-}
-
-.accordion_item:last-child {
-    border-bottom: 1px solid var(--color-border);
-}
-
-summary {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    cursor: pointer;
-    list-style-position: outside;
-    font-size: var(--fs-sm);
-    color: var(--color-text);
-}
-
-summary,
-.accordion_body {
-    padding: var(--space-4);
-}
-
-.accordion_title {
-    margin: 0;
-}
-
-.accordion_icon {
-    color: currentColor;
-    transition: transform var(--transition-all);
-}
-
-details[open]::details-content {
-    block-size: auto;
-}
-details[open] summary {
-    color: var(--color-brand-dark);
-    background-color: var(--color-surface);
-}
-details[open] .accordion_icon {
-    transform: rotate(180deg);
-}
-
-.accordion_body {
-    font-size: var(--fs-sm);
-    animation: fadeIn var(--transition-all);
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-8px);
+    /* FAQ Accordion - Carbon-inspired styles */
+    .accordion_container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
-/* Focus styles aligned with Carbon Design */
-details summary:focus-visible {
-    outline: var(--focus-ring-width) solid var(--focus-ring-color);
-    outline-offset: var(--focus-ring-offset);
-}
+    /* Remove default details marker */
+    details summary {
+        list-style: none;
+    }
+    details summary::-webkit-details-marker {
+        display: none;
+    }
+
+    details > * {
+        margin: 0;
+    }
+
+    details::details-content {
+        overflow: hidden;
+        block-size: 0;
+        transition:
+            block-size var(--transition-all),
+            content-visibility var(--transition-all);
+        transition-behavior: allow-discrete;
+    }
+
+    .accordion_item {
+        border-top: 1px solid var(--color-border);
+        width: 100%;
+    }
+
+    .accordion_item:last-child {
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    summary {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        cursor: pointer;
+        list-style-position: outside;
+        font-size: var(--fs-sm);
+        color: var(--color-text);
+    }
+
+    summary,
+    .accordion_body {
+        padding: var(--space-4);
+    }
+
+    .accordion_title {
+        margin: 0;
+    }
+
+    .accordion_icon {
+        color: currentColor;
+        transition: transform var(--transition-all);
+    }
+
+    details[open]::details-content {
+        block-size: auto;
+    }
+    details[open] summary {
+        color: var(--color-brand);
+        background-color: var(--color-surface);
+    }
+    details[open] .accordion_icon {
+        transform: rotate(180deg);
+    }
+
+    .accordion_body {
+        font-size: var(--fs-sm);
+        animation: fadeIn var(--transition-all);
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-8px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Focus styles aligned with Carbon Design */
+    details summary:focus-visible {
+        outline: var(--focus-ring-width) solid var(--focus-ring-color);
+        outline-offset: var(--focus-ring-offset);
+    }
 </style>
+
+<script>
+    // JavaScript to handle accordion functionality
+    document.addEventListener("DOMContentLoaded", () => {
+        const details = document.querySelectorAll(
+            ".accordion_details",
+        ) as NodeListOf<HTMLDetailsElement>;
+
+        details.forEach((detail) => {
+            detail.addEventListener("toggle", () => {
+                // Only perform actions when an accordion is opened
+                if (detail.open) {
+                    // Close all other details
+                    details.forEach((otherDetail) => {
+                        if (otherDetail !== detail && otherDetail.open) {
+                            otherDetail.open = false;
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>

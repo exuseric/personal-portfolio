@@ -290,7 +290,9 @@
 [data-parent-container] {
   padding-block: var(--space-12);
 }
-
+[data-parent-container] h2 {
+  margin-bottom: var(--space-4);
+}
 [data-content-wrapper] {
   width: var(--content-width);
   margin-inline: auto;
