@@ -16,6 +16,20 @@ import FaqSection from "@/components/FaqSection.astro";
     <meta name="author" content={seo.author} />
     <link rel="canonical" href={seo.siteUrl} />
     <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- Standard favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+    <!-- PNG favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+
+    <!-- Apple Touch Icon (for iOS bookmarks) -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+
+    <!-- Web App Manifest (if you're pretending your site is an app) -->
+    <link rel="manifest" href="/site.webmanifest" />
+
     <meta name="theme-color" content={seo.themeColor} />
 
     <script type="application/ld+json">
