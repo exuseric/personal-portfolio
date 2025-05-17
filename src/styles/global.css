@@ -178,6 +178,8 @@ html {
   background-color: var(--color-brand-lighter);
   line-height: var(--line-height-normal);
   font-weight: 400;
+
+  scroll-behavior: smooth;
   /* Carbon uses 400 for body text */
 }
 

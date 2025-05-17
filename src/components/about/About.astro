@@ -1,9 +1,13 @@
+---
+const { id } = Astro.props;
+---
+
 <div class="about container" data-highlight>
     <!-- <header class="about__header">
         <h2>About Me</h2>
     </header> -->
     
-    <div class="about__content" data-content-wrapper>
+    <div class="about__content" id={id} data-content-wrapper>
         <article>
             <h2>I've been building on the web for <em>half a decade<sup>*</sup></em>, and in that time, I've learned what makes a great site tick.</h2>
         </article>

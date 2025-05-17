@@ -1,8 +1,10 @@
 ---
 import Form from "./Form.astro";
+
+const {id} = Astro.props;
 ---
 
-<div class="contact container">
+<div class="contact container" id={id}>
     <header class="contact__header">
         <h2>Let's Talk</h2>
         <p>

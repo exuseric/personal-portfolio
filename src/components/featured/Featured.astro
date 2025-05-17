@@ -18,9 +18,11 @@ const bookMeProject = {
 };
 
 const projects = [rsvpProject, bookMeProject];
+
+const { id } = Astro.props;
 ---
 
-<div class="featured container">
+<div class="featured container" id={id}>
     <header class="featured__header">
         <h2>Featured Projects</h2>
     </header>
