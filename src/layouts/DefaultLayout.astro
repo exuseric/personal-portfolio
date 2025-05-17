@@ -4,6 +4,7 @@ import { AstroFont } from "astro-font";
 import Navigation from "@/components/navigation/Navigation.astro";
 import "@/styles/global.css";
 import Footer from "@/components/footer/Footer.astro";
+import FaqSection from "@/components/FaqSection.astro";
 ---
 
 <html lang="en">
@@ -64,6 +65,71 @@ import Footer from "@/components/footer/Footer.astro";
       }
     </script>
 
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What kind of projects do you work on?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "I work on fast, accessible, and design-forward websites. I’m a frontend-heavy fullstack developer, so I handle everything from clean code to clean UI. I’ve built Shopify storefronts, launched static sites with Astro, and integrated Pocketbase for backend magic."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What technologies do you use?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "I mostly work with JavaScript, Astro, Pocketbase, HTML, CSS, and Shopify. I care a lot about performance, accessibility, and code quality—so I’m constantly refining my stack to build better experiences."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you do both design and development?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes! My background blends UI/UX design with solid development skills. Whether I’m creating a layout or writing the logic behind it, I care about both how things look and how they work."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are you available for freelance or contract work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, I’m available for freelance and contract projects. I’m into work that’s challenging, collaborative, and built on trust. If that sounds like your team, let’s talk."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can you improve my existing website?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Absolutely. I can audit your current site for performance and accessibility issues, help redesign it, or just clean up the code. It depends on what you need—I'm flexible."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What sets you apart from other developers?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "I care about the whole picture—code, design, branding, and user experience. I bring calm to chaotic projects, make smart decisions under pressure, and avoid building anything I wouldn’t want to use myself."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where are you based?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "I'm based in Kenya, but I work with clients all over the world. Time zones aren’t a dealbreaker—I just care that the project’s a good fit."
+            }
+          }
+        ]
+      }
+    </script>
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content={seo.openGraph.type} />
     <meta property="og:url" content={seo.openGraph.url} />
@@ -113,6 +179,7 @@ import Footer from "@/components/footer/Footer.astro";
     <Navigation />
     <main id="main-content" class="page-wrapper">
       <slot />
+      <FaqSection />
     </main>
     <Footer />
   </body>

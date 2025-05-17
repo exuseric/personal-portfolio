@@ -1,0 +1,153 @@
+---
+import { Icon } from "astro-icon/components";
+
+const faqs = [
+    {
+        question: "What kind of projects do you work on?",
+        answer: "I work on fast, accessible, and design-forward websites. I'm a frontend-heavy fullstack developer, so I handle everything from clean code to clean UI. I've built Shopify storefronts, launched static sites with Astro, and integrated Pocketbase for backend magic.",
+    },
+    {
+        question: "What technologies do you use?",
+        answer: "I mostly work with JavaScript, Astro, Pocketbase, HTML, CSS, and Shopify. I care a lot about performance, accessibility, and code quality—so I'm constantly refining my stack to build better experiences.",
+    },
+    {
+        question: "Do you do both design and development?",
+        answer: "Yes! My background blends UI/UX design with solid development skills. Whether I'm creating a layout or writing the logic behind it, I care about both how things look and how they work.",
+    },
+    {
+        question: "Are you available for freelance or contract work?",
+        answer: "Yes, I'm available for freelance and contract projects. I'm into work that's challenging, collaborative, and built on trust. If that sounds like your team, let's talk.",
+    },
+    {
+        question: "Can you improve my existing website?",
+        answer: "Absolutely. I can audit your current site for performance and accessibility issues, help redesign it, or just clean up the code. It depends on what you need—I'm flexible.",
+    },
+    {
+        question: "What sets you apart from other developers?",
+        answer: "I care about the whole picture—code, design, branding, and user experience. I bring calm to chaotic projects, make smart decisions under pressure, and avoid building anything I wouldn't want to use myself.",
+    },
+    {
+        question: "Where are you based?",
+        answer: "I'm based in Kenya, but I work with clients all over the world. Time zones aren't a dealbreaker—I just care that the project's a good fit.",
+    },
+];
+---
+
+<div class="faq container" data-parent-container aria-labelledby="faq-heading">
+    <div data-content-wrapper>
+        <h2 id="faq-heading" class="text-2xl">Frequently Asked Questions</h2>
+        <div class="accordion_container">
+            {
+                faqs.map((faq, index) => (
+                    <div class="accordion_item">
+                        <details open={index === 0} class="accordion_details" data-index={index}>
+                            <summary class="accordion_summary">
+                                <h3 class="accordion_title">{faq.question}</h3>
+                                <Icon name="mdi:caret" class="accordion_icon" aria-hidden="true" focusable="false" />
+                            </summary>
+                            <div class="accordion_body">
+                                <p>{faq.answer}</p>
+                            </div>
+                        </details>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+/* FAQ Accordion - Carbon-inspired styles */
+.accordion_container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* Remove default details marker */
+details summary {
+    list-style: none;
+}
+details summary::-webkit-details-marker {
+    display: none;
+}
+
+details > * {
+    margin: 0;
+}
+
+details::details-content {
+    overflow: hidden;
+    block-size: 0;
+    transition: block-size var(--transition-all), content-visibility var(--transition-all);
+    transition-behavior: allow-discrete;
+}
+
+.accordion_item {
+    border-top: 1px solid var(--color-border);
+    width: 100%;
+}
+
+.accordion_item:last-child {
+    border-bottom: 1px solid var(--color-border);
+}
+
+summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+    list-style-position: outside;
+    font-size: var(--fs-sm);
+    color: var(--color-text);
+}
+
+summary,
+.accordion_body {
+    padding: var(--space-4);
+}
+
+.accordion_title {
+    margin: 0;
+}
+
+.accordion_icon {
+    color: currentColor;
+    transition: transform var(--transition-all);
+}
+
+details[open]::details-content {
+    block-size: auto;
+}
+details[open] summary {
+    color: var(--color-brand-dark);
+    background-color: var(--color-surface);
+}
+details[open] .accordion_icon {
+    transform: rotate(180deg);
+}
+
+.accordion_body {
+    font-size: var(--fs-sm);
+    animation: fadeIn var(--transition-all);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Focus styles aligned with Carbon Design */
+details summary:focus-visible {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+}
+</style>
