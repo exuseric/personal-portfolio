@@ -22,7 +22,7 @@
   /* Secondary darkest */
 
   /* Carbon-inspired Neutral Palette */
-  --color-bg: #FFFFF;
+  --color-bg: #FFFFFF;
   --color-text: #161616;
   /* Carbon uses darker text for accessibility */
   --color-text-muted: #525252;
@@ -108,7 +108,7 @@
   --shadow-md: 0 4px 8px hsl(var(--shadow-color) / calc(var(--shadow-strength)));
 
   /* Carbon-inspired Transitions */
-  --transition-all: 110ms cubic-bezier(0.2, 0, 0.38, 0.9);
+  --transition-all: 350ms cubic-bezier(0.2, 0, 0.38, 0.9);
   /* Carbon's standard easing */
 
   /* Layout */
@@ -171,16 +171,89 @@
   --focus-ring-color: #ffffff;
 } */
 
-/* Base Styles - Carbon Inspired */
-html {
-  font-family: var(--font-sans);
-  color: oklch(from var(--color-brand-lighter) calc(l - .90) c h);
-  background-color: var(--color-brand-lighter);
-  line-height: var(--line-height-normal);
-  font-weight: 400;
+@layer general-styling {
 
-  scroll-behavior: smooth;
-  /* Carbon uses 400 for body text */
+  /* Base Styles - Carbon Inspired */
+  html {
+    font-family: var(--font-sans);
+    color: oklch(from var(--color-brand-lighter) calc(l - .90) c h);
+    background-color: var(--color-brand-lighter);
+    line-height: var(--line-height-normal);
+    font-weight: 400;
+
+    scroll-behavior: smooth;
+    interpolate-size: allow-keywords;
+    /* Carbon uses 400 for body text */
+  }
+
+
+  /* Typography Base Styles - Carbon Inspired */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    line-height: var(--line-height-tight);
+    margin-bottom: var(--space-4);
+    font-weight: 400;
+    max-width: 50ch;
+    /* Carbon uses 400 for headings */
+  }
+
+  h1 {
+    font-size: var(--fs-3xl);
+    font-weight: 300;
+    /* Carbon uses lighter weight for largest headings */
+  }
+
+  h2 {
+    font-size: var(--fs-2xl);
+  }
+
+  h3 {
+    font-size: var(--fs-xl);
+  }
+
+  h4 {
+    font-size: var(--fs-lg);
+  }
+
+  h5 {
+    font-size: var(--fs-base);
+  }
+
+  p,
+  ul,
+  ol {
+    margin-bottom: var(--space-4);
+    font-size: var(--fs-sm);
+    /* Carbon uses 14px for body text */
+  }
+
+  small {
+    font-size: var(--fs-xs);
+    color: var(--color-text-muted);
+  }
+
+  a {
+    color: var(--color-text);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--transition-all);
+  }
+
+  a:not([class]) {
+    color: var(--color-brand-darker);
+  }
+
+  a:hover {
+    border-color: currentColor;
+  }
+
+  p {
+    max-width: 65ch;
+    margin: 0;
+  }
 }
 
 /* Core Layout Elements */
@@ -217,7 +290,9 @@ html {
 [data-parent-container] {
   padding-block: var(--space-12);
 }
-
+[data-parent-container] h2 {
+  margin-bottom: var(--space-4);
+}
 [data-content-wrapper] {
   width: var(--content-width);
   margin-inline: auto;
@@ -247,74 +322,6 @@ html {
   color: var(--gray-100);
   background-color: var(--color-brand-dark);
 } */
-
-/* Typography Base Styles - Carbon Inspired */
-h1,
-h2,
-h3,
-h4,
-h5 {
-  line-height: var(--line-height-tight);
-  margin-bottom: var(--space-4);
-  font-weight: 400;
-  max-width: 50ch;
-  /* Carbon uses 400 for headings */
-}
-
-h1 {
-  font-size: var(--fs-3xl);
-  font-weight: 300;
-  /* Carbon uses lighter weight for largest headings */
-}
-
-h2 {
-  font-size: var(--fs-2xl);
-}
-
-h3 {
-  font-size: var(--fs-xl);
-}
-
-h4 {
-  font-size: var(--fs-lg);
-}
-
-h5 {
-  font-size: var(--fs-base);
-}
-
-p,
-ul,
-ol {
-  margin-bottom: var(--space-4);
-  font-size: var(--fs-sm);
-  /* Carbon uses 14px for body text */
-}
-
-small {
-  font-size: var(--fs-xs);
-  color: var(--color-text-muted);
-}
-
-a {
-  color: var(--color-text);
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: border-color var(--transition-all);
-}
-
-a:not([class]) {
-  color: var(--color-brand-darker);
-}
-
-a:hover {
-  border-color: currentColor;
-}
-
-p {
-  max-width: 65ch;
-  margin: 0;
-}
 
 /* Typography Utilities */
 .text-sm {
