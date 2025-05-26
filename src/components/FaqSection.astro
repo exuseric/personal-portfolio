@@ -89,9 +89,11 @@ const faqs = [
     details::details-content {
         overflow: hidden;
         block-size: 0;
+        height: 0;
         transition:
-            block-size var(--transition-all),
-            content-visibility var(--transition-all);
+            block-size var(--exit-transition-medium),
+            content-visibility var(--exit-transition-fast),
+            height var(--exit-transition-medium);
         transition-behavior: allow-discrete;
     }
 
@@ -130,7 +132,9 @@ const faqs = [
     }
 
     details[open]::details-content {
+        height: auto;
         block-size: auto;
+        transition: block-size var(--entry-transition-medium), content-visibility var(--entry-transition-fast), height var(--entry-transition-medium);
     }
     details[open] summary {
         color: var(--color-brand);

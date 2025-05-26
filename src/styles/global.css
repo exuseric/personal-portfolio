@@ -2,6 +2,7 @@
 
 /* Minimal Design System with Carbon Inspiration: Core Variables */
 :root {
+  interpolate-size: allow-keywords;
   /* Brand Color - Maintained from Original */
   --color-brand: #9c68f2;
   /*oklch(0.64 0.20 298)*/
@@ -109,6 +110,17 @@
 
   /* Carbon-inspired Transitions */
   --transition-all: 350ms cubic-bezier(0.2, 0, 0.38, 0.9);
+  --entry-speed-medium: 200ms;
+  --exit-speed-medium: 250ms;
+  --entry-speed-fast: 100ms;
+  --exit-speed-fast: 150ms;
+  --entry-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --exit-ease: cubic-bezier(0.5, 0, 0.75, 0);
+
+  --entry-transition-medium: var(--entry-speed-medium) var(--entry-ease);
+  --exit-transition-medium: var(--exit-speed-medium) var(--exit-ease);
+  --entry-transition-fast: var(--entry-speed-fast) var(--entry-ease);
+  --exit-transition-fast: var(--exit-speed-fast) var(--exit-ease);
   /* Carbon's standard easing */
 
   /* Layout */
