@@ -308,7 +308,7 @@
 .container {
   --padding-inline: 1rem;
   --content-max-width: 1200px;
-  --breakout-max-width: 300px;
+  --breakout-max-width: 1300px;
   --breakout-size: calc((var(--breakout-max-width) - var(--content-max-width)) / 2);
 
   display: grid;
@@ -1516,4 +1516,9 @@ table.data-table {
 
 .skeleton-text .skeleton:nth-child(3) {
   width: 75%;
+}
+
+[data-offscreen] {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
 }
