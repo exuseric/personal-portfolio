@@ -7,7 +7,7 @@
         </p>
     </article>
 
-    <article class="hero__content full-width" data-highlight>
+    <article class="hero__content breakout" data-highlight data-offscreen>
         <h2>Let's build something that works harder and loads faster.</h2>
         <div class="btn-group">
             <a href="#projects" class="btn btn--mid btn--minimal">Projects</a>
@@ -25,11 +25,10 @@
 
         text-align: center;
 
-        justify-self: center;
+        /* justify-self: center; */
 
         width: 100%;
         /* max-width: max-content; */
-        height: 100&;
         min-height: 300px;
 
         position: relative;
@@ -38,8 +37,8 @@
 
     .hero .hero__content:nth-child(1) {
         gap: var(--space-1);
-        height: 400px;
-        padding: var(--space-12) var(--space-4);
+        height: 100vh;
+        max-height: 600px;
     }
     .hero .hero__content:nth-child(1) p {
         margin: 0;
@@ -47,6 +46,7 @@
     .hero .hero__content:nth-child(2) {
         /* padding: var(--space-8); */
         gap: var(--space-8);
+        height: 100%;
         padding: var(--space-8) var(--space-4);
     }
     .hero__content h2 {
