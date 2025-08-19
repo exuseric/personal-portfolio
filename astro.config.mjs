@@ -17,5 +17,14 @@ export default defineConfig({
   adapter: netlify({
     imageCDN: false
   }),
-  integrations: [icon(), sitemap(), purgecss()]
+  image: {
+    responsiveStyles: true,
+    layout: 'constrained',
+    domains: ['eu-west-2.graphassets.com'],
+  },
+  integrations: [icon(), sitemap(), purgecss({
+    variables: true,
+    keyframes: true,
+    fontFace: true
+  })]
 });

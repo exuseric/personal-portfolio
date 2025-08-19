@@ -4,6 +4,7 @@ interface ImportMetaEnv {
   readonly SENDER_NAME: string;
   readonly RECEIVER_EMAIL: string;
   readonly RECEIVER_NAME: string;
+  readonly ASTRO_HYGRAPH_ENDPOINT: string;
   // more env variables...
 }
 

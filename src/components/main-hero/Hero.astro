@@ -1,17 +1,23 @@
+---
+import { getContent } from "@/utils/graphql-client";
+import { heroQuery } from "@/utils/queries";
+const res = await getContent(heroQuery);
+const data = res.homePage.hero;
+---
+
 <header class="hero container">
     <article class="hero__content">
-        <h1 class="hero__title">Fullstack Developer</h1>
+        <p>{data.heading}</p>
+        <h1 class="hero__title">{data.subheading}</h1>
         <p>
-            I'm Eric Maina—a frontend heavy fullstack developer who cares about
-            fast, accessible, and beautiful websites.
+            {data.description}
         </p>
-    </article>
-
-    <article class="hero__content breakout" data-highlight data-offscreen>
-        <h2>Let's build something that works harder and loads faster.</h2>
         <div class="btn-group">
-            <a href="#projects" class="btn btn--mid btn--minimal">Projects</a>
-            <a href="#contact" class="btn btn--mid btn--minimal">Contact</a>
+            {
+                data.cta && data.cta.map((cta) => (
+                    <a href={cta.link} class:list={["btn btn--mid", cta.type === "primary" && "btn--primary", cta.type === "secondary" && "btn--outline"]}>{cta.title}</a>
+                ))
+            }
         </div>
     </article>
 </header>

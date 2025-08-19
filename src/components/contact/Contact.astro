@@ -1,18 +1,17 @@
 ---
+import { getContent } from "@/utils/graphql-client";
+import { contactQuery } from "@/utils/queries";
 import Form from "./Form.astro";
+
+const {homePage: { contact: data }} = await getContent(contactQuery);
 
 const {id} = Astro.props;
 ---
 
 <div class="contact container" id={id} data-content-wrapper data-parent-container>
     <header class="contact__header">
-        <h2>Let's Talk</h2>
-        <p>
-            If you're looking for a developer who can code it, design it, and
-            optimize it, I'd love to hear from you. I take on projects that
-            challenge me, clients who trust the process, and teams that value
-            thoughtful collaboration.
-        </p>
+        <h2>{data.heading}</h2>
+        <slot set:html={data.body.html} />
     </header>
     <div class="contact__form_wrapper">
         <Form />
