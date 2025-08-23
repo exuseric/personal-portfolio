@@ -3,64 +3,36 @@ import { getContent } from "@/utils/graphql-client";
 import { heroQuery } from "@/utils/queries";
 const res = await getContent(heroQuery);
 const data = res.homePage.hero;
+import "./style.css";
 ---
 
 <header class="hero container">
-    <article class="hero__content">
-        <p>{data.heading}</p>
-        <h1 class="hero__title">{data.subheading}</h1>
-        <p>
-            {data.description}
-        </p>
-        <div class="btn-group">
-            {
-                data.cta && data.cta.map((cta) => (
-                    <a href={cta.link} class:list={["btn btn--mid", cta.type === "primary" && "btn--primary", cta.type === "secondary" && "btn--outline"]}>{cta.title}</a>
-                ))
-            }
+    <div class="hero__wrapper">
+        <div class="hero__heading">
+            <p>{data.heading}</p>
+            <h1 class="hero__title">{data.subheading}</h1>
         </div>
-    </article>
+        <div class="hero__content">
+            <p>
+                {data.description}
+            </p>
+            <div class="btn-group">
+                {
+                    data.cta &&
+                        data.cta.map((cta) => (
+                            <a
+                                href={cta.link}
+                                class:list={[
+                                    "btn btn--mid",
+                                    cta.type === "primary" && "btn--primary",
+                                    cta.type === "secondary" && "btn--outline",
+                                ]}
+                            >
+                                {cta.title}
+                            </a>
+                        ))
+                }
+            </div>
+        </div>
+    </div>
 </header>
-
-<style>
-    .hero__content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-
-        text-align: center;
-
-        /* justify-self: center; */
-
-        width: 100%;
-        /* max-width: max-content; */
-        min-height: 300px;
-
-        position: relative;
-        z-index: 2;
-    }
-
-    .hero .hero__content:nth-child(1) {
-        gap: var(--space-1);
-        height: 100vh;
-        max-height: 600px;
-    }
-    .hero .hero__content:nth-child(1) p {
-        margin: 0;
-    }
-    .hero .hero__content:nth-child(2) {
-        /* padding: var(--space-8); */
-        gap: var(--space-8);
-        height: 100%;
-        padding: var(--space-8) var(--space-4);
-    }
-    .hero__content h2 {
-        margin: 0;
-    }
-    .hero__title {
-        /* font-weight: 700; */
-        color: var(--color-brand);
-        margin: 0;
-    }
-</style>
