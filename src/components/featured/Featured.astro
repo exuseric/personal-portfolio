@@ -2,121 +2,66 @@
 import { Image } from "astro:assets";
 import ToastImage from "@/images/toast_or_ghost.png";
 
-type Project = {
-    title: string;
-    description: string;
-    image: ImageMetadata | string;
-    imageWidth: number;
-    imageHeight: number;
-    tags: string[];
-    status: string;
-    links?: { name: string; url: string }[];
-};
+import { projectsQuery } from "@/utils/queries";
+import {getContent} from "@/utils/graphql-client";
+import { Icon } from "astro-icon/components";
 
-const rsvpProject: Project = {
-    title: "Toast or Ghost",
-    description:
-        "<p>A streamlined RSVP management app built with Next.js, Supabase, and Postgres (via Xata). Designed for event organizers who enjoy clean UX and not chasing people down in group chats.</p> <p>Organizers can create events, send out branded invites, and track RSVPs in real-time. Attendees can RSVP in two clicks and even update their responses later — because people love changing their minds.</p>",
-    image: ToastImage,
-    imageWidth: ToastImage.width,
-    imageHeight: ToastImage.height,
-    tags: ["Next.js", "Supabase", "Postgres"],
-    status: "In Progress",
-    links: [
-        {
-            name: "GitHub",
-            url: "https://github.com/exuseric/toast-or-ghost",
-        },
-    ],
-};
-
-const bookMeProject: Project = {
-    title: "BookMeMaybe",
-    description:
-        "A booking platform for solo service providers: tutors, dog walkers, life coaches (don't @ me). Create a custom booking page, manage your availability, and accept payments without crying.",
-    image: "https://placehold.co/700x400.webp",
-    imageWidth: 700,
-    imageHeight: 400,
-    tags: ["Next.js", "Clerk", "Postgres"],
-    status: "Backlog",
-};
-
-const projects = [rsvpProject];
-
+const {homePage: { projects: data }} = await getContent(projectsQuery);
 const { id } = Astro.props;
 ---
 
 <div class="featured container" id={id} data-parent-container>
     <header class="featured__header">
-        <h2>Featured Projects</h2>
+        <h2>{data.heading}</h2>
     </header>
 
     <div class="featured__projects">
-        {
-            projects.map((project) => (
-                <div class="featured__project_card">
-                    <div class="featured__project_card__image">
-                        {typeof project.image === "object" && (
-                            <Image
-                                src={project.image}
-                                alt="project-cover"
-                                width={project.imageWidth}
-                                height={project.imageHeight}
+        {data.project.map((project) => (
+            <div class="featured__project_card">
+                <div class="featured__project_card__image">
+                    {project.cover ? (
+                        <Image
+                                src={project.cover.url}
+                                alt={project.heading}
+                                width={project.cover.width}
+                                height={project.cover.height}
                                 loading="lazy"
                                 decoding="async"
                                 format="webp"
                                 widths={[300, 600, 900]}
                             />
-                        )}
-                        {typeof project.image === "string" && (
-                            <Image
-                                src={project.image}
+                    ) : (
+                        <Image
+                                src='https://placehold.co/700x400.webp'
                                 alt="project-cover"
-                                width={project.imageWidth}
-                                height={project.imageHeight}
+                                width="700"
+                                height="400"
                                 loading="lazy"
                                 decoding="async"
                                 format="webp"
                                 widths={[300, 600, 900]}
                             />
-                        )}
-                    </div>
-
-                    <article
-                        class="featured__project_card__body"
-                        data-content-wrapper
-                    >
-                        <h3>
-                            {project.title}
-                            <div class="btn-group">
-                                <span class="tag">{project.status}</span>
-                                {project?.links &&
-                                    project.links.map((link) => (
-                                        <a
-                                            href={link.url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            class="btn btn--text"
-                                        >
-                                            {link.name}
-                                        </a>
-                                    ))}
-                            </div>
-                        </h3>
-
-                        <div class="featured__project_card__description">
-                            <slot set:html={project.description} />
-                        </div>
-
-                        <ul class="featured__project_card__tech">
-                            {project.tags.map((tag) => (
-                                <li class="tag">{tag}</li>
-                            ))}
-                        </ul>
-                    </article>
+                    )}
                 </div>
-            ))
-        }
+                <article>
+                    <h3>{project.heading}</h3>
+                    <div class="btn-group">
+                        {project.cta.map((cta) => (
+                            <a
+                                href={cta.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="btn btn--text"
+                            >
+                                {cta.title}
+                                <Icon name="mdi:open-in-new" />
+                            </a>
+                        ))}
+                    </div>
+                    <slot set:html={project.body.html} />
+                </article>
+            </div>
+        ))}
     </div>
 </div>
 

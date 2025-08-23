@@ -198,6 +198,28 @@
     /* Carbon uses 400 for body text */
   }
 
+  body {
+    position: relative;
+    isolation: isolate;
+    z-index: 1;
+
+    background-color: var(--color-bg);
+  }
+
+  body::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    z-index: 1;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 0.015;
+    background-image: url('src/images/texture.svg');
+    background-size: 1rem;
+  }
+
 
   /* Typography Base Styles - Carbon Inspired */
   h1,
@@ -307,7 +329,7 @@
 /* Core Layout Elements */
 .container {
   --padding-inline: 1rem;
-  --content-max-width: 1200px;
+  --content-max-width: var(--site-width);
   --breakout-max-width: 1300px;
   --breakout-size: calc((var(--breakout-max-width) - var(--content-max-width)) / 2);
 
