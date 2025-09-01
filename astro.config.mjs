@@ -15,7 +15,16 @@ export default defineConfig({
     inlineStylesheets: "never",
   },
   adapter: netlify({
-    imageCDN: false
+    imageCDN: false,
+    functionPerRoute: false,
+    _redirects: [
+      // Security headers
+      "/*    /.netlify/functions/entry    200",
+      // Redirect www to non-www
+      "https://www.ericmaina.me/* https://ericmaina.me/:splat 301!",
+      // Force HTTPS
+      "http://ericmaina.me/* https://ericmaina.me/:splat 301!",
+    ]
   }),
   image: {
     responsiveStyles: true,

@@ -7,15 +7,29 @@ import Footer from "@/components/footer/Footer.astro";
 import FaqSection from "@/components/FaqSection.astro";
 ---
 
-<html lang="en">
+<html lang={seo.language}>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content={seo.additionalMeta.viewport} />
     <title>{seo.title}</title>
     <meta name="description" content={seo.description} />
     <meta name="author" content={seo.author} />
+    <meta name="keywords" content={seo.keywords} />
+    <meta name="robots" content={seo.robots} />
+    <meta name="language" content={seo.language} />
+    <meta name="format-detection" content={seo.additionalMeta.formatDetection} />
+    <meta name="referrer" content={seo.additionalMeta.referrer} />
+    <meta name="color-scheme" content={seo.additionalMeta.colorScheme} />
+    <meta name="supported-color-schemes" content={seo.additionalMeta.supportedColorSchemes} />
+    
+    <!-- Canonical and Sitemap -->
     <link rel="canonical" href={seo.siteUrl} />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    
+    <!-- DNS Prefetch for external domains -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="//eu-west-2.graphassets.com" />
 
     <!-- Standard favicon -->
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
@@ -31,16 +45,33 @@ import FaqSection from "@/components/FaqSection.astro";
     <link rel="manifest" href="/site.webmanifest" />
 
     <meta name="theme-color" content={seo.themeColor} />
+    <meta name="msapplication-TileColor" content={seo.themeColor} />
 
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
+
+    <!-- Performance and Caching -->
+    <meta http-equiv="Cache-Control" content="public, max-age=31536000" />
+
+    <!-- Enhanced Person Schema -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Eric Maina",
+        "alternateName": "Eric Gathoni",
         "url": "https://ericmaina.me",
         "image": "https://ericmaina.me/_astro/logo.DR1VfmNz_1wiNMl.webp",
         "jobTitle": "Fullstack Developer",
         "description": "Frontend-heavy fullstack developer focused on fast, accessible, and beautiful websites. Combines development, UI/UX, and branding with experience across Shopify, Astro, and Pocketbase.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "KE",
+          "addressLocality": "Kenya"
+        },
         "sameAs": [
           "https://github.com/exuseric",
           "https://linkedin.com/in/exuseric"
@@ -75,10 +106,40 @@ import FaqSection from "@/components/FaqSection.astro";
             "@type": "Language",
             "name": "JavaScript"
           }
-        ]
+        ],
+        "hasOccupation": {
+          "@type": "Occupation",
+          "name": "Fullstack Developer",
+          "description": "Develops web applications with focus on frontend performance and accessibility"
+        }
       }
     </script>
 
+    <!-- Website Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Eric Gathoni Portfolio",
+        "url": "https://ericmaina.me",
+        "description": "Professional portfolio showcasing fullstack development work, specializing in React, Astro, and web accessibility.",
+        "author": {
+          "@type": "Person",
+          "name": "Eric Gathoni"
+        },
+        "publisher": {
+          "@type": "Person",
+          "name": "Eric Gathoni"
+        },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://ericmaina.me?search={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+
+    <!-- FAQ Schema -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -89,7 +150,7 @@ import FaqSection from "@/components/FaqSection.astro";
             "name": "What kind of projects do you work on?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "I work on fast, accessible, and design-forward websites. I’m a frontend-heavy fullstack developer, so I handle everything from clean code to clean UI. I’ve built Shopify storefronts, launched static sites with Astro, and integrated Pocketbase for backend magic."
+              "text": "I work on fast, accessible, and design-forward websites. I'm a frontend-heavy fullstack developer, so I handle everything from clean code to clean UI. I've built Shopify storefronts, launched static sites with Astro, and integrated Pocketbase for backend magic."
             }
           },
           {
@@ -97,7 +158,7 @@ import FaqSection from "@/components/FaqSection.astro";
             "name": "What technologies do you use?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "I mostly work with JavaScript, Astro, Pocketbase, HTML, CSS, and Shopify. I care a lot about performance, accessibility, and code quality—so I’m constantly refining my stack to build better experiences."
+              "text": "I mostly work with JavaScript, Astro, Pocketbase, HTML, CSS, and Shopify. I care a lot about performance, accessibility, and code quality—so I'm constantly refining my stack to build better experiences."
             }
           },
           {
@@ -105,7 +166,7 @@ import FaqSection from "@/components/FaqSection.astro";
             "name": "Do you do both design and development?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes! My background blends UI/UX design with solid development skills. Whether I’m creating a layout or writing the logic behind it, I care about both how things look and how they work."
+              "text": "Yes! My background blends UI/UX design with solid development skills. Whether I'm creating a layout or writing the logic behind it, I care about both how things look and how they work."
             }
           },
           {
@@ -113,7 +174,7 @@ import FaqSection from "@/components/FaqSection.astro";
             "name": "Are you available for freelance or contract work?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes, I’m available for freelance and contract projects. I’m into work that’s challenging, collaborative, and built on trust. If that sounds like your team, let’s talk."
+              "text": "Yes, I'm available for freelance and contract projects. I'm into work that's challenging, collaborative, and built on trust. If that sounds like your team, let's talk."
             }
           },
           {
@@ -129,7 +190,7 @@ import FaqSection from "@/components/FaqSection.astro";
             "name": "What sets you apart from other developers?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "I care about the whole picture—code, design, branding, and user experience. I bring calm to chaotic projects, make smart decisions under pressure, and avoid building anything I wouldn’t want to use myself."
+              "text": "I care about the whole picture—code, design, branding, and user experience. I bring calm to chaotic projects, make smart decisions under pressure, and avoid building anything I wouldn't want to use myself."
             }
           },
           {
@@ -137,7 +198,7 @@ import FaqSection from "@/components/FaqSection.astro";
             "name": "Where are you based?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "I'm based in Kenya, but I work with clients all over the world. Time zones aren’t a dealbreaker—I just care that the project’s a good fit."
+              "text": "I'm based in Kenya, but I work with clients all over the world. Time zones aren't a dealbreaker—I just care that the project's a good fit."
             }
           }
         ]
@@ -153,6 +214,8 @@ import FaqSection from "@/components/FaqSection.astro";
     <meta property="og:image:width" content={seo.openGraph.image.width} />
     <meta property="og:image:height" content={seo.openGraph.image.height} />
     <meta property="og:image:alt" content={seo.openGraph.image.alt} />
+    <meta property="og:locale" content={seo.openGraph.locale} />
+    <meta property="og:site_name" content={seo.openGraph.siteName} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content={seo.twitter.card} />
@@ -161,6 +224,8 @@ import FaqSection from "@/components/FaqSection.astro";
     <meta name="twitter:title" content={seo.twitter.title} />
     <meta name="twitter:description" content={seo.twitter.description} />
     <meta name="twitter:image" content={seo.twitter.image} />
+
+    <!-- Fonts with performance optimization -->
     <AstroFont
       config={[
         {

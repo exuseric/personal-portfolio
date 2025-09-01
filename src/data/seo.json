@@ -5,6 +5,8 @@
   "siteUrl": "https://ericmaina.me",
   "language": "en",
   "themeColor": "#8937A4",
+  "keywords": "fullstack developer, frontend developer, web developer, React developer, Astro developer, web accessibility, UI/UX design, Kenya developer, Shopify developer, Pocketbase developer, performance optimization, responsive design",
+  "robots": "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
   "openGraph": {
     "type": "website",
     "locale": "en_US",
@@ -16,7 +18,7 @@
       "url": "https://ericmaina.me/images/og-image.png",
       "width": "1200",
       "height": "630",
-      "alt": "Eric Gathoni - Fullstack Developer"
+      "alt": "Eric Gathoni - Fullstack Developer Portfolio"
     }
   },
   "twitter": {
@@ -26,5 +28,12 @@
     "title": "Eric Gathoni - Fullstack Developer",
     "description": "Frontend heavy fullstack developer who cares about fast, accessible, and beautiful websites with 4+ years of experience crafting accessible, responsive interfaces. Specializing in React, Astro, and web accessibility.",
     "image": "https://ericmaina.me/images/og-image.png"
+  },
+  "additionalMeta": {
+    "viewport": "width=device-width, initial-scale=1, shrink-to-fit=no",
+    "formatDetection": "telephone=no",
+    "referrer": "origin-when-cross-origin",
+    "colorScheme": "light dark",
+    "supportedColorSchemes": "light dark"
   }
 }
