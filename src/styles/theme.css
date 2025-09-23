@@ -1,0 +1,598 @@
+/*=================================*/
+/* Default Theme Aliases                   */
+/*=================================*/
+:root {
+  /* Brand Colors */
+  --surface-brand-default: var(--color-brand-500);
+  --surface-brand-subtle: var(--color-brand-100);
+  --surface-brand-hover: var(--color-brand-600);
+
+  --text-brand-default: var(--color-brand-700);
+  --text-brand-subtle: var(--color-brand-400);
+  --text-brand-hover: var(--color-brand-900);
+  --text-brand-on-color: var(--color-neutral-white);
+
+  /* Secondary Colors */
+  --surface-secondary-default: var(--color-secondary-500);
+  --surface-secondary-subtle: var(--color-secondary-100);
+  --surface-secondary-hover: var(--color-secondary-600);
+
+  --text-secondary-default: var(--color-secondary-700);
+  --text-secondary-subtle: var(--color-secondary-400);
+  --text-secondary-hover: var(--color-secondary-900);
+  --text-secondary-on-color: var(--color-neutral-900);
+
+  /* Accent Colors */
+  --surface-accent-default: var(--color-accent-500);
+  --surface-accent-subtle: var(--color-accent-100);
+  --surface-accent-hover: var(--color-accent-600);
+
+  --text-accent-default: var(--color-accent-700);
+  --text-accent-subtle: var(--color-accent-400);
+  --text-accent-hover: var(--color-accent-900);
+  --text-accent-on-color: var(--color-neutral-white);
+
+  /* Neutral Colors */
+  --surface-neutral-default: var(--color-neutral-white);
+  --surface-neutral-subtle: var(--color-neutral-100);
+  /* fallback */
+  --surface-neutral-hover: var(--color-neutral-200);
+
+  --text-neutral-default: var(--color-neutral-900);
+  --text-neutral-subtle: var(--color-neutral-400);
+  --text-neutral-hover: var(--color-neutral-700);
+  --text-neutral-on-color: var(--color-neutral-white);
+
+  /* Success Colors */
+  --surface-success-default: var(--color-success-500);
+  --surface-success-subtle: var(--color-success-100);
+  --surface-success-hover: var(--color-success-600);
+
+  --text-success-default: var(--color-success-700);
+  --text-success-subtle: var(--color-success-400);
+  --text-success-hover: var(--color-success-900);
+  --text-success-on-color: var(--color-neutral-900);
+
+  /* Warning Colors */
+  --surface-warning-default: var(--color-warning-500);
+  --surface-warning-subtle: var(--color-warning-100);
+  --surface-warning-hover: var(--color-warning-600);
+
+  --text-warning-default: var(--color-warning-700);
+  --text-warning-subtle: var(--color-warning-400);
+  --text-warning-hover: var(--color-warning-900);
+  --text-warning-on-color: var(--color-neutral-900);
+
+  /* Error Colors */
+  --surface-error-default: var(--color-error-500);
+  --surface-error-subtle: var(--color-error-100);
+  --surface-error-hover: var(--color-error-600);
+
+  --text-error-default: var(--color-error-700);
+  --text-error-subtle: var(--color-error-400);
+  --text-error-hover: var(--color-error-900);
+  --text-error-on-color: var(--color-neutral-white);
+
+  /* Info Colors */
+  --surface-info-default: var(--color-info-500);
+  --surface-info-subtle: var(--color-info-100);
+  --surface-info-hover: var(--color-info-600);
+
+  --text-info-default: var(--color-info-700);
+  --text-info-subtle: var(--color-info-400);
+  --text-info-hover: var(--color-info-900);
+  --text-info-on-color: var(--color-neutral-900);
+}
+
+/*=================================*/
+/* Utility Theme Classes           */
+/*=================================*/
+
+/*  Neutral  */
+.surface-neutral {
+  background-color: var(--surface-neutral-default);
+  color: var(--text-neutral-default);
+  border-color: var(--surface-neutral-default);
+}
+.surface-neutral-subtle {
+  background-color: var(--surface-neutral-subtle);
+  color: var(--text-neutral-default);
+  border-color: var(--surface-neutral-subtle);
+}
+.surface-neutral:hover,
+.surface-neutral-subtle:hover {
+  background-color: var(--surface-neutral-hover);
+  color: var(--text-neutral-default);
+  border-color: var(--surface-neutral-hover);
+}
+
+/*  Brand */
+.surface-brand {
+  background-color: var(--surface-brand-default);
+  color: var(--text-brand-on-color);
+  border-color: var(--surface-brand-default);
+}
+.surface-brand-subtle {
+  background-color: var(--surface-brand-subtle);
+  color: var(--text-brand-default);
+  border-color: var(--surface-brand-subtle);
+}
+.surface-brand:hover,
+.surface-brand-subtle:hover {
+  background-color: var(--surface-brand-hover);
+  color: var(--text-brand-on-color);
+  border-color: var(--surface-brand-hover);
+}
+
+/*  Secondary  */
+.surface-secondary {
+  background-color: var(--surface-secondary-default);
+  color: var(--text-secondary-on-color);
+  border-color: var(--surface-secondary-default);
+}
+.surface-secondary-subtle {
+  background-color: var(--surface-secondary-subtle);
+  color: var(--text-secondary-default);
+  border-color: var(--surface-secondary-subtle);
+}
+.surface-secondary:hover,
+.surface-secondary-subtle:hover {
+  background-color: var(--surface-secondary-hover);
+  color: var(--text-secondary-on-color);
+  border-color: var(--surface-secondary-hover);
+}
+
+/*  Accent  */
+.surface-accent {
+  background-color: var(--surface-accent-default);
+  color: var(--text-accent-on-color);
+  border-color: var(--surface-accent-default);
+}
+.surface-accent-subtle {
+  background-color: var(--surface-accent-subtle);
+  color: var(--text-accent-default);
+  border-color: var(--surface-accent-subtle);
+}
+.surface-accent:hover,
+.surface-accent-subtle:hover {
+  background-color: var(--surface-accent-hover);
+  color: var(--text-accent-on-color);
+  border-color: var(--surface-accent-hover);
+}
+
+/*  Success */
+.surface-success {
+  background-color: var(--surface-success-default);
+  color: var(--text-success-on-color);
+  border-color: var(--surface-success-default);
+}
+.surface-success-subtle {
+  background-color: var(--surface-success-subtle);
+  color: var(--text-success-default);
+  border-color: var(--surface-success-subtle);
+}
+.surface-success:hover,
+.surface-success-subtle:hover {
+  background-color: var(--surface-success-hover);
+  color: var(--text-success-on-color);
+  border-color: var(--surface-success-hover);
+}
+
+/*  Warning  */
+.surface-warning {
+  background-color: var(--surface-warning-default);
+  color: var(--text-warning-on-color);
+  border-color: var(--surface-warning-default);
+}
+.surface-warning-subtle {
+  background-color: var(--surface-warning-subtle);
+  color: var(--text-warning-default);
+  border-color: var(--surface-warning-subtle);
+}
+.surface-warning:hover,
+.surface-warning-subtle:hover {
+  background-color: var(--surface-warning-hover);
+  color: var(--text-warning-on-color);
+  border-color: var(--surface-warning-hover);
+}
+
+/*  Error  */
+.surface-error {
+  background-color: var(--surface-error-default);
+  color: var(--text-error-on-color);
+  border-color: var(--surface-error-default);
+}
+.surface-error-subtle {
+  background-color: var(--surface-error-subtle);
+  color: var(--text-error-default);
+  border-color: var(--surface-error-subtle);
+}
+.surface-error:hover,
+.surface-error-subtle:hover {
+  background-color: var(--surface-error-hover);
+  color: var(--text-error-on-color);
+  border-color: var(--surface-error-hover);
+}
+
+/*  Info  */
+.surface-info {
+  background-color: var(--surface-info-default);
+  color: var(--text-info-on-color);
+  border-color: var(--surface-info-default);
+}
+.surface-info-subtle {
+  background-color: var(--surface-info-subtle);
+  color: var(--text-info-default);
+  border-color: var(--surface-info-subtle);
+}
+.surface-info:hover,
+.surface-info-subtle:hover {
+  background-color: var(--surface-info-hover);
+  color: var(--text-info-on-color);
+  border-color: var(--surface-info-hover);
+}
+
+/* Disabled */
+.surface-disabled {
+  background-color: var(--surface-neutral-subtle);
+  color: var(--text-neutral-subtle);
+  border-color: var(--surface-neutral-subtle);
+  cursor: not-allowed;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/*=================================*/
+/* Outline / Ghost Surfaces                */
+/*=================================*/
+
+/* Neutral */
+.outline-neutral {
+  background-color: transparent;
+  color: var(--text-neutral-default);
+  border: 1px solid var(--surface-neutral-default);
+}
+.outline-neutral:hover {
+  background-color: var(--surface-neutral-hover);
+  color: var(--text-neutral-default);
+  border-color: var(--surface-neutral-hover);
+}
+
+/* Brand */
+.outline-brand {
+  background-color: transparent;
+  color: var(--text-brand-default);
+  border: 1px solid var(--surface-brand-default);
+}
+.outline-brand:hover {
+  background-color: var(--surface-brand-default);
+  color: var(--text-brand-on-color);
+  border-color: var(--surface-brand-default);
+}
+
+/* Secondary */
+.outline-secondary {
+  background-color: transparent;
+  color: var(--text-secondary-default);
+  border: 1px solid var(--surface-secondary-default);
+}
+.outline-secondary:hover {
+  background-color: var(--surface-secondary-default);
+  color: var(--text-secondary-on-color);
+  border-color: var(--surface-secondary-default);
+}
+
+/* Accent */
+.outline-accent {
+  background-color: transparent;
+  color: var(--text-accent-default);
+  border: 1px solid var(--surface-accent-default);
+}
+.outline-accent:hover {
+  background-color: var(--surface-accent-default);
+  color: var(--text-accent-on-color);
+  border-color: var(--surface-accent-default);
+}
+
+/* Success */
+.outline-success {
+  background-color: transparent;
+  color: var(--text-success-default);
+  border: 1px solid var(--surface-success-default);
+}
+.outline-success:hover {
+  background-color: var(--surface-success-default);
+  color: var(--text-success-on-color);
+  border-color: var(--surface-success-default);
+}
+
+/* Warning */
+.outline-warning {
+  background-color: transparent;
+  color: var(--text-warning-default);
+  border: 1px solid var(--surface-warning-default);
+}
+.outline-warning:hover {
+  background-color: var(--surface-warning-default);
+  color: var(--text-warning-on-color);
+  border-color: var(--surface-warning-default);
+}
+
+/* Error */
+.outline-error {
+  background-color: transparent;
+  color: var(--text-error-default);
+  border: 1px solid var(--surface-error-default);
+}
+.outline-error:hover {
+  background-color: var(--surface-error-default);
+  color: var(--text-error-on-color);
+  border-color: var(--surface-error-default);
+}
+
+/* Info */
+.outline-info {
+  background-color: transparent;
+  color: var(--text-info-default);
+  border: 1px solid var(--surface-info-default);
+}
+.outline-info:hover {
+  background-color: var(--surface-info-default);
+  color: var(--text-info-on-color);
+  border-color: var(--surface-info-default);
+}
+
+/* Disabled */
+.outline-disabled {
+  background-color: transparent;
+  color: var(--text-neutral-subtle);
+  border: 1px solid var(--surface-neutral-subtle);
+  cursor: not-allowed;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/*=================================*/
+/* Subtle Outline / Ghost Surfaces         */
+/*=================================*/
+
+/* Neutral */
+.outline-neutral-subtle {
+  background-color: transparent;
+  color: var(--text-neutral-subtle);
+  border: 1px solid var(--surface-neutral-subtle);
+}
+.outline-neutral-subtle:hover {
+  background-color: var(--surface-neutral-subtle);
+  color: var(--text-neutral-default);
+  border-color: var(--surface-neutral-subtle);
+}
+
+/* Brand */
+.outline-brand-subtle {
+  background-color: transparent;
+  color: var(--text-brand-subtle);
+  border: 1px solid var(--surface-brand-subtle);
+}
+.outline-brand-subtle:hover {
+  background-color: var(--surface-brand-subtle);
+  color: var(--text-brand-on-color);
+  border-color: var(--surface-brand-subtle);
+}
+
+/* Secondary */
+.outline-secondary-subtle {
+  background-color: transparent;
+  color: var(--text-secondary-subtle);
+  border: 1px solid var(--surface-secondary-subtle);
+}
+.outline-secondary-subtle:hover {
+  background-color: var(--surface-secondary-subtle);
+  color: var(--text-secondary-on-color);
+  border-color: var(--surface-secondary-subtle);
+}
+
+/* Accent */
+.outline-accent-subtle {
+  background-color: transparent;
+  color: var(--text-accent-subtle);
+  border: 1px solid var(--surface-accent-subtle);
+}
+.outline-accent-subtle:hover {
+  background-color: var(--surface-accent-subtle);
+  color: var(--text-accent-on-color);
+  border-color: var(--surface-accent-subtle);
+}
+
+/* Success */
+.outline-success-subtle {
+  background-color: transparent;
+  color: var(--text-success-subtle);
+  border: 1px solid var(--surface-success-subtle);
+}
+.outline-success-subtle:hover {
+  background-color: var(--surface-success-subtle);
+  color: var(--text-success-on-color);
+  border-color: var(--surface-success-subtle);
+}
+
+/* Warning */
+.outline-warning-subtle {
+  background-color: transparent;
+  color: var(--text-warning-subtle);
+  border: 1px solid var(--surface-warning-subtle);
+}
+.outline-warning-subtle:hover {
+  background-color: var(--surface-warning-subtle);
+  color: var(--text-warning-on-color);
+  border-color: var(--surface-warning-subtle);
+}
+
+/* Error */
+.outline-error-subtle {
+  background-color: transparent;
+  color: var(--text-error-subtle);
+  border: 1px solid var(--surface-error-subtle);
+}
+.outline-error-subtle:hover {
+  background-color: var(--surface-error-subtle);
+  color: var(--text-error-on-color);
+  border-color: var(--surface-error-subtle);
+}
+
+/* Info */
+.outline-info-subtle {
+  background-color: transparent;
+  color: var(--text-info-subtle);
+  border: 1px solid var(--surface-info-subtle);
+}
+.outline-info-subtle:hover {
+  background-color: var(--surface-info-subtle);
+  color: var(--text-info-on-color);
+  border-color: var(--surface-info-subtle);
+}
+
+/* Disabled */
+.outline-disabled-subtle {
+  background-color: transparent;
+  color: var(--text-neutral-subtle);
+  border: 1px solid var(--surface-neutral-subtle);
+  cursor: not-allowed;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+
+/*=================================*/
+/* Text Utilities (no background)  */
+/*=================================*/
+
+/* Brand */
+.text-brand {
+  color: var(--text-brand-default);
+}
+.text-brand-subtle {
+  color: var(--text-brand-subtle);
+}
+.text-on-brand-color {
+  color: var(--text-brand-on-color);
+}
+.text-brand:hover,
+.text-brand-subtle:hover {
+  color: var(--text-brand-hover);
+}
+
+/* Secondary */
+.text-secondary {
+  color: var(--text-secondary-default);
+}
+.text-secondary-subtle {
+  color: var(--text-secondary-subtle);
+}
+.text-on-secondary-color {
+  color: var(--text-secondary-on-color);
+}
+.text-secondary:hover,
+.text-secondary-subtle:hover {
+  color: var(--text-secondary-hover);
+}
+
+/* Success */
+.text-success {
+  color: var(--text-success-default);
+}
+.text-success-subtle {
+  color: var(--text-success-subtle);
+}
+.text-on-success-color {
+  color: var(--text-success-on-color);
+}
+.text-success:hover,
+.text-success-subtle:hover {
+  color: var(--text-success-hover);
+}
+
+/* Warning */
+.text-warning {
+  color: var(--text-warning-default);
+}
+.text-warning-subtle {
+  color: var(--text-warning-subtle);
+}
+.text-on-warning-color {
+  color: var(--text-warning-on-color);
+}
+.text-warning:hover,
+.text-warning-subtle:hover {
+  color: var(--text-warning-hover);
+}
+
+/* Error */
+.text-error {
+  color: var(--text-error-default);
+}
+.text-error-subtle {
+  color: var(--text-error-subtle);
+}
+.text-on-error-color {
+  color: var(--text-error-on-color);
+}
+.text-error:hover,
+.text-error-subtle:hover {
+  color: var(--text-error-hover);
+}
+
+/* Info */
+.text-info {
+  color: var(--text-info-default);
+}
+.text-info-subtle {
+  color: var(--text-info-subtle);
+}
+.text-on-info-color {
+  color: var(--text-info-on-color);
+}
+.text-info:hover,
+.text-info-subtle:hover {
+  color: var(--text-info-hover);
+}
+
+/* Neutral */
+.text-neutral {
+  color: var(--text-neutral-default);
+}
+.text-neutral-subtle {
+  color: var(--text-neutral-subtle);
+}
+.text-on-neutral-color {
+  color: var(--text-neutral-on-color);
+}
+.text-neutral:hover,
+.text-neutral-subtle:hover {
+  color: var(--text-neutral-hover);
+}
+
+/* Disabled */
+.text-disabled {
+  color: var(--text-neutral-subtle);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/*=================================*/
+/* State Variations                */
+/*=================================*/
+.is-disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+.is-active {
+  outline: 2px solid var(--surface-brand-default);
+  outline-offset: 2px;
+}
+.is-invalid {
+  border-color: var(--surface-error-default);
+}
+.is-valid {
+  border-color: var(--surface-success-default);
+}

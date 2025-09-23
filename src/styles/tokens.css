@@ -1,0 +1,164 @@
+/* ======================================= */
+/* Colors                                  */
+/* ======================================= */
+:root {
+    /* Brand Colors */
+    --color-brand-900: #221a2f;
+    --color-brand-800: #3e2c5a;
+    --color-brand-700: #5b3f8a;
+    --color-brand-600: #7a54bd;
+    --color-brand-500: #9b69f2;
+    --color-brand-400: #b287f6;
+    --color-brand-300: #c7a4f9;
+    --color-brand-200: #dac2fb;
+    --color-brand-100: #ede0fd;
+
+    /* Secondary Colors */
+    --color-secondary-900: #272e1a;
+    --color-secondary-800: #4a5a2d;
+    --color-secondary-700: #6f8a40;
+    --color-secondary-600: #97bc54;
+    --color-secondary-500: #c0f269;
+    --color-secondary-400: #cef589;
+    --color-secondary-300: #dcf8a7;
+    --color-secondary-200: #e8fac5;
+    --color-secondary-100: #f4fde2;
+
+    /* Neutral Colors */
+    --color-neutral-900: #080809;
+    --color-neutral-800: #101010;
+    --color-neutral-700: #151516;
+    --color-neutral-600: #1a1a1a;
+    --color-neutral-500: #1e1e1f;
+    --color-neutral-400: #444445;
+    --color-neutral-300: #6f6f70;
+    --color-neutral-200: #9c9c9d;
+    --color-neutral-100: #cdcdcd;
+    --color-neutral-white: #ffffff;
+    --color-neutral-black: #000000;
+
+    /* Accent Colors */
+    --color-accent-900: #2f1b2e;
+    --color-accent-800: #5b2e58;
+    --color-accent-700: #8a4187;
+    --color-accent-600: #bd55b9;
+    --color-accent-500: #F268ED;
+    --color-accent-400: #f78bf1;
+    --color-accent-300: #fbaaf5;
+    --color-accent-200: #fec7f9;
+    --color-accent-100: #ffe3fc;
+
+    /* Warning Colors */
+    --color-warning-900: #2f2c1a;
+    --color-warning-800: #5b542d;
+    --color-warning-700: #8a8040;
+    --color-warning-600: #bdaf54;
+    --color-warning-500: #f2e069;
+    --color-warning-400: #f6e689;
+    --color-warning-300: #faeca7;
+    --color-warning-200: #fdf2c4;
+    --color-warning-100: #fef9e2;
+
+    /* Error Colors */
+    --color-error-900: #301b1c;
+    --color-error-800: #5b2d32;
+    --color-error-700: #8b4049;
+    --color-error-600: #bd5461;
+    --color-error-500: #f2697b;
+    --color-error-400: #f88994;
+    --color-error-300: #fda8ad;
+    --color-error-200: #ffc5c8;
+    --color-error-100: #ffe2e3;
+
+    /* Success Colors */
+    --color-success-900: #272e1a;
+    --color-success-800: #4a5a2d;
+    --color-success-700: #6f8a40;
+    --color-success-600: #97bc54;
+    --color-success-500: #c0f269;
+    --color-success-400: #cef589;
+    --color-success-300: #dcf8a7;
+    --color-success-200: #e8fac5;
+    --color-success-100: #f4fde2;
+
+    /* Info Colors */
+    --color-info-900: #1c2f2c;
+    --color-info-800: #2f5a54;
+    --color-info-700: #428a80;
+    --color-info-600: #56bdaf;
+    --color-info-500: #69f2df;
+    --color-info-400: #8ff5e6;
+    --color-info-300: #aff8ec;
+    --color-info-200: #cbfbf2;
+    --color-info-100: #e6fdf9;
+}
+
+/* ======================================= */
+/* Typography                              */
+/* ======================================= */
+:root {
+  --font-family-heading: 'Space Grotesk', sans-serif;
+  --font-family-base: 'DM Sans', sans-serif;
+
+  /* Line Heights */
+  --lh-base: 1.5;   /* body / small text */
+  --lh-tight: 1.45; /* mid-sizes */
+  --lh-tighter: 1.35;
+  --lh-heading: 1.3;
+  --lh-display: 1.25;
+  --lh-hero: 1.2;
+
+  /* Desktop Font Sizes */
+  --font-size-xs: 0.694rem;   /* ≈11.1px */
+  --font-size-sm: 0.833rem;   /* ≈13.3px */
+  --font-size-md: 1rem;       /* 16px */
+  --font-size-lg: 1.2rem;     /* 19.2px */
+  --font-size-xl: 1.44rem;    /* 23.0px */
+  --font-size-2xl: 1.728rem;  /* 27.6px */
+  --font-size-3xl: 2.074rem;  /* 33.2px */
+  --font-size-4xl: 2.488rem;  /* 39.8px */
+  --font-size-5xl: 2.986rem;  /* 47.8px */
+}
+
+@media (max-width: 768px) {
+  :root {
+    /* Mobile Font Sizes */
+    --font-size-xs: 0.79rem;   /* ≈12.6px */
+    --font-size-sm: 0.889rem;  /* ≈14.2px */
+    --font-size-md: 1rem;      /* 16px */
+    --font-size-lg: 1.125rem;  /* 18px */
+    --font-size-xl: 1.266rem;  /* ≈20.3px */
+    --font-size-2xl: 1.424rem; /* ≈22.8px */
+    --font-size-3xl: 1.602rem; /* ≈25.6px */
+    --font-size-4xl: 1.802rem; /* ≈28.8px */
+    --font-size-5xl: 2.027rem; /* ≈32.4px */
+  }
+}
+
+
+/* ======================================= */
+/* Spacing                                 */
+/* ======================================= */
+:root {
+  --spacing-0: 0rem;    /* 0px */
+  --spacing-1: 0.25rem; /* 4px */
+  --spacing-2: 0.5rem;  /* 8px */
+  --spacing-3: 0.75rem; /* 12px */
+  --spacing-4: 1rem;    /* 16px */
+  --spacing-5: 1.25rem; /* 20px */
+  --spacing-6: 1.5rem;  /* 24px */
+  --spacing-8: 2rem;    /* 32px */
+  --spacing-10: 2.5rem; /* 40px */
+  --spacing-12: 3rem;   /* 48px */
+  --spacing-16: 4rem;   /* 64px */
+  --spacing-20: 5rem;   /* 80px */
+  --spacing-24: 6rem;   /* 96px */
+  --spacing-32: 8rem;   /* 128px */
+  --spacing-40: 10rem;  /* 160px */
+  --spacing-48: 12rem;  /* 192px */
+  --spacing-56: 14rem;  /* 224px */
+  --spacing-64: 16rem;  /* 256px */
+  --spacing-72: 18rem;  /* 288px */
+  --spacing-80: 20rem;  /* 320px */
+  --spacing-96: 24rem;  /* 384px */
+}
