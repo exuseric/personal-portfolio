@@ -1,0 +1,72 @@
+:root {
+    /* Generic transitions */
+    --transition-fast: var(--duration-content-fast) var(--ease-standard);
+    --transition-medium: var(--duration-content-medium) var(--ease-standard);
+    --transition-slow: var(--duration-content-slow) var(--ease-standard);
+
+    --transition-exit-fast: calc(var(--duration-content-fast) * var(--exit-multiplier)) var(--ease-exit);
+    --transition-exit-medium: calc(var(--duration-content-medium) * var(--exit-multiplier)) var(--ease-exit);
+    --transition-exit-slow: calc(var(--duration-content-slow) * var(--exit-multiplier)) var(--ease-exit);
+
+    /* Elastic transitions */
+    --transition-elastic-fast: var(--duration-content-fast) var(--ease-elastic-out);
+    --transition-elastic-medium: var(--duration-content-medium) var(--ease-elastic-out);
+    --transition-elastic-slow: var(--duration-content-slow) var(--ease-elastic-out);
+
+    --transition-elastic-in-fast: var(--duration-content-fast) var(--ease-elastic-in);
+    --transition-elastic-in-medium: var(--duration-content-medium) var(--ease-elastic-in);
+    --transition-elastic-in-slow: var(--duration-content-slow) var(--ease-elastic-in);
+
+    --transition-elastic-out-fast: var(--duration-content-fast) var(--ease-elastic-out);
+    --transition-elastic-out-medium: var(--duration-content-medium) var(--ease-elastic-out);
+    --transition-elastic-out-slow: var(--duration-content-slow) var(--ease-elastic-out);
+
+    /* Bounce */
+    --transition-bounce-fast: var(--duration-content-fast) var(--ease-bounce);
+    --transition-bounce-medium: var(--duration-content-medium) var(--ease-bounce);
+    --transition-bounce-slow: var(--duration-content-slow) var(--ease-bounce);
+
+    /* Back */
+    --transition-back-fast: var(--duration-content-fast) var(--ease-back);
+    --transition-back-medium: var(--duration-content-medium) var(--ease-back);
+    --transition-back-slow: var(--duration-content-slow) var(--ease-back);
+
+    /* Spring */
+    --transition-spring-fast: var(--duration-content-fast) var(--ease-spring);
+    --transition-spring-medium: var(--duration-content-medium) var(--ease-spring);
+    --transition-spring-slow: var(--duration-content-slow) var(--ease-spring);
+
+    /* Anticipate */
+    --transition-anticipate-fast: var(--duration-content-fast) var(--ease-anticipate);
+    --transition-anticipate-medium: var(--duration-content-medium) var(--ease-anticipate);
+    --transition-anticipate-slow: var(--duration-content-slow) var(--ease-anticipate);
+
+
+    /* Property-specific */
+    --transition-opacity: var(--transition-medium);
+    --transition-transform: var(--duration-content-medium) var(--ease-enter);
+    --transition-colors: var(--duration-micro-fast) var(--ease-standard);
+    --transition-layout: var(--transition-medium);
+
+    /* Interaction states */
+    --transition-hover: var(--duration-micro-fast) var(--ease-standard);
+    --transition-focus: var(--duration-micro-fast) var(--ease-standard);
+
+    /* Micro transitions (buttons, icons, taps) */
+    --transition-micro-fast: var(--duration-micro-fast) var(--ease-standard);
+    --transition-micro-medium: var(--duration-micro-medium) var(--ease-standard);
+    --transition-micro-slow: var(--duration-micro-slow) var(--ease-standard);
+
+    /* Fun / expressive variants */
+    --transition-micro-elastic-fast: var(--duration-micro-fast) var(--ease-elastic-out);
+    --transition-micro-elastic-medium: var(--duration-micro-medium) var(--ease-elastic-out);
+    --transition-micro-elastic-slow: var(--duration-micro-slow) var(--ease-elastic-out);
+
+    --transition-micro-bounce-fast: var(--duration-micro-fast) var(--ease-bounce);
+    --transition-micro-bounce-medium: var(--duration-micro-medium) var(--ease-bounce);
+    --transition-micro-bounce-slow: var(--duration-micro-slow) var(--ease-bounce);
+
+    --transition-micro-back-fast: var(--duration-micro-fast) var(--ease-back);
+    --transition-micro-back-medium: var(--duration-micro-medium) var(--ease-back);
+    --transition-micro-back-slow: var(--duration-micro-slow) var(--ease-back);
+}
