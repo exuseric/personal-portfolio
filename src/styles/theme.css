@@ -10,7 +10,7 @@
   --text-brand-default: var(--color-brand-700);
   --text-brand-subtle: var(--color-brand-400);
   --text-brand-hover: var(--color-brand-900);
-  --text-brand-on-color: var(--color-neutral-white);
+  --text-on-brand-color: var(--color-neutral-white);
 
   /* Secondary Colors */
   --surface-secondary-default: var(--color-secondary-500);
@@ -20,7 +20,7 @@
   --text-secondary-default: var(--color-secondary-700);
   --text-secondary-subtle: var(--color-secondary-400);
   --text-secondary-hover: var(--color-secondary-900);
-  --text-secondary-on-color: var(--color-neutral-900);
+  --text-on-secondary-color: var(--color-neutral-900);
 
   /* Accent Colors */
   --surface-accent-default: var(--color-accent-500);
@@ -30,7 +30,7 @@
   --text-accent-default: var(--color-accent-700);
   --text-accent-subtle: var(--color-accent-400);
   --text-accent-hover: var(--color-accent-900);
-  --text-accent-on-color: var(--color-neutral-white);
+  --text-on-accent-color: var(--color-neutral-white);
 
   /* Neutral Colors */
   --surface-neutral-default: var(--color-neutral-white);
@@ -41,7 +41,7 @@
   --text-neutral-default: var(--color-neutral-900);
   --text-neutral-subtle: var(--color-neutral-400);
   --text-neutral-hover: var(--color-neutral-700);
-  --text-neutral-on-color: var(--color-neutral-white);
+  --text-on-neutral-color: var(--color-neutral-900);
 
   /* Success Colors */
   --surface-success-default: var(--color-success-500);
@@ -51,7 +51,7 @@
   --text-success-default: var(--color-success-700);
   --text-success-subtle: var(--color-success-400);
   --text-success-hover: var(--color-success-900);
-  --text-success-on-color: var(--color-neutral-900);
+  --text-on-success-color: var(--color-neutral-900);
 
   /* Warning Colors */
   --surface-warning-default: var(--color-warning-500);
@@ -61,7 +61,7 @@
   --text-warning-default: var(--color-warning-700);
   --text-warning-subtle: var(--color-warning-400);
   --text-warning-hover: var(--color-warning-900);
-  --text-warning-on-color: var(--color-neutral-900);
+  --text-on-warning-color: var(--color-neutral-900);
 
   /* Error Colors */
   --surface-error-default: var(--color-error-500);
@@ -71,7 +71,7 @@
   --text-error-default: var(--color-error-700);
   --text-error-subtle: var(--color-error-400);
   --text-error-hover: var(--color-error-900);
-  --text-error-on-color: var(--color-neutral-white);
+  --text-on-error-color: var(--color-neutral-white);
 
   /* Info Colors */
   --surface-info-default: var(--color-info-500);
@@ -81,7 +81,7 @@
   --text-info-default: var(--color-info-700);
   --text-info-subtle: var(--color-info-400);
   --text-info-hover: var(--color-info-900);
-  --text-info-on-color: var(--color-neutral-900);
+  --text-on-info-color: var(--color-neutral-900);
 }
 
 /*=================================*/
@@ -109,7 +109,7 @@
 /*  Brand */
 .surface-brand {
   background-color: var(--surface-brand-default);
-  color: var(--text-brand-on-color);
+  color: var(--text-on-brand-color);
   border-color: var(--surface-brand-default);
 }
 .surface-brand-subtle {
@@ -120,14 +120,14 @@
 .surface-brand:hover,
 .surface-brand-subtle:hover {
   background-color: var(--surface-brand-hover);
-  color: var(--text-brand-on-color);
+  color: var(--text-on-brand-color);
   border-color: var(--surface-brand-hover);
 }
 
 /*  Secondary  */
 .surface-secondary {
   background-color: var(--surface-secondary-default);
-  color: var(--text-secondary-on-color);
+  color: var(--text-on-secondary-color);
   border-color: var(--surface-secondary-default);
 }
 .surface-secondary-subtle {
@@ -138,14 +138,14 @@
 .surface-secondary:hover,
 .surface-secondary-subtle:hover {
   background-color: var(--surface-secondary-hover);
-  color: var(--text-secondary-on-color);
+  color: var(--text-on-secondary-color);
   border-color: var(--surface-secondary-hover);
 }
 
 /*  Accent  */
 .surface-accent {
   background-color: var(--surface-accent-default);
-  color: var(--text-accent-on-color);
+  color: var(--text-on-accent-color);
   border-color: var(--surface-accent-default);
 }
 .surface-accent-subtle {
@@ -156,14 +156,14 @@
 .surface-accent:hover,
 .surface-accent-subtle:hover {
   background-color: var(--surface-accent-hover);
-  color: var(--text-accent-on-color);
+  color: var(--text-on-accent-color);
   border-color: var(--surface-accent-hover);
 }
 
 /*  Success */
 .surface-success {
   background-color: var(--surface-success-default);
-  color: var(--text-success-on-color);
+  color: var(--text-on-surface-color);
   border-color: var(--surface-success-default);
 }
 .surface-success-subtle {
@@ -174,14 +174,14 @@
 .surface-success:hover,
 .surface-success-subtle:hover {
   background-color: var(--surface-success-hover);
-  color: var(--text-success-on-color);
+  color: var(--text-on-surface-color);
   border-color: var(--surface-success-hover);
 }
 
 /*  Warning  */
 .surface-warning {
   background-color: var(--surface-warning-default);
-  color: var(--text-warning-on-color);
+  color: var(--text-on-warning-color);
   border-color: var(--surface-warning-default);
 }
 .surface-warning-subtle {
@@ -192,14 +192,14 @@
 .surface-warning:hover,
 .surface-warning-subtle:hover {
   background-color: var(--surface-warning-hover);
-  color: var(--text-warning-on-color);
+  color: var(--text-on-warning-color);
   border-color: var(--surface-warning-hover);
 }
 
 /*  Error  */
 .surface-error {
   background-color: var(--surface-error-default);
-  color: var(--text-error-on-color);
+  color: var(--text-on-error-color);
   border-color: var(--surface-error-default);
 }
 .surface-error-subtle {
@@ -210,14 +210,14 @@
 .surface-error:hover,
 .surface-error-subtle:hover {
   background-color: var(--surface-error-hover);
-  color: var(--text-error-on-color);
+  color: var(--text-on-error-color);
   border-color: var(--surface-error-hover);
 }
 
 /*  Info  */
 .surface-info {
   background-color: var(--surface-info-default);
-  color: var(--text-info-on-color);
+  color: var(--text-on-info-color);
   border-color: var(--surface-info-default);
 }
 .surface-info-subtle {
@@ -228,7 +228,7 @@
 .surface-info:hover,
 .surface-info-subtle:hover {
   background-color: var(--surface-info-hover);
-  color: var(--text-info-on-color);
+  color: var(--text-on-info-color);
   border-color: var(--surface-info-hover);
 }
 
@@ -266,7 +266,7 @@
 }
 .outline-brand:hover {
   background-color: var(--surface-brand-default);
-  color: var(--text-brand-on-color);
+  color: var(--text-on-brand-color);
   border-color: var(--surface-brand-default);
 }
 
@@ -278,7 +278,7 @@
 }
 .outline-secondary:hover {
   background-color: var(--surface-secondary-default);
-  color: var(--text-secondary-on-color);
+  color: var(--text-on-secondary-color);
   border-color: var(--surface-secondary-default);
 }
 
@@ -290,7 +290,7 @@
 }
 .outline-accent:hover {
   background-color: var(--surface-accent-default);
-  color: var(--text-accent-on-color);
+  color: var(--text-on-accent-color);
   border-color: var(--surface-accent-default);
 }
 
@@ -302,7 +302,7 @@
 }
 .outline-success:hover {
   background-color: var(--surface-success-default);
-  color: var(--text-success-on-color);
+  color: var(--text-on-surface-color);
   border-color: var(--surface-success-default);
 }
 
@@ -314,7 +314,7 @@
 }
 .outline-warning:hover {
   background-color: var(--surface-warning-default);
-  color: var(--text-warning-on-color);
+  color: var(--text-on-warning-color);
   border-color: var(--surface-warning-default);
 }
 
@@ -326,7 +326,7 @@
 }
 .outline-error:hover {
   background-color: var(--surface-error-default);
-  color: var(--text-error-on-color);
+  color: var(--text-on-error-color);
   border-color: var(--surface-error-default);
 }
 
@@ -338,7 +338,7 @@
 }
 .outline-info:hover {
   background-color: var(--surface-info-default);
-  color: var(--text-info-on-color);
+  color: var(--text-on-info-color);
   border-color: var(--surface-info-default);
 }
 
@@ -376,7 +376,7 @@
 }
 .outline-brand-subtle:hover {
   background-color: var(--surface-brand-subtle);
-  color: var(--text-brand-on-color);
+  color: var(--text-on-brand-color);
   border-color: var(--surface-brand-subtle);
 }
 
@@ -388,7 +388,7 @@
 }
 .outline-secondary-subtle:hover {
   background-color: var(--surface-secondary-subtle);
-  color: var(--text-secondary-on-color);
+  color: var(--text-on-secondary-color);
   border-color: var(--surface-secondary-subtle);
 }
 
@@ -400,7 +400,7 @@
 }
 .outline-accent-subtle:hover {
   background-color: var(--surface-accent-subtle);
-  color: var(--text-accent-on-color);
+  color: var(--text-on-accent-color);
   border-color: var(--surface-accent-subtle);
 }
 
@@ -412,7 +412,7 @@
 }
 .outline-success-subtle:hover {
   background-color: var(--surface-success-subtle);
-  color: var(--text-success-on-color);
+  color: var(--text-on-surface-color);
   border-color: var(--surface-success-subtle);
 }
 
@@ -424,7 +424,7 @@
 }
 .outline-warning-subtle:hover {
   background-color: var(--surface-warning-subtle);
-  color: var(--text-warning-on-color);
+  color: var(--text-on-warning-color);
   border-color: var(--surface-warning-subtle);
 }
 
@@ -436,7 +436,7 @@
 }
 .outline-error-subtle:hover {
   background-color: var(--surface-error-subtle);
-  color: var(--text-error-on-color);
+  color: var(--text-on-error-color);
   border-color: var(--surface-error-subtle);
 }
 
@@ -448,7 +448,7 @@
 }
 .outline-info-subtle:hover {
   background-color: var(--surface-info-subtle);
-  color: var(--text-info-on-color);
+  color: var(--text-on-info-color);
   border-color: var(--surface-info-subtle);
 }
 
@@ -475,7 +475,7 @@
   color: var(--text-brand-subtle);
 }
 .text-on-brand-color {
-  color: var(--text-brand-on-color);
+  color: var(--text-on-brand-color);
 }
 .text-brand:hover,
 .text-brand-subtle:hover {
@@ -490,7 +490,7 @@
   color: var(--text-secondary-subtle);
 }
 .text-on-secondary-color {
-  color: var(--text-secondary-on-color);
+  color: var(--text-on-secondary-color);
 }
 .text-secondary:hover,
 .text-secondary-subtle:hover {
@@ -505,7 +505,7 @@
   color: var(--text-success-subtle);
 }
 .text-on-success-color {
-  color: var(--text-success-on-color);
+  color: var(--text-on-surface-color);
 }
 .text-success:hover,
 .text-success-subtle:hover {
@@ -520,7 +520,7 @@
   color: var(--text-warning-subtle);
 }
 .text-on-warning-color {
-  color: var(--text-warning-on-color);
+  color: var(--text-on-warning-color);
 }
 .text-warning:hover,
 .text-warning-subtle:hover {
@@ -535,7 +535,7 @@
   color: var(--text-error-subtle);
 }
 .text-on-error-color {
-  color: var(--text-error-on-color);
+  color: var(--text-on-error-color);
 }
 .text-error:hover,
 .text-error-subtle:hover {
@@ -550,7 +550,7 @@
   color: var(--text-info-subtle);
 }
 .text-on-info-color {
-  color: var(--text-info-on-color);
+  color: var(--text-on-info-color);
 }
 .text-info:hover,
 .text-info-subtle:hover {
