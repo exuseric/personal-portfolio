@@ -23,6 +23,8 @@ a.link-button {
 
   transition:
     background-color var(--transition-anticipate-medium),
+    background-image var(--transition-anticipate-medium),
+    background var(--transition-anticipate-medium),
     color var(--transition-anticipate-fast),
     border-color var(--transition-micro-fast),
     all var(--transition-medium);
@@ -39,7 +41,8 @@ a.link-button:focus,
 .btn:focus:active,
 a.link-button:focus:active,
 .icon-btn:focus:active {
-  background-color: var(--surface-accent-subtle);
+  color: var(--text-on-accent-color);
+  background-color: var(--surface-accent-default);
 }
 
 /* Variants */
@@ -130,7 +133,7 @@ a.is-disabled,
   padding: 0;
 
   border-radius: var(--_radius);
-  border: 1px solid transparent;
+  border: 0.12rem solid transparent;
   background-color: transparent;
 
   font-size: var(--font-size-lg);
@@ -157,7 +160,7 @@ a.is-disabled,
   font-size: 1.5rem;
 }
 
-.icon-btn > * {
+.icon-btn>* {
   position: absolute;
   inset: 0 0 auto;
   top: 50%;

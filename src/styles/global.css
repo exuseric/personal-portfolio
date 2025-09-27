@@ -6,46 +6,32 @@
 @import "./animations.css";
 
 
-/* Minimal Design System with Carbon Inspiration: Core Variables */
-:root {
-  interpolate-size: allow-keywords;
+@layer base {
+  :root {
+    interpolate-size: allow-keywords;
 
-  /* Carbon-inspired Shadow System */
-  --shadow-color: 0deg 0% 0%;
-  --shadow-strength: 10%;
-  --shadow-sm: 0 2px 6px hsl(var(--shadow-color) / calc(var(--shadow-strength)));
-  --shadow-md: 0 4px 8px hsl(var(--shadow-color) / calc(var(--shadow-strength)));
+    --shadow-color: 0deg 0% 0%;
+    --shadow-strength: 10%;
+    --shadow-sm: 0 2px 6px hsl(var(--shadow-color) / calc(var(--shadow-strength)));
+    --shadow-md: 0 4px 8px hsl(var(--shadow-color) / calc(var(--shadow-strength)));
 
-  /* Carbon-inspired Transitions */
-  --transition-all: 350ms cubic-bezier(0.2, 0, 0.38, 0.9);
-  --entry-speed-medium: 200ms;
-  --exit-speed-medium: 250ms;
-  --entry-speed-fast: 100ms;
-  --exit-speed-fast: 150ms;
-  --entry-ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --exit-ease: cubic-bezier(0.5, 0, 0.75, 0);
-
-  --entry-transition-medium: var(--entry-speed-medium) var(--entry-ease);
-  --exit-transition-medium: var(--exit-speed-medium) var(--exit-ease);
-  --entry-transition-fast: var(--entry-speed-fast) var(--entry-ease);
-  --exit-transition-fast: var(--exit-speed-fast) var(--exit-ease);
-  /* Carbon's standard easing */
-
-  /* Layout */
-  --content-width: min(100% - 2rem, 680px);
-  --site-width: min(100% - 2rem, 1200px);
+    /* Layout */
+    --content-width: min(100% - 2rem, 680px);
+    --site-width: min(100% - 2rem, 1200px);
+  }
 }
 
-@layer general-styling {
+@layer base {
 
   html,
   body {
     font-family: var(--font-family-base);
     color: var(--text-neutral-default);
-    background-color: var(--surface-neutral-default);
+    /* background-color: var(--surface-neutral-default); */
+    background: var(--surface-neutral-default);
+    background: radial-gradient(at left top, var(--surface-brand-subtle), var(--surface-secondary-subtle));
     line-height: var(--lh-base);
     font-weight: 400;
-
     scroll-behavior: smooth;
     interpolate-size: allow-keywords;
   }
@@ -56,22 +42,7 @@
     z-index: 1;
   }
 
-  body::before {
-    content: '';
-    position: absolute;
-    inset: 0 0 auto;
-    z-index: -1;
-
-    width: 100%;
-    height: 100%;
-
-    opacity: 0.015;
-    background-image: url('src/images/texture.svg');
-    background-size: 1rem;
-  }
-
-
-  /* Typography Base Styles - Carbon Inspired */
+  /* Typography */
   h1,
   h2,
   h3,
@@ -81,13 +52,11 @@
     margin-bottom: var(--size-4);
     font-weight: 400;
     max-width: 50ch;
-    /* Carbon uses 400 for headings */
   }
 
   h1 {
     font-size: var(--font-size-5xl);
     font-weight: 300;
-    /* Carbon uses lighter weight for largest headings */
   }
 
   h2 {
@@ -124,7 +93,102 @@
   }
 }
 
-@layer animation {
+
+@layer components {
+  .container {
+    --padding-inline: 1rem;
+    --content-max-width: var(--site-width);
+    --breakout-max-width: 1300px;
+    --breakout-size: calc((var(--breakout-max-width) - var(--content-max-width)) / 2);
+
+    display: grid;
+    grid-template-columns:
+      [full-width-start] minmax(var(--padding-inline), 1fr) [breakout-start] minmax(0, var(--breakout-size)) [content-start] min(100% - (var(--padding-inline) * 2), var(--content-max-width)) [content-end] minmax(0, var(--breakout-size)) [breakout-end] minmax(var(--padding-inline), 1fr) [full-width-end];
+    width: 100%;
+  }
+
+  .container> :not(.breakout, .full-width) {
+    grid-column: content;
+  }
+
+  .container>.breakout {
+    grid-column: breakout;
+  }
+
+  .container>.full-width {
+    grid-column: full-width;
+  }
+
+  .page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    gap: var(--size-6);
+  }
+
+  [data-parent-container] {
+    padding-block: var(--size-12);
+  }
+
+  [data-parent-container] h2 {
+    margin-bottom: var(--size-4);
+  }
+
+  [data-content-wrapper] {
+    width: var(--content-width);
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-4);
+    align-items: flex-start;
+  }
+
+  [data-offscreen] {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 500px;
+  }
+}
+
+
+@layer components {
+  .skeleton {
+    width: 100%;
+    height: 1em;
+    background-color: var(--surface-neutral-subtle);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skeleton::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, var(--color-neutral-200), transparent);
+    animation: skeleton-loading 1.5s infinite;
+  }
+
+  @keyframes skeleton-loading {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .skeleton-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-2);
+  }
+
+  .skeleton-text .skeleton:nth-child(3) {
+    width: 75%;
+  }
+}
+
+@layer animations {
   @keyframes fade-in {
     from {
       opacity: 0;
@@ -158,106 +222,4 @@
     animation: 210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
       300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
   }
-}
-
-/* Core Layout Elements */
-.container {
-  --padding-inline: 1rem;
-  --content-max-width: var(--site-width);
-  --breakout-max-width: 1300px;
-  --breakout-size: calc((var(--breakout-max-width) - var(--content-max-width)) / 2);
-
-  display: grid;
-  grid-template-columns: [full-width-start] minmax(var(--padding-inline), 1fr) [breakout-start] minmax(0, var(--breakout-size)) [content-start] min(100% - (var(--padding-inline) * 2), var(--content-max-width)) [content-end] minmax(0, var(--breakout-size)) [breakout-end] minmax(var(--padding-inline), 1fr) [full-width-end];
-  width: 100%;
-}
-
-.container> :not(.breakout, .full-width) {
-  grid-column: content;
-}
-
-.container>.breakout {
-  grid-column: breakout;
-}
-
-.container>.full-width {
-  grid-column: full-width;
-}
-
-.page-wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  gap: var(--size-6);
-}
-
-[data-parent-container] {
-  padding-block: var(--size-12);
-}
-
-[data-parent-container] h2 {
-  margin-bottom: var(--size-4);
-}
-
-[data-content-wrapper] {
-  width: var(--content-width);
-  margin-inline: auto;
-
-  display: flex;
-  flex-direction: column;
-  gap: var(--size-4);
-  align-items: flex-start;
-}
-
-[data-highlight] {
-  color: var(--text-brand-on-color);
-  background-color: var(--surface-brand-default);
-}
-
-[data-highlight] a:not(:hover),
-[data-highlight] .btn---minimal:not(:hover) {
-  color: currentColor;
-}
-
-/* Skeleton */
-.skeleton {
-  width: 100%;
-  height: 1em;
-  background-color: var(--surface-neutral-subtle);
-  position: relative;
-  overflow: hidden;
-}
-
-.skeleton::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  transform: translateX(-100%);
-  background: linear-gradient(90deg, transparent, var(--color-neutral-200), transparent);
-  animation: skeleton-loading 1.5s infinite;
-}
-
-@keyframes skeleton-loading {
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-/* Multi-line skeleton text */
-.skeleton-text {
-  display: flex;
-  flex-direction: column;
-  gap: var(--size-2);
-}
-
-.skeleton-text .skeleton:nth-child(3) {
-  width: 75%;
-}
-
-[data-offscreen] {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 500px;
 }

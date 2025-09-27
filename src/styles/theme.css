@@ -250,7 +250,7 @@
 .outline-neutral {
   background-color: transparent;
   color: var(--text-neutral-default);
-  border: 1px solid var(--surface-neutral-default);
+  border: 0.12rem solid var(--surface-neutral-default);
 }
 .outline-neutral:hover {
   background-color: var(--surface-neutral-hover);
@@ -262,7 +262,7 @@
 .outline-brand {
   background-color: transparent;
   color: var(--text-brand-default);
-  border: 1px solid var(--surface-brand-default);
+  border: 0.12rem solid var(--surface-brand-default);
 }
 .outline-brand:hover {
   background-color: var(--surface-brand-default);
@@ -274,7 +274,7 @@
 .outline-secondary {
   background-color: transparent;
   color: var(--text-secondary-default);
-  border: 1px solid var(--surface-secondary-default);
+  border: 0.12rem solid var(--surface-secondary-default);
 }
 .outline-secondary:hover {
   background-color: var(--surface-secondary-default);
@@ -286,7 +286,7 @@
 .outline-accent {
   background-color: transparent;
   color: var(--text-accent-default);
-  border: 1px solid var(--surface-accent-default);
+  border: 0.12rem solid var(--surface-accent-default);
 }
 .outline-accent:hover {
   background-color: var(--surface-accent-default);
@@ -298,7 +298,7 @@
 .outline-success {
   background-color: transparent;
   color: var(--text-success-default);
-  border: 1px solid var(--surface-success-default);
+  border: 0.12rem solid var(--surface-success-default);
 }
 .outline-success:hover {
   background-color: var(--surface-success-default);
@@ -310,7 +310,7 @@
 .outline-warning {
   background-color: transparent;
   color: var(--text-warning-default);
-  border: 1px solid var(--surface-warning-default);
+  border: 0.12rem solid var(--surface-warning-default);
 }
 .outline-warning:hover {
   background-color: var(--surface-warning-default);
@@ -322,7 +322,7 @@
 .outline-error {
   background-color: transparent;
   color: var(--text-error-default);
-  border: 1px solid var(--surface-error-default);
+  border: 0.12rem solid var(--surface-error-default);
 }
 .outline-error:hover {
   background-color: var(--surface-error-default);
@@ -334,7 +334,7 @@
 .outline-info {
   background-color: transparent;
   color: var(--text-info-default);
-  border: 1px solid var(--surface-info-default);
+  border: 0.12rem solid var(--surface-info-default);
 }
 .outline-info:hover {
   background-color: var(--surface-info-default);
@@ -346,7 +346,7 @@
 .outline-disabled {
   background-color: transparent;
   color: var(--text-neutral-subtle);
-  border: 1px solid var(--surface-neutral-subtle);
+  border: 0.12rem solid var(--surface-neutral-subtle);
   cursor: not-allowed;
   opacity: 0.6;
   pointer-events: none;
@@ -360,7 +360,7 @@
 .outline-neutral-subtle {
   background-color: transparent;
   color: var(--text-neutral-subtle);
-  border: 1px solid var(--surface-neutral-subtle);
+  border: 0.12rem solid var(--surface-neutral-subtle);
 }
 .outline-neutral-subtle:hover {
   background-color: var(--surface-neutral-subtle);
@@ -372,7 +372,7 @@
 .outline-brand-subtle {
   background-color: transparent;
   color: var(--text-brand-subtle);
-  border: 1px solid var(--surface-brand-subtle);
+  border: 0.12rem solid var(--surface-brand-subtle);
 }
 .outline-brand-subtle:hover {
   background-color: var(--surface-brand-subtle);
@@ -384,7 +384,7 @@
 .outline-secondary-subtle {
   background-color: transparent;
   color: var(--text-secondary-subtle);
-  border: 1px solid var(--surface-secondary-subtle);
+  border: 0.12rem solid var(--surface-secondary-subtle);
 }
 .outline-secondary-subtle:hover {
   background-color: var(--surface-secondary-subtle);
@@ -396,7 +396,7 @@
 .outline-accent-subtle {
   background-color: transparent;
   color: var(--text-accent-subtle);
-  border: 1px solid var(--surface-accent-subtle);
+  border: 0.12rem solid var(--surface-accent-subtle);
 }
 .outline-accent-subtle:hover {
   background-color: var(--surface-accent-subtle);
@@ -408,7 +408,7 @@
 .outline-success-subtle {
   background-color: transparent;
   color: var(--text-success-subtle);
-  border: 1px solid var(--surface-success-subtle);
+  border: 0.12rem solid var(--surface-success-subtle);
 }
 .outline-success-subtle:hover {
   background-color: var(--surface-success-subtle);
@@ -420,7 +420,7 @@
 .outline-warning-subtle {
   background-color: transparent;
   color: var(--text-warning-subtle);
-  border: 1px solid var(--surface-warning-subtle);
+  border: 0.12rem solid var(--surface-warning-subtle);
 }
 .outline-warning-subtle:hover {
   background-color: var(--surface-warning-subtle);
@@ -432,7 +432,7 @@
 .outline-error-subtle {
   background-color: transparent;
   color: var(--text-error-subtle);
-  border: 1px solid var(--surface-error-subtle);
+  border: 0.12rem solid var(--surface-error-subtle);
 }
 .outline-error-subtle:hover {
   background-color: var(--surface-error-subtle);
@@ -444,7 +444,7 @@
 .outline-info-subtle {
   background-color: transparent;
   color: var(--text-info-subtle);
-  border: 1px solid var(--surface-info-subtle);
+  border: 0.12rem solid var(--surface-info-subtle);
 }
 .outline-info-subtle:hover {
   background-color: var(--surface-info-subtle);
@@ -456,7 +456,7 @@
 .outline-disabled-subtle {
   background-color: transparent;
   color: var(--text-neutral-subtle);
-  border: 1px solid var(--surface-neutral-subtle);
+  border: 0.12rem solid var(--surface-neutral-subtle);
   cursor: not-allowed;
   opacity: 0.6;
   pointer-events: none;
