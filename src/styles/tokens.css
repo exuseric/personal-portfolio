@@ -205,6 +205,28 @@
 }
 
 /* ======================================= */
+/* Borders & Outlines and Radius                      */
+/* ======================================= */
+:root {
+  /* Base */
+  --stroke-base: 0.12rem;
+  /* replaces 1px */
+
+  /* Scale */
+  --stroke-0: 0;
+  --stroke-1: var(--stroke-base);
+  --stroke-2: calc(var(--stroke-base) * 2);
+  --stroke-3: calc(var(--stroke-base) * 3);
+  --stroke-4: calc(var(--stroke-base) * 4);
+
+  --radius-none: 0;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-round: calc(infinity * 1px);
+}
+
+/* ======================================= */
 /* Animations and Transitions */
 /* ======================================= */
 :root {
