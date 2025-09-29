@@ -7,7 +7,7 @@ import Footer from "@/components/footer/Footer.astro";
 import FaqSection from "@/components/FaqSection.astro";
 ---
 
-<html lang={seo.language}>
+<html lang={seo.language} data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content={seo.additionalMeta.viewport} />
@@ -230,14 +230,14 @@ import FaqSection from "@/components/FaqSection.astro";
       config={[
         {
           src: [],
-          name: "Inter",
+          name: "DM Sans",
           preload: true,
           display: "swap",
           selector: "body",
           fallback: "sans-serif",
-          cssVariable: "font-sans",
+          cssVariable: "font-family-base",
           googleFontsURL:
-            "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
+            "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap",
         },
         {
           src: [],
@@ -246,7 +246,7 @@ import FaqSection from "@/components/FaqSection.astro";
           display: "swap",
           selector: "h1,h2",
           fallback: "monospace",
-          cssVariable: "font-mono",
+          cssVariable: "font-family-heading",
           googleFontsURL:
             "https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap",
         },
@@ -254,9 +254,9 @@ import FaqSection from "@/components/FaqSection.astro";
     />
   </head>
 
-  <body>
+  <body class="container">
     <Navigation />
-    <main id="main-content" class="page-wrapper">
+    <main id="main-content" class="page-wrapper breakout">
       <slot />
       <FaqSection />
     </main>

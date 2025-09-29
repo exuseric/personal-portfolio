@@ -1,112 +1,38 @@
 ---
 import data from "@/data/navigation.json";
 const { nav } = data;
+import style from "./navigation.module.css";
 ---
 
-<ul
-    class="primary_nav__list"
+<nav
     data-menu
-    data-is-open="false"
-    aria-label="Main Navigation Links"
+    data-is-menu-open="false"
+    class:list={[style.nav__links]}
+    aria-label="Main Navigation"
 >
-    {
-        nav.links.map((link, index) => (
-            <li class="primary_nav__list_item">
-                <a
-                    href={link.url}
-                    class={`primary_nav__link btn ${index === nav.links.length - 1 ? "btn--primary" : "btn--ghost"}`}
-                    title={link.label}
-                    aria-label={link.label}
-                >
-                    {link.label}
-                </a>
-            </li>
-        ))
-    }
-</ul>
-
-<style>
-    .primary_nav__list {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        z-index: -1;
-
-        width: 100%;
-        height: max-content;
-
-        margin: 0;
-        padding: 0;
-
-        list-style-type: none;
-
-        background-color: var(--color-bg);
-        box-shadow: var(--shadow-md);
-        transition: var(--transition-all);
-    }
-
-    .primary_nav__list_item,
-    .primary_nav__link {
-        width: 100%;
-    }
-    .primary_nav__link {
-        display: inline-flex;
-        padding: var(--space-8);
-        justify-content: flex-start;
-    }
-    .primary_nav__list[data-is-open="true"] {
-        transform: translateY(0);
-    }
-    .primary_nav__list[data-is-open="false"] {
-        transform: translateY(-200%);
-    }
-
-    @media (min-width: 768px) {
-        .primary_nav__list {
-            position: relative;
-            display: flex;
-            flex-flow: row wrap;
-            align-items: center;
-            justify-content: flex-end;
-            gap: var(--space-2);
-
-            list-style: none;
-            margin: 0;
-            padding: 0;
+    <ul class:list={[style.nav__list]} aria-label="Main Navigation Links">
+        {
+            nav.links.map((link, index) => (
+                <li class:list={[style.nav__listItem]}>
+                    <a
+                        href={link.url}
+                        class:list={[style.nav__link, "link-button"]}
+                        title={link.label}
+                        aria-label={link.label}
+                    >
+                        {link.label}
+                    </a>
+                </li>
+            ))
         }
-        .primary_nav__links {
-            display: flex;
-            flex-flow: row wrap;
-            align-items: center;
-            justify-content: flex-end;
-            gap: var(--space-3);
-        }
-        .primary_nav__list[data-is-open="true"],
-        .primary_nav__list[data-is-open="false"] {
-            transform: translateX(0);
-            justify-self: end;
-            position: relative;
-            top: 0;
-            z-index: -1;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            width: max-content;
-            height: max-content;
+    </ul>
+</nav>
 
-            background-color: var(--color-bg);
-            box-shadow: none;
-            transition: var(--transition-all);
-        }
-        .primary_nav__list_item,
-        .primary_nav__link {
-            width: max-content;
-        }
-
-        .primary_nav__link {
-            justify-content: center;
-            padding: var(--space-4);
-        }
-    }
-</style>
+<script>
+    window.addEventListener("ToggleMenu", (event) => {
+        const menu = document.querySelector("[data-menu]") as HTMLElement;
+        const {detail} = event as CustomEvent;
+      
+        menu.dataset.isMenuOpen = String(detail.newState);
+    })
+</script>

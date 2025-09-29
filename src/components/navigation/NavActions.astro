@@ -1,0 +1,62 @@
+---
+import { Icon } from "astro-icon/components";
+import SocialButtons from "./SocialButtons.astro";
+import style from "./navigation.module.css";
+---
+
+<div class:list={[style.nav__actions]}>
+    <SocialButtons />
+    <div class:list={[style.nav__toggleWrapper]}>
+        <button
+            class:list={[
+                style.nav__toggle,
+                "icon-btn icon-btn--md icon-btn--neutral",
+            ]}
+            aria-expanded="false"
+            aria-label="Toggle Navigation"
+            data-toggle-button
+            data-is-menu-visible="false"
+        >
+            <Icon
+                name="mdi:menu"
+                aria-hidden="true"
+                focusable="false"
+                data-toggle-icon="hamburger"
+                data-is-visible="true"
+            />
+            <Icon
+                name="mdi:close"
+                aria-hidden="true"
+                focusable="false"
+                data-toggle-icon="close"
+                data-is-visible="false"
+            />
+        </button>
+    </div>
+</div>
+
+<script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const toggleButton = document.querySelector(
+            "[data-toggle-button]",
+        ) as HTMLButtonElement;
+
+        if (toggleButton) {
+            toggleButton.addEventListener("click", () => {
+                const isOpen = toggleButton.dataset.isMenuVisible === "true";
+                const newState = !isOpen;
+
+                const toggleMenu = new CustomEvent("ToggleMenu", {
+                    bubbles: true,
+                    cancelable: true,
+                    detail: { newState },
+                });
+
+                toggleButton.dataset.isMenuVisible = String(newState);
+                toggleButton.setAttribute("aria-expanded", String(newState));
+
+                dispatchEvent(toggleMenu);
+            });
+        }
+    });
+</script>

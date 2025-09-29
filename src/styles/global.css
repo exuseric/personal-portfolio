@@ -37,9 +37,17 @@
   }
 
   body {
+    --_body-spacing: var(--size-2);
     position: relative;
     isolation: isolate;
     z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: var(--_body-spacing);
+
+    padding-top: var(--_body-spacing);
   }
 
   /* Typography */
@@ -124,6 +132,10 @@
     flex-direction: column;
     min-height: 100vh;
     gap: var(--size-6);
+
+    background-color: var(--surface-neutral-default);
+    border: 0.12rem solid var(--surface-neutral-subtle);
+    border-radius: var(--size-1);
   }
 
   [data-parent-container] {

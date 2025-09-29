@@ -99,12 +99,12 @@
   color: var(--text-neutral-default);
   border-color: var(--surface-neutral-subtle);
 }
-.surface-neutral:hover,
+/* .surface-neutral:hover,
 .surface-neutral-subtle:hover {
   background-color: var(--surface-neutral-hover);
   color: var(--text-neutral-default);
   border-color: var(--surface-neutral-hover);
-}
+} */
 
 /*  Brand */
 .surface-brand {
@@ -117,12 +117,12 @@
   color: var(--text-brand-default);
   border-color: var(--surface-brand-subtle);
 }
-.surface-brand:hover,
+/* .surface-brand:hover,
 .surface-brand-subtle:hover {
   background-color: var(--surface-brand-hover);
   color: var(--text-on-brand-color);
   border-color: var(--surface-brand-hover);
-}
+} */
 
 /*  Secondary  */
 .surface-secondary {
@@ -135,12 +135,12 @@
   color: var(--text-secondary-default);
   border-color: var(--surface-secondary-subtle);
 }
-.surface-secondary:hover,
+/* .surface-secondary:hover,
 .surface-secondary-subtle:hover {
   background-color: var(--surface-secondary-hover);
   color: var(--text-on-secondary-color);
   border-color: var(--surface-secondary-hover);
-}
+} */
 
 /*  Accent  */
 .surface-accent {
@@ -153,12 +153,12 @@
   color: var(--text-accent-default);
   border-color: var(--surface-accent-subtle);
 }
-.surface-accent:hover,
+/* .surface-accent:hover,
 .surface-accent-subtle:hover {
   background-color: var(--surface-accent-hover);
   color: var(--text-on-accent-color);
   border-color: var(--surface-accent-hover);
-}
+} */
 
 /*  Success */
 .surface-success {
@@ -171,12 +171,12 @@
   color: var(--text-success-default);
   border-color: var(--surface-success-subtle);
 }
-.surface-success:hover,
+/* .surface-success:hover,
 .surface-success-subtle:hover {
   background-color: var(--surface-success-hover);
   color: var(--text-on-surface-color);
   border-color: var(--surface-success-hover);
-}
+} */
 
 /*  Warning  */
 .surface-warning {
@@ -189,12 +189,12 @@
   color: var(--text-warning-default);
   border-color: var(--surface-warning-subtle);
 }
-.surface-warning:hover,
+/* .surface-warning:hover,
 .surface-warning-subtle:hover {
   background-color: var(--surface-warning-hover);
   color: var(--text-on-warning-color);
   border-color: var(--surface-warning-hover);
-}
+} */
 
 /*  Error  */
 .surface-error {
@@ -207,12 +207,12 @@
   color: var(--text-error-default);
   border-color: var(--surface-error-subtle);
 }
-.surface-error:hover,
+/* .surface-error:hover,
 .surface-error-subtle:hover {
   background-color: var(--surface-error-hover);
   color: var(--text-on-error-color);
   border-color: var(--surface-error-hover);
-}
+} */
 
 /*  Info  */
 .surface-info {
@@ -225,12 +225,12 @@
   color: var(--text-info-default);
   border-color: var(--surface-info-subtle);
 }
-.surface-info:hover,
+/* .surface-info:hover,
 .surface-info-subtle:hover {
   background-color: var(--surface-info-hover);
   color: var(--text-on-info-color);
   border-color: var(--surface-info-hover);
-}
+} */
 
 /* Disabled */
 .surface-disabled {
