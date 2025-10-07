@@ -2,21 +2,21 @@
 import { getContent } from "@/utils/graphql-client";
 import { heroQuery } from "@/utils/queries";
 const res = await getContent(heroQuery);
+console.log({res, heroQuery});
 const data = res.homePage.hero;
-import "./style.css";
 ---
 
 <header class="hero container">
     <div class="hero__wrapper">
         <div class="hero__heading">
-            <p>{data.heading}</p>
-            <h1 class="hero__title">{data.subheading}</h1>
+            <p class="hero__subtitle">{data.heading}</p>
+            <h1 class="hero__title text-brand">{data.subheading}</h1>
         </div>
         <div class="hero__content">
             <p>
                 {data.description}
             </p>
-            <div class="btn-group">
+            <!-- <div class="btn-group">
                 {
                     data.cta &&
                         data.cta.map((cta) => (
@@ -24,7 +24,7 @@ import "./style.css";
                                 href={cta.link}
                                 class:list={[
                                     "btn btn--mid",
-                                    cta.type === "primary" && "btn--primary",
+                                    cta.type === "primary" && "btn--brand",
                                     cta.type === "secondary" && "btn--outline",
                                 ]}
                             >
@@ -32,7 +32,46 @@ import "./style.css";
                             </a>
                         ))
                 }
-            </div>
+            </div> -->
         </div>
     </div>
+
+    <div class="hero__illustration">
+    </div>
 </header>
+
+<style>
+    .hero {
+        padding-top: var(--size-24);
+        height: 100%;
+        min-height: 500px;
+    }
+
+    .hero__wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        height: 100%;
+    }
+    
+    .hero__wrapper {
+        text-align: center;
+    }
+
+    .hero__title {
+        margin-block: var(--size-3);
+    }
+
+    .hero__subtitle {
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+    
+    .hero__illustration {
+        margin-top: var(--size-8);
+        width: 100%;
+        height: 200px;
+        background: var(--surface-neutral-default);
+    }
+</style>
