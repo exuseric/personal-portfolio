@@ -477,10 +477,6 @@
 .text-on-brand-color {
   color: var(--text-on-brand-color);
 }
-.text-brand:hover,
-.text-brand-subtle:hover {
-  color: var(--text-brand-hover);
-}
 
 /* Secondary */
 .text-secondary {
@@ -491,10 +487,6 @@
 }
 .text-on-secondary-color {
   color: var(--text-on-secondary-color);
-}
-.text-secondary:hover,
-.text-secondary-subtle:hover {
-  color: var(--text-secondary-hover);
 }
 
 /* Success */
@@ -507,10 +499,6 @@
 .text-on-success-color {
   color: var(--text-on-surface-color);
 }
-.text-success:hover,
-.text-success-subtle:hover {
-  color: var(--text-success-hover);
-}
 
 /* Warning */
 .text-warning {
@@ -521,10 +509,6 @@
 }
 .text-on-warning-color {
   color: var(--text-on-warning-color);
-}
-.text-warning:hover,
-.text-warning-subtle:hover {
-  color: var(--text-warning-hover);
 }
 
 /* Error */
@@ -537,10 +521,6 @@
 .text-on-error-color {
   color: var(--text-on-error-color);
 }
-.text-error:hover,
-.text-error-subtle:hover {
-  color: var(--text-error-hover);
-}
 
 /* Info */
 .text-info {
@@ -552,10 +532,6 @@
 .text-on-info-color {
   color: var(--text-on-info-color);
 }
-.text-info:hover,
-.text-info-subtle:hover {
-  color: var(--text-info-hover);
-}
 
 /* Neutral */
 .text-neutral {
@@ -566,10 +542,6 @@
 }
 .text-on-neutral-color {
   color: var(--text-neutral-on-color);
-}
-.text-neutral:hover,
-.text-neutral-subtle:hover {
-  color: var(--text-neutral-hover);
 }
 
 /* Disabled */

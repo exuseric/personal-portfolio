@@ -27,9 +27,7 @@
   body {
     font-family: var(--font-family-base);
     color: var(--text-neutral-default);
-    /* background-color: var(--surface-neutral-default); */
-    background: var(--surface-neutral-default);
-    background: radial-gradient(at left top, var(--surface-brand-subtle), var(--surface-secondary-subtle));
+    background-color: var(--surface-brand-subtle);
     line-height: var(--lh-base);
     font-weight: 400;
     scroll-behavior: smooth;
@@ -130,12 +128,9 @@
   .page-wrapper {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    gap: var(--size-6);
-
-    background-color: var(--surface-neutral-default);
-    border: 0.12rem solid var(--surface-neutral-subtle);
-    border-radius: var(--size-1);
+   
+    min-height: 100vh; 
+    row-gap: var(--size-2);
   }
 
   [data-parent-container] {

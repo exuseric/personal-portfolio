@@ -241,14 +241,14 @@ import FaqSection from "@/components/FaqSection.astro";
         },
         {
           src: [],
-          name: "Space Mono",
+          name: "Geist Mono",
           preload: true,
           display: "swap",
           selector: "h1,h2",
           fallback: "monospace",
           cssVariable: "font-family-heading",
           googleFontsURL:
-            "https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap",
+            "https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap",
         },
       ]}
     />
@@ -256,7 +256,7 @@ import FaqSection from "@/components/FaqSection.astro";
 
   <body class="container">
     <Navigation />
-    <main id="main-content" class="page-wrapper breakout">
+    <main id="main-content" class="page-wrapper">
       <slot />
       <FaqSection />
     </main>

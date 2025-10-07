@@ -52,10 +52,14 @@ ul.nav__list {
     visibility: hidden;
 }
 
+.nav__linkCta {
+    justify-self: flex-end;
+}
+
 @media (min-width: 768px) {
     .nav__container {
         display: grid;
-        grid-template-columns: auto 1fr auto;
+        grid-template-columns: 1fr auto 1fr;
     }
 
     .nav__links,
@@ -65,6 +69,10 @@ ul.nav__list {
         align-items: center;
         justify-content: center;
         gap: var(--size-3);
+    }
+
+    .nav__actions {
+        justify-self: end;
     }
 
     ul.nav__list {
@@ -88,7 +96,7 @@ ul.nav__list {
 
     .nav__container {
         display: grid;
-        grid-template-columns: repeat(2, 50%);
+        grid-template-columns: auto 1fr;
         grid-template-rows: auto 1fr;
 
         position: relative;
@@ -116,6 +124,7 @@ ul.nav__list {
         flex-flow: row wrap;
         align-items: center;
         justify-content: flex-end;
+        column-gap: var(--size-2);
     }
 
     .nav__toggleWrapper {

@@ -2,10 +2,29 @@
 import { Icon } from "astro-icon/components";
 import SocialButtons from "./SocialButtons.astro";
 import style from "./navigation.module.css";
+import data from "@/data/navigation.json";
+
+const { nav } = data;
 ---
 
 <div class:list={[style.nav__actions]}>
     <SocialButtons />
+    {
+        nav.cta && (
+            <a
+                href={nav.cta.url}
+                class:list={[
+                    style.nav__link,
+                    "btn btn--mid btn--brand",
+                    style.nav__linkCta,
+                ]}
+                title={nav.cta.label}
+                aria-label={nav.cta.label}
+            >
+                {nav.cta.label}
+            </a>
+        )
+    }
     <div class:list={[style.nav__toggleWrapper]}>
         <button
             class:list={[

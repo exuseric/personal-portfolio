@@ -10,7 +10,7 @@ import style from "./navigation.module.css";
     class:list={[style.nav__links]}
     aria-label="Main Navigation"
 >
-    <ul class:list={[style.nav__list]} aria-label="Main Navigation Links">
+    <ul class:list={[style.nav__list]}>
         {
             nav.links.map((link, index) => (
                 <li class:list={[style.nav__listItem]}>
@@ -31,8 +31,8 @@ import style from "./navigation.module.css";
 <script>
     window.addEventListener("ToggleMenu", (event) => {
         const menu = document.querySelector("[data-menu]") as HTMLElement;
-        const {detail} = event as CustomEvent;
-      
+        const { detail } = event as CustomEvent;
+
         menu.dataset.isMenuOpen = String(detail.newState);
-    })
+    });
 </script>

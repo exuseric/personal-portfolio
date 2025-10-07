@@ -4,14 +4,14 @@ import data from "@/data/navigation.json";
 import { Icon } from "astro-icon/components";
 // const data = await getCollection("navigation");
 const { nav } = data;
-import LogoImage from "@/images/logo.png";
+import LogoImage from "@/images/purple-horn.png";
 import NavMenu from "@/components/navigation/NavMenu.astro";
 import NavActions from "./NavActions.astro";
 import style from "./navigation.module.css";
 ---
 
 <header
-    class:list={[style.nav, "container"]}
+    class:list={[style.nav, "container breakout"]}
     data-active="false"
     data-navigation-container
 >

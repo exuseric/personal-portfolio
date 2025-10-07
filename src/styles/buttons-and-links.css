@@ -221,3 +221,10 @@ a.link-neutral:hover {
   color: var(--text-neutral-hover);
   text-decoration: underline;
 }
+
+button,
+a {
+  @supports (corner-shape: squircle) {
+    corner-shape: squircle;
+  }
+}
