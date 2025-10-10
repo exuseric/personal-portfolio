@@ -1,0 +1,70 @@
+---
+import "./style/button.css";
+import Icon from "@/components/Button/ButtonIcon.astro";
+
+interface Props {
+    label: string;
+    variant?:
+        | "default"
+        | "primary"
+        | "secondary"
+        | "destructive"
+        | "success"
+        | "text"
+        | "link";
+    disabled?: boolean;
+    iconName: string[];
+    href?: string;
+    size?: "sm" | "md" | "lg";
+    classList?: string[];
+}
+const props = Astro.props;
+
+const utilityClasses: Record<NonNullable<Props["variant"]>, string> = {
+    default: "btn--neutral",
+    primary: "btn--primary",
+    secondary: "btn--secondary",
+    destructive: "btn--danger",
+    success: "btn--success",
+    text: "btn--text",
+    link: "btn--link",
+};
+
+const sizeClasses: Record<NonNullable<Props["size"]>, string> = {
+    sm: "btn--sm",
+    md: "btn--md",
+    lg: "btn--lg",
+};
+---
+
+{
+    props.href ? (
+        <a
+            href={props.href}
+            aria-label={props.label}
+            target="_blank"
+            class:list={[
+                "btn--icon",
+                utilityClasses[props.variant ?? "default"],
+                sizeClasses[props.size ?? "sm"],
+            ]}
+        >
+            <Icon name={props.iconName} />
+        </a>
+    ) : (
+        <button aria-label={props.label}>
+            <Icon name={props.iconName} />
+        </button>
+    )
+}
+
+<style>
+    .btn--sm {
+        --_min-height: 24px;
+    }
+    .btn--md {
+        --_min-height: 32px;
+    }
+    .btn--lg {
+    }
+</style>

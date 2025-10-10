@@ -2,7 +2,6 @@
 @import "./tokens.css";
 @import "./theme.css";
 @import "./form-elements.css";
-@import "./buttons-and-links.css";
 @import "./animations.css";
 
 
@@ -16,7 +15,7 @@
     --shadow-md: 0 4px 8px hsl(var(--shadow-color) / calc(var(--shadow-strength)));
 
     /* Layout */
-    --content-width: min(100% - 2rem, 680px);
+    --content-width: min(100% - 2rem, 720px);
     --site-width: min(100% - 2rem, 1200px);
   }
 }
@@ -27,7 +26,7 @@
   body {
     font-family: var(--font-family-base);
     color: var(--text-neutral-default);
-    background-color: var(--surface-brand-subtle);
+    background-color: var(--surface-neutral-default);
     line-height: var(--lh-base);
     font-weight: 400;
     scroll-behavior: smooth;
@@ -113,6 +112,10 @@
     width: 100%;
   }
 
+  .container[data-container-md] {
+    --content-max-width: var(--content-width);
+  }
+
   .container> :not(.breakout, .full-width) {
     grid-column: content;
   }
@@ -128,8 +131,8 @@
   .page-wrapper {
     display: flex;
     flex-direction: column;
-   
-    min-height: 100vh; 
+
+    min-height: 100vh;
     row-gap: var(--size-2);
   }
 

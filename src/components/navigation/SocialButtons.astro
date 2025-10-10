@@ -1,21 +1,13 @@
 ---
-import { Icon } from "astro-icon/components";
 import socialLinksData from "@/data/links.json";
+import IconButton from "@/components/Button/IconButton.astro";
 const { links: socialLinks } = socialLinksData;
 ---
 
 <div class="primary_nav__social">
     {
         socialLinks.map((link) => (
-            <a
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="icon-btn icon-btn--sm icon-btn--neutral"
-                title={link.name}
-            >
-                <Icon name={link.icon} aria-hidden="true" focusable="false" />
-            </a>
+            <IconButton iconName={[link.icon]} label={link.name} href={link.url}/>
         ))
     }
 </div>
@@ -25,6 +17,6 @@ const { links: socialLinks } = socialLinksData;
         display: flex;
         flex-flow: row wrap;
         align-items: center;
-        gap: var(--space-3);
+        gap: var(--size-1);
     }
 </style>

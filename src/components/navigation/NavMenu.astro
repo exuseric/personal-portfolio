@@ -2,6 +2,7 @@
 import data from "@/data/navigation.json";
 const { nav } = data;
 import style from "./navigation.module.css";
+import Button from "@/components/Button/Button.astro";
 ---
 
 <nav
@@ -14,14 +15,21 @@ import style from "./navigation.module.css";
         {
             nav.links.map((link, index) => (
                 <li class:list={[style.nav__listItem]}>
-                    <a
+                    <Button
+                        href={link.url}
+                        label={link.label}
+                        variant="text"
+                        size="sm"
+                        classList={['nav__link']}
+                    />
+                    {/* <a
                         href={link.url}
                         class:list={[style.nav__link, "link-button"]}
                         title={link.label}
                         aria-label={link.label}
                     >
                         {link.label}
-                    </a>
+                    </a> */}
                 </li>
             ))
         }

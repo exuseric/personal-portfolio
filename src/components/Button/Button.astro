@@ -1,0 +1,82 @@
+---
+import "./style/button.css"
+
+interface Props {
+    label: string;
+    variant?:
+        | "default"
+        | "primary"
+        | "secondary"
+        | "destructive"
+        | "success"
+        | "text"
+        | "link"
+        | "icon";
+    disabled?: boolean;
+    iconPosition?: "right" | "left";
+    iconName?: string;
+    href?: string;
+    size?: "sm" | "md" | "lg";
+    classList?: string[];
+}
+const props = Astro.props;
+
+const utilityClasses: Record<NonNullable<Props["variant"]>, string> = {
+    default: "btn--neutral",
+    primary: "btn--primary",
+    secondary: "btn--secondary",
+    destructive: "btn--danger",
+    success: "btn--success",
+    text: "btn--text",
+    link: "btn--link",
+    icon: "btn--icon",
+};
+
+const sizeClasses: Record<NonNullable<Props["size"]>, string> = {
+    sm: "btn--sm",
+    md: "btn--md",
+    lg: "btn--lg",
+};
+---
+
+{
+    props.href ? (
+        <a
+            href={props.href}
+            class:list={[
+                "btn",
+                utilityClasses[props.variant ?? "default"],
+                sizeClasses[props.size ?? "md"],
+                ...(props.classList ?? []),
+            ]}
+            title={props.label}
+        >
+            {props.label}
+        </a>
+    ) : (
+        <button
+            class:list={[
+                "btn",
+                utilityClasses[props.variant ?? "default"],
+                sizeClasses[props.size ?? "md"],
+            ]}
+            disabled={props.disabled}
+        >
+            {props.label}
+        </button>
+    )
+}
+
+<style>
+    .btn--sm {
+        --_min-height: 24px;
+        padding: var(--size-1) var(--size-2);
+    }
+    .btn--md {
+        --_min-height: 32px;
+        padding: var(--size-2) var(--size-4);
+    }
+    .btn--lg {
+        padding: var(--size-3) var(--size-5);
+    }
+</style>

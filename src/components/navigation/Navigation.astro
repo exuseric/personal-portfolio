@@ -4,19 +4,21 @@ import data from "@/data/navigation.json";
 import { Icon } from "astro-icon/components";
 // const data = await getCollection("navigation");
 const { nav } = data;
-import LogoImage from "@/images/purple-horn.png";
+import LogoImage from "@/images/logo/purple-horn.png";
 import NavMenu from "@/components/navigation/NavMenu.astro";
 import NavActions from "./NavActions.astro";
-import style from "./navigation.module.css";
+// import style from "./navigation.module.css";
 ---
 
 <header
-    class:list={[style.nav, "container breakout"]}
+    class="nav container breakout"
     data-active="false"
-    data-navigation-container
+    data-navigation
+    data-container-md
 >
-    <div class:list={[style.nav__container]}>
-        <a href="/" class:list={[style.nav__logo]}>
+    <div class="surface-brand-subtle nav__container" data-navigation-container>
+        <NavMenu />
+        <a href="/" class="nav__logo">
             <Image
                 src={LogoImage}
                 width={LogoImage.width}
@@ -24,28 +26,83 @@ import style from "./navigation.module.css";
                 alt={nav.logo.text}
                 loading="eager"
                 decoding="sync"
-                class:list={[style.nav__logo__img]}
+                class="nav__logo__img"
                 layout="fixed"
             />
         </a>
-        <NavMenu />
         <NavActions />
     </div>
 </header>
 
-<script>
-    window.addEventListener("DOMContentLoaded", () => {
-        const navContainer = document.querySelector(
-            "[data-navigation-container]",
-        ) as HTMLElement;
+<style>
+    .nav__logo {
+        display: flex;
+        flex-direction: row;
+        gap: var(--size-2);
+        align-items: center;
 
-        if (navContainer) {
-            window.addEventListener("scroll", () => {
-            const scrollY = window.scrollY;
-            const isActive = scrollY > 10;
-            navContainer.dataset.active = String(isActive);
-            navContainer.classList.toggle("surface-neutral", isActive);
-        });
+        width: 100%;
+        max-width: max-content;
+
+        text-decoration: none;
+        font-size: var(--font-size-sm);
+    }
+
+    .nav__logo__img {
+        width: auto;
+        height: 100%;
+        max-height: 40px;
+        transition: all var(--transition-spring-fast);
+    }
+
+    .nav {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        z-index: 999;
+        padding: var(--size-2) 0;
+        border: 0.12rem solid transparent;
+        border-radius: var(--size-1);
+
+        transition:
+            translate var(--transition-elastic-fast),
+            background-color var(--transition-fast),
+            backdrop-filter var(--transition-medium),
+            border-color var(--transition-fast);
+    }
+
+    .nav__container {
+        padding: var(--size-3);
+        border-radius: var(--radius-round);
+        border: 0.12rem solid oklch(from var(--surface-brand-default) l c h / 0.08);
+
+        transition:
+            background-color var(--transition-fast),
+            box-shadow var(--transition-anticipate-medium);
+    }
+    .nav__container[data-active="true"] {
+        box-shadow: var(--shadow-md);
+    }
+
+    @supports (corner-shape: squircle) {
+        .nav__container {
+            corner-shape: squircle;
         }
-    });
-</script>
+    }
+
+    @media (min-width: 768px) {
+        .nav__container {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+
+            &>:first-child {
+                justify-self: start;
+                width: max-content;
+            }
+
+            &>:last-child {
+                justify-self: end;
+            }
+        }
+    }
+</style>

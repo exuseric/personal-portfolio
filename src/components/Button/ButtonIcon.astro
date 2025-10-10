@@ -1,0 +1,19 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+    name: string[];
+}
+
+const props = Astro.props;
+---
+
+{
+    props.name.map((name) => (
+        <Icon
+            name={name}
+            aria-hidden="true"
+            focusable="false"
+        />
+    ))
+}
