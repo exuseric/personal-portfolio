@@ -70,3 +70,29 @@
     --transition-micro-back-medium: var(--duration-micro-medium) var(--ease-back);
     --transition-micro-back-slow: var(--duration-micro-slow) var(--ease-back);
 }
+
+:root {
+    --animate-squash: squash var(--transition-elastic-slow);
+}
+
+@keyframes squash {
+    0% {
+        scale: 1;
+    }
+
+    40% {
+        scale: 0.92 0.88;
+    }
+
+    60% {
+        scale: 1.05 1.02;
+    }
+
+    80% {
+        scale: 0.98 0.99;
+    }
+
+    100% {
+        scale: 1;
+    }
+}

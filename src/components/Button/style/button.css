@@ -1,5 +1,6 @@
 .btn,
 .btn--icon {
+    --_border-gradient: var(--_border-color, transparent), oklch(from var(--_border-color, transparent) calc(l / 0.725) c h);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -10,7 +11,10 @@
     z-index: 1;
 
     color: var(--_color, var(--text-on-neutral-color));
-    background-color: var(--_background-color, transparent);
+    background:
+        linear-gradient(var(--_background-color, transparent) 0 0) padding-box,
+        linear-gradient(15deg, var(--_border-gradient)) border-box;
+    /* background-color: var(--_background-color, transparent); */
 
     font-family: var(--font-family-base);
     font-size: var(--font-size-sm);
@@ -19,7 +23,8 @@
 
     cursor: pointer;
     user-select: none;
-    border: 0.12rem solid var(--_border-color, transparent);
+    border: 0.12rem solid transparent;
+    outline: 0.12rem solid var(--_outline-color, transparent);
 
     text-decoration: none;
 
@@ -28,22 +33,24 @@
         oklch(from var(--_background-color) calc(l * 0.06) c h / 0.06) 0px 1px 2px 0px;
 
     transition:
-        background-color var(--transition-anticipate-medium),
-        background-image var(--transition-anticipate-medium),
-        background var(--transition-anticipate-medium),
-        color var(--transition-anticipate-fast),
+        background-color var(--transition-anticipate-fast),
+        background var(--transition-micro-fast),
+        color var(--transition-micro-fast),
         border-color var(--transition-micro-fast),
-        all var(--transition-medium);
+        scale var(--transition-micro-fast);
 
-    &:focus-visible {
-        outline-color: var(--surface-accent-default);
-        outline-offset: 0.12rem;
+    /* &:focus-visible {
+        outline-offset: .3rem;
         outline-width: 0.12rem;
-    }
+        } */
 
-    &:active {
+    &:active,
+    &:focus-visible {
+        --_border-color: var(--surface-accent-default);
         --_background-color: var(--surface-accent-subtle);
         --_color: var(--text-accent-hover);
+        box-shadow: inset 1px 1px 4px oklch(from var(--_background-color) calc(l * 0.06) c h / 0.06);
+        scale: 0.98 0.99;
     }
 }
 
@@ -70,7 +77,7 @@
     --_background-color: var(--surface-brand-default);
     --_border-color: var(--surface-brand-default);
     --_color: var(--text-on-brand-color);
-    
+
     &:hover {
         --_color: var(--text-brand-hover);
         --_background-color: var(--surface-brand-hover);
