@@ -73,6 +73,8 @@
 
 :root {
     --animate-squash: squash var(--transition-elastic-slow);
+    --animate-fade-in-bottom: fade-in-bottom;
+    --animate-fade-out-bottom: fade-out-bottom;
 }
 
 @keyframes squash {
@@ -94,5 +96,58 @@
 
     100% {
         scale: 1;
+    }
+}
+
+
+@keyframes fade-in-top {
+    0% {
+        translate: 0 -50px;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    100% {
+        translate: 0 0;
+        opacity: 1;
+        pointer-events: all;
+    }
+}
+
+@keyframes fade-out-top {
+    0% {
+        translate: 0 0;
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    100% {
+        translate: 0 -50px;
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+@keyframes fade-in-bottom {
+	0% {
+		opacity: 0;
+		translate: 0 100%;
+	}
+
+	100% {
+		opacity: 1;
+		translate: 0 0;
+	}
+}
+@keyframes fade-out-bottom {
+    
+    0% {
+        opacity: 1;
+		translate: 0 0;
+	}
+
+    100% {
+        opacity: 0;
+        translate: 0 100%;
     }
 }

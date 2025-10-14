@@ -1,25 +1,49 @@
 ---
-import "./style/button.css"
+import "@/styles/button.css";
+import { Icon } from "astro-iconify";
 
-interface Props {
-    label: string;
+interface BaseProps {
     variant?:
         | "default"
         | "primary"
         | "secondary"
         | "destructive"
         | "success"
-        | "text"
         | "link"
-        | "icon";
+        | "icon"
+        | "outline"
+        | "ghost";
     disabled?: boolean;
+    loading?: boolean;
     iconPosition?: "right" | "left";
     iconName?: string;
     href?: string;
-    size?: "sm" | "md" | "lg";
+    size?: "xs" | "sm" | "md" | "lg" | "xl";
+    type?: "button" | "submit" | "reset";
     classList?: string[];
+    as: "icon-only" | "default";
+    attributes?: {
+        dataset?: Record<string, string | number | boolean>;
+        attributes?: Record<string, string | number | boolean>;
+    };
 }
-const props = Astro.props;
+
+interface LabelButtonProps extends BaseProps {
+    label: string;
+    ariaLabel?: string;
+    variant?: Exclude<BaseProps["variant"], "icon">;
+}
+
+interface IconOnlyButtonProps extends BaseProps {
+    iconName: string;
+    ariaLabel: string;
+    label?: never;
+    variant?: Exclude<BaseProps["variant"], "icon">;
+}
+
+type Props = LabelButtonProps | IconOnlyButtonProps;
+
+const props = Astro.props as Props;
 
 const utilityClasses: Record<NonNullable<Props["variant"]>, string> = {
     default: "btn--neutral",
@@ -27,47 +51,93 @@ const utilityClasses: Record<NonNullable<Props["variant"]>, string> = {
     secondary: "btn--secondary",
     destructive: "btn--danger",
     success: "btn--success",
-    text: "btn--text",
     link: "btn--link",
-    icon: "btn--icon",
+    outline: "btn--outline",
+    ghost: "btn--ghost",
 };
 
 const sizeClasses: Record<NonNullable<Props["size"]>, string> = {
+    xs: "btn--xs",
     sm: "btn--sm",
     md: "btn--md",
     lg: "btn--lg",
+    xl: "btn--xl",
+};
+
+const classes = [
+    "btn",
+    props.as === "icon-only" && "btn--icon",
+    utilityClasses[props.variant ?? "default"],
+    sizeClasses[props.size ?? "md"],
+    props.loading && "btn--loading",
+    ...(props.classList ?? []),
+];
+
+const mapAttributes = (attributesObject: Props["attributes"]) => {
+    const result: Record<string, string> = {};
+
+    if (!attributesObject) return result;
+    const attributeEntries = Object.entries(attributesObject) as [
+        "dataset" | "attributes",
+        Record<string, string | number | boolean> | undefined,
+    ][];
+
+    for (const [attributeKey, attributes] of attributeEntries) {
+        if(!attributes) return
+
+        for (const [attribute, value] of Object.entries(attributes)) {
+            const kebab = attribute.replace(
+                /[A-Z]/g,
+                (m) => "-" + m.toLowerCase(),
+            );
+            const attributeName =
+                attributeKey === "dataset" ? `data-${kebab}` : kebab;
+            result[attributeName] = String(value);
+        }
+    }
+
+    return result
 };
 ---
 
 {
     props.href ? (
         <a
-            href={props.href}
-            class:list={[
-                "btn",
-                utilityClasses[props.variant ?? "default"],
-                sizeClasses[props.size ?? "md"],
-                ...(props.classList ?? []),
-            ]}
-            title={props.label}
+            { ...mapAttributes(props.attributes) }
+            href={props.disabled ? undefined : props.href}
+            class:list={classes}
+            aria-disabled={props.disabled ? "true" : "false"}
+            aria-label={props.ariaLabel ?? props.label}
         >
-            {props.label}
+            {props.iconName && props.iconPosition !== "right" && (
+                <Icon name={props.iconName} />
+            )}
+            {props.label && <span class="btn__label">{props.label}</span>}
+            {props.iconName && props.iconPosition === "right" && (
+                <Icon name={props.iconName} />
+            )}
         </a>
     ) : (
         <button
-            class:list={[
-                "btn",
-                utilityClasses[props.variant ?? "default"],
-                sizeClasses[props.size ?? "md"],
-            ]}
-            disabled={props.disabled}
+            { ...mapAttributes(props.attributes) }
+            class:list={classes}
+            disabled={props.disabled || props.loading}
+            type={props.type ?? "button"}
+            aria-label={props.ariaLabel ?? props.label}
         >
-            {props.label}
+            {props.iconName && props.iconPosition !== "right" && (
+                <Icon name={props.iconName} />
+            )}
+            {props.loading && <span class="btn__spinner" aria-hidden="true" />}
+            {props.label && <span class="btn__label">{props.label}</span>}
+            {props.iconName && props.iconPosition === "right" && (
+                <Icon name={props.iconName} />
+            )}
         </button>
     )
 }
 
-<style>
+<!-- <style>
     .btn--sm {
         --_min-height: 24px;
         padding: var(--size-1) var(--size-2);
@@ -79,4 +149,11 @@ const sizeClasses: Record<NonNullable<Props["size"]>, string> = {
     .btn--lg {
         padding: var(--size-3) var(--size-5);
     }
-</style>
+
+    @media(max-width: 768px) {
+        .btn--sm {
+            --_min-height: 42px;
+            --_min-width: 100%;
+        }
+    }
+</style> -->

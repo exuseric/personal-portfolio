@@ -1,79 +1,118 @@
 ---
-import { Icon } from "astro-icon/components";
+import { Icon } from "astro-iconify";
 import SocialButtons from "./SocialButtons.astro";
-import style from "./navigation.module.css";
+// import style from "./navigation.module.css";
 import data from "@/data/navigation.json";
 import Button from "@/components/Button/Button.astro";
+import IconButton from "@/components/Button/IconButton.astro";
 
 const { nav } = data;
 ---
 
-<div class:list={[style.nav__actions]}>
+<div class:list={["nav__actions"]}>
     <SocialButtons />
     {
         nav.cta && (
             <Button
-            href={nav.cta.url}
-            label={nav.cta.label}
-            variant="primary"
-            classList={[style.nav__link, style.nav__linkCta]}
+                as="default"
+                href={nav.cta.url}
+                label={nav.cta.label}
+                variant="primary"
+                class:list={["nav__link", "nav__linkCta"]}
             />
         )
     }
-    <div class:list={[style.nav__toggleWrapper]}>
-        <Button 
-            label="Toggle Navigation"
+    <div class:list={["nav__toggleWrapper"]}>
+        <Button
+            as="icon-only"
+            variant="default"
+            iconName="mingcute:menu-fill"
+            ariaLabel="Open menu"
+            classList={["nav__toggle"]}
+            attributes={{
+                dataset: {
+                    toggleMenu: true,
+                    isMenuVisible: false,
+                    isVisible: true,
+                    toggleAction: "open"
+                },
+                attributes: {
+                    ariaExpanded: false,
+                },
+            }}
         />
-        <button
-            class:list={[
-                style.nav__toggle,
-                "icon-btn icon-btn--md icon-btn--neutral",
-            ]}
-            aria-expanded="false"
-            aria-label="Toggle Navigation"
-            data-toggle-button
-            data-is-menu-visible="false"
-        >
-            <Icon
-                name="mdi:menu"
-                aria-hidden="true"
-                focusable="false"
-                data-toggle-icon="hamburger"
-                data-is-visible="true"
-            />
-            <Icon
-                name="mdi:close"
-                aria-hidden="true"
-                focusable="false"
-                data-toggle-icon="close"
-                data-is-visible="false"
-            />
-        </button>
+        <Button
+            as="icon-only"
+            variant="default"
+            iconName="material-symbols:close-rounded"
+            ariaLabel="Close menu"
+            classList={["nav__toggle"]}
+            attributes={{
+                dataset: {
+                    toggleMenu: true,
+                    isMenuVisible: false,
+                    isVisible: false,
+                    toggleAction: "close"
+                },
+                attributes: {
+                    ariaExpanded: false,
+                },
+            }}
+        />
     </div>
 </div>
 
+<style></style>
+
 <script>
+    function handleMenu(button: HTMLButtonElement) {
+        const toggleAction = button.dataset.toggleAction
+        const isMenuVisible = button.dataset.isMenuVisible === "true";
+        let state;
+
+        if(toggleAction === "open") state = true;
+        if(toggleAction === "close") state = false;
+        
+        button.dataset.isMenuVisible = String(state);
+        button.setAttribute("aria-expanded", String(state));
+
+        button.dispatchEvent(
+            new CustomEvent("ToggleMenu", {
+                bubbles: true,
+                cancelable: true,
+                detail: { state },
+            }),
+        );
+    }
+
+    function handleButtons(
+        buttons: NodeListOf<HTMLButtonElement>,
+        button: HTMLButtonElement,
+    ) {
+        const isButtonVisible = button.dataset.isVisible === "true";
+        const state = !isButtonVisible;
+
+        button.dataset.isVisible = String(state);
+
+        buttons.forEach((otherBtn) => {
+            if (otherBtn !== button) {
+                otherBtn.dataset.isVisible = String(!state);
+                button.dataset.isVisible = String(state);
+                console.log(otherBtn);
+            }
+        });
+    }
+
     window.addEventListener("DOMContentLoaded", () => {
-        const toggleButton = document.querySelector(
-            "[data-toggle-button]",
-        ) as HTMLButtonElement;
+        const toggleButtons = document.querySelectorAll(
+            '[data-toggle-menu="true"]',
+        ) as NodeListOf<HTMLButtonElement>;
 
-        if (toggleButton) {
-            toggleButton.addEventListener("click", () => {
-                const isOpen = toggleButton.dataset.isMenuVisible === "true";
-                const newState = !isOpen;
-
-                const toggleMenu = new CustomEvent("ToggleMenu", {
-                    bubbles: true,
-                    cancelable: true,
-                    detail: { newState },
-                });
-
-                toggleButton.dataset.isMenuVisible = String(newState);
-                toggleButton.setAttribute("aria-expanded", String(newState));
-
-                dispatchEvent(toggleMenu);
+        toggleButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                handleButtons(toggleButtons, button);
+                handleMenu(button);
             });
-        }
+        });
     });
 </script>

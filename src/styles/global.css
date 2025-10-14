@@ -3,6 +3,7 @@
 @import "./theme.css";
 @import "./form-elements.css";
 @import "./animations.css";
+@import "./button.css";
 
 
 @layer base {
@@ -15,7 +16,7 @@
     --shadow-md: 0 4px 8px hsl(var(--shadow-color) / calc(var(--shadow-strength)));
 
     /* Layout */
-    --content-width: min(100% - 2rem, 720px);
+    --content-width: min(100% - 2rem, 800px);
     --site-width: min(100% - 2rem, 1200px);
   }
 }
@@ -103,7 +104,7 @@
   .container {
     --padding-inline: 1rem;
     --content-max-width: var(--site-width);
-    --breakout-max-width: 1300px;
+    --breakout-max-width: calc(var(--content-max-width) * 0.2);
     --breakout-size: calc((var(--breakout-max-width) - var(--content-max-width)) / 2);
 
     display: grid;

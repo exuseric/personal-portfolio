@@ -1,13 +1,14 @@
 ---
 import socialLinksData from "@/data/links.json";
-import IconButton from "@/components/Button/IconButton.astro";
+import Button from "@/components/Button/Button.astro";
 const { links: socialLinks } = socialLinksData;
 ---
 
 <div class="primary_nav__social">
     {
         socialLinks.map((link) => (
-            <IconButton iconName={[link.icon]} label={link.name} href={link.url}/>
+            // <IconButton iconName={[link.icon]} label={link.name} href={link.url}/>
+            <Button variant="ghost" as="icon-only" type="button" ariaLabel={link.name} iconName={link.icon} href={link.url}/>
         ))
     }
 </div>
