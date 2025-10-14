@@ -10,6 +10,7 @@
     "check": "astro check",
     "preview": "astro preview",
     "lint": "astro check",
+    "hide": "astro preferences disable devToolbar",
     "type-check": "tsc --noEmit"
   },
   "keywords": [
@@ -55,6 +56,7 @@
   },
   "devDependencies": {
     "@iconify-json/mdi": "^1.2.3",
-    "@iconify-json/uil": "^1.2.3"
+    "@iconify-json/uil": "^1.2.3",
+    "astro-iconify": "^1.2.0"
   }
 }
