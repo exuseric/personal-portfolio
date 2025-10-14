@@ -152,7 +152,7 @@
     box-shadow: none;
 
     &:hover {
-        --_color: var(--text-brand-default);
+        --_color: var(--text-brand-hover);
         --_background-color: var(--surface-brand-hover);
     }
 }

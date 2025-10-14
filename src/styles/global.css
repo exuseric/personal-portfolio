@@ -22,7 +22,6 @@
 }
 
 @layer base {
-
   html,
   body {
     font-family: var(--font-family-base);
@@ -44,8 +43,6 @@
     flex-direction: column;
     align-items: flex-start;
     row-gap: var(--_body-spacing);
-
-    padding-top: var(--_body-spacing);
   }
 
   /* Typography */
@@ -57,7 +54,8 @@
     line-height: var(--lh-display);
     margin-bottom: var(--size-4);
     font-weight: 400;
-    max-width: 50ch;
+    max-width: 25ch;
+    orphans: 1;
   }
 
   h1 {
