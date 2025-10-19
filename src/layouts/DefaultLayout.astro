@@ -21,11 +21,11 @@ import FaqSection from "@/components/FaqSection.astro";
     <meta name="referrer" content={seo.additionalMeta.referrer} />
     <meta name="color-scheme" content={seo.additionalMeta.colorScheme} />
     <meta name="supported-color-schemes" content={seo.additionalMeta.supportedColorSchemes} />
-    
+
     <!-- Canonical and Sitemap -->
     <link rel="canonical" href={seo.siteUrl} />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    
+
     <!-- DNS Prefetch for external domains -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com" />
     <link rel="dns-prefetch" href="//fonts.gstatic.com" />
@@ -238,6 +238,7 @@ import FaqSection from "@/components/FaqSection.astro";
           cssVariable: "font-family-base",
           googleFontsURL:
             "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap",
+
         },
         {
           src: [],
@@ -254,7 +255,7 @@ import FaqSection from "@/components/FaqSection.astro";
     />
   </head>
 
-  <body class="container">
+  <body>
     <Navigation />
     <main id="main-content" class="page-wrapper">
       <slot />
