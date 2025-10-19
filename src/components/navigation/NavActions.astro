@@ -4,7 +4,7 @@ import SocialButtons from "./SocialButtons.astro";
 // import style from "./navigation.module.css";
 import data from "@/data/navigation.json";
 import Button from "@/components/Button/Button.astro";
-import IconButton from "@/components/Button/IconButton.astro";
+import ThemeSwitcher from "@/components/navigation/ThemeSwitcher.astro";
 
 const { nav } = data;
 ---
@@ -67,12 +67,8 @@ const { nav } = data;
 <script>
     function handleMenu(button: HTMLButtonElement) {
         const toggleAction = button.dataset.toggleAction
-        const isMenuVisible = button.dataset.isMenuVisible === "true";
-        let state;
+        let state = toggleAction === "open" ? true : toggleAction === "close" ? false : false;
 
-        if(toggleAction === "open") state = true;
-        if(toggleAction === "close") state = false;
-        
         button.dataset.isMenuVisible = String(state);
         button.setAttribute("aria-expanded", String(state));
 

@@ -3,8 +3,10 @@
 @import "./theme.css";
 @import "./form-elements.css";
 @import "./animations.css";
-@import "./button.css";
 
+@layer utility {
+  @import "./button.css";
+}
 
 @layer base {
   :root {
@@ -12,12 +14,14 @@
 
     --shadow-color: 0deg 0% 0%;
     --shadow-strength: 10%;
-    --shadow-sm: 0 2px 6px hsl(var(--shadow-color) / calc(var(--shadow-strength)));
-    --shadow-md: 0 4px 8px hsl(var(--shadow-color) / calc(var(--shadow-strength)));
+    --shadow-sm: 0 2px 6px
+      hsl(var(--shadow-color) / calc(var(--shadow-strength)));
+    --shadow-md: 0 4px 8px
+      hsl(var(--shadow-color) / calc(var(--shadow-strength)));
 
     /* Layout */
-    --content-width: min(100% - 2rem, 800px);
-    --site-width: min(100% - 2rem, 1200px);
+    --content-width: min(100% - 2rem, 50rem); /*800px*/
+    --site-width: min(100% - 2rem, 75rem); /*1200px*/
   }
 }
 
@@ -34,15 +38,9 @@
   }
 
   body {
-    --_body-spacing: var(--size-2);
     position: relative;
     isolation: isolate;
     z-index: 1;
-
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    row-gap: var(--_body-spacing);
   }
 
   /* Typography */
@@ -58,24 +56,29 @@
     orphans: 1;
   }
 
-  h1 {
+  h1,
+  .h1 {
     font-size: var(--font-size-5xl);
     font-weight: 300;
   }
 
-  h2 {
+  h2,
+  .h2 {
     font-size: var(--font-size-4xl);
   }
 
-  h3 {
+  h3,
+  .h3 {
     font-size: var(--font-size-3xl);
   }
 
-  h4 {
+  h4,
+  .h4 {
     font-size: var(--font-size-2xl);
   }
 
-  h5 {
+  h5,
+  .h5 {
     font-size: var(--font-size-md);
   }
 
@@ -97,17 +100,27 @@
   }
 }
 
-
 @layer components {
   .container {
     --padding-inline: 1rem;
     --content-max-width: var(--site-width);
     --breakout-max-width: calc(var(--content-max-width) * 0.2);
-    --breakout-size: calc((var(--breakout-max-width) - var(--content-max-width)) / 2);
+    --breakout-size: calc(
+      (var(--breakout-max-width) - var(--content-max-width)) / 2
+    );
 
     display: grid;
     grid-template-columns:
-      [full-width-start] minmax(var(--padding-inline), 1fr) [breakout-start] minmax(0, var(--breakout-size)) [content-start] min(100% - (var(--padding-inline) * 2), var(--content-max-width)) [content-end] minmax(0, var(--breakout-size)) [breakout-end] minmax(var(--padding-inline), 1fr) [full-width-end];
+      [full-width-start] minmax(var(--padding-inline), 1fr)
+      [breakout-start] minmax(0, var(--breakout-size)) [content-start] min(
+        100% - (var(--padding-inline) * 2),
+        var(--content-max-width)
+      )
+      [content-end] minmax(0, var(--breakout-size)) [breakout-end] minmax(
+        var(--padding-inline),
+        1fr
+      )
+      [full-width-end];
     width: 100%;
   }
 
@@ -115,15 +128,15 @@
     --content-max-width: var(--content-width);
   }
 
-  .container> :not(.breakout, .full-width) {
+  .container > :not(.breakout, .full-width) {
     grid-column: content;
   }
 
-  .container>.breakout {
+  .container > .breakout {
     grid-column: breakout;
   }
 
-  .container>.full-width {
+  .container > .full-width {
     grid-column: full-width;
   }
 
@@ -158,7 +171,6 @@
   }
 }
 
-
 @layer components {
   .skeleton {
     width: 100%;
@@ -176,7 +188,12 @@
     bottom: 0;
     left: 0;
     transform: translateX(-100%);
-    background: linear-gradient(90deg, transparent, var(--color-neutral-200), transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--color-neutral-200),
+      transparent
+    );
     animation: skeleton-loading 1.5s infinite;
   }
 
@@ -223,12 +240,14 @@
   }
 
   ::view-transition-old(root) {
-    animation: 90ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
+    animation:
+      90ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
       300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
   }
 
   ::view-transition-new(root) {
-    animation: 210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
+    animation:
+      210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
       300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
   }
 }

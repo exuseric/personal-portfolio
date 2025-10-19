@@ -15,8 +15,6 @@
   --color-brand-900: #542191;
   --color-brand-950: #341362;
 
-
-
   /* Secondary Colors */
   --color-secondary-50: #f7fee7;
   --color-secondary-100: #ecfccb;
@@ -29,8 +27,6 @@
   --color-secondary-800: #3f6212;
   --color-secondary-900: #365314;
   --color-secondary-950: #1a2e05;
-
-
 
   /* Neutral Colors */
   --color-neutral-50: #f5f5f6;
@@ -60,8 +56,6 @@
   --color-accent-900: #711e67;
   --color-accent-950: #4b0744;
 
-
-
   /* Warning Colors */
   --color-warning-50: #fcfcea;
   --color-warning-100: #faf7c7;
@@ -88,8 +82,6 @@
   --color-error-900: #821938;
   --color-error-950: #48091a;
 
-
-
   /* Success Colors */
   --color-success-50: #f7fee7;
   --color-success-100: #ecfccb;
@@ -102,8 +94,6 @@
   --color-success-800: #3f6212;
   --color-success-900: #365314;
   --color-success-950: #1a2e05;
-
-
 
   /* Info Colors */
   --color-info-50: #effefa;
@@ -123,8 +113,8 @@
 /* Typography                              */
 /* ======================================= */
 :root {
-  --font-family-heading: 'Geist Mono', sans-serif;
-  --font-family-base: 'DM Sans', sans-serif;
+  --font-family-heading: "Geist Mono", sans-serif;
+  --font-family-base: "DM Sans", sans-serif;
 
   /* Line Heights */
   --lh-base: 1.5;
@@ -181,7 +171,6 @@
   }
 }
 
-
 /* ======================================= */
 /* Spacing                                 */
 /* ======================================= */
@@ -228,6 +217,8 @@
   /* 320px */
   --size-96: 24rem;
   /* 384px */
+
+  --container-padding-block: var(--size-16);
 }
 
 /* ======================================= */
@@ -312,7 +303,6 @@
   --ease-elastic-in: cubic-bezier(0.36, 0, 0.66, -0.56);
   --ease-elastic-out: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-elastic-in-out: cubic-bezier(0.68, -0.6, 0.32, 1.6);
-
 
   /* ========================= */
   /* Multipliers                */
