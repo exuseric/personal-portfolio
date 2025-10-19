@@ -115,7 +115,7 @@
 }
 
 .btn--primary {
-  --_background-color: var(--surface-brand-default);
+  --_background-color: var(--surface-brand-light);
   --_border-color: var(--surface-brand-default);
   --_color: var(--text-on-brand-color);
 

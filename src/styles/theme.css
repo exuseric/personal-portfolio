@@ -5,12 +5,13 @@
   :root {
     /* Brand Colors */
     --surface-brand-default: var(--color-brand-500);
+    --surface-brand-light: var(--color-brand-200);
     --surface-brand-subtle: var(--color-brand-50);
-    --surface-brand-hover: var(--color-brand-200);
+    --surface-brand-hover: var(--color-brand-300);
 
     --text-brand-default: var(--color-brand-500);
     --text-brand-subtle: var(--color-brand-400);
-    --text-brand-hover: var(--color-brand-800);
+    --text-brand-hover: var(--color-brand-950);
     --text-on-brand-color: var(--color-brand-950);
 
     /* Secondary Colors */
