@@ -4,7 +4,7 @@
 @import "./form-elements.css";
 @import "./animations.css";
 
-@layer utility {
+@layer utilities {
   @import "./button.css";
 }
 

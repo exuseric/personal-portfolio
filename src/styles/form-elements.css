@@ -12,7 +12,9 @@ select {
   border-radius: 0.375rem;
   background-color: var(--surface-neutral-default);
   color: var(--text-neutral-default);
-  transition: all var(--transition-medium), background-color var(--transition-anticipate-slow);
+  transition:
+    all var(--transition-medium),
+    background-color var(--transition-anticipate-slow);
   outline: 0.12rem solid transparent;
 }
 
@@ -131,7 +133,11 @@ input[type="checkbox"]:checked {
 input[type="radio"]:checked {
   background-color: var(--surface-brand-default);
   border-color: var(--surface-brand-default);
-  background-image: radial-gradient(circle, var(--text-on-brand-color) 40%, transparent 50%);
+  background-image: radial-gradient(
+    circle,
+    var(--text-on-brand-color) 40%,
+    transparent 50%
+  );
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -170,48 +176,52 @@ input[type="radio"]:disabled {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--surface-neutral-subtle);
+  background-color: var(--surface-neutral-hover);
   border-radius: calc(infinity * 1px);
   transition: background-color var(--transition-anticipate-medium);
 }
 
 .switch-slider::before {
-  content: "";
+  content: url("src/images/solar--sun-bold.svg");
   position: absolute;
   height: 1rem;
   width: 1rem;
+  font-size: 0.5em;
   left: calc(var(--size-1) * 0.5);
   bottom: calc(var(--size-1) * 0.5);
-  background-color: var(--surface-neutral-default);
+  background-color: var(--surface-neutral-subtle);
   border-radius: 50%;
-  transition: transform var(--transition-spring-fast), background-color var(--transition-anticipate-medium);
+  background-size: 0.5em;
+  transition:
+    transform var(--transition-spring-fast),
+    background-color var(--transition-anticipate-medium);
 }
 
 /* Checked state */
-.switch input:checked+.switch-slider {
+.switch input:checked + .switch-slider {
   background-color: var(--surface-brand-default);
 }
 
-.switch input:checked+.switch-slider::before {
+.switch input:checked + .switch-slider::before {
+  content: url("src/images/solar--moon-bold.svg");
   transform: translateX(calc(var(--_switch-width) - var(--_switch-height)));
 }
 
 /* Disabled */
-.switch input:disabled+.switch-slider {
+.switch input:disabled + .switch-slider {
   background-color: var(--surface-neutral-subtle);
   cursor: not-allowed;
   opacity: 0.6;
 }
 
 .switch-slider:hover,
-.switch input:checked+.switch-slider:hover {
-  background-color: var(--surface-accent-default);
+.switch input:checked + .switch-slider:hover {
+  background-color: var(--surface-brand-hover);
 }
 
 .switch-slider:hover::before {
-  background-color: var(--surface-accent-subtle);
+  background-color: var(--surface-neutral-default);
 }
-
 
 /* Form Group */
 .form-group {
@@ -236,10 +246,20 @@ input[type="radio"]:disabled {
 
 /* Helper Text / Descriptions */
 .form-helper {
+  display: none;
   margin-top: var(--size-1);
   font-size: var(--font-size-xs);
   line-height: var(--lh-base);
   color: var(--text-neutral-subtle);
+}
+
+input:invalid,
+.textarea--error,
+.select--error,
+textarea:max {
+  ~ .form-helper {
+    display: block;
+  }
 }
 
 /* Success / Error helper text */
@@ -273,7 +293,6 @@ input[type="radio"]:disabled {
   color: var(--text-neutral-subtle);
   cursor: not-allowed;
 }
-
 
 /* Switch Label Wrappers  */
 .form-switch {

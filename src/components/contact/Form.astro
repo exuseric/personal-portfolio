@@ -1,5 +1,7 @@
 ---
 import FormMessage from "@/components/contact/FormMessage.astro";
+import Button from "@/components/Button/Button.astro";
+import { actions, isInputError } from 'astro:actions';
 
 let success = false;
 let showMessage = false;
@@ -13,244 +15,211 @@ type FormResponse = {
         [key: string]: any;
     };
 };
+
+const result = Astro.getActionResult(actions.contact.sendToMe);
+const inputErrors = isInputError(result?.error) ? result.error.fields : {};
 ---
 
-<form class="contact__form">
-    <FormMessage success={success} />
-
-    <div class="contact__form_grid">
-        <div class="form__field">
-            <label for="name">Name</label>
-            <div class="input-wrapper">
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Your name"
-                    autocomplete="name"
-                    required
-                />
-            </div>
-            <span class="error-message" data-for="name"></span>
-        </div>
-
-        <div class="form__field">
-            <label for="email"> Email </label>
-            <input
-                type="email"
-                name="email"
-                id="email"
-                placeholder="e.g. user@example.com"
-                autocomplete="email"
-                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                title="Please enter a valid email address"
-                required
-            />
-            <span class="error-message" data-for="email">
-                Please enter a valid email address (e.g. user@example.com)
-            </span>
-        </div>
+<form class="contact__form" id="contactForm">
+    <div class="form-group">
+        <label for="name" class="form-label">Full name</label>
+        <input
+            id="name"
+            name="name"
+            type="text"
+            class="input"
+            placeholder="Enter your name"
+            autocomplete="name"
+            minlength="2"
+            required
+            transition:persist
+        />
+         <p class="form-helper form-helper-error" data-error-for="name">Name must be atleast 2 characters.</p>
+    </div>
+    <div class="form-group">
+        <label for="email" class="form-label">Email Address</label>
+        <input
+            id="email"
+            name="email"
+            type="email"
+            class="input"
+            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+            placeholder="mail@example.com"
+            autocomplete="email"
+            required
+            transition:persist
+        />
+        <p class="form-helper form-helper-error" data-error-for="email">Invalid email address; mail@example.com</p>
+    </div>
+    <div class="form-group">
+        <label for="inquiry" class="form-label">Inquiry</label>
+        <select name="inquiry" id="inquiry" transition:persist>
+            <option value="General Inquiry" selected>Genereal Inquiry</option>
+            <option value="Project Inquiry">Project Inquiry</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="message" class="form-label">Your Message</label>
+        <textarea id="message" name="message" class="textarea" rows="4" maxlength="1000" required transition:persist></textarea>
+        <p class="form-helper form-helper-error" data-error-for="message">Your message must be atleast 10 characters long</p>
     </div>
 
-    <div class="form__field">
-        <label for="message">Message</label>
-        <div class="textarea-wrapper">
-            <textarea
-                id="message"
-                name="message"
-                rows="4"
-                placeholder="Tell me about your project"
-                required></textarea>
-        </div>
-        <span class="error-message" data-for="message"></span>
-    </div>
 
-    <button class="btn btn--primary" type="submit">
-        <span class="btn-text">Send Message</span>
-    </button>
+    <div class="form-group">
+        <Button type="submit" variant="primary" as="default" label="Send Message" attributes={{
+          dataset: {
+              isSubmitting: false,
+              isSuccess: false,
+              isError: false,
+          }
+        }}/>
+    </div>
 </form>
 
+<style>
+
+</style>
+
 <script>
-import { actions } from "astro:actions";
+import { actions, isInputError } from 'astro:actions';
 
-const submitButtonTextContent = {
-    submitting: "Sending Message...",
-    success: "Message Sent!",
-    error: "There was an error sending your message. Please try again.",
-    default: "Send Message",
-} as const;
+const form = document.querySelector("#contactForm") as HTMLFormElement
+const submitButton = form.querySelector("button[type='submit']") as HTMLButtonElement
 
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.querySelector(".contact__form") as HTMLFormElement;
-    const formSubmitBtn = document.querySelector("button[type='submit']") as HTMLButtonElement;
-    const formStatus = document.querySelector(".form_message") as HTMLDivElement;
+form.addEventListener("submit", async (e) => {
+  e.preventDefault()
 
-    // Hide the form status message initially
-    formStatus.setAttribute("hidden", "");
+  const formData = new FormData(form)
 
-    form.addEventListener("submit", async (event: SubmitEvent) => {
-        event.preventDefault();
-        formSubmitBtn.textContent = submitButtonTextContent.submitting;
-        formStatus.toggleAttribute("hidden");
+  submitButton.textContent = "Sending Message..."
+  const {data, error} = await actions.contact.sendToMe(formData)
 
-        // create a FormData object from the form
-        const formData = new FormData(form);
+    if(isInputError(error)) {
+      const fields = error.fields
+      Object.keys(fields).forEach((fieldName) => {
+        const errorElement = form.querySelector(`[data-error-for="${fieldName}"]`) as HTMLElement
+        errorElement.textContent = fields[fieldName].join(', ')
+        errorElement.style.display = "block"
+      })
+    } else {
+      // Clear previous error messages
+      const errorElements = form.querySelectorAll('.form-helper-error') as NodeListOf<HTMLElement>
+      errorElements.forEach((el) => {
+        el.style.display = "none"
+      })
+    }
+  if(!data?.error) {
+    const { data, error} = await actions.contact.sendAutoReply(formData)
+    console.log("autoreply sent")
+    submitButton.textContent = "Message Sent!"
+    submitButton.classList.toggle("btn--success", true)
+  }
 
-        // send the form data to the server
-        const {data, error} = await actions.sendFeedback(formData);
-        
-        // Handle submission success
-        if (data?.success) {
-            formSubmitBtn.textContent = submitButtonTextContent.success;
-            formStatus.setAttribute("data-success", "true");
-            
-            setTimeout(() => {
-                formSubmitBtn.textContent = submitButtonTextContent.default;
-                formStatus.toggleAttribute("hidden");
-                formStatus.setAttribute("data-success", "false");
-            }, 5000);
-            
-            form.reset();
-        }
+  setTimeout(() => {
+    submitButton.textContent = "Send Message"
+    submitButton.classList.toggle("btn--success", false)
+  }, 2000)
 
-        // Handle submission error
-        if (error) {
-            formSubmitBtn.textContent = submitButtonTextContent.error;
-            formStatus.setAttribute("data-succes", "false")
-            formStatus.setAttribute("data-error", "true")
-            
-            setTimeout(() => {
-                formSubmitBtn.textContent = submitButtonTextContent.default;
-                formStatus.toggleAttribute("hidden");
-                formStatus.setAttribute("data-error", "false");
-            }, 5000);
-        }
-    });
+  form.reset()
 })
 </script>
 
-<style>
-.contact__form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-    width: 100%;
-    /* max-width: 400px; */
-    margin-block: var(--space-8);
-    position: relative;
+<!-- <script>
+import {actions} from "astro:actions";
+import { z } from "astro:schema"
+import {contactFormValidation} from "@/utils/zod-validation-objects.ts";
+
+const form = document.querySelector("#contactForm") as HTMLFormElement
+
+const validateForm = (formData: FormData, form: HTMLFormElement) => {
+  const {error: validationError, success: validationSuccess} = contactFormValidation.safeParse(Object.fromEntries(formData.entries()))
+
+  if(!validationSuccess) {
+    validationError?.issues.forEach(issue => {
+      const errorElement = form.querySelector(`[data-error-for="${issue.path[0]}"`) as HTMLElement
+      errorElement.textContent = issue.message
+      errorElement.style.display = "block"
+
+      errorElement.addEventListener("keydown", () => {
+        console.log("keydown")
+        const data = validateForm(formData, form)
+        console.log(data)
+      })
+    })
+
+    return false
+  }
+
+  return true
 }
 
-.contact__form_grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    gap: var(--space-4);
-}
+form.addEventListener("submit", async function(e){
+  e.preventDefault()
 
-@media (min-width: 768px) {
-    .contact__form_grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
+  const formData = new FormData(this)
 
-.contact__form label {
-    display: block;
-    margin-bottom: var(--space-1);
-    font-weight: 500;
-}
+  if(!validateForm(formData, this)) return
 
-.contact__form input,
-.contact__form textarea {
-    anchor-name: --form-input;
-    display: block;
-    width: 100%;
-    padding: var(--space-2);
+  const {data, error, } = await actions.contact.sendToMe(formData)
 
-    background-color: transparent;
+  if(!error) {
+    const { data, error} = await actions.contact.sendAutoReply(formData)
+  }
 
-    border: 1px solid transparent;
-    border-bottom-color: var(--color-border);
-    border-radius: var(--border-radius);
+  this.reset()
+})
+</script> -->
 
-    transition: border-color 0.2s ease;
-}
+<!-- <script>
+    import { actions } from "astro:actions";
+    import {z} from "astro:schema";
 
-/* .contact__form input:focus,
-.contact__form textarea:focus {
-    outline: none;
-    border-color: var(--color-brand);
-    box-shadow: 0 0 0 2px rgba(var(--color-brand-rgb), 0.2);
-} */
+    const submitButtonTextContent = {
+        submitting: "Sending Message...",
+        success: "Message Sent!",
+        error: "There was an error sending your message. Please try again.",
+        default: "Send Message",
+    } as const;
 
-input[type="email"] {
-    anchor-name: --email-input;
-}
+    document.addEventListener("DOMContentLoaded", () => {
+        const form = document.querySelector(
+            ".contact__form",
+        ) as HTMLFormElement;
+        const formSubmitBtn = document.querySelector(
+            "button[type='submit']",
+        ) as HTMLButtonElement;
 
-.contact__form button {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 44px;
-}
+        // Hide the form status message initially
 
-.contact__form button:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-}
+        form.addEventListener("submit", async (event: SubmitEvent) => {
+            event.preventDefault();
+            formSubmitBtn.textContent = submitButtonTextContent.submitting;
 
-.contact__form input:user-invalid,
-.contact__form textarea:user-invalid {
-    border-color: var(--color-error, #dc3545);
-}
+            // create a FormData object from the form
+            const formData = new FormData(form);
 
-.error-message {
-    display: none;
-    visibility: hidden;
-    opacity: 0;
-    
-    position: absolute;
-    color: var(--color-error, #dc3545);
-    font-size: 0.875rem;
-    margin-top: var(--space-1);
-    transition-behavior: allow-discrete;
-    transition: display var(--exit-transition-medium);
-}
+            // send the form data to the server
+            const { data, error } = await actions.sendFeedback(formData);
 
-.error-message[data-for="email"] {
-    top: anchor( --email-input bottom);
-}
+            // Handle submission success
+            if (data?.success) {
+                formSubmitBtn.textContent = submitButtonTextContent.success;
 
-.error-message.active {
-    display: block;
-}
+                setTimeout(() => {
+                    formSubmitBtn.textContent = submitButtonTextContent.default;
+                }, 5000);
 
-.error-details {
-    font-size: 0.875rem;
-    margin-top: var(--space-2);
-}
+                form.reset();
+            }
 
-input:invalid:not(:placeholder-shown):focus + .error-message {
-    display: block;
-    opacity: 1;
-    visibility: visible;
-    padding: var(--space-2);
+            // Handle submission error
+            if (error) {
+                formSubmitBtn.textContent = submitButtonTextContent.error;
 
-    color: oklch(from var(--color-brand) l c 100);
-    background-color: oklch(from var(--color-brand) l c 100 / 5%);
-    transition: display var(--entry-transition-medium), opacity var(--entry-transition-medium), visibility var(--entry-transition-medium), padding var(--entry-transition-medium);
-}
-input:invalid:not(:placeholder-shown):focus {
-    outline: 2px solid oklch(from var(--color-brand) calc(l + 0.2) c 100);
-    background-color: oklch(from var(--color-brand) l c 100 / 5%);
-}
-
-input:valid:not(:placeholder-shown):focus + .error-message {
-    display: none;
-}
-
-input:valid:not(:placeholder-shown):focus {
-    outline:2px solid oklch(from var(--color-brand) l c 140);
-    background-color: oklch(from var(--color-brand) l c 140 / 5%);
-}
-</style>
+                setTimeout(() => {
+                    formSubmitBtn.textContent = submitButtonTextContent.default;
+                }, 5000);
+            }
+        });
+    });
+</script> -->

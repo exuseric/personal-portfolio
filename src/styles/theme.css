@@ -203,7 +203,7 @@
 
   .surface-brand-subtle {
     background-color: var(--surface-brand-subtle);
-    color: var(--text-brand-default);
+    color: var(--text-on-brand-color);
     border-color: var(--surface-brand-subtle);
   }
 
