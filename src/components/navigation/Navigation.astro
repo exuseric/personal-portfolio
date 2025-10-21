@@ -14,10 +14,8 @@ import"./navigation.css";
     class="nav container"
     data-active="false"
     data-navigation
-    data-container-md
 >
-    <div class="surface-brand-subtle nav__container" data-navigation-container>
-        <NavMenu />
+    <div class="nav__container" data-navigation-container>
         <a href="/" class="nav__logo">
             <Image
                 src={LogoImage}
@@ -30,6 +28,26 @@ import"./navigation.css";
                 layout="fixed"
             />
         </a>
+        <NavMenu />
         <NavActions />
     </div>
 </header>
+
+
+<script>
+    window.addEventListener('DOMContentLoaded', (e) => {
+        const nav = document.querySelector('[data-navigation]')
+        const navContainer = document.querySelector('[data-navigation-container]')
+
+        window.addEventListener('scroll', (e) => {
+            const scrollY = window.scrollY;
+            if (scrollY > 10) {
+                nav?.toggleAttribute('data-container-md', true);
+                navContainer?.toggleAttribute('data-active', true);
+            } else {
+                nav?.toggleAttribute('data-container-md', false);
+                navContainer?.toggleAttribute('data-active', false);
+            }
+        });
+    });
+</script>

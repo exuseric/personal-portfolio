@@ -11,17 +11,6 @@ const { nav } = data;
 
 <div class:list={["nav__actions"]}>
   <SocialButtons />
-  {
-    nav.cta && (
-      <Button
-        as="default"
-        href={nav.cta.url}
-        label={nav.cta.label}
-        variant="primary"
-        class:list={["nav__link", "nav__linkCta"]}
-      />
-    )
-  }
   <div class:list={["nav__toggleWrapper"]}>
     <Button
       as="icon-only"

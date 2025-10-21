@@ -12,6 +12,10 @@
         align-items: center;
         justify-content: space-between;
     }
+
+    .section-heading {
+        text-transform: uppercase;
+    }
 }
 
 @layer base {
