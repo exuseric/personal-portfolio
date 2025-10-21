@@ -1,77 +1,61 @@
 ---
-import FormMessage from "@/components/contact/FormMessage.astro";
 import Button from "@/components/Button/Button.astro";
-import { actions, isInputError } from 'astro:actions';
-
-let success = false;
-let showMessage = false;
-
-type FormResponse = {
-    success?: boolean;
-    message?: string;
-    error?: {
-        code?: string;
-        message?: string;
-        [key: string]: any;
-    };
-};
-
-const result = Astro.getActionResult(actions.contact.sendToMe);
-const inputErrors = isInputError(result?.error) ? result.error.fields : {};
 ---
 
 <form class="contact__form" id="contactForm">
     <div class="form-group">
         <label for="name" class="form-label">Full name</label>
         <input
-            id="name"
-            name="name"
-            type="text"
-            class="input"
-            placeholder="Enter your name"
-            autocomplete="name"
-            minlength="2"
-            required
-            transition:persist
+                id="name"
+                name="name"
+                type="text"
+                class="input"
+                placeholder="Enter your name"
+                autocomplete="name"
+                minlength="2"
+                required
+                transition:persist
         />
-         <p class="form-helper form-helper-error" data-error-for="name">Name must be atleast 2 characters.</p>
+        <p class="form-helper form-helper-error" data-error-for="name">Name must be at least 2 characters.</p>
     </div>
     <div class="form-group">
         <label for="email" class="form-label">Email Address</label>
         <input
-            id="email"
-            name="email"
-            type="email"
-            class="input"
-            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-            placeholder="mail@example.com"
-            autocomplete="email"
-            required
-            transition:persist
+                id="email"
+                name="email"
+                type="email"
+                class="input"
+                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                placeholder="mail@example.com"
+                autocomplete="email"
+                required
+                transition:persist
         />
         <p class="form-helper form-helper-error" data-error-for="email">Invalid email address; mail@example.com</p>
     </div>
     <div class="form-group">
         <label for="inquiry" class="form-label">Inquiry</label>
         <select name="inquiry" id="inquiry" transition:persist>
-            <option value="General Inquiry" selected>Genereal Inquiry</option>
+            <option value="General Inquiry" selected>General Inquiry</option>
             <option value="Project Inquiry">Project Inquiry</option>
         </select>
     </div>
     <div class="form-group">
         <label for="message" class="form-label">Your Message</label>
-        <textarea id="message" name="message" class="textarea" rows="4" maxlength="1000" required transition:persist></textarea>
-        <p class="form-helper form-helper-error" data-error-for="message">Your message must be atleast 10 characters long</p>
+        <textarea id="message" name="message" class="textarea" rows="4" maxlength="1000" required
+                  transition:persist></textarea>
+        <p class="form-helper form-helper-error" data-error-for="message">Your message must be at least 10 characters
+            long</p>
     </div>
 
 
     <div class="form-group">
         <Button type="submit" variant="primary" as="default" label="Send Message" attributes={{
-          dataset: {
-              isSubmitting: false,
-              isSuccess: false,
-              isError: false,
-          }
+            dataset: {
+                isSubmitting: false,
+                isSuccess: false,
+                isError: false,
+            }
         }}/>
     </div>
 </form>
@@ -81,145 +65,49 @@ const inputErrors = isInputError(result?.error) ? result.error.fields : {};
 </style>
 
 <script>
-import { actions, isInputError } from 'astro:actions';
+    import {actions, isInputError} from 'astro:actions';
 
-const form = document.querySelector("#contactForm") as HTMLFormElement
-const submitButton = form.querySelector("button[type='submit']") as HTMLButtonElement
+    const form = document.querySelector("#contactForm") as HTMLFormElement
+    const submitButton = form.querySelector("button[type='submit']") as HTMLButtonElement
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault()
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault()
 
-  const formData = new FormData(form)
+        const formData = new FormData(form)
 
-  submitButton.textContent = "Sending Message..."
-  const {data, error} = await actions.contact.sendToMe(formData)
+        submitButton.textContent = "Sending Message..."
+        const {data, error} = await actions.contact.sendToMe(formData)
 
-    if(isInputError(error)) {
-      const fields = error.fields
-      Object.keys(fields).forEach((fieldName) => {
-        const errorElement = form.querySelector(`[data-error-for="${fieldName}"]`) as HTMLElement
-        errorElement.textContent = fields[fieldName].join(', ')
-        errorElement.style.display = "block"
-      })
-    } else {
-      // Clear previous error messages
-      const errorElements = form.querySelectorAll('.form-helper-error') as NodeListOf<HTMLElement>
-      errorElements.forEach((el) => {
-        el.style.display = "none"
-      })
-    }
-  if(!data?.error) {
-    const { data, error} = await actions.contact.sendAutoReply(formData)
-    console.log("autoreply sent")
-    submitButton.textContent = "Message Sent!"
-    submitButton.classList.toggle("btn--success", true)
-  }
+        if (isInputError(error)) {
+            const fields = error.fields
+            Object.keys(fields).forEach((fieldName) => {
+                const errorElement = form.querySelector(`[data-error-for="${fieldName}"]`) as HTMLElement
+                errorElement.textContent = fields[fieldName].join(', ')
+                errorElement.style.display = "block"
+            })
+        } else {
+            // Clear previous error messages
+            const errorElements = form.querySelectorAll('.form-helper-error') as NodeListOf<HTMLElement>
+            errorElements.forEach((el) => {
+                el.style.display = "none"
+            })
+        }
 
-  setTimeout(() => {
-    submitButton.textContent = "Send Message"
-    submitButton.classList.toggle("btn--success", false)
-  }, 2000)
 
-  form.reset()
-})
-</script>
+        if (!data?.error) {
+            const {data} = await actions.contact.sendAutoReply(formData)
 
-<!-- <script>
-import {actions} from "astro:actions";
-import { z } from "astro:schema"
-import {contactFormValidation} from "@/utils/zod-validation-objects.ts";
+            if (!data?.error) {
+                submitButton.textContent = "Message Sent!"
+                submitButton.classList.toggle("btn--success", true)
+            }
+        }
 
-const form = document.querySelector("#contactForm") as HTMLFormElement
+        setTimeout(() => {
+            submitButton.textContent = "Send Message"
+            submitButton.classList.toggle("btn--success", false)
+        }, 2000)
 
-const validateForm = (formData: FormData, form: HTMLFormElement) => {
-  const {error: validationError, success: validationSuccess} = contactFormValidation.safeParse(Object.fromEntries(formData.entries()))
-
-  if(!validationSuccess) {
-    validationError?.issues.forEach(issue => {
-      const errorElement = form.querySelector(`[data-error-for="${issue.path[0]}"`) as HTMLElement
-      errorElement.textContent = issue.message
-      errorElement.style.display = "block"
-
-      errorElement.addEventListener("keydown", () => {
-        console.log("keydown")
-        const data = validateForm(formData, form)
-        console.log(data)
-      })
+        form.reset()
     })
-
-    return false
-  }
-
-  return true
-}
-
-form.addEventListener("submit", async function(e){
-  e.preventDefault()
-
-  const formData = new FormData(this)
-
-  if(!validateForm(formData, this)) return
-
-  const {data, error, } = await actions.contact.sendToMe(formData)
-
-  if(!error) {
-    const { data, error} = await actions.contact.sendAutoReply(formData)
-  }
-
-  this.reset()
-})
-</script> -->
-
-<!-- <script>
-    import { actions } from "astro:actions";
-    import {z} from "astro:schema";
-
-    const submitButtonTextContent = {
-        submitting: "Sending Message...",
-        success: "Message Sent!",
-        error: "There was an error sending your message. Please try again.",
-        default: "Send Message",
-    } as const;
-
-    document.addEventListener("DOMContentLoaded", () => {
-        const form = document.querySelector(
-            ".contact__form",
-        ) as HTMLFormElement;
-        const formSubmitBtn = document.querySelector(
-            "button[type='submit']",
-        ) as HTMLButtonElement;
-
-        // Hide the form status message initially
-
-        form.addEventListener("submit", async (event: SubmitEvent) => {
-            event.preventDefault();
-            formSubmitBtn.textContent = submitButtonTextContent.submitting;
-
-            // create a FormData object from the form
-            const formData = new FormData(form);
-
-            // send the form data to the server
-            const { data, error } = await actions.sendFeedback(formData);
-
-            // Handle submission success
-            if (data?.success) {
-                formSubmitBtn.textContent = submitButtonTextContent.success;
-
-                setTimeout(() => {
-                    formSubmitBtn.textContent = submitButtonTextContent.default;
-                }, 5000);
-
-                form.reset();
-            }
-
-            // Handle submission error
-            if (error) {
-                formSubmitBtn.textContent = submitButtonTextContent.error;
-
-                setTimeout(() => {
-                    formSubmitBtn.textContent = submitButtonTextContent.default;
-                }, 5000);
-            }
-        });
-    });
-</script> -->
+</script>
