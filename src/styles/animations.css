@@ -1,153 +1,186 @@
-:root {
-    /* Generic transitions */
-    --transition-fast: var(--duration-content-fast) var(--ease-standard);
-    --transition-medium: var(--duration-content-medium) var(--ease-standard);
-    --transition-slow: var(--duration-content-slow) var(--ease-standard);
+@layer animations {
 
-    --transition-exit-fast: calc(var(--duration-content-fast) * var(--exit-multiplier)) var(--ease-exit);
-    --transition-exit-medium: calc(var(--duration-content-medium) * var(--exit-multiplier)) var(--ease-exit);
-    --transition-exit-slow: calc(var(--duration-content-slow) * var(--exit-multiplier)) var(--ease-exit);
+    :root {
+        /* Generic transitions */
+        --transition-fast: var(--duration-content-fast) var(--ease-standard);
+        --transition-medium: var(--duration-content-medium) var(--ease-standard);
+        --transition-slow: var(--duration-content-slow) var(--ease-standard);
 
-    /* Elastic transitions */
-    --transition-elastic-fast: var(--duration-content-fast) var(--ease-elastic-out);
-    --transition-elastic-medium: var(--duration-content-medium) var(--ease-elastic-out);
-    --transition-elastic-slow: var(--duration-content-slow) var(--ease-elastic-out);
+        --transition-exit-fast: calc(var(--duration-content-fast) * var(--exit-multiplier)) var(--ease-exit);
+        --transition-exit-medium: calc(var(--duration-content-medium) * var(--exit-multiplier)) var(--ease-exit);
+        --transition-exit-slow: calc(var(--duration-content-slow) * var(--exit-multiplier)) var(--ease-exit);
 
-    --transition-elastic-in-fast: var(--duration-content-fast) var(--ease-elastic-in);
-    --transition-elastic-in-medium: var(--duration-content-medium) var(--ease-elastic-in);
-    --transition-elastic-in-slow: var(--duration-content-slow) var(--ease-elastic-in);
+        /* Elastic transitions */
+        --transition-elastic-fast: var(--duration-content-fast) var(--ease-elastic-out);
+        --transition-elastic-medium: var(--duration-content-medium) var(--ease-elastic-out);
+        --transition-elastic-slow: var(--duration-content-slow) var(--ease-elastic-out);
 
-    --transition-elastic-out-fast: var(--duration-content-fast) var(--ease-elastic-out);
-    --transition-elastic-out-medium: var(--duration-content-medium) var(--ease-elastic-out);
-    --transition-elastic-out-slow: var(--duration-content-slow) var(--ease-elastic-out);
+        --transition-elastic-in-fast: var(--duration-content-fast) var(--ease-elastic-in);
+        --transition-elastic-in-medium: var(--duration-content-medium) var(--ease-elastic-in);
+        --transition-elastic-in-slow: var(--duration-content-slow) var(--ease-elastic-in);
 
-    /* Bounce */
-    --transition-bounce-fast: var(--duration-content-fast) var(--ease-bounce);
-    --transition-bounce-medium: var(--duration-content-medium) var(--ease-bounce);
-    --transition-bounce-slow: var(--duration-content-slow) var(--ease-bounce);
+        --transition-elastic-out-fast: var(--duration-content-fast) var(--ease-elastic-out);
+        --transition-elastic-out-medium: var(--duration-content-medium) var(--ease-elastic-out);
+        --transition-elastic-out-slow: var(--duration-content-slow) var(--ease-elastic-out);
 
-    /* Back */
-    --transition-back-fast: var(--duration-content-fast) var(--ease-back);
-    --transition-back-medium: var(--duration-content-medium) var(--ease-back);
-    --transition-back-slow: var(--duration-content-slow) var(--ease-back);
+        /* Bounce */
+        --transition-bounce-fast: var(--duration-content-fast) var(--ease-bounce);
+        --transition-bounce-medium: var(--duration-content-medium) var(--ease-bounce);
+        --transition-bounce-slow: var(--duration-content-slow) var(--ease-bounce);
 
-    /* Spring */
-    --transition-spring-fast: var(--duration-content-fast) var(--ease-spring);
-    --transition-spring-medium: var(--duration-content-medium) var(--ease-spring);
-    --transition-spring-slow: var(--duration-content-slow) var(--ease-spring);
+        /* Back */
+        --transition-back-fast: var(--duration-content-fast) var(--ease-back);
+        --transition-back-medium: var(--duration-content-medium) var(--ease-back);
+        --transition-back-slow: var(--duration-content-slow) var(--ease-back);
 
-    /* Anticipate */
-    --transition-anticipate-fast: var(--duration-content-fast) var(--ease-anticipate);
-    --transition-anticipate-medium: var(--duration-content-medium) var(--ease-anticipate);
-    --transition-anticipate-slow: var(--duration-content-slow) var(--ease-anticipate);
+        /* Spring */
+        --transition-spring-fast: var(--duration-content-fast) var(--ease-spring);
+        --transition-spring-medium: var(--duration-content-medium) var(--ease-spring);
+        --transition-spring-slow: var(--duration-content-slow) var(--ease-spring);
+
+        /* Anticipate */
+        --transition-anticipate-fast: var(--duration-content-fast) var(--ease-anticipate);
+        --transition-anticipate-medium: var(--duration-content-medium) var(--ease-anticipate);
+        --transition-anticipate-slow: var(--duration-content-slow) var(--ease-anticipate);
 
 
-    /* Property-specific */
-    --transition-opacity: var(--transition-medium);
-    --transition-transform: var(--duration-content-medium) var(--ease-enter);
-    --transition-colors: var(--duration-micro-fast) var(--ease-standard);
-    --transition-layout: var(--transition-medium);
+        /* Property-specific */
+        --transition-opacity: var(--transition-medium);
+        --transition-transform: var(--duration-content-medium) var(--ease-enter);
+        --transition-colors: var(--duration-micro-fast) var(--ease-standard);
+        --transition-layout: var(--transition-medium);
 
-    /* Interaction states */
-    --transition-hover: var(--duration-micro-fast) var(--ease-standard);
-    --transition-focus: var(--duration-micro-fast) var(--ease-standard);
+        /* Interaction states */
+        --transition-hover: var(--duration-micro-fast) var(--ease-standard);
+        --transition-focus: var(--duration-micro-fast) var(--ease-standard);
 
-    /* Micro transitions (buttons, icons, taps) */
-    --transition-micro-fast: var(--duration-micro-fast) var(--ease-standard);
-    --transition-micro-medium: var(--duration-micro-medium) var(--ease-standard);
-    --transition-micro-slow: var(--duration-micro-slow) var(--ease-standard);
+        /* Micro transitions (buttons, icons, taps) */
+        --transition-micro-fast: var(--duration-micro-fast) var(--ease-standard);
+        --transition-micro-medium: var(--duration-micro-medium) var(--ease-standard);
+        --transition-micro-slow: var(--duration-micro-slow) var(--ease-standard);
 
-    /* Fun / expressive variants */
-    --transition-micro-elastic-fast: var(--duration-micro-fast) var(--ease-elastic-out);
-    --transition-micro-elastic-medium: var(--duration-micro-medium) var(--ease-elastic-out);
-    --transition-micro-elastic-slow: var(--duration-micro-slow) var(--ease-elastic-out);
+        /* Fun / expressive variants */
+        --transition-micro-elastic-fast: var(--duration-micro-fast) var(--ease-elastic-out);
+        --transition-micro-elastic-medium: var(--duration-micro-medium) var(--ease-elastic-out);
+        --transition-micro-elastic-slow: var(--duration-micro-slow) var(--ease-elastic-out);
 
-    --transition-micro-bounce-fast: var(--duration-micro-fast) var(--ease-bounce);
-    --transition-micro-bounce-medium: var(--duration-micro-medium) var(--ease-bounce);
-    --transition-micro-bounce-slow: var(--duration-micro-slow) var(--ease-bounce);
+        --transition-micro-bounce-fast: var(--duration-micro-fast) var(--ease-bounce);
+        --transition-micro-bounce-medium: var(--duration-micro-medium) var(--ease-bounce);
+        --transition-micro-bounce-slow: var(--duration-micro-slow) var(--ease-bounce);
 
-    --transition-micro-back-fast: var(--duration-micro-fast) var(--ease-back);
-    --transition-micro-back-medium: var(--duration-micro-medium) var(--ease-back);
-    --transition-micro-back-slow: var(--duration-micro-slow) var(--ease-back);
-}
-
-:root {
-    --animate-squash: squash var(--transition-elastic-slow);
-    --animate-fade-in-bottom: fade-in-bottom;
-    --animate-fade-out-bottom: fade-out-bottom;
-}
-
-@keyframes squash {
-    0% {
-        scale: 1;
+        --transition-micro-back-fast: var(--duration-micro-fast) var(--ease-back);
+        --transition-micro-back-medium: var(--duration-micro-medium) var(--ease-back);
+        --transition-micro-back-slow: var(--duration-micro-slow) var(--ease-back);
     }
 
-    40% {
-        scale: 0.92 0.88;
+    :root {
+        --animate-squash: squash var(--transition-elastic-slow);
+        --animate-fade-in-bottom: fade-in-bottom;
+        --animate-fade-out-bottom: fade-out-bottom;
     }
 
-    60% {
-        scale: 1.05 1.02;
+    @keyframes squash {
+        0% {
+            scale: 1;
+        }
+
+        40% {
+            scale: 0.92 0.88;
+        }
+
+        60% {
+            scale: 1.05 1.02;
+        }
+
+        80% {
+            scale: 0.98 0.99;
+        }
+
+        100% {
+            scale: 1;
+        }
     }
 
-    80% {
-        scale: 0.98 0.99;
+
+    @keyframes fade-in-top {
+        0% {
+            translate: 0 -50px;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        100% {
+            translate: 0 0;
+            opacity: 1;
+            pointer-events: all;
+        }
     }
 
-    100% {
-        scale: 1;
-    }
-}
+    @keyframes fade-out-top {
+        0% {
+            translate: 0 0;
+            opacity: 1;
+            pointer-events: all;
+        }
 
-
-@keyframes fade-in-top {
-    0% {
-        translate: 0 -50px;
-        opacity: 0;
-        pointer-events: none;
-    }
-
-    100% {
-        translate: 0 0;
-        opacity: 1;
-        pointer-events: all;
-    }
-}
-
-@keyframes fade-out-top {
-    0% {
-        translate: 0 0;
-        opacity: 1;
-        pointer-events: all;
+        100% {
+            translate: 0 -50px;
+            opacity: 0;
+            pointer-events: none;
+        }
     }
 
-    100% {
-        translate: 0 -50px;
-        opacity: 0;
-        pointer-events: none;
+    @keyframes fade-in-bottom {
+        0% {
+            opacity: 0;
+            translate: 0 100%;
+        }
+
+        100% {
+            opacity: 1;
+            translate: 0 0;
+        }
     }
-}
+    @keyframes fade-out-bottom {
 
-@keyframes fade-in-bottom {
-	0% {
-		opacity: 0;
-		translate: 0 100%;
-	}
+        0% {
+            opacity: 1;
+            translate: 0 0;
+        }
 
-	100% {
-		opacity: 1;
-		translate: 0 0;
-	}
-}
-@keyframes fade-out-bottom {
-    
-    0% {
-        opacity: 1;
-		translate: 0 0;
-	}
+        100% {
+            opacity: 0;
+            translate: 0 100%;
+        }
+    }
 
-    100% {
-        opacity: 0;
-        translate: 0 100%;
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+        }
+    }
+
+    @keyframes fade-out {
+        to {
+            opacity: 0;
+        }
+    }
+
+    @keyframes slide-from-right {
+        from {
+            transform: translateX(30px);
+        }
+    }
+
+    @keyframes slide-to-left {
+        to {
+            transform: translateX(-30px);
+        }
     }
 }
