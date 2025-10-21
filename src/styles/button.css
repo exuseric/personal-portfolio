@@ -131,11 +131,11 @@
     .btn--primary {
         --_background-color: var(--surface-brand-light);
         --_border-color: var(--surface-brand-default);
-        --_color: var(--text-on-brand-color);
+        --_color: var(--text-on-brand-subtle);
 
         &:hover {
             --_color: var(--text-brand-hover);
-            --_background-color: var(--surface-brand-hover);
+            --_background-color: var(--surface-brand-subtle);
         }
     }
 
@@ -179,25 +179,28 @@
     }
 
     .btn--ghost {
-        --_background-color: transparent;
+        --_background-color: var(--surface-brand-light);
         --_color: var(--text-neutral-default);
+        --_border-color: var(--surface-brand-hover);
         box-shadow: none;
-
+        
         &:hover {
             --_color: var(--text-brand-hover);
-            --_background-color: var(--surface-brand-hover);
+            --_background-color: var(--surface-brand-subtle);
         }
     }
 
     .btn--link {
         --_background-color: transparent;
         --_color: var(--text-neutral-default);
-        text-decoration: underline;
+        --_border-color: transparent;
         padding: 0;
-        border: none;
+        box-shadow: none;
 
         &:hover {
             --_color: var(--text-brand-hover);
+            --_background-color: var(--surface-brand-subtle);
+            --_border-color: var(--surface-brand-hover);
         }
     }
 

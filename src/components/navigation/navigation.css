@@ -58,7 +58,8 @@
 @media (min-width: 768px) {
   .nav__container {
     display: grid;
-    grid-template-columns: 1fr auto auto;
+    grid-template-columns: auto auto 1fr;
+    column-gap: var(--size-4);
     
     &[data-active] {
       
