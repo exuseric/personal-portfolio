@@ -14,6 +14,7 @@
         --text-brand-subtle: var(--color-brand-400);
         --text-brand-hover: var(--color-brand-950);
         --text-on-brand-color: var(--color-brand-50);
+        --text-on-subtle-color: var(--color-brand-950);
 
         /* Secondary Colors */
         --surface-secondary-default: var(--color-secondary-500);
@@ -89,15 +90,16 @@
     @media (prefers-color-scheme: dark) {
         :root {
             /* Brand Colors */
-            --surface-brand-default: var(--color-brand-700);
-            --surface-brand-light: var(--color-brand-600);
-            --surface-brand-subtle: var(--color-brand-950);
+            --surface-brand-default: var(--color-brand-800);
+            --surface-brand-light: var(--color-brand-950);
+            --surface-brand-subtle: var(--color-brand-900);
             --surface-brand-hover: var(--color-brand-800);
 
             --text-brand-default: var(--color-brand-600);
             --text-brand-subtle: var(--color-brand-400);
             --text-brand-hover: var(--color-brand-200);
             --text-on-brand-color: var(--color-brand-200);
+            --text-on-subtle-color: var(--color-brand-100);
 
             /* Secondary Colors */
             --surface-secondary-default: var(--color-secondary-700);
@@ -205,7 +207,7 @@
 
     .surface-brand-subtle {
         background-color: var(--surface-brand-subtle);
-        color: var(--text-on-brand-color);
+        color: var(--text-on-subtle-color);
         border-color: var(--surface-brand-subtle);
     }
 

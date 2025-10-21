@@ -17,10 +17,9 @@
 }
 
 @layer utilities {
+
     .btn,
     .btn--icon {
-        --_border-gradient: var(--_border-color, transparent),
-        oklch(from var(--_border-color, transparent) calc(l / 0.725) c h);
         display: inline-flex;
         align-items: var(--_align-items, center);
         justify-content: var(--_justify-content, center);
@@ -31,9 +30,10 @@
         z-index: 1;
 
         color: var(--_color, var(--text-on-neutral-color));
-        background: linear-gradient(var(--_background-color)) padding-box,
-        linear-gradient(15deg, var(--_border-gradient)) border-box;
-        /* background-color: var(--_background-color, transparent); */
+        background-color: var(--_background-color, transparent);
+        border: 0.12rem solid var(--_border-color);
+        /* background: linear-gradient(var(--_background-color)) padding-box,
+            linear-gradient(15deg, var(--_border-gradient)) border-box; */
 
         font-family: var(--font-family-base), sans-serif;
         font-size: var(--font-size-sm);
@@ -42,19 +42,18 @@
 
         cursor: pointer;
         user-select: none;
-        border: 0.12rem solid transparent;
         outline: 0.12rem solid var(--_outline-color, transparent);
 
         text-decoration: none;
 
         box-shadow: oklch(from var(--_background-color) calc(l * 0.1) c h / 0.1) 0 1px 3px 0,
-        oklch(from var(--_background-color) calc(l * 0.06) c h / 0.06) 0 1px 2px 0;
+            oklch(from var(--_background-color) calc(l * 0.06) c h / 0.06) 0 1px 2px 0;
 
         transition: background-color var(--transition-anticipate-fast),
-        background var(--transition-micro-fast),
-        color var(--transition-micro-fast),
-        border-color var(--transition-micro-fast),
-        scale var(--transition-micro-fast);
+            background var(--transition-micro-fast),
+            color var(--transition-micro-fast),
+            border-color var(--transition-micro-fast),
+            scale var(--transition-micro-fast);
 
         /* &:focus-visible {
               outline-offset: .3rem;
@@ -76,6 +75,7 @@
         border-radius: var(--radius-md);
 
         width: max-content;
+        height: max-content;
         min-width: var(--_min-width, 4.6rem);
         min-height: var(--_min-height, 3rem);
 
@@ -85,6 +85,15 @@
                 corner-shape: squircle;
             }
         }
+    }
+
+    .btn:not(.btn--outline),
+    .btn--icon {
+        --_border-gradient: var(--_border-color, transparent),
+            oklch(from var(--_border-color, transparent) calc(l / 0.725) c h);
+        background: linear-gradient(var(--_background-color)) padding-box,
+            linear-gradient(15deg, var(--_border-gradient)) border-box;
+            border: 0.12rem solid transparent;
     }
 
     /* ICON BUTTONS */
@@ -183,7 +192,7 @@
         --_color: var(--text-neutral-default);
         --_border-color: var(--surface-brand-hover);
         box-shadow: none;
-        
+
         &:hover {
             --_color: var(--text-brand-hover);
             --_background-color: var(--surface-brand-subtle);
@@ -270,6 +279,7 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
+
         .btn,
         .btn__spinner {
             transition: none;

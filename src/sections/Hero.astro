@@ -7,23 +7,38 @@ const data = res.homePage.hero;
 ---
 
 <header class="hero container">
-    <div class="hero__wrapper">
-        <header class="hero__heading">
-            <h1 class="hero__title section-heading text-brand">
-                {data.heading}
-            </h1>
-            <div class="hero__content">
-                <p>{data.subheading}</p>
-                <p>
-                    {data.description}
-                </p>
+    <div class="hero__wrapper container" data-container-md>
+        <div class="hero__heading full-width">
+            <div>
+                <h1 class="section-heading">
+                    Eric Gathoni, Frontend Developer.
+                </h1>
             </div>
-            <Button
-                as="default"
-                href="#contact"
-                label="Let's Connect"
-                variant="primary"
-            />
+        </div>
+        <header class="hero__content">
+            <p class="h5">
+                <!-- {data.heading} -->
+                Most websites look good but perform poorly. I craft performant, accessible
+                frontends that grow traffic, improve retention, and make design systems
+                shine.
+            </p>
+            <!-- <p>
+                {data.description}
+            </p> -->
+            <div class="flex-start">
+                <Button
+                    as="default"
+                    href="#contact"
+                    label="Explore My Projects"
+                    variant="primary"
+                />
+                <Button
+                    as="default"
+                    href="#contact"
+                    label="Get in Touch"
+                    variant="outline"
+                />
+            </div>
         </header>
     </div>
 </header>
@@ -33,35 +48,15 @@ const data = res.homePage.hero;
         min-height: 100dvh;
     }
     .hero__wrapper {
-        display: grid;
-        grid: [stack] 1fr / [stack] 1fr;
-
-        > * {
-            grid-area: stack;
-        }
-
-        header {
-            display: flex;
-            flex-direction: column;
-            row-gap: var(--size-6);
-            
-            justify-self: start;
-            align-self: center;
-
-            z-index: 2;
-            text-align: start;
-
-            h1 {
-                margin-block-start: 0;
-            }
-        }
+        /* display: grid; */
+        align-content: center;
+        row-gap: var(--size-12);
     }
 
     .hero__content {
-        margin-top: var(--size-4);
-
-        > :not(:first-child) {
-            margin-top: var(--size-1);
-        }
+        display: flex;
+        flex-direction: column;
+        gap: var(--size-4);
+        max-width: 45ch;
     }
 </style>

@@ -12,6 +12,13 @@
         align-items: center;
         justify-content: space-between;
     }
+    .flex-start {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: flex-start;
+        gap: var(--size-2);
+    }
 
     .section-heading {
         text-transform: uppercase;
@@ -55,15 +62,15 @@
     h3,
     h4,
     h5 {
-        line-height: var(--lh-display);
         margin-bottom: var(--size-4);
         font-weight: 400;
         max-width: 25ch;
         orphans: 1;
     }
-
+    
     h1,
     .h1 {
+        line-height: var(--lh-tight);
         font-size: var(--font-size-5xl);
         font-weight: 300;
     }
@@ -71,6 +78,7 @@
     h2,
     .h2 {
         font-size: var(--font-size-4xl);
+        line-height:  var(--lh-hero);
     }
 
     h3,
@@ -80,7 +88,7 @@
 
     h4,
     .h4 {
-        font-size: var(--font-size-2xl);
+        font-size: var(--font-size-lg);
     }
 
     h5,
