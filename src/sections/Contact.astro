@@ -1,0 +1,58 @@
+---
+import { getContent } from "@/utils/graphql-client";
+import { contactQuery } from "@/utils/queries";
+import Form from "@/components/contact/Form.astro";
+
+const {
+    homePage: { contact: data },
+} = await getContent(contactQuery);
+---
+
+<section class="contact surface-brand-subtle container" id="contact">
+    <div class="contact__wrapper">
+        <header class="contact__header">
+            <!-- <h2 class="h1">{data.heading}</h2> -->
+            <h2 class="h1 section-heading text-on-brand-color">Keep in touch with me</h2>
+            <slot set:html={data.body.html} />
+        </header>
+        <div class="contact__formWrapper">
+            <Form />
+        </div>
+    </div>
+    <!-- <div class="contact container" data-content-wrapper data-parent-container></div> -->
+</section>
+
+<style>
+    .contact {
+        padding-block: var(--container-padding-block);
+    }
+
+    .contact__header {
+        display: flex;
+        flex-direction: column;
+        gap: var(--size-6);
+    }
+
+    .contact__wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: var(--size-12);
+    }
+
+    @media (min-width: 768px) {
+        .contact__wrapper {
+            display: grid;
+            grid-template-columns: [content-start] 1fr [content-end form-start] 1fr [form-end];
+            gap: var(--size-12);
+            align-items: start;
+            justify-content: start;
+
+            .contact__header {
+                grid-column: content;
+            }
+            .contact__formWrapper {
+                grid-column: form;
+            }
+        }
+    }
+</style>
