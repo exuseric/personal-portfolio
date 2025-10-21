@@ -1,6 +1,7 @@
 ---
 import { getContent } from "@/utils/graphql-client";
 import { heroQuery } from "@/utils/queries";
+import Button from "@/components/Button/Button.astro";
 const res = await getContent(heroQuery);
 const data = res.homePage.hero;
 ---
@@ -8,13 +9,21 @@ const data = res.homePage.hero;
 <header class="hero container">
     <div class="hero__wrapper">
         <header class="hero__heading">
-            <h1 class="hero__title text-brand">{data.heading}</h1>
+            <h1 class="hero__title section-heading text-brand">
+                {data.heading}
+            </h1>
             <div class="hero__content">
                 <p>{data.subheading}</p>
                 <p>
                     {data.description}
                 </p>
             </div>
+            <Button
+                as="default"
+                href="#contact"
+                label="Let's Connect"
+                variant="primary"
+            />
         </header>
     </div>
 </header>
@@ -26,12 +35,16 @@ const data = res.homePage.hero;
     .hero__wrapper {
         display: grid;
         grid: [stack] 1fr / [stack] 1fr;
-        
+
         > * {
             grid-area: stack;
         }
 
         header {
+            display: flex;
+            flex-direction: column;
+            row-gap: var(--size-6);
+            
             justify-self: start;
             align-self: center;
 
@@ -40,14 +53,13 @@ const data = res.homePage.hero;
 
             h1 {
                 margin-block-start: 0;
-                font-weight: 600;
             }
         }
     }
 
     .hero__content {
         margin-top: var(--size-4);
-        
+
         > :not(:first-child) {
             margin-top: var(--size-1);
         }
