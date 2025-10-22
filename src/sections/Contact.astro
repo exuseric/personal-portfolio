@@ -4,10 +4,14 @@ import { contactQuery } from "@/utils/queries";
 import Form from "@/components/contact/Form.astro";
 
 const response = await getContent(contactQuery);
-const {heading, content} = response.contact;
+const { heading, content } = response.contact;
 ---
 
-<section class="contact surface-brand-subtle container" id="contact">
+<section
+    class="contact surface-brand-subtle container"
+    id="contact"
+    data-cutout
+>
     <div class="contact__wrapper container" data-container-md>
         <header class="contact__header full-width">
             <h2 class="h1 full-width">

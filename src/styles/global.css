@@ -134,6 +134,16 @@
         max-width: 65ch;
         margin: 0;
     }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        vertical-align: middle;
+        font-style: italic;
+        background-repeat: no-repeat;
+        background-size: cover;
+        shape-margin: 1rem;
+    }
 }
 
 @layer components {
@@ -195,6 +205,32 @@
     [data-offscreen] {
         content-visibility: auto;
         contain-intrinsic-size: auto 31.25rem;
+    }
+
+    [data-cutout] {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+
+        &::after {
+            /* content: ""; */
+            position: absolute;
+            top: 80%;
+            right: 0;
+            bottom: 0;
+            left: 80%;
+            translate: -50% -50%;
+            /* width: var(--size-24);
+            height: var(--size-24); */
+            width: var(--size-32);
+            height: var(--size-32);
+
+            background-color: var(--surface-neutral-default);
+            /* border-radius: var(--radius-round); */
+            clip-path: polygon(0% 0%, 0% 100%, 25% 100%, 25% 25%, 75% 25%, 75% 75%, 25% 75%, 25% 100%, 100% 100%, 100% 0%);
+
+            z-index: -1;
+        }
     }
 }
 

@@ -3,13 +3,13 @@ import seo from "@/data/seo.json";
 import { AstroFont } from "astro-font";
 import Navigation from "@/components/navigation/Navigation.astro";
 import "@/styles/global.css";
-import Footer from "@/components/footer/Footer.astro";
+import Footer from "@/sections/Footer.astro";
 import FaqSection from "@/sections/FaqSection.astro";
 
 import { getContent } from "@/utils/graphql-client";
 import { faqQuery } from "@/utils/queries";
 const response = await getContent(faqQuery);
-const {jsonLd: faqJsonLd} = response.faq;
+const { jsonLd: faqJsonLd } = response.faq;
 ---
 
 <html lang={seo.language} data-theme="dark">
@@ -22,10 +22,16 @@ const {jsonLd: faqJsonLd} = response.faq;
     <meta name="keywords" content={seo.keywords} />
     <meta name="robots" content={seo.robots} />
     <meta name="language" content={seo.language} />
-    <meta name="format-detection" content={seo.additionalMeta.formatDetection} />
+    <meta
+      name="format-detection"
+      content={seo.additionalMeta.formatDetection}
+    />
     <meta name="referrer" content={seo.additionalMeta.referrer} />
     <meta name="color-scheme" content={seo.additionalMeta.colorScheme} />
-    <meta name="supported-color-schemes" content={seo.additionalMeta.supportedColorSchemes} />
+    <meta
+      name="supported-color-schemes"
+      content={seo.additionalMeta.supportedColorSchemes}
+    />
 
     <!-- Canonical and Sitemap -->
     <link rel="canonical" href={seo.siteUrl} />
@@ -40,11 +46,25 @@ const {jsonLd: faqJsonLd} = response.faq;
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 
     <!-- PNG favicons -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/favicon-16x16.png"
+    />
 
     <!-- Apple Touch Icon (for iOS bookmarks) -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
 
     <!-- Web App Manifest (if you're pretending your site is an app) -->
     <link rel="manifest" href="/site.webmanifest" />
@@ -56,7 +76,10 @@ const {jsonLd: faqJsonLd} = response.faq;
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta http-equiv="X-Frame-Options" content="DENY" />
     <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
-    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
+    <meta
+      http-equiv="Permissions-Policy"
+      content="camera=(), microphone=(), geolocation=()"
+    />
 
     <!-- Performance and Caching -->
     <meta http-equiv="Cache-Control" content="public, max-age=31536000" />
@@ -145,7 +168,7 @@ const {jsonLd: faqJsonLd} = response.faq;
     </script>
 
     <!-- FAQ Schema -->
-   <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content={seo.openGraph.type} />
@@ -180,7 +203,6 @@ const {jsonLd: faqJsonLd} = response.faq;
           cssVariable: "font-family-base",
           googleFontsURL:
             "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap",
-
         },
         // {
         //   src: [],
