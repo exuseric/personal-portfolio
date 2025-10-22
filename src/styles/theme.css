@@ -38,7 +38,7 @@
 
         /* Neutral Colors */
         --surface-neutral-default: var(--color-neutral-white);
-        --surface-neutral-subtle: var(--color-neutral-50);
+        --surface-neutral-subtle: var(--color-neutral-100);
         --surface-neutral-hover: var(--color-brand-200);
 
         --text-neutral-default: var(--color-neutral-900);

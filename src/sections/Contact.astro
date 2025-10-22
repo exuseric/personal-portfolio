@@ -10,9 +10,9 @@ const {
 
 <section class="contact surface-brand-subtle container" id="contact">
     <div class="contact__wrapper">
-        <header class="contact__header">
+        <header class="contact__header container" data-container-md>
             <!-- <h2 class="h1">{data.heading}</h2> -->
-            <h2 class="h1">Keep in touch with me</h2>
+            <h2 class="h1 full-width">Keep in touch with me</h2>
             <slot set:html={data.body.html} />
         </header>
         <div class="contact__formWrapper">
@@ -26,12 +26,12 @@ const {
     .contact {
         padding-block: var(--container-padding-block);
     }
-
+/* 
     .contact__header {
         display: flex;
         flex-direction: column;
         gap: var(--size-6);
-    }
+    } */
 
     .contact__wrapper {
         display: flex;

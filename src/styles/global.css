@@ -12,6 +12,7 @@
         align-items: center;
         justify-content: space-between;
     }
+
     .flex-start {
         display: flex;
         flex-flow: row wrap;
@@ -35,8 +36,10 @@
         --shadow-md: 0 4px 8px hsl(var(--shadow-color) / calc(var(--shadow-strength)));
 
         /* Layout */
-        --content-width: min(100% - 2rem, 50rem); /*800px*/
-        --site-width: min(100% - 2rem, 75rem); /*1200px*/
+        --content-width: min(100% - 2rem, 50rem);
+        /*800px*/
+        --site-width: min(100% - 2rem, 75rem);
+        /*1200px*/
     }
 
     html,
@@ -44,7 +47,7 @@
         font-family: var(--font-family-base), sans-serif;
         color: var(--text-neutral-default);
         background-color: var(--surface-neutral-default);
-        line-height: var(--lh-base);
+        line-height: var(--lh-body-text);
         font-weight: 400;
         scroll-behavior: smooth;
         interpolate-size: allow-keywords;
@@ -64,26 +67,33 @@
     h5 {
         margin-bottom: var(--size-4);
         font-weight: 400;
-        max-width: 25ch;
         orphans: 1;
     }
-    
+
+    h1,
+    h2,
+    .h1,
+    .h2 {
+        max-width: 25ch;
+    }
+
     h1,
     .h1 {
-        line-height: var(--lh-tight);
-        font-size: var(--font-size-5xl);
+        line-height: var(--lh-hero);
+        font-size: var(--font-size-display);
         font-weight: 300;
     }
 
     h2,
     .h2 {
         font-size: var(--font-size-4xl);
-        line-height:  var(--lh-hero);
+        line-height: var(--lh-heading-large);
     }
 
     h3,
     .h3 {
-        font-size: var(--font-size-3xl);
+        font-size: var(--font-size-xl);
+        line-height: var(--lh-heading-medium);
     }
 
     h4,
@@ -119,22 +129,13 @@
         --padding-inline: 1rem;
         --content-max-width: var(--site-width);
         --breakout-max-width: calc(var(--content-max-width) * 0.2);
-        --breakout-size: calc(
-                (var(--breakout-max-width) - var(--content-max-width)) / 2
-        );
+        --breakout-size: calc((var(--breakout-max-width) - var(--content-max-width)) / 2);
 
         display: grid;
         grid-template-columns:
-      [full-width-start] minmax(var(--padding-inline), 1fr)
-      [breakout-start] minmax(0, var(--breakout-size)) [content-start] min(
-        100% - (var(--padding-inline) * 2),
-        var(--content-max-width)
-      )
-      [content-end] minmax(0, var(--breakout-size)) [breakout-end] minmax(
-        var(--padding-inline),
-        1fr
-      )
-      [full-width-end];
+            [full-width-start] minmax(var(--padding-inline), 1fr) [breakout-start] minmax(0, var(--breakout-size)) [content-start] min(100% - (var(--padding-inline) * 2),
+                var(--content-max-width)) [content-end] minmax(0, var(--breakout-size)) [breakout-end] minmax(var(--padding-inline),
+                1fr) [full-width-end];
         width: 100%;
     }
 
@@ -142,15 +143,15 @@
         --content-max-width: var(--content-width);
     }
 
-    .container > :not(.breakout, .full-width) {
+    .container> :not(.breakout, .full-width) {
         grid-column: content;
     }
 
-    .container > .breakout {
+    .container>.breakout {
         grid-column: breakout;
     }
 
-    .container > .full-width {
+    .container>.full-width {
         grid-column: full-width;
     }
 
@@ -202,12 +203,10 @@
         bottom: 0;
         left: 0;
         transform: translateX(-100%);
-        background: linear-gradient(
-                90deg,
+        background: linear-gradient(90deg,
                 transparent,
                 var(--color-neutral-200),
-                transparent
-        );
+                transparent);
         animation: skeleton-loading 1.5s infinite;
     }
 
@@ -232,11 +231,11 @@
 
     ::view-transition-old(root) {
         animation: 90ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
-        300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
+            300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
     }
 
     ::view-transition-new(root) {
         animation: 210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
-        300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
+            300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
     }
 }
