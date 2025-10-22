@@ -1,0 +1,112 @@
+---
+import { Icon } from "astro-icon/components";
+import { getContent } from "@/utils/graphql-client";
+import { faqQuery } from "@/utils/queries";
+const response = await getContent(faqQuery);
+const {heading, faq} = response.faq;
+---
+
+<div class="faq container" aria-labelledby="faq-heading">
+  <header>
+    <h2 id="faq-heading">{heading}</h2>
+  </header>
+  <div class="accordion_container container" data-container-md>
+    {
+      faq && faq.map((faq, index) => (
+          <div class="accordion_item">
+            <details
+              open={index === 0}
+              class="accordion_details"
+              data-index={index}
+              name="faq"
+            >
+              <summary class="accordion_summary flex-between">
+                <h3 class="accordion_title">{faq.question}</h3>
+                <Icon
+                  name="mdi:caret"
+                  class="accordion_icon"
+                  aria-hidden="true"
+                  focusable="false"
+                />
+              </summary>
+              <div class="accordion_body">
+                <slot set:html={faq.answer.html} />
+              </div>
+            </details>
+          </div>
+        ))
+    }
+  </div>
+</div>
+
+<style>
+  .faq,
+  .accordion_container {
+    padding-block: var(--container-padding-block);
+  }
+  .accordion_item {
+    align-items: center;
+    &:not(:first-child) {
+      border-top: 0.12rem solid var(--surface-neutral-subtle);
+    }
+  }
+
+  .accordion_title {
+    margin-block: 0;
+    max-width: 23ch;
+  }
+
+  .accordion_body {
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--size-4);
+
+    padding-top: var(--size-8);
+  }
+
+  .accordion_icon {
+    color: var(--text-neutral-subtle);
+    transition: transform var(--transition-micro-fast);
+    font-size: var(--font-size-lg);
+  }
+
+  details {
+    overflow: hidden;
+    padding-block: var(--size-8);
+
+    summary {
+      color: var(--text-neutral-subtle);
+      cursor: pointer;
+    }
+  }
+
+  details::details-content {
+    block-size: 0;
+    transition:
+      block-size var(--transition-anticipate-medium),
+      content-visibility var(--transition-anticipate-medium);
+    transition-behavior: allow-discrete;
+  }
+
+  details[open]::details-content {
+    block-size: auto;
+  }
+
+  details[open] {
+    summary {
+      color: var(--text-neutral-default);
+    }
+    .accordion_icon {
+      transform: rotate(180deg);
+      color: var(--text-neutral-default);
+      background-color: var(--surface-brand-subtle);
+      border-radius: var(--radius-round);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .accordion_title {
+      max-width: 65ch;
+    }
+  }
+</style>

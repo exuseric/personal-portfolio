@@ -13,15 +13,14 @@ export const heroQuery = `query Page {
   }
 }`;
 
-export const faqQuery = `query Page {
-  homePage(where: {id: "${import.meta.env.ASTRO_HYGRAPH_HOMEPAGE_ID}"}) {
+export const faqQuery = `query FAQ {
+  faq(where: {id: "${import.meta.env.ASTRO_HYGRAPH_FAQ_ID}"}) {
+    heading
+    jsonLd
     faq {
-      heading
-      question {
-        question
-        answer {
-          html
-        }
+      question
+      answer {
+        html
       }
     }
   }
