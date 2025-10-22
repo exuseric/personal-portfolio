@@ -6,32 +6,36 @@ import Button from "@/components/Button/Button.astro";
     <div class="form-group">
         <label for="name" class="form-label">Full name</label>
         <input
-                id="name"
-                name="name"
-                type="text"
-                class="input"
-                placeholder="Enter your name"
-                autocomplete="name"
-                minlength="2"
-                required
-                transition:persist
+            id="name"
+            name="name"
+            type="text"
+            class="input"
+            placeholder="Enter your name"
+            autocomplete="name"
+            minlength="2"
+            required
+            transition:persist
         />
-        <p class="form-helper form-helper-error" data-error-for="name">Name must be at least 2 characters.</p>
+        <p class="form-helper form-helper-error" data-error-for="name">
+            Name must be at least 2 characters.
+        </p>
     </div>
     <div class="form-group">
         <label for="email" class="form-label">Email Address</label>
         <input
-                id="email"
-                name="email"
-                type="email"
-                class="input"
-                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                placeholder="mail@example.com"
-                autocomplete="email"
-                required
-                transition:persist
+            id="email"
+            name="email"
+            type="email"
+            class="input"
+            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+            placeholder="mail@example.com"
+            autocomplete="email"
+            required
+            transition:persist
         />
-        <p class="form-helper form-helper-error" data-error-for="email">Invalid email address; mail@example.com</p>
+        <p class="form-helper form-helper-error" data-error-for="email">
+            Invalid email address; mail@example.com
+        </p>
     </div>
     <div class="form-group">
         <label for="inquiry" class="form-label">Inquiry</label>
@@ -42,72 +46,159 @@ import Button from "@/components/Button/Button.astro";
     </div>
     <div class="form-group">
         <label for="message" class="form-label">Your Message</label>
-        <textarea id="message" name="message" class="textarea" rows="4" maxlength="1000" required
-                  transition:persist></textarea>
-        <p class="form-helper form-helper-error" data-error-for="message">Your message must be at least 10 characters
-            long</p>
+        <textarea
+            id="message"
+            name="message"
+            class="textarea"
+            rows="4"
+            maxlength="1000"
+            required
+            transition:persist></textarea>
+        <p class="form-helper form-helper-error" data-error-for="message">
+            Your message must be at least 10 characters long
+        </p>
     </div>
 
-
     <div class="form-group">
-        <Button type="submit" variant="primary" as="default" label="Send Message" attributes={{
-            dataset: {
-                isSubmitting: false,
-                isSuccess: false,
-                isError: false,
-            }
-        }}/>
+        <Button
+            type="submit"
+            variant="primary"
+            as="default"
+            label="Send Message"
+            attributes={{
+                dataset: {
+                    isSubmitting: false,
+                    isSuccess: false,
+                    isError: false,
+                },
+            }}
+        />
     </div>
 </form>
 
-<style>
-
-</style>
+<style></style>
 
 <script>
-    import {actions, isInputError} from 'astro:actions';
+    import { actions, isInputError } from "astro:actions";
 
-    const form = document.querySelector("#contactForm") as HTMLFormElement
-    const submitButton = form.querySelector("button[type='submit']") as HTMLButtonElement
+    const form = document.querySelector("#contactForm") as HTMLFormElement;
+    const submitButton = form.querySelector(
+        "button[type='submit']",
+    ) as HTMLButtonElement;
 
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault()
+    type SubmitButtonState = {
+        isSubmitting?: boolean;
+        isSuccess?: boolean;
+        isError?: boolean;
+    };
 
-        const formData = new FormData(form)
+    type FormInputs = {
+        name?: string[];
+        email?: string[];
+        inquiry?: string[];
+        message?: string[];
+    };
 
-        submitButton.textContent = "Sending Message..."
-        const {data, error} = await actions.contact.sendToMe(formData)
+    const toggleSubmitButtonState = ({
+        isSubmitting = false,
+        isSuccess = false,
+        isError = false,
+    }: SubmitButtonState) => {
+        submitButton.dataset.isSubmitting = isSubmitting.toString();
+        submitButton.dataset.isSuccess = isSuccess.toString();
+        submitButton.dataset.isError = isError.toString();
 
-        if (isInputError(error)) {
-            const fields = error.fields
-            Object.keys(fields).forEach((fieldName) => {
-                const errorElement = form.querySelector(`[data-error-for="${fieldName}"]`) as HTMLElement
-                errorElement.textContent = fields[fieldName].join(', ')
-                errorElement.style.display = "block"
-            })
+        submitButton.classList.toggle("btn--success", isSuccess);
+        submitButton.classList.toggle("btn--danger", isError);
+
+        if (isSubmitting) {
+            submitButton.textContent = "Sending Message...";
+        } else if (isSuccess) {
+            submitButton.textContent = "Message Sent!";
+        } else if (isError) {
+            submitButton.textContent = "Error Sending Message";
         } else {
-            // Clear previous error messages
-            const errorElements = form.querySelectorAll('.form-helper-error') as NodeListOf<HTMLElement>
-            errorElements.forEach((el) => {
-                el.style.display = "none"
-            })
+            submitButton.textContent = "Send Message";
         }
+    };
 
+    const sendMessage = async (formData: FormData) => {
+        const data= await actions.contact.sendToMe(formData);
+        toggleSubmitButtonState({ isSubmitting: true });
+        return data;
+    };
+
+    const sendAutoReply = async (formData: FormData) => {
+        const data = await actions.contact.sendAutoReply(formData);
+        console.log("Auto-reply sent:", data);
 
         if (!data?.error) {
-            const {data} = await actions.contact.sendAutoReply(formData)
-
-            if (!data?.error) {
-                submitButton.textContent = "Message Sent!"
-                submitButton.classList.toggle("btn--success", true)
-            }
+            toggleSubmitButtonState({ isSuccess: true });
         }
 
-        setTimeout(() => {
-            submitButton.textContent = "Send Message"
-            submitButton.classList.toggle("btn--success", false)
-        }, 2000)
+        return data;
+    };
 
-        form.reset()
-    })
+    const handleInputErrors = ({
+        fields,
+        form,
+    }: {
+        fields: FormInputs;
+        form: HTMLFormElement;
+    }) => {
+        Object.keys(fields).forEach((fieldName) => {
+            const errorElement = form.querySelector(
+                `[data-error-for="${fieldName}"]`,
+            ) as HTMLElement;
+            errorElement.textContent = fields[fieldName].join(", ");
+            errorElement.style.display = "block";
+        });
+    };
+
+    const clearInputErrors = (form: HTMLFormElement) => {
+        const errorElements = form.querySelectorAll(
+            ".form-helper-error",
+        ) as NodeListOf<HTMLElement>;
+        errorElements.forEach((el) => {
+            el.style.display = "none";
+        });
+    };
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+
+        const {data: messageSent, error} = await sendMessage(formData);
+        
+        if (isInputError(error)) {
+            handleInputErrors({ fields: error.fields, form });
+            toggleSubmitButtonState({ isError: true, isSubmitting: false });
+
+            setTimeout(() => {
+                toggleSubmitButtonState({
+                    isSubmitting: false,
+                    isError: false,
+                });
+            }, 3000);
+        } else {
+            clearInputErrors(form);
+        }
+
+        if (messageSent?.success) {
+            const {data: autoReplySent, error} = await sendAutoReply(formData);
+            
+            error && toggleSubmitButtonState({ isError: true });
+            autoReplySent?.success && toggleSubmitButtonState({ isSuccess: true });
+
+            setTimeout(() => {
+                toggleSubmitButtonState({
+                    isSubmitting: false,
+                    isSuccess: false,
+                    isError: false,
+                });
+                form.reset();
+            }, 3000);
+        }
+    });
 </script>
