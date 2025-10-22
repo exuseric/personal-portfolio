@@ -24,7 +24,6 @@ export const contact = {
               email: import.meta.env.DEFAULT_EMAIL,
             },
           ],
-          subject: "Feedback from your website",
           templateId: 2,
           params: {
             name: input.name,
@@ -55,7 +54,6 @@ export const contact = {
               email: input.email,
             },
           ],
-          subject: "Feedback from your website",
           templateId: 1,
         }),
       })
