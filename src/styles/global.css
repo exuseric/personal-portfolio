@@ -3,8 +3,8 @@
 @import "./reset.css" layer(framework);
 @import "./tokens.css" layer(global);
 @import "./theme.css" layer(components);
-@import "./form-elements.css";
-@import "./animations.css";
+@import "./form-elements.css" layer(components);
+@import "./animations.css" layer(animations);
 @import "./button.css" layer(components);
 
 
