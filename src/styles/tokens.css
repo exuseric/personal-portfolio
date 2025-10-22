@@ -150,7 +150,7 @@
   /* 39.8px */
   --font-size-5xl: 2.986rem;
   /* 47.8px */
-  --font-size-display: 4.986rem;
+  --font-size-display: 3.986rem;
 }
 
 @media (max-width: 768px) {

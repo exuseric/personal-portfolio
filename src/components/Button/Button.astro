@@ -10,6 +10,7 @@ interface BaseProps {
         | "destructive"
         | "success"
         | "link"
+        | "text"
         | "icon"
         | "outline"
         | "ghost";
@@ -52,6 +53,7 @@ const utilityClasses: Record<NonNullable<Props["variant"]>, string> = {
     destructive: "btn--danger",
     success: "btn--success",
     link: "btn--link",
+    text: "btn--text",
     outline: "btn--outline",
     ghost: "btn--ghost",
 };
@@ -68,7 +70,7 @@ const classes = [
     "btn",
     props.as === "icon-only" && "btn--icon",
     utilityClasses[props.variant ?? "default"],
-    sizeClasses[props.size ?? "md"],
+    sizeClasses[props.variant !== "text" ? "md" : "btn--tiny"],
     props.loading && "btn--loading",
     ...(props.classList ?? []),
 ];
@@ -136,24 +138,3 @@ const mapAttributes = (attributesObject: Props["attributes"]) => {
         </button>
     )
 }
-
-<!-- <style>
-    .btn--sm {
-        --_min-height: 24px;
-        padding: var(--size-1) var(--size-2);
-    }
-    .btn--md {
-        --_min-height: 32px;
-        padding: var(--size-2) var(--size-4);
-    }
-    .btn--lg {
-        padding: var(--size-3) var(--size-5);
-    }
-
-    @media(max-width: 768px) {
-        .btn--sm {
-            --_min-height: 42px;
-            --_min-width: 100%;
-        }
-    }
-</style> -->

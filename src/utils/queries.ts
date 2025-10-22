@@ -67,14 +67,11 @@ export const projectsQuery = `query Page {
   }
 }`
 
-export const contactQuery = `query Page {
-  homePage(where: {id: "${import.meta.env.ASTRO_HYGRAPH_HOMEPAGE_ID}"}) {
-    contact {
-      body {
-        html
-      }
-      heading
-      id
+export const contactQuery = `query Contact {
+  contact(where: {id: "${import.meta.env.ASTRO_HYGRAPH_CONTACT_ID}"}) {
+    heading
+    content {
+      html
     }
   }
 }`
