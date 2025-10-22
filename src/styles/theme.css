@@ -90,10 +90,10 @@
     @media (prefers-color-scheme: dark) {
         :root {
             /* Brand Colors */
-            --surface-brand-default: var(--color-brand-800);
-            --surface-brand-light: var(--color-brand-950);
-            --surface-brand-subtle: var(--color-brand-900);
-            --surface-brand-hover: var(--color-brand-800);
+            --surface-brand-default: var(--color-brand-900);
+            --surface-brand-light: var(--color-brand-800);
+            --surface-brand-subtle: var(--color-brand-950);
+            --surface-brand-hover: var(--color-brand-700);
 
             --text-brand-default: var(--color-brand-600);
             --text-brand-subtle: var(--color-brand-400);
@@ -102,9 +102,9 @@
             --text-on-subtle-color: var(--color-brand-100);
 
             /* Secondary Colors */
-            --surface-secondary-default: var(--color-secondary-700);
+            --surface-secondary-default: var(--color-secondary-900);
             --surface-secondary-subtle: var(--color-secondary-950);
-            --surface-secondary-hover: var(--color-secondary-800);
+            --surface-secondary-hover: var(--color-secondary-700);
 
             --text-secondary-default: var(--color-secondary-200);
             --text-secondary-subtle: var(--color-secondary-400);
