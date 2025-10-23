@@ -4,10 +4,14 @@ import { aboutQuery } from "@/utils/queries";
 
 const res = await getContent(aboutQuery);
 const { heading, content } = res.aboutMe;
-const { id } = Astro.props;
 ---
 
-<div class="aboutContainer container" id={id} data-parent-container data-cutout>
+<div
+  class="aboutContainer container"
+  id="about"
+  data-parent-container
+  data-cutout
+>
   <header>
     <h2 class="h1">
       {heading}

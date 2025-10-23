@@ -7,9 +7,11 @@ import Footer from "@/sections/Footer.astro";
 import FaqSection from "@/sections/FaqSection.astro";
 
 import { getContent } from "@/utils/graphql-client";
-import { faqQuery } from "@/utils/queries";
-const response = await getContent(faqQuery);
-const { jsonLd: faqJsonLd } = response.faq;
+import { faqQuery, aboutQuery } from "@/utils/queries";
+const { faq } = await getContent(faqQuery);
+const { aboutMe } = await getContent(aboutQuery);
+const { schema: aboutSchema } = aboutMe;
+const { jsonLd: faqJsonLd } = faq;
 ---
 
 <html lang={seo.language} data-theme="dark">
@@ -85,90 +87,26 @@ const { jsonLd: faqJsonLd } = response.faq;
     <meta http-equiv="Cache-Control" content="public, max-age=31536000" />
 
     <!-- Enhanced Person Schema -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Eric Maina",
-        "alternateName": "Eric Gathoni",
-        "url": "https://ericmaina.me",
-        "image": "https://ericmaina.me/_astro/logo.DR1VfmNz_1wiNMl.webp",
-        "jobTitle": "Fullstack Developer",
-        "description": "Frontend-heavy fullstack developer focused on fast, accessible, and beautiful websites. Combines development, UI/UX, and branding with experience across Shopify, Astro, and Pocketbase.",
-        "address": {
-          "@type": "PostalAddress",
-          "addressCountry": "KE",
-          "addressLocality": "Kenya"
-        },
-        "sameAs": [
-          "https://github.com/exuseric",
-          "https://linkedin.com/in/exuseric"
-        ],
-        "worksFor": {
-          "@type": "Organization",
-          "name": "Yellow Pages Kenya"
-        },
-        "alumniOf": {
-          "@type": "Organization",
-          "name": "The Internet, School of Hard DOM Manipulation"
-        },
-        "knowsAbout": [
-          "Frontend Development",
-          "Backend Development",
-          "UI/UX Design",
-          "Performance Optimization",
-          "Accessibility",
-          "Astro",
-          "Pocketbase",
-          "Shopify",
-          "HTML",
-          "CSS",
-          "JavaScript"
-        ],
-        "knowsLanguage": [
-          {
-            "@type": "Language",
-            "name": "English"
-          },
-          {
-            "@type": "Language",
-            "name": "JavaScript"
-          }
-        ],
-        "hasOccupation": {
-          "@type": "Occupation",
-          "name": "Fullstack Developer",
-          "description": "Develops web applications with focus on frontend performance and accessibility"
-        }
-      }
-    </script>
+    <script type="application/ld+json" set:html={JSON.stringify(aboutSchema)} />
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
 
     <!-- Website Schema -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "name": "Eric Gathoni Portfolio",
+        "@id": "https://ericmaina.me",
         "url": "https://ericmaina.me",
-        "description": "Professional portfolio showcasing fullstack development work, specializing in React, Astro, and web accessibility.",
-        "author": {
-          "@type": "Person",
-          "name": "Eric Gathoni"
-        },
+        "name": "Eric Maina Gathoni | Frontend Developer",
+        "description": "The official website and portfolio of Eric Maina Gathoni, a Frontend Developer specialising in React, Next.js, and Astro. Building fast, accessible, and SEO-optimised web experiences.",
         "publisher": {
           "@type": "Person",
-          "name": "Eric Gathoni"
-        },
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://ericmaina.me?search={search_term_string}",
-          "query-input": "required name=search_term_string"
+          "@id": "https://ericmaina.me#about"
         }
       }
     </script>
-
-    <!-- FAQ Schema -->
-    <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content={seo.openGraph.type} />

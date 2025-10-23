@@ -28,11 +28,12 @@ export const faqQuery = `query FAQ {
 
 export const aboutQuery = `query About {
   aboutMe(where: {id: "${import.meta.env.ASTRO_HYGRAPH_ABOUT_ID}"}) {
-  heading
+    heading
       content {
         html
       }
-    }
+      schema
+  }
 }`;
 
 export const projectsQuery = `query Page {
