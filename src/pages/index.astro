@@ -1,14 +1,14 @@
 ---
 import DefaultLayout from "@/layouts/DefaultLayout.astro";
-import Hero from "@/components/main-hero/Hero.astro"
+import Hero from "@/sections/Hero.astro"
 import Featured from "@/components/featured/Featured.astro";
-import About from "@/components/about/About.astro";
-import Contact from "@/components/contact/Contact.astro";
+import About from "@/sections/About.astro";
+import ContactSection from "@/sections/Contact.astro"
 ---
 
 <DefaultLayout>
     <Hero />
+    <About />
     <Featured id="projects" />
-    <About id="about" />
-    <Contact id="contact" />
+    <ContactSection />
 </DefaultLayout>

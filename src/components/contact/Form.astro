@@ -1,256 +1,209 @@
 ---
-import FormMessage from "@/components/contact/FormMessage.astro";
-
-let success = false;
-let showMessage = false;
-
-type FormResponse = {
-    success?: boolean;
-    message?: string;
-    error?: {
-        code?: string;
-        message?: string;
-        [key: string]: any;
-    };
-};
+import Button from "@/components/Button/Button.astro";
 ---
 
-<form class="contact__form">
-    <FormMessage success={success} />
-
-    <div class="contact__form_grid">
-        <div class="form__field">
-            <label for="name">Name</label>
-            <div class="input-wrapper">
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Your name"
-                    autocomplete="name"
-                    required
-                />
-            </div>
-            <span class="error-message" data-for="name"></span>
-        </div>
-
-        <div class="form__field">
-            <label for="email"> Email </label>
-            <input
-                type="email"
-                name="email"
-                id="email"
-                placeholder="e.g. user@example.com"
-                autocomplete="email"
-                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                title="Please enter a valid email address"
-                required
-            />
-            <span class="error-message" data-for="email">
-                Please enter a valid email address (e.g. user@example.com)
-            </span>
-        </div>
+<form class="contact__form" id="contactForm">
+    <div class="form-group">
+        <label for="name" class="form-label">Full name</label>
+        <input
+            id="name"
+            name="name"
+            type="text"
+            class="input"
+            placeholder="Enter your name"
+            autocomplete="name"
+            minlength="2"
+            required
+            transition:persist
+        />
+        <p class="form-helper form-helper-error" data-error-for="name">
+            Name must be at least 2 characters.
+        </p>
+    </div>
+    <div class="form-group">
+        <label for="email" class="form-label">Email Address</label>
+        <input
+            id="email"
+            name="email"
+            type="email"
+            class="input"
+            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+            placeholder="mail@example.com"
+            autocomplete="email"
+            required
+            transition:persist
+        />
+        <p class="form-helper form-helper-error" data-error-for="email">
+            Invalid email address; mail@example.com
+        </p>
+    </div>
+    <div class="form-group">
+        <label for="inquiry" class="form-label">Inquiry</label>
+        <select name="inquiry" id="inquiry" transition:persist>
+            <option value="General Inquiry" selected>General Inquiry</option>
+            <option value="Project Inquiry">Project Inquiry</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="message" class="form-label">Your Message</label>
+        <textarea
+            id="message"
+            name="message"
+            class="textarea"
+            rows="4"
+            maxlength="1000"
+            minlength="10"
+            required
+            placeholder="Write your message..."
+            transition:persist></textarea>
+        <p class="form-helper form-helper-error" data-error-for="message">
+            Your message must be at least 10 characters long
+        </p>
     </div>
 
-    <div class="form__field">
-        <label for="message">Message</label>
-        <div class="textarea-wrapper">
-            <textarea
-                id="message"
-                name="message"
-                rows="4"
-                placeholder="Tell me about your project"
-                required></textarea>
-        </div>
-        <span class="error-message" data-for="message"></span>
+    <div class="form-group">
+        <Button
+            type="submit"
+            variant="primary"
+            as="default"
+            label="Send Message"
+            attributes={{
+                dataset: {
+                    isSubmitting: false,
+                    isSuccess: false,
+                    isError: false,
+                },
+            }}
+        />
     </div>
-
-    <button class="btn btn--primary" type="submit">
-        <span class="btn-text">Send Message</span>
-    </button>
 </form>
 
+<style></style>
+
 <script>
-import { actions } from "astro:actions";
+    import { actions, isInputError } from "astro:actions";
 
-const submitButtonTextContent = {
-    submitting: "Sending Message...",
-    success: "Message Sent!",
-    error: "There was an error sending your message. Please try again.",
-    default: "Send Message",
-} as const;
+    const form = document.querySelector("#contactForm") as HTMLFormElement;
+    const submitButton = form.querySelector(
+        "button[type='submit']",
+    ) as HTMLButtonElement;
 
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.querySelector(".contact__form") as HTMLFormElement;
-    const formSubmitBtn = document.querySelector("button[type='submit']") as HTMLButtonElement;
-    const formStatus = document.querySelector(".form_message") as HTMLDivElement;
+    type SubmitButtonState = {
+        isSubmitting?: boolean;
+        isSuccess?: boolean;
+        isError?: boolean;
+    };
 
-    // Hide the form status message initially
-    formStatus.setAttribute("hidden", "");
+    type FormInputs = {
+        name?: string[];
+        email?: string[];
+        inquiry?: string[];
+        message?: string[];
+    };
 
-    form.addEventListener("submit", async (event: SubmitEvent) => {
-        event.preventDefault();
-        formSubmitBtn.textContent = submitButtonTextContent.submitting;
-        formStatus.toggleAttribute("hidden");
+    const toggleSubmitButtonState = ({
+        isSubmitting = false,
+        isSuccess = false,
+        isError = false,
+    }: SubmitButtonState) => {
+        submitButton.dataset.isSubmitting = isSubmitting.toString();
+        submitButton.dataset.isSuccess = isSuccess.toString();
+        submitButton.dataset.isError = isError.toString();
 
-        // create a FormData object from the form
+        submitButton.classList.toggle("btn--success", isSuccess);
+        submitButton.classList.toggle("btn--danger", isError);
+
+        if (isSubmitting) {
+            submitButton.textContent = "Sending Message...";
+        } else if (isSuccess) {
+            submitButton.textContent = "Message Sent!";
+        } else if (isError) {
+            submitButton.textContent = "Error Sending Message";
+        } else {
+            submitButton.textContent = "Send Message";
+        }
+    };
+
+    const sendMessage = async (formData: FormData) => {
+        toggleSubmitButtonState({ isSubmitting: true });
+        const data = await actions.contact.sendToMe(formData);
+        return data;
+    };
+
+    const sendAutoReply = async (formData: FormData) => {
+        const data = await actions.contact.sendAutoReply(formData);
+        console.log("Auto-reply sent:", data);
+
+        if (!data?.error) {
+            toggleSubmitButtonState({ isSuccess: true });
+        }
+
+        return data;
+    };
+    const handleInputErrors = ({
+        fields,
+        form,
+    }: {
+        fields: FormInputs;
+        form: HTMLFormElement;
+    }) => {
+        Object.keys(fields).forEach((fieldName) => {
+            const errorElement = form.querySelector(
+                `[data-error-for="${fieldName}"]`,
+            ) as HTMLElement;
+            if (fields[fieldName]) {
+                errorElement.textContent = fields[fieldName].join(", ");
+            }
+            errorElement.style.display = "block";
+        });
+    };
+
+    const clearInputErrors = (form: HTMLFormElement) => {
+        const errorElements = form.querySelectorAll(
+            ".form-helper-error",
+        ) as NodeListOf<HTMLElement>;
+        errorElements.forEach((el) => {
+            el.style.display = "none";
+        });
+    };
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
         const formData = new FormData(form);
 
-        // send the form data to the server
-        const {data, error} = await actions.sendFeedback(formData);
-        
-        // Handle submission success
-        if (data?.success) {
-            formSubmitBtn.textContent = submitButtonTextContent.success;
-            formStatus.setAttribute("data-success", "true");
-            
+        const { data: messageSent, error } = await sendMessage(formData);
+
+        if (isInputError(error)) {
+            handleInputErrors({ fields: error.fields, form });
+            toggleSubmitButtonState({ isError: true, isSubmitting: false });
+
             setTimeout(() => {
-                formSubmitBtn.textContent = submitButtonTextContent.default;
-                formStatus.toggleAttribute("hidden");
-                formStatus.setAttribute("data-success", "false");
-            }, 5000);
-            
-            form.reset();
+                toggleSubmitButtonState({
+                    isSubmitting: false,
+                    isError: false,
+                });
+            }, 3000);
+        } else {
+            clearInputErrors(form);
         }
 
-        // Handle submission error
-        if (error) {
-            formSubmitBtn.textContent = submitButtonTextContent.error;
-            formStatus.setAttribute("data-succes", "false")
-            formStatus.setAttribute("data-error", "true")
-            
+        if (messageSent?.success) {
+            const { data: autoReplySent, error } =
+                await sendAutoReply(formData);
+
+            error && toggleSubmitButtonState({ isError: true });
+            autoReplySent?.success &&
+                toggleSubmitButtonState({ isSuccess: true });
+
             setTimeout(() => {
-                formSubmitBtn.textContent = submitButtonTextContent.default;
-                formStatus.toggleAttribute("hidden");
-                formStatus.setAttribute("data-error", "false");
-            }, 5000);
+                toggleSubmitButtonState({
+                    isSubmitting: false,
+                    isSuccess: false,
+                    isError: false,
+                });
+                form.reset();
+            }, 3000);
         }
     });
-})
 </script>
-
-<style>
-.contact__form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-    width: 100%;
-    /* max-width: 400px; */
-    margin-block: var(--space-8);
-    position: relative;
-}
-
-.contact__form_grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    gap: var(--space-4);
-}
-
-@media (min-width: 768px) {
-    .contact__form_grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-.contact__form label {
-    display: block;
-    margin-bottom: var(--space-1);
-    font-weight: 500;
-}
-
-.contact__form input,
-.contact__form textarea {
-    anchor-name: --form-input;
-    display: block;
-    width: 100%;
-    padding: var(--space-2);
-
-    background-color: transparent;
-
-    border: 1px solid transparent;
-    border-bottom-color: var(--color-border);
-    border-radius: var(--border-radius);
-
-    transition: border-color 0.2s ease;
-}
-
-/* .contact__form input:focus,
-.contact__form textarea:focus {
-    outline: none;
-    border-color: var(--color-brand);
-    box-shadow: 0 0 0 2px rgba(var(--color-brand-rgb), 0.2);
-} */
-
-input[type="email"] {
-    anchor-name: --email-input;
-}
-
-.contact__form button {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 44px;
-}
-
-.contact__form button:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-}
-
-.contact__form input:user-invalid,
-.contact__form textarea:user-invalid {
-    border-color: var(--color-error, #dc3545);
-}
-
-.error-message {
-    display: none;
-    visibility: hidden;
-    opacity: 0;
-    
-    position: absolute;
-    color: var(--color-error, #dc3545);
-    font-size: 0.875rem;
-    margin-top: var(--space-1);
-    transition-behavior: allow-discrete;
-    transition: display var(--exit-transition-medium);
-}
-
-.error-message[data-for="email"] {
-    top: anchor( --email-input bottom);
-}
-
-.error-message.active {
-    display: block;
-}
-
-.error-details {
-    font-size: 0.875rem;
-    margin-top: var(--space-2);
-}
-
-input:invalid:not(:placeholder-shown):focus + .error-message {
-    display: block;
-    opacity: 1;
-    visibility: visible;
-    padding: var(--space-2);
-
-    color: oklch(from var(--color-brand) l c 100);
-    background-color: oklch(from var(--color-brand) l c 100 / 5%);
-    transition: display var(--entry-transition-medium), opacity var(--entry-transition-medium), visibility var(--entry-transition-medium), padding var(--entry-transition-medium);
-}
-input:invalid:not(:placeholder-shown):focus {
-    outline: 2px solid oklch(from var(--color-brand) calc(l + 0.2) c 100);
-    background-color: oklch(from var(--color-brand) l c 100 / 5%);
-}
-
-input:valid:not(:placeholder-shown):focus + .error-message {
-    display: none;
-}
-
-input:valid:not(:placeholder-shown):focus {
-    outline:2px solid oklch(from var(--color-brand) l c 140);
-    background-color: oklch(from var(--color-brand) l c 140 / 5%);
-}
-</style>

@@ -1,1546 +1,774 @@
-@import url("./reset.css");
+@layer framework, global, elements, components, utilities, animations;
 
-/* Minimal Design System with Carbon Inspiration: Core Variables */
-:root {
-  interpolate-size: allow-keywords;
-  /* Brand Color - Maintained from Original */
-  --color-brand: #9c68f2;
-  /*oklch(0.64 0.20 298)*/
-  --color-secondary: #5f7eff;
+@import "./reset.css" layer(framework);
+@import "./tokens.css" layer(global);
+@import "./theme.css" layer(components);
+@import "./form-elements.css" layer(components);
+@import "./animations.css" layer(animations);
+@import "./button.css" layer(components);
 
-  /* Brand lightest */
-  --color-brand-darker: #010006;
-  --color-brand-dark: #240052;
-  --color-brand-light: #f1c2ff;
-  --color-brand-lighter: #fff9ff;
-  /* Brand darkest */
+@layer utilities {
+  .flex-between {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-  /* Secondary lightest */
-  --color-secondary-darker: #000008;
-  --color-secondary-dark: #0b005d;
-  --color-secondary-light: #b0d8ff;
-  --color-secondary-lighter: #f2feff;
-  /* Secondary darkest */
+  .flex-start {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--size-2);
+  }
 
-  /* Carbon-inspired Neutral Palette */
-  --color-bg: #FFFFFF;
-  --color-text: #161616;
-  /* Carbon uses darker text for accessibility */
-  --color-text-muted: #525252;
-  /* Carbon gray-60 */
-  --color-border: #e0e0e0;
-  /* Carbon gray-20 */
-  --color-surface: #f4f4f4;
-  /* Carbon gray-10 */
-  --color-surface-raised: #ffffff;
-
-  /* Carbon Gray Scale */
-  --gray-100: #f4f4f4;
-  /* Carbon gray-10 */
-  --gray-200: #e0e0e0;
-  /* Carbon gray-20 */
-  --gray-300: #c6c6c6;
-  /* Carbon gray-30 */
-  --gray-400: #a8a8a8;
-  /* Carbon gray-40 */
-  --gray-500: #8d8d8d;
-  /* Carbon gray-50 */
-  --gray-600: #525252;
-  /* Carbon gray-60 */
-  --gray-700: #393939;
-  /* Carbon gray-70 */
-  --gray-800: #262626;
-  /* Carbon gray-80 */
-  --gray-900: #161616;
-  /* Carbon gray-90 */
-
-  /* Typography - Carbon IBM Plex Sans Inspired */
-  /* --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
-  --font-mono: 'IBM Plex Mono', 'SF Mono', monospace; */
-
-  /* Carbon-inspired Font Scale */
-  --fs-base: 1rem;
-  /* 16px */
-  --fs-sm: 0.875rem;
-  /* 14px - Carbon body copy */
-  --fs-xs: 0.75rem;
-  /* 12px - Carbon caption */
-  --fs-lg: 1.125rem;
-  /* 18px */
-  --fs-xl: 1.25rem;
-  /* 20px - Carbon heading-03 */
-  --fs-2xl: 1.75rem;
-  /* 28px - Carbon heading-05 */
-  --fs-3xl: 2.625rem;
-  /* 42px - Carbon heading-07 */
-
-  /* Carbon-inspired Spacing - 8px base */
-  --space-unit: 0.5rem;
-  /* 8px base unit */
-  --space-1: 0.25rem;
-  /* 4px - Carbon spacing-01 */
-  --space-2: 0.5rem;
-  /* 8px - Carbon spacing-03 */
-  --space-3: 0.75rem;
-  /* 12px - Carbon spacing-04 */
-  --space-4: 1rem;
-  /* 16px - Carbon spacing-05 */
-  --space-6: 1.5rem;
-  /* 24px - Carbon spacing-06 */
-  --space-8: 2rem;
-  /* 32px - Carbon spacing-07 */
-  --space-12: 3rem;
-  /* 48px - Carbon spacing-09 */
-  --space-16: 4rem;
-  /* 64px - Carbon spacing-11 */
-
-  /* Carbon-inspired Border Radii */
-  --radius-sm: 0;
-  /* Carbon uses mostly sharp corners */
-  --radius-md: 0;
-  /* Carbon uses mostly sharp corners */
-  --radius-lg: 0;
-  /* Carbon uses mostly sharp corners */
-
-  /* Carbon-inspired Shadow System */
-  --shadow-color: 0deg 0% 0%;
-  --shadow-strength: 10%;
-  --shadow-sm: 0 2px 6px hsl(var(--shadow-color) / calc(var(--shadow-strength)));
-  --shadow-md: 0 4px 8px hsl(var(--shadow-color) / calc(var(--shadow-strength)));
-
-  /* Carbon-inspired Transitions */
-  --transition-all: 350ms cubic-bezier(0.2, 0, 0.38, 0.9);
-  --entry-speed-medium: 200ms;
-  --exit-speed-medium: 250ms;
-  --entry-speed-fast: 100ms;
-  --exit-speed-fast: 150ms;
-  --entry-ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --exit-ease: cubic-bezier(0.5, 0, 0.75, 0);
-
-  --entry-transition-medium: var(--entry-speed-medium) var(--entry-ease);
-  --exit-transition-medium: var(--exit-speed-medium) var(--exit-ease);
-  --entry-transition-fast: var(--entry-speed-fast) var(--entry-ease);
-  --exit-transition-fast: var(--exit-speed-fast) var(--exit-ease);
-  /* Carbon's standard easing */
-
-  /* Layout */
-  --content-width: min(100% - 2rem, 680px);
-  --site-width: min(100% - 2rem, 1200px);
-
-  /* Line Heights - Carbon Inspired */
-  --line-height-tight: 1.25;
-  /* Carbon's heading line height */
-  --line-height-normal: 1.5;
-  /* Carbon's body line height */
-  --line-height-relaxed: 1.7;
-
-  /* Component Variables */
-  --header-height: 48px;
-  /* Carbon header is 48px */
-
-  /* Button System Variables - Carbon Inspired */
-  --button-height-sm: 32px;
-  /* Carbon small button */
-  --button-height-md: 40px;
-  /* Carbon default button */
-  --button-height-lg: 48px;
-  /* Carbon large button */
-
-  --icon-button-sm: 32px;
-  --icon-button-md: 40px;
-  --icon-button-lg: 48px;
-
-  --button-radius: 0;
-  /* Carbon uses sharp corners */
-  --button-border-width: 1px;
-
-  --button-font-weight: 400;
-  /* Carbon buttons are typically regular weight */
-  --button-letter-spacing: 0;
-
-  --button-transition: 110ms cubic-bezier(0.2, 0, 0.38, 0.9);
-
-  --button-icon-gap: var(--space-2);
-
-  --focus-ring-color: var(--color-secondary);
-  /* Carbon uses white focus rings */
-  --focus-ring-width: 2px;
-  --focus-ring-offset: 1px;
+  .section-heading {
+    text-transform: uppercase;
+  }
 }
 
-/* Dark Theme - Carbon Inspired */
-/* .dark {
-  --color-bg: #161616;
-  --color-text: #f4f4f4;        
-  --color-text-muted: #a8a8a8;  
-  --color-border: #393939;      
-  --color-surface: #262626;     
-  --color-surface-raised: #393939;
-  
-  --shadow-strength: 30%;
-  --shadow-color: 220deg 40% 2%;
-  
-  --focus-ring-color: #ffffff;
-} */
+@layer global {
+  :root {
+    interpolate-size: allow-keywords;
 
-@layer general-styling {
+    --shadow-color: 0deg 0% 0%;
+    --shadow-strength: 10%;
+    --shadow-sm: 0 2px 6px hsl(var(--shadow-color) / calc(var(--shadow-strength)));
+    --shadow-md: 0 4px 8px hsl(var(--shadow-color) / calc(var(--shadow-strength)));
 
-  /* Base Styles - Carbon Inspired */
-  html {
-    font-family: var(--font-sans);
-    color: oklch(from var(--color-brand-lighter) calc(l - .90) c h);
-    background-color: var(--color-brand-lighter);
-    line-height: var(--line-height-normal);
+    /* Layout */
+    --content-width: min(100% - 2rem, 50rem);
+    /*800px*/
+    --site-width: min(100% - 2rem, 75rem);
+    /*1200px*/
+  }
+
+  html,
+  body {
+    font-family: var(--font-family-base), sans-serif;
+    color: var(--text-neutral-default);
+    background-color: var(--surface-neutral-default);
+    line-height: var(--lh-body-text);
     font-weight: 400;
-
     scroll-behavior: smooth;
     interpolate-size: allow-keywords;
-    /* Carbon uses 400 for body text */
+    -webkit-font-smoothing: antialiased;
   }
 
   body {
     position: relative;
     isolation: isolate;
     z-index: 1;
-
-    background-color: var(--color-bg);
   }
+}
 
-  body::before {
-    content: '';
-    position: absolute;
-    inset: 0 0 auto;
-    z-index: 1;
+@layer elements {
 
-    width: 100%;
-    height: 100%;
-
-    opacity: 0.015;
-    background-image: url('src/images/texture.svg');
-    background-size: 1rem;
-  }
-
-
-  /* Typography Base Styles - Carbon Inspired */
+  /* Typography */
   h1,
   h2,
   h3,
   h4,
   h5 {
-    line-height: var(--line-height-tight);
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--size-4);
     font-weight: 400;
-    max-width: 50ch;
-    /* Carbon uses 400 for headings */
+    orphans: 1;
   }
 
-  h1 {
-    font-size: var(--fs-3xl);
+  h1,
+  .h1 {
+    line-height: var(--lh-hero);
+    font-size: var(--font-size-display);
     font-weight: 300;
-    /* Carbon uses lighter weight for largest headings */
+    max-width: 15ch;
   }
 
-  h2 {
-    font-size: var(--fs-2xl);
+  h2,
+  .h2 {
+    font-size: var(--font-size-4xl);
+    line-height: var(--lh-heading-large);
   }
 
-  h3 {
-    font-size: var(--fs-xl);
+  h3,
+  .h3 {
+    font-size: var(--font-size-xl);
+    line-height: var(--lh-heading-medium);
   }
 
-  h4 {
-    font-size: var(--fs-lg);
+  h4,
+  .h4 {
+    font-size: var(--font-size-lg);
   }
 
-  h5 {
-    font-size: var(--fs-base);
+  h5,
+  .h5 {
+    font-size: var(--font-size-md);
+  }
+
+  h2,
+  .h2,
+  h3,
+  .h3,
+  h4,
+  .h4,
+  h5,
+  .h5 {
+    max-width: 40ch;
   }
 
   p,
   ul,
   ol {
-    margin-bottom: var(--space-4);
-    font-size: var(--fs-sm);
-    /* Carbon uses 14px for body text */
+    margin-bottom: var(--size-4);
+    font-size: var(--font-size-md);
   }
 
   small {
-    font-size: var(--fs-xs);
-    color: var(--color-text-muted);
-  }
-
-  a {
-    color: var(--color-text);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color var(--transition-all);
-  }
-
-  a:not([class]) {
-    color: var(--color-brand-darker);
-  }
-
-  a:hover {
-    border-color: currentColor;
+    font-size: var(--font-size-sm);
+    color: var(--text-neutral-subtle);
   }
 
   p {
     max-width: 65ch;
     margin: 0;
   }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+    font-style: italic;
+    background-repeat: no-repeat;
+    background-size: cover;
+    shape-margin: 1rem;
+  }
 }
 
-@layer animation {
-  @keyframes fade-in {
-    from {
-      opacity: 0;
+@layer components {
+  .container {
+    --padding-inline: 1rem;
+    --content-max-width: var(--site-width);
+    --breakout-max-width: calc(var(--content-max-width) * 0.2);
+    --breakout-size: calc((var(--breakout-max-width) - var(--content-max-width)) / 2);
+
+    display: grid;
+    grid-template-columns:
+      [full-width-start] minmax(var(--padding-inline), 1fr) [breakout-start] minmax(0, var(--breakout-size)) [content-start] min(100% - (var(--padding-inline) * 2),
+        var(--content-max-width)) [content-end] minmax(0, var(--breakout-size)) [breakout-end] minmax(var(--padding-inline),
+        1fr) [full-width-end];
+    width: 100%;
+  }
+
+  .container[data-container-md] {
+    --content-max-width: var(--content-width);
+  }
+
+  .container> :not(.breakout, .full-width) {
+    grid-column: content;
+  }
+
+  .container>.breakout {
+    grid-column: breakout;
+  }
+
+  .container>.full-width {
+    grid-column: full-width;
+  }
+
+  .page-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    min-height: 100vh;
+    row-gap: var(--size-2);
+  }
+
+  [data-parent-container] {
+    padding-block: var(--container-padding-block);
+  }
+
+  [data-parent-container] h2 {
+    margin: 0 0 var(--size-4);
+  }
+
+  [data-content-wrapper] {
+    width: var(--content-width);
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-4);
+    align-items: flex-start;
+  }
+
+  [data-offscreen] {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 31.25rem;
+  }
+
+  [data-cutout] {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    &::after {
+      /* content: ""; */
+      position: absolute;
+      top: 80%;
+      right: 0;
+      bottom: 0;
+      left: 80%;
+      translate: -50% -50%;
+      /* width: var(--size-24);
+            height: var(--size-24); */
+      width: var(--size-32);
+      height: var(--size-32);
+
+      background-color: var(--surface-neutral-default);
+      /* border-radius: var(--radius-round); */
+      clip-path: polygon(0% 0%,
+          0% 100%,
+          25% 100%,
+          25% 25%,
+          75% 25%,
+          75% 75%,
+          25% 75%,
+          25% 100%,
+          100% 100%,
+          100% 0%);
+
+      z-index: -1;
+    }
+  }
+}
+
+@layer components {
+  .skeleton {
+    width: 100%;
+    height: 1em;
+    background-color: var(--surface-neutral-subtle);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skeleton::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg,
+        transparent,
+        var(--color-neutral-200),
+        transparent);
+    animation: skeleton-loading 1.5s infinite;
+  }
+
+  @keyframes skeleton-loading {
+    100% {
+      transform: translateX(100%);
     }
   }
 
-  @keyframes fade-out {
-    to {
-      opacity: 0;
-    }
+  .skeleton-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-2);
   }
 
-  @keyframes slide-from-right {
-    from {
-      transform: translateX(30px);
-    }
+  .skeleton-text .skeleton:nth-child(3) {
+    width: 75%;
   }
+}
 
-  @keyframes slide-to-left {
-    to {
-      transform: translateX(-30px);
-    }
-  }
-
+@layer animations {
   ::view-transition-old(root) {
-    animation: 90ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
+    animation:
+      90ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
       300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
   }
 
   ::view-transition-new(root) {
-    animation: 210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
+    animation:
+      210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
       300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
   }
 }
 
-/* Core Layout Elements */
-.container {
-  --padding-inline: 1rem;
-  --content-max-width: var(--site-width);
-  --breakout-max-width: 1300px;
-  --breakout-size: calc((var(--breakout-max-width) - var(--content-max-width)) / 2);
-
-  display: grid;
-  grid-template-columns: [full-width-start] minmax(var(--padding-inline), 1fr) [breakout-start] minmax(0, var(--breakout-size)) [content-start] min(100% - (var(--padding-inline) * 2), var(--content-max-width)) [content-end] minmax(0, var(--breakout-size)) [breakout-end] minmax(var(--padding-inline), 1fr) [full-width-end];
-  width: 100%;
-}
-
-.container> :not(.breakout, .full-width) {
-  grid-column: content;
-}
-
-.container>.breakout {
-  grid-column: breakout;
-}
-
-.container>.full-width {
-  grid-column: full-width;
-}
-
-.page-wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  gap: var(--space-6);
-}
-
-[data-parent-container] {
-  padding-block: var(--space-12);
-}
-
-[data-parent-container] h2 {
-  margin-bottom: var(--space-4);
-}
-
-[data-content-wrapper] {
-  width: var(--content-width);
-  margin-inline: auto;
-
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-  align-items: flex-start;
-
-  /* padding-block: var(--space-12); */
-}
-
-[data-highlight] {
-  --bg-color: var(--color-brand-dark);
-  color: oklch(from var(--bg-color) calc(l + .60) c h);
-  background-color: var(--bg-color);
-}
-
-[data-highlight] a:not(:hover),
-[data-highlight] .btn---minimal:not(:hover) {
-  color: currentColor;
-}
-
-/* [data-content-wrapper] em {
-  padding: var(--space-1);
-
-  color: var(--gray-100);
-  background-color: var(--color-brand-dark);
-} */
-
-/* Typography Utilities */
-.text-sm {
-  font-size: var(--fs-sm);
-}
-
-.text-base {
-  font-size: var(--fs-base);
-}
-
-.text-lg {
-  font-size: var(--fs-lg);
-}
-
-.text-xl {
-  font-size: var(--fs-xl);
-}
-
-.text-2xl {
-  font-size: var(--fs-2xl);
-}
-
-.text-3xl {
-  font-size: var(--fs-3xl);
-}
-
-.text-muted {
-  color: var(--color-text-muted);
-}
-
-.text-accent {
-  color: var(--color-brand);
-}
-
-/* Layout Utilities */
-.flex {
-  display: flex;
-}
-
-.flex-col {
-  flex-direction: column;
-}
-
-.items-center {
-  align-items: center;
-}
-
-.justify-between {
-  justify-content: space-between;
-}
-
-.gap-2 {
-  gap: var(--space-2);
-}
-
-.gap-4 {
-  gap: var(--space-4);
-}
-
-.mt-2 {
-  margin-top: var(--space-2);
-}
-
-.mt-4 {
-  margin-top: var(--space-4);
-}
-
-.mt-8 {
-  margin-top: var(--space-8);
-}
-
-.mb-2 {
-  margin-bottom: var(--space-2);
-}
-
-.mb-4 {
-  margin-bottom: var(--space-4);
-}
-
-.mb-8 {
-  margin-bottom: var(--space-8);
-}
-
-/* Components - Carbon Inspired */
-.card {
-  background-color: var(--color-surface-raised);
-  border-radius: 0;
-  /* Carbon uses sharp corners */
-  padding: var(--space-4);
-  border: 1px solid var(--color-border);
-  transition: transform var(--transition-all), box-shadow var(--transition-all);
-}
-
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-sm);
-}
-
-/* Base Button Styles - Carbon Inspired */
-.btn {
-  /* Layout */
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: var(--button-height-md);
-  padding-inline: var(--space-4);
-  white-space: nowrap;
-  min-width: 78px;
-  /* Carbon has min-width */
-
-  /* Shape */
-  border-radius: var(--button-radius);
-  border: var(--button-border-width) solid transparent;
-
-  /* Typography */
-  font-size: var(--fs-sm);
-  /* Carbon uses 14px */
-  font-weight: var(--button-font-weight);
-  letter-spacing: var(--button-letter-spacing);
-
-  /* Behavior */
-  cursor: pointer;
-  user-select: none;
-  transition: all var(--button-transition);
-  position: relative;
-  overflow: hidden;
-
-  /* Reset */
-  background: none;
-  outline: none;
-  text-decoration: none;
-}
-
-/* Carbon Focus Style */
-.btn:focus-visible {
-  outline: var(--focus-ring-width) solid var(--focus-ring-color);
-  outline-offset: var(--focus-ring-width);
-}
-
-/* Disabled State - Carbon Style */
-.btn:disabled,
-.btn[aria-disabled="true"] {
-  opacity: 0.3;
-  /* Carbon uses 30% opacity */
-  pointer-events: none;
-}
-
-/* Button Sizes - Carbon Inspired */
-.btn--sm {
-  height: var(--button-height-sm);
-  padding-inline: var(--space-2);
-  font-size: var(--fs-xs);
-  min-width: 60px;
-  /* Carbon has min-width */
-}
-
-.btn--lg {
-  height: var(--button-height-lg);
-  padding-inline: var(--space-6);
-  font-size: var(--fs-base);
-  min-width: 96px;
-  /* Carbon has min-width */
-}
-
-/* Button Variants - Carbon Inspired */
-.btn--primary {
-  background-color: var(--color-brand);
-  color: oklch(from var(--color-brand) calc(l - .60) c h);
-}
-
-.btn--primary:hover {
-  --bg-color: var(--color-brand-dark);
-  color: oklch(from var(--bg-color) calc(l + .60) c h);
-  background-color: var(--bg-color);
-}
-
-.btn--primary:active {
-  background-color: color-mix(in srgb, var(--color-brand-dark) 70%, black);
-}
-
-/* Carbon Secondary Button */
-.btn--minimal {
-  --bg-color: transparent;
-  background-color: var(--bg-color);
-  color: oklch(from var(--bg-color) calc(l - .60) c h);
-  border: var(--button-border-width) solid currentColor;
-}
-
-.btn--minimal:hover {
-  --bg-color: var(--color-brand-lighter);
-}
-
-.btn--minimal:active {
-  background-color: var(--gray-300);
-}
-
-/* Carbon Tertiary Button */
-.btn--text {
-  background-color: transparent;
-  color: var(--color-brand);
-  padding-inline: var(--space-2);
-  height: auto;
-  border: none;
-}
-
-.btn--text:hover {
-  text-decoration: underline;
-  /* Carbon uses underline on hover */
-}
-
-/* Carbon Ghost Button */
-.btn--color-brand {
-  background-color: transparent;
-  color: var(--color-brand);
-  border: var(--button-border-width) solid var(--color-brand);
-}
-
-.btn--color-brand:hover {
-  background-color: var(--color-brand-lighter);
-}
-
-/* Icon Button Variations - Carbon Inspired */
-.btn--icon {
-  width: var(--icon-button-md);
-  height: var(--icon-button-md);
-  padding: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: auto;
-  /* Override min-width for icon buttons */
-}
-
-.btn--icon_sm {
-  width: var(--icon-button-sm);
-  height: var(--icon-button-sm);
-  padding: 0;
-  min-width: auto;
-}
-
-.btn--icon_lg {
-  width: var(--icon-button-lg);
-  height: var(--icon-button-lg);
-  padding: 0;
-  min-width: auto;
-}
-
-.btn--icon.btn--primary {
-  color: white;
-}
-
-/* Carbon-inspired Ghost Button */
-.btn--icon.btn--ghost {
-  background-color: transparent;
-  color: var(--color-text);
-  border: none;
-}
-
-.btn--icon.btn--ghost:hover {
-  background-color: var(--color-surface);
-}
-
-.btn--icon.btn--outline {
-  background-color: transparent;
-  color: var(--color-text);
-  border: var(--button-border-width) solid var(--color-text);
-}
-
-.btn--icon.btn--outline:hover {
-  background-color: var(--color-surface);
-}
-
-.btn--icon.btn--color-brand--icon {
-  background-color: transparent;
-  color: var(--color-brand);
-  border: none;
-}
-
-.btn--icon.btn--color-brand--icon:hover {
-  background-color: var(--color-brand-lighter);
-}
-
-/* Icon with Text Buttons - Carbon Style */
-.btn--with-icon {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--button-icon-gap);
-}
-
-.btn--with-icon .icon-left {
-  margin-right: var(--space-1);
-}
-
-.btn--with-icon .icon-right {
-  margin-left: var(--space-1);
-}
-
-/* Carbon uses sharp corners already */
-.btn-sharp {
-  border-radius: 0;
-  text-transform: none;
-  /* Carbon doesn't use text transform */
-  letter-spacing: 0;
-  font-size: var(--fs-sm);
-}
-
-/* Button Group - Carbon Style */
-.btn-group {
-  display: inline-flex;
-  flex-flow: row wrap;
-  gap: var(--space-2);
-}
-
-.btn-group .btn:not(:first-child) {
-  margin-left: -1px;
-  /* Collapse borders */
-}
-
-/* Loading State - Carbon Style */
-.btn--loading {
-  position: relative;
-  color: transparent;
-  pointer-events: none;
-}
-
-.btn--loading::after {
-  content: "";
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  top: calc(50% - 8px);
-  left: calc(50% - 8px);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  border-top-color: currentColor;
-  animation: button-spinner 0.6s linear infinite;
-}
-
-@keyframes button-spinner {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Tag/Badge - Carbon Style */
-.tag {
-  display: inline-flex;
-  align-items: center;
-  padding: 0 var(--space-2);
-  width: max-content;
-  height: 24px;
-  /* Carbon tag height */
-  border-radius: 0;
-  /* Carbon tags have sharp corners */
-  font-size: var(--fs-xs);
-  background-color: var(--color-surface);
-  color: var(--color-text);
-  border: 1px solid var(--color-border);
-}
-
-/* Header - Carbon Navigation Style */
-.header {
-  height: var(--header-height);
-  border-bottom: 1px solid var(--color-border);
-  display: flex;
-  align-items: center;
-  background-color: var(--color-surface);
-}
-
-.nav-link {
-  color: var(--color-text);
-  font-size: var(--fs-sm);
-  padding: var(--space-2);
-  margin-inline: var(--space-2);
-  transition: color var(--transition-all);
-  border-bottom: 2px solid transparent;
-  height: var(--header-height);
-  display: inline-flex;
-  align-items: center;
-}
-
-.nav-link:hover {
-  color: var(--color-brand);
-}
-
-.nav-link.active {
-  border-bottom: 2px solid var(--color-brand);
-  color: var(--color-text);
-  /* Carbon keeps text color the same */
-}
-
-/* Form Elements - Carbon Style */
-.input {
-  height: var(--button-height-md);
-  padding-inline: var(--space-2);
-  border: none;
-  /* Carbon inputs have bottom border only */
-  border-bottom: 1px solid var(--color-border);
-  border-radius: 0;
-  /* Carbon inputs have no border radius */
-  background-color: var(--color-bg);
-  font-size: var(--fs-sm);
-  transition: border-color var(--transition-all);
-}
-
-.input:focus {
-  outline: none;
-  border-bottom: 2px solid var(--color-brand);
-}
-
-/* Dividers - Carbon Style */
-.divider {
-  width: 100%;
-  height: 1px;
-  background-color: var(--color-border);
-  margin-block: var(--space-8);
-}
-
-/* Code Display - Carbon Style */
-code {
-  font-family: var(--font-mono);
-  font-size: var(--fs-sm);
-  background-color: var(--color-surface);
-  padding: var(--space-1) var(--space-2);
-  border-radius: 0;
-  /* Carbon uses sharp corners */
-}
-
-.code-block {
-  padding: var(--space-4);
-  border-radius: 0;
-  /* Carbon uses sharp corners */
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  font-family: var(--font-mono);
-  font-size: var(--fs-sm);
-  overflow-x: auto;
-  margin-bottom: var(--space-4);
-}
-
-/* Carbon-specific Additions */
-
-/* Toggle - Carbon Style */
-.toggle {
-  position: relative;
-  display: inline-block;
-  width: 48px;
-  height: 24px;
-}
-
-.toggle input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.toggle-slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: var(--gray-300);
-  transition: var(--transition-all);
-  border-radius: 24px;
-}
-
-.toggle-slider:before {
-  position: absolute;
-  content: "";
-  height: 18px;
-  width: 18px;
-  left: 3px;
-  bottom: 3px;
-  background-color: white;
-  transition: var(--transition-all);
-  border-radius: 50%;
-}
-
-input:checked+.toggle-slider {
-  background-color: var(--color-brand);
-}
-
-input:checked+.toggle-slider:before {
-  transform: translateX(24px);
-}
-
-/* Checkbox - Carbon Style */
-.checkbox {
-  position: relative;
-  display: inline-block;
-  height: 16px;
-  width: 16px;
-}
-
-.checkbox input {
-  opacity: 0;
-  height: 0;
-  width: 0;
-}
-
-.checkbox-mark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 16px;
-  width: 16px;
-  background-color: transparent;
-  border: 1px solid var(--color-border);
-}
-
-.checkbox input:checked+.checkbox-mark {
-  background-color: var(--color-brand);
-  border-color: var(--color-brand);
-}
-
-.checkbox-mark:after {
-  content: "";
-  position: absolute;
-  display: none;
-  left: 5px;
-  top: 1px;
-  width: 4px;
-  height: 8px;
-  border: solid white;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-}
-
-.checkbox input:checked+.checkbox-mark:after {
-  display: block;
-}
-
-/* Radio Button - Carbon Style */
-.radio {
-  position: relative;
-  display: inline-block;
-  height: 16px;
-  width: 16px;
-}
-
-.radio input {
-  opacity: 0;
-  height: 0;
-  width: 0;
-}
-
-.radio-mark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 16px;
-  width: 16px;
-  background-color: transparent;
-  border: 1px solid var(--color-border);
-  border-radius: 50%;
-}
-
-.radio input:checked+.radio-mark {
-  border: 1px solid var(--color-brand);
-}
-
-.radio-mark:after {
-  content: "";
-  position: absolute;
-  display: none;
-  top: 3px;
-  left: 3px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--color-brand);
-}
-
-.radio input:checked+.radio-mark:after {
-  display: block;
-}
-
-/* Carbon-inspired Grid System
- * Based on 16-column grid with fluid gutters
- * Simplified for portfolio use but maintains Carbon principles
- */
-
-/* Grid Container */
-.grid {
-  display: grid;
-  width: 100%;
-  grid-template-columns: repeat(16, 1fr);
-  column-gap: var(--space-4);
-  row-gap: var(--space-4);
-}
-
-/* Responsive breakpoints - Carbon inspired */
-:root {
-  --breakpoint-sm: 320px;
-  /* Small - Carbon mobile */
-  --breakpoint-md: 672px;
-  /* Medium - Carbon tablet */
-  --breakpoint-lg: 1056px;
-  /* Large - Carbon laptop/desktop */
-  --breakpoint-xl: 1312px;
-  /* XLarge - Carbon wide screens */
-  --breakpoint-max: 1584px;
-  /* Max - Carbon maximum width */
-
-  /* Responsive margin units for different breakpoints */
-  --margin-sm: var(--space-2);
-  --margin-md: var(--space-4);
-  --margin-lg: var(--space-6);
-  --margin-xl: var(--space-8);
-}
-
-/* Grid column span utilities */
-.col-span-1 {
-  grid-column: span 1;
-}
-
-.col-span-2 {
-  grid-column: span 2;
-}
-
-.col-span-4 {
-  grid-column: span 4;
-}
-
-.col-span-6 {
-  grid-column: span 6;
-}
-
-.col-span-8 {
-  grid-column: span 8;
-}
-
-.col-span-12 {
-  grid-column: span 12;
-}
-
-.col-span-16 {
-  grid-column: span 16;
-}
-
-/* Responsive column spans */
-@media (max-width: 671px) {
-  .col-sm-span-4 {
-    grid-column: span 4;
+@layer utilities {
+
+  /*=================================*/
+  /* Utility Theme Classes           */
+  /*=================================*/
+  /*  Neutral  */
+  .surface-neutral {
+    background-color: var(--surface-neutral-default);
+    color: var(--text-neutral-default);
+    border-color: var(--surface-neutral-default);
   }
 
-  .col-sm-span-2 {
-    grid-column: span 2;
+  .surface-neutral-subtle {
+    background-color: var(--surface-neutral-subtle);
+    color: var(--text-neutral-default);
+    border-color: var(--surface-neutral-subtle);
   }
 
-  .col-sm-span-4 {
-    grid-column: span 4;
+  /*  Brand */
+  .surface-brand {
+    background-color: var(--surface-brand-default);
+    color: var(--text-on-brand-color);
+    border-color: var(--surface-brand-default);
   }
 
-  .grid {
-    column-gap: var(--space-2);
-  }
-}
-
-@media (min-width: 672px) and (max-width: 1055px) {
-  .col-md-span-4 {
-    grid-column: span 4;
+  .surface-brand-subtle {
+    background-color: var(--surface-brand-subtle);
+    color: var(--text-on-subtle-color);
+    border-color: var(--surface-brand-subtle);
   }
 
-  .col-md-span-8 {
-    grid-column: span 8;
-  }
-}
-
-@media (min-width: 1056px) {
-  .col-lg-span-4 {
-    grid-column: span 4;
+  /*  Secondary  */
+  .surface-secondary {
+    background-color: var(--surface-secondary-default);
+    color: var(--text-on-secondary-color);
+    border-color: var(--surface-secondary-default);
   }
 
-  .col-lg-span-6 {
-    grid-column: span 6;
+  .surface-secondary-subtle {
+    background-color: var(--surface-secondary-subtle);
+    color: var(--text-secondary-default);
+    border-color: var(--surface-secondary-subtle);
   }
 
-  .col-lg-span-8 {
-    grid-column: span 8;
+  /*  Accent  */
+  .surface-accent {
+    background-color: var(--surface-accent-default);
+    color: var(--text-on-accent-color);
+    border-color: var(--surface-accent-default);
   }
 
-  .col-lg-span-12 {
-    grid-column: span 12;
-  }
-}
-
-/* Carbon-inspired Responsive Utilities */
-.hide-sm {
-  @media (max-width: 671px) {
-    display: none !important;
-  }
-}
-
-.hide-md {
-  @media (min-width: 672px) and (max-width: 1055px) {
-    display: none !important;
-  }
-}
-
-.hide-lg {
-  @media (min-width: 1056px) {
-    display: none !important;
-  }
-}
-
-/* Responsive spacing utilities */
-@media (max-width: 671px) {
-  .mt-sm-2 {
-    margin-top: var(--space-2);
+  .surface-accent-subtle {
+    background-color: var(--surface-accent-subtle);
+    color: var(--text-accent-default);
+    border-color: var(--surface-accent-subtle);
   }
 
-  .mb-sm-2 {
-    margin-bottom: var(--space-2);
+  /*  Success */
+  .surface-success {
+    background-color: var(--surface-success-default);
+    color: var(--text-on-success-color);
+    border-color: var(--surface-success-default);
   }
 
-  .p-sm-2 {
-    padding: var(--space-2);
-  }
-}
-
-@media (min-width: 672px) {
-  .mt-md-4 {
-    margin-top: var(--space-4);
+  .surface-success-subtle {
+    background-color: var(--surface-success-subtle);
+    color: var(--text-success-default);
+    border-color: var(--surface-success-subtle);
   }
 
-  .mb-md-4 {
-    margin-bottom: var(--space-4);
+  /*  Warning  */
+  .surface-warning {
+    background-color: var(--surface-warning-default);
+    color: var(--text-on-warning-color);
+    border-color: var(--surface-warning-default);
   }
 
-  .p-md-4 {
-    padding: var(--space-4);
+  .surface-warning-subtle {
+    background-color: var(--surface-warning-subtle);
+    color: var(--text-warning-default);
+    border-color: var(--surface-warning-subtle);
   }
-}
 
-/* ---- Carbon-inspired Additional Components ---- */
-
-/* Tile Component - Carbon uses tiles extensively */
-.tile {
-  background: var(--color-surface-raised);
-  border: 1px solid var(--color-border);
-  padding: var(--space-4);
-  height: 100%;
-}
-
-.tile--clickable {
-  cursor: pointer;
-  transition: background-color var(--transition-all);
-}
-
-.tile--clickable:hover {
-  background-color: var(--color-surface);
-}
-
-.tile--selectable {
-  position: relative;
-  padding-left: var(--space-8);
-}
-
-.tile--selectable::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 4px;
-  background-color: transparent;
-  transition: background-color var(--transition-all);
-}
-
-.tile--selectable:hover::before,
-.tile--selectable.selected::before {
-  background-color: var(--color-brand);
-}
-
-/* Modal - Simplified Carbon Modal */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(22, 22, 22, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.modal {
-  background-color: var(--color-surface-raised);
-  border: 1px solid var(--color-border);
-  width: 100%;
-  max-width: 48rem;
-  max-height: 90vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.modal-header {
-  padding: var(--space-4);
-  border-bottom: 1px solid var(--color-border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.modal-body {
-  padding: var(--space-4);
-  overflow-y: auto;
-  flex-grow: 1;
-}
-
-.modal-footer {
-  padding: var(--space-4);
-  border-top: 1px solid var(--color-border);
-  display: flex;
-  justify-content: flex-end;
-  gap: var(--space-2);
-}
-
-/* Notification - Carbon Style */
-.notification {
-  display: flex;
-  align-items: flex-start;
-  padding: var(--space-4);
-  border-left: 3px solid var(--color-brand);
-  background-color: var(--color-surface);
-  margin-bottom: var(--space-4);
-}
-
-.notification-icon {
-  margin-right: var(--space-4);
-  flex-shrink: 0;
-}
-
-.notification-content {
-  flex-grow: 1;
-}
-
-.notification-title {
-  font-weight: 600;
-  margin-bottom: var(--space-1);
-}
-
-.notification-close {
-  margin-left: var(--space-4);
-  flex-shrink: 0;
-}
-
-.notification--info {
-  border-left-color: #0072c3;
-  /* Carbon blue-60 */
-}
-
-.notification--success {
-  border-left-color: #24a148;
-  /* Carbon green-60 */
-}
-
-.notification--warning {
-  border-left-color: #f1c21b;
-  /* Carbon yellow-30 */
-}
-
-.notification--error {
-  border-left-color: #da1e28;
-  /* Carbon red-60 */
-}
-
-/* Data Table - Simplified Carbon Data Table */
-.table-container {
-  width: 100%;
-  overflow-x: auto;
-}
-
-table.data-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.data-table th {
-  text-align: left;
-  padding: var(--space-2) var(--space-4);
-  font-weight: 600;
-  border-bottom: 1px solid var(--color-border);
-  white-space: nowrap;
-}
-
-.data-table td {
-  padding: var(--space-2) var(--space-4);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.data-table tr:hover {
-  background-color: var(--color-surface);
-}
-
-.data-table--compact td,
-.data-table--compact th {
-  padding: var(--space-1) var(--space-2);
-  font-size: var(--fs-xs);
-}
-
-/* Tabs - Carbon Style */
-.tabs {
-  display: flex;
-  border-bottom: 1px solid var(--color-border);
-}
-
-.tab {
-  padding: var(--space-2) var(--space-4);
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  transition: border-color var(--transition-all);
-}
-
-.tab:hover {
-  border-bottom-color: var(--gray-300);
-}
-
-.tab.active {
-  border-bottom-color: var(--color-brand);
-  color: var(--color-text);
-}
-
-.tab-panel {
-  padding: var(--space-4) 0;
-}
-
-/* Accordion - Carbon Style */
-.accordion-item {
-  border-bottom: 1px solid var(--color-border);
-}
-
-.accordion-header {
-  padding: var(--space-4);
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.accordion-body {
-  padding: 0 var(--space-4) var(--space-4);
-}
-
-/* Progress Indicator - Carbon Style */
-.progress-indicator {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-}
-
-.progress-step {
-  display: flex;
-  min-height: 32px;
-  position: relative;
-}
-
-.progress-step::before {
-  content: "";
-  width: 1px;
-  position: absolute;
-  top: 24px;
-  bottom: 0;
-  left: 7px;
-  background-color: var(--color-border);
-}
-
-.progress-step:last-child::before {
-  display: none;
-}
-
-.progress-circle {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  border: 1px solid var(--color-border);
-  background-color: var(--color-bg);
-  margin-right: var(--space-2);
-}
-
-.progress-step.completed .progress-circle {
-  background-color: var(--color-brand);
-  border-color: var(--color-brand);
-}
-
-.progress-step.current .progress-circle {
-  border: 2px solid var(--color-brand);
-}
-
-.progress-label {
-  flex-grow: 1;
-  margin-top: -4px;
-}
-
-/* Tooltip - Carbon Style */
-.tooltip {
-  position: relative;
-  display: inline-block;
-}
-
-.tooltip-trigger {
-  text-decoration: underline dotted;
-  cursor: help;
-}
-
-.tooltip-content {
-  position: absolute;
-  z-index: 10;
-  background-color: var(--color-text);
-  color: var(--color-bg);
-  padding: var(--space-2);
-  font-size: var(--fs-xs);
-  max-width: 200px;
-  border-radius: 0;
-  bottom: 125%;
-  left: 50%;
-  transform: translateX(-50%);
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity var(--transition-all);
-}
-
-.tooltip:hover .tooltip-content {
-  visibility: visible;
-  opacity: 1;
-}
-
-/* Breadcrumb - Carbon Style */
-.breadcrumb {
-  display: flex;
-  list-style: none;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.breadcrumb-item {
-  display: flex;
-  align-items: center;
-}
-
-.breadcrumb-item::after {
-  content: "/";
-  margin: 0 var(--space-2);
-  color: var(--color-text-muted);
-}
-
-.breadcrumb-item:last-child::after {
-  display: none;
-}
-
-.breadcrumb-link {
-  color: var(--color-text-muted);
-  text-decoration: none;
-}
-
-.breadcrumb-item:last-child .breadcrumb-link {
-  color: var(--color-text);
-  font-weight: 400;
-}
-
-/* Pagination - Carbon Style */
-.pagination {
-  display: flex;
-  align-items: center;
-}
-
-.pagination-button {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.pagination-button.active {
-  border-bottom: 2px solid var(--color-brand);
-}
-
-/* Loading Animation (Inline Loader) - Carbon Style */
-.inline-loading {
-  display: inline-flex;
-  align-items: center;
-}
-
-.loading-spinner {
-  animation: rotate 1s linear infinite;
-  width: 16px;
-  height: 16px;
-  border: 2px solid var(--color-text-muted);
-  border-radius: 50%;
-  border-top-color: var(--color-brand);
-  margin-right: var(--space-2);
-}
-
-@keyframes rotate {
-  to {
-    transform: rotate(360deg);
+  /*  Error  */
+  .surface-error {
+    background-color: var(--surface-error-default);
+    color: var(--text-on-error-color);
+    border-color: var(--surface-error-default);
   }
-}
 
-/* Skeleton - Carbon Style */
-.skeleton {
-  width: 100%;
-  height: 1em;
-  background-color: var(--color-surface);
-  position: relative;
-  overflow: hidden;
-}
-
-.skeleton::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  transform: translateX(-100%);
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  animation: skeleton-loading 1.5s infinite;
-}
-
-@keyframes skeleton-loading {
-  100% {
-    transform: translateX(100%);
+  .surface-error-subtle {
+    background-color: var(--surface-error-subtle);
+    color: var(--text-error-default);
+    border-color: var(--surface-error-subtle);
   }
-}
 
-/* Multi-line skeleton text */
-.skeleton-text {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
+  /*  Info  */
+  .surface-info {
+    background-color: var(--surface-info-default);
+    color: var(--text-on-info-color);
+    border-color: var(--surface-info-default);
+  }
 
-.skeleton-text .skeleton:nth-child(3) {
-  width: 75%;
-}
+  .surface-info-subtle {
+    background-color: var(--surface-info-subtle);
+    color: var(--text-info-default);
+    border-color: var(--surface-info-subtle);
+  }
 
-[data-offscreen] {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 500px;
+  /* Disabled */
+  .surface-disabled {
+    background-color: var(--surface-neutral-subtle);
+    color: var(--text-neutral-subtle);
+    border-color: var(--surface-neutral-subtle);
+    cursor: not-allowed;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  /*=================================*/
+  /* Outline / Ghost Surfaces                */
+  /*=================================*/
+  /* Neutral */
+  .outline-neutral {
+    background-color: transparent;
+    color: var(--text-neutral-default);
+    border: 0.12rem solid var(--surface-neutral-default);
+  }
+
+  .outline-neutral:hover {
+    background-color: var(--surface-neutral-hover);
+    color: var(--text-neutral-default);
+    border-color: var(--surface-neutral-hover);
+  }
+
+  /* Brand */
+  .outline-brand {
+    background-color: transparent;
+    color: var(--text-brand-default);
+    border: 0.12rem solid var(--surface-brand-default);
+  }
+
+  .outline-brand:hover {
+    background-color: var(--surface-brand-default);
+    color: var(--text-on-brand-color);
+    border-color: var(--surface-brand-default);
+  }
+
+  /* Secondary */
+  .outline-secondary {
+    background-color: transparent;
+    color: var(--text-secondary-default);
+    border: 0.12rem solid var(--surface-secondary-default);
+  }
+
+  .outline-secondary:hover {
+    background-color: var(--surface-secondary-default);
+    color: var(--text-on-secondary-color);
+    border-color: var(--surface-secondary-default);
+  }
+
+  /* Accent */
+  .outline-accent {
+    background-color: transparent;
+    color: var(--text-accent-default);
+    border: 0.12rem solid var(--surface-accent-default);
+  }
+
+  .outline-accent:hover {
+    background-color: var(--surface-accent-default);
+    color: var(--text-on-accent-color);
+    border-color: var(--surface-accent-default);
+  }
+
+  /* Success */
+  .outline-success {
+    background-color: transparent;
+    color: var(--text-success-default);
+    border: 0.12rem solid var(--surface-success-default);
+  }
+
+  .outline-success:hover {
+    background-color: var(--surface-success-default);
+    color: var(--text-on-success-color);
+    border-color: var(--surface-success-default);
+  }
+
+  /* Warning */
+  .outline-warning {
+    background-color: transparent;
+    color: var(--text-warning-default);
+    border: 0.12rem solid var(--surface-warning-default);
+  }
+
+  .outline-warning:hover {
+    background-color: var(--surface-warning-default);
+    color: var(--text-on-warning-color);
+    border-color: var(--surface-warning-default);
+  }
+
+  /* Error */
+  .outline-error {
+    background-color: transparent;
+    color: var(--text-error-default);
+    border: 0.12rem solid var(--surface-error-default);
+  }
+
+  .outline-error:hover {
+    background-color: var(--surface-error-default);
+    color: var(--text-on-error-color);
+    border-color: var(--surface-error-default);
+  }
+
+  /* Info */
+  .outline-info {
+    background-color: transparent;
+    color: var(--text-info-default);
+    border: 0.12rem solid var(--surface-info-default);
+  }
+
+  .outline-info:hover {
+    background-color: var(--surface-info-default);
+    color: var(--text-on-info-color);
+    border-color: var(--surface-info-default);
+  }
+
+  /* Disabled */
+  .outline-disabled {
+    background-color: transparent;
+    color: var(--text-neutral-subtle);
+    border: 0.12rem solid var(--surface-neutral-subtle);
+    cursor: not-allowed;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  /*=================================*/
+  /* Subtle Outline / Ghost Surfaces         */
+  /*=================================*/
+  /* Neutral */
+  .outline-neutral-subtle {
+    background-color: transparent;
+    color: var(--text-neutral-subtle);
+    border: 0.12rem solid var(--surface-neutral-subtle);
+  }
+
+  .outline-neutral-subtle:hover {
+    background-color: var(--surface-neutral-subtle);
+    color: var(--text-neutral-default);
+    border-color: var(--surface-neutral-subtle);
+  }
+
+  /* Brand */
+  .outline-brand-subtle {
+    background-color: transparent;
+    color: var(--text-brand-subtle);
+    border: 0.12rem solid var(--surface-brand-subtle);
+  }
+
+  .outline-brand-subtle:hover {
+    background-color: var(--surface-brand-subtle);
+    color: var(--text-on-brand-color);
+    border-color: var(--surface-brand-subtle);
+  }
+
+  /* Secondary */
+  .outline-secondary-subtle {
+    background-color: transparent;
+    color: var(--text-secondary-subtle);
+    border: 0.12rem solid var(--surface-secondary-subtle);
+  }
+
+  .outline-secondary-subtle:hover {
+    background-color: var(--surface-secondary-subtle);
+    color: var(--text-on-secondary-color);
+    border-color: var(--surface-secondary-subtle);
+  }
+
+  /* Accent */
+  .outline-accent-subtle {
+    background-color: transparent;
+    color: var(--text-accent-subtle);
+    border: 0.12rem solid var(--surface-accent-subtle);
+  }
+
+  .outline-accent-subtle:hover {
+    background-color: var(--surface-accent-subtle);
+    color: var(--text-on-accent-color);
+    border-color: var(--surface-accent-subtle);
+  }
+
+  /* Success */
+  .outline-success-subtle {
+    background-color: transparent;
+    color: var(--text-success-subtle);
+    border: 0.12rem solid var(--surface-success-subtle);
+  }
+
+  .outline-success-subtle:hover {
+    background-color: var(--surface-success-subtle);
+    color: var(--text-on-success-color);
+    border-color: var(--surface-success-subtle);
+  }
+
+  /* Warning */
+  .outline-warning-subtle {
+    background-color: transparent;
+    color: var(--text-warning-subtle);
+    border: 0.12rem solid var(--surface-warning-subtle);
+  }
+
+  .outline-warning-subtle:hover {
+    background-color: var(--surface-warning-subtle);
+    color: var(--text-on-warning-color);
+    border-color: var(--surface-warning-subtle);
+  }
+
+  /* Error */
+  .outline-error-subtle {
+    background-color: transparent;
+    color: var(--text-error-subtle);
+    border: 0.12rem solid var(--surface-error-subtle);
+  }
+
+  .outline-error-subtle:hover {
+    background-color: var(--surface-error-subtle);
+    color: var(--text-on-error-color);
+    border-color: var(--surface-error-subtle);
+  }
+
+  /* Info */
+  .outline-info-subtle {
+    background-color: transparent;
+    color: var(--text-info-subtle);
+    border: 0.12rem solid var(--surface-info-subtle);
+  }
+
+  .outline-info-subtle:hover {
+    background-color: var(--surface-info-subtle);
+    color: var(--text-on-info-color);
+    border-color: var(--surface-info-subtle);
+  }
+
+  /* Disabled */
+  .outline-disabled-subtle {
+    background-color: transparent;
+    color: var(--text-neutral-subtle);
+    border: 0.12rem solid var(--surface-neutral-subtle);
+    cursor: not-allowed;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  /*=================================*/
+  /* Text Utilities (no background)  */
+  /*=================================*/
+  /* Brand */
+  .text-brand {
+    color: var(--text-brand-default);
+  }
+
+  .text-brand-subtle {
+    color: var(--text-brand-subtle);
+  }
+
+  .text-on-brand-color {
+    color: var(--text-on-brand-color);
+  }
+
+  /* Secondary */
+  .text-secondary {
+    color: var(--text-secondary-default);
+  }
+
+  .text-secondary-subtle {
+    color: var(--text-secondary-subtle);
+  }
+
+  .text-on-secondary-color {
+    color: var(--text-on-secondary-color);
+  }
+
+  /* Success */
+  .text-success {
+    color: var(--text-success-default);
+  }
+
+  .text-success-subtle {
+    color: var(--text-success-subtle);
+  }
+
+  .text-on-success-color {
+    color: var(--text-on-success-color);
+  }
+
+  /* Warning */
+  .text-warning {
+    color: var(--text-warning-default);
+  }
+
+  .text-warning-subtle {
+    color: var(--text-warning-subtle);
+  }
+
+  .text-on-warning-color {
+    color: var(--text-on-warning-color);
+  }
+
+  /* Error */
+  .text-error {
+    color: var(--text-error-default);
+  }
+
+  .text-error-subtle {
+    color: var(--text-error-subtle);
+  }
+
+  .text-on-error-color {
+    color: var(--text-on-error-color);
+  }
+
+  /* Info */
+  .text-info {
+    color: var(--text-info-default);
+  }
+
+  .text-info-subtle {
+    color: var(--text-info-subtle);
+  }
+
+  .text-on-info-color {
+    color: var(--text-on-info-color);
+  }
+
+  /* Neutral */
+  .text-neutral {
+    color: var(--text-neutral-default);
+  }
+
+  .text-neutral-subtle {
+    color: var(--text-neutral-subtle);
+  }
+
+  .text-on-neutral-color {
+    color: var(--text-on-neutral-color);
+  }
+
+  /* Disabled */
+  .text-disabled {
+    color: var(--text-neutral-subtle);
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  /*=================================*/
+  /* State Variations                */
+  /*=================================*/
+  .is-disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  .is-active {
+    outline: 2px solid var(--surface-brand-default);
+    outline-offset: 2px;
+  }
+
+  .is-invalid {
+    border-color: var(--surface-error-default);
+  }
+
+  .is-valid {
+    border-color: var(--surface-success-default);
+  }
 }

@@ -1,0 +1,57 @@
+---
+import { getContent } from "@/utils/graphql-client";
+import { heroQuery } from "@/utils/queries";
+import Button from "@/components/Button/Button.astro";
+const res = await getContent(heroQuery);
+const data = res.homePage.hero;
+---
+
+<header class="hero container">
+    <div class="hero__wrapper container" data-container-md>
+        <div class="hero__heading full-width">
+            <div>
+                <h1>Eric Gathoni, Frontend Developer.</h1>
+            </div>
+        </div>
+        <div class="hero__content">
+            <p class="h5">
+                <!-- {data.heading} -->
+                Most websites look good but perform poorly. I craft performant, accessible
+                frontends that grow traffic, improve retention, and make design systems
+                shine.
+            </p>
+            <div class="flex-start">
+                <Button
+                    as="default"
+                    href="#projects"
+                    label="Explore My Projects"
+                    variant="primary"
+                />
+                <Button
+                    as="default"
+                    href="#contact"
+                    label="Get in Touch"
+                    variant="outline"
+                />
+            </div>
+        </div>
+    </div>
+</header>
+
+<style>
+    .hero {
+        min-height: 100dvh;
+    }
+    .hero__wrapper {
+        /* display: grid; */
+        align-content: center;
+        row-gap: var(--size-12);
+    }
+
+    .hero__content {
+        display: flex;
+        flex-direction: column;
+        gap: var(--size-4);
+        max-width: 45ch;
+    }
+</style>

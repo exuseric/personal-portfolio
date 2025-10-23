@@ -1,24 +1,32 @@
 ---
-import { Icon } from "astro-icon/components";
-import socialLinksData from "@/data/links.json";
-const { links: socialLinks } = socialLinksData;
+import Button from "@/components/Button/Button.astro";
 ---
 
 <div class="primary_nav__social">
-    {
-        socialLinks.map((link) => (
-            <a
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="primary_nav__cta btn btn--icon btn--icon_sm"
-                title={link.name}
-                aria-label={link.name}
-            >
-                <Icon name={link.icon} aria-hidden="true" focusable="false" />
-            </a>
-        ))
-    }
+    <Button
+        variant="ghost"
+        as="icon-only"
+        type="button"
+        ariaLabel="Connect on github"
+        iconName="ri:github-fill"
+        href="https://github.com/exuseric"
+    />
+    <Button
+        variant="ghost"
+        as="icon-only"
+        type="button"
+        ariaLabel="Connect on behance"
+        iconName="akar-icons:behance-fill"
+        href="https://behance.net/exuseric"
+    />
+    <Button
+        variant="ghost"
+        as="icon-only"
+        type="button"
+        ariaLabel="Send an email"
+        iconName="solar:letter-bold"
+        href="mailto:hello@ericmaina.me"
+    />
 </div>
 
 <style>
@@ -26,10 +34,6 @@ const { links: socialLinks } = socialLinksData;
         display: flex;
         flex-flow: row wrap;
         align-items: center;
-        gap: var(--space-3);
-    }
-
-    a.primary_nav__cta {
-        color: inherit;
+        gap: var(--size-1);
     }
 </style>

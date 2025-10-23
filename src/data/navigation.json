@@ -20,19 +20,13 @@
           "label": "About",
           "url": "#about",
           "type": "internal"
-        },
-        {
-          "label": "Contact",
-          "url": "#contact",
-          "type": "internal",
-          "highlight": true
         }
       ],
       "cta": {
-        "label": "Hire Me",
-        "url": "/contact",
+        "label": "Get in Touch",
+        "url": "#contact",
         "type": "internal",
-        "style": "button" 
+        "style": "brand" 
       },
       "mobile": {
         "menuLabel": "Menu",

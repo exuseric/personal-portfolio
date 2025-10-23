@@ -1,0 +1,306 @@
+@property --_align-items {
+    initial-value: center;
+    syntax: "*";
+    inherits: false;
+}
+
+@property --_justify-content {
+    initial-value: center;
+    syntax: "*";
+    inherits: false;
+}
+
+@property --_outline-color {
+    initial-value: transparent;
+    syntax: "<color>";
+    inherits: false;
+}
+
+.btn,
+.btn--icon {
+    display: inline-flex;
+    align-items: var(--_align-items, center);
+    justify-content: var(--_justify-content, center);
+    gap: var(--size-2);
+
+    position: relative;
+    isolation: isolate;
+    z-index: 1;
+
+    color: var(--_color, var(--text-on-neutral-color));
+    background-color: var(--_background-color, transparent);
+    border: 0.12rem solid var(--_border-color);
+    /* background: linear-gradient(var(--_background-color)) padding-box,
+            linear-gradient(15deg, var(--_border-gradient)) border-box; */
+
+    font-family: var(--font-family-base), sans-serif;
+    font-size: var(--font-size-sm);
+    line-height: var(--lh-base);
+    font-weight: 600;
+
+    cursor: pointer;
+    user-select: none;
+    outline: 0.12rem solid var(--_outline-color, transparent);
+
+    text-decoration: none;
+
+    box-shadow: oklch(from var(--_background-color) calc(l * 0.1) c h / 0.1) 0 1px 3px 0,
+        oklch(from var(--_background-color) calc(l * 0.06) c h / 0.06) 0 1px 2px 0;
+
+    transition: background-color var(--transition-anticipate-fast),
+        background var(--transition-micro-fast),
+        color var(--transition-micro-fast),
+        border-color var(--transition-micro-fast),
+        scale var(--transition-micro-fast);
+
+    &:active,
+    &:focus-visible {
+        --_border-color: var(--surface-accent-default);
+        --_background-color: var(--surface-accent-subtle);
+        --_color: var(--text-accent-hover);
+        box-shadow: inset 1px 1px 4px oklch(from var(--_background-color) calc(l * 0.06) c h / 0.06);
+        /* scale: 0.98 0.99; */
+        animation: var(--animate-squash);
+    }
+}
+
+.btn:not(.btn--icon) {
+    border-radius: var(--radius-md);
+
+    width: max-content;
+    height: max-content;
+    min-width: var(--_min-width, 4.6rem);
+    min-height: var(--_min-height, 3rem);
+
+    @supports (corner-shape: squircle) {
+        & {
+            border-radius: var(--radius-lg);
+            corner-shape: squircle;
+        }
+    }
+}
+
+.btn:not(.btn--outline),
+.btn--icon {
+    --_border-gradient: var(--_border-color, transparent),
+        oklch(from var(--_border-color, transparent) calc(l / 0.725) c h);
+    background: linear-gradient(var(--_background-color)) padding-box,
+        linear-gradient(15deg, var(--_border-gradient)) border-box;
+    border: 0.12rem solid transparent;
+}
+
+/* ICON BUTTONS */
+.btn--icon {
+    --_size: 2em;
+    --_radius: var(--radius-md);
+
+    width: var(--_min-width, 3rem);
+    height: var(--_min-height, 3rem);
+    aspect-ratio: 1 / 1;
+    padding: 0;
+
+    border-radius: var(--_radius);
+
+    & [astro-icon] {
+        width: var(--font-size-lg);
+        height: var(--font-size-lg);
+    }
+
+    @supports (corner-shape: squircle) {
+        & {
+            --_radius: var(--radius-lg);
+            corner-shape: squircle;
+        }
+    }
+}
+
+.btn--icon .btn__label {
+    display: none;
+}
+
+/* VARIANTS */
+.btn--outline {
+    --_background-color: transparent;
+    --_border-color: var(--surface-brand-default);
+    --_color: var(--text-brand-default);
+
+    &:hover {
+        --_background-color: var(--surface-brand-subtle);
+        --_color: var(--text-brand-hover);
+    }
+}
+
+.btn--primary {
+    --_background-color: var(--surface-brand-light);
+    --_border-color: var(--surface-brand-default);
+    --_color: var(--text-on-brand-subtle);
+
+    &:hover {
+        --_color: var(--text-brand-hover);
+        --_background-color: var(--surface-brand-subtle);
+    }
+}
+
+.btn--secondary {
+    --_color: var(--text-on-secondary-color);
+    --_background-color: var(--surface-secondary-default);
+    --_border-color: var(--surface-secondary-default);
+
+    &:hover {
+        --_color: var(--text-secondary-hover);
+        --_background-color: var(--surface-secondary-hover);
+    }
+}
+
+.btn--neutral {
+    --_background-color: var(--surface-neutral-default);
+    --_color: var(--text-on-neutral-color);
+
+    &:hover {
+        --_color: var(--text-neutral-hover);
+        --_background-color: var(--surface-neutral-hover);
+    }
+}
+
+.btn--danger {
+    --_background-color: var(--surface-error-default);
+    --_color: var(--text-on-error-color);
+
+    &:hover {
+        --_background-color: var(--surface-error-hover);
+    }
+}
+
+.btn--success {
+    --_background-color: var(--surface-success-default);
+    --_color: var(--text-on-success-color);
+
+    &:hover {
+        --_background-color: var(--surface-success-hover);
+    }
+}
+
+.btn--ghost {
+    --_background-color: var(--surface-brand-light);
+    --_color: var(--text-neutral-default);
+    --_border-color: var(--surface-brand-hover);
+    box-shadow: none;
+
+    &:hover {
+        --_color: var(--text-brand-hover);
+        --_background-color: var(--surface-brand-subtle);
+    }
+}
+
+.btn--link {
+    --_background-color: transparent;
+    --_color: var(--text-neutral-default);
+    --_border-color: transparent;
+    padding: 0;
+    box-shadow: none;
+
+    &:hover {
+        --_color: var(--text-brand-hover);
+        --_background-color: var(--surface-brand-subtle);
+        --_border-color: var(--surface-brand-hover);
+    }
+}
+
+.btn--text {
+    --_background-color: transparent;
+    --_color: var(--text-neutral-default);
+    --_border-color: transparent;
+    --_min-width: auto;
+    --_min-height: auto;
+    padding: 0;
+    box-shadow: none;
+    text-decoration: underline;
+    transition: padding var(--transition-micro-fast);
+
+    &:hover {
+        --_color: var(--text-on-brand-color);
+        --_background-color: var(--surface-brand-default);
+        padding: 0 var(--size-2);
+    }
+}
+
+
+/* VISUAL STATES */
+.btn:disabled,
+.btn[aria-disabled="true"] {
+    opacity: 0.6;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+/* LOADING STATE */
+.btn--loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.85;
+}
+
+.btn__spinner {
+    width: 1em;
+    height: 1em;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+.btn--tiny {
+    &:not(.btn--icon) {
+        padding: 0;
+    }
+}
+
+/* SIZE VARIANTS */
+.btn--xs {
+    font-size: var(--font-size-xs);
+
+    &:not(.btn--icon) {
+        padding: var(--size-1) var(--size-2);
+    }
+}
+
+.btn--sm {
+    font-size: var(--font-size-sm);
+
+    &:not(.btn--icon) {
+        padding: var(--size-2) var(--size-3);
+    }
+}
+
+.btn--md {
+    font-size: var(--font-size-md);
+
+    &:not(.btn--icon) {
+        padding: var(--size-2) var(--size-4);
+    }
+}
+
+.btn--lg {
+    font-size: var(--font-size-md);
+
+    &:not(.btn--icon) {
+        padding: var(--size-3) var(--size-5);
+    }
+}
+
+.btn--xl {
+    font-size: var(--font-size-lg);
+
+    &:not(.btn--icon) {
+        padding: var(--size-4) var(--size-6);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .btn,
+    .btn__spinner {
+        transition: none;
+        animation: none;
+    }
+}

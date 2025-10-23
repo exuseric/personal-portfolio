@@ -1,10 +1,13 @@
 interface ImportMetaEnv {
-  readonly BREVO_API_KEY: string;
-  readonly SENDER_EMAIL: string;
-  readonly SENDER_NAME: string;
-  readonly RECEIVER_EMAIL: string;
-  readonly RECEIVER_NAME: string;
+  readonly EMAIL_API_KEY: string;
+  readonly EMAIL_BASE_URL: string;
+  readonly DEFAULT_EMAIL: string;
+  readonly DEFAULT_NAME: string;
   readonly ASTRO_HYGRAPH_ENDPOINT: string;
+  readonly ASTRO_HYGRAPH_HOMEPAGE_ID: string;
+  readonly ASTRO_HYGRAPH_FAQ_ID: string;
+  readonly ASTRO_HYGRAPH_CONTACT_ID: string;
+  readonly ASTRO_HYGRAPH_ABOUT_ID: string;
   // more env variables...
 }
 

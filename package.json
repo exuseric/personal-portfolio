@@ -10,6 +10,7 @@
     "check": "astro check",
     "preview": "astro preview",
     "lint": "astro check",
+    "hide": "astro preferences disable devToolbar",
     "type-check": "tsc --noEmit"
   },
   "keywords": [
@@ -40,11 +41,11 @@
   "homepage": "https://ericmaina.me",
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/netlify": "^6.5.7",
-    "@astrojs/react": "^4.3.0",
-    "@astrojs/sitemap": "^3.5.0",
-    "@astrojs/svelte": "^7.1.0",
-    "astro": "^5.13.2",
+    "@astrojs/netlify": "^6.5.10",
+    "@astrojs/react": "^4.3.1",
+    "@astrojs/sitemap": "^3.6.0",
+    "@astrojs/svelte": "^7.1.1",
+    "astro": "^5.13.8",
     "astro-font": "^1.1.0",
     "astro-google-fonts-optimizer": "^0.2.2",
     "astro-icon": "^1.1.5",
@@ -55,6 +56,10 @@
   },
   "devDependencies": {
     "@iconify-json/mdi": "^1.2.3",
-    "@iconify-json/uil": "^1.2.3"
+    "@iconify-json/uil": "^1.2.3",
+    "astro-iconify": "^1.2.0",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "3.6.2",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }

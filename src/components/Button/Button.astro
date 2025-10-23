@@ -1,0 +1,140 @@
+---
+import "@/styles/button.css";
+import { Icon } from "astro-iconify";
+
+interface BaseProps {
+    variant?:
+        | "default"
+        | "primary"
+        | "secondary"
+        | "destructive"
+        | "success"
+        | "link"
+        | "text"
+        | "icon"
+        | "outline"
+        | "ghost";
+    disabled?: boolean;
+    loading?: boolean;
+    iconPosition?: "right" | "left";
+    iconName?: string;
+    href?: string;
+    size?: "xs" | "sm" | "md" | "lg" | "xl";
+    type?: "button" | "submit" | "reset";
+    classList?: string[];
+    as: "icon-only" | "default";
+    attributes?: {
+        dataset?: Record<string, string | number | boolean>;
+        attributes?: Record<string, string | number | boolean>;
+    };
+}
+
+interface LabelButtonProps extends BaseProps {
+    label: string;
+    ariaLabel?: string;
+    variant?: Exclude<BaseProps["variant"], "icon">;
+}
+
+interface IconOnlyButtonProps extends BaseProps {
+    iconName: string;
+    ariaLabel: string;
+    label?: never;
+    variant?: Exclude<BaseProps["variant"], "icon">;
+}
+
+type Props = LabelButtonProps | IconOnlyButtonProps;
+
+const props = Astro.props as Props;
+
+const utilityClasses: Record<NonNullable<Props["variant"]>, string> = {
+    default: "btn--neutral",
+    primary: "btn--primary",
+    secondary: "btn--secondary",
+    destructive: "btn--danger",
+    success: "btn--success",
+    link: "btn--link",
+    text: "btn--text",
+    outline: "btn--outline",
+    ghost: "btn--ghost",
+};
+
+const sizeClasses: Record<NonNullable<Props["size"]>, string> = {
+    xs: "btn--xs",
+    sm: "btn--sm",
+    md: "btn--md",
+    lg: "btn--lg",
+    xl: "btn--xl",
+};
+
+const classes = [
+    "btn",
+    props.as === "icon-only" && "btn--icon",
+    utilityClasses[props.variant ?? "default"],
+    sizeClasses[props.variant !== "text" ? "md" : "btn--tiny"],
+    props.loading && "btn--loading",
+    ...(props.classList ?? []),
+];
+
+const mapAttributes = (attributesObject: Props["attributes"]) => {
+    const result: Record<string, string> = {};
+
+    if (!attributesObject) return result;
+    const attributeEntries = Object.entries(attributesObject) as [
+        "dataset" | "attributes",
+        Record<string, string | number | boolean> | undefined,
+    ][];
+
+    for (const [attributeKey, attributes] of attributeEntries) {
+        if (!attributes) continue;
+
+        for (const [attribute, value] of Object.entries(attributes)) {
+            const kebab = attribute.replace(
+                /[A-Z]/g,
+                (m) => "-" + m.toLowerCase(),
+            );
+            const attributeName =
+                attributeKey === "dataset" ? `data-${kebab}` : kebab;
+            result[attributeName] = String(value);
+        }
+    }
+
+    return result;
+};
+---
+
+{
+    props.href ? (
+        <a
+            {...mapAttributes(props.attributes)}
+            href={props.disabled ? undefined : props.href}
+            class:list={classes}
+            aria-disabled={props.disabled ? "true" : "false"}
+            aria-label={props.ariaLabel ?? props.label}
+        >
+            {props.iconName && props.iconPosition !== "right" && (
+                <Icon name={props.iconName} />
+            )}
+            {props.label && <span class="btn__label">{props.label}</span>}
+            {props.iconName && props.iconPosition === "right" && (
+                <Icon name={props.iconName} />
+            )}
+        </a>
+    ) : (
+        <button
+            {...mapAttributes(props.attributes)}
+            class:list={classes}
+            disabled={props.disabled || props.loading}
+            type={props.type ?? "button"}
+            aria-label={props.ariaLabel ?? props.label}
+        >
+            {props.iconName && props.iconPosition !== "right" && (
+                <Icon name={props.iconName} />
+            )}
+            {props.loading && <span class="btn__spinner" aria-hidden="true" />}
+            {props.label && <span class="btn__label">{props.label}</span>}
+            {props.iconName && props.iconPosition === "right" && (
+                <Icon name={props.iconName} />
+            )}
+        </button>
+    )
+}

@@ -1,5 +1,5 @@
 export const heroQuery = `query Page {
-  homePage(where: {id: "cmeiatztyw3u307mokyk6cej7"}) {
+  homePage(where: {id: "${import.meta.env.ASTRO_HYGRAPH_HOMEPAGE_ID}"}) {
     hero {
       heading
       subheading
@@ -13,39 +13,31 @@ export const heroQuery = `query Page {
   }
 }`;
 
-export const faqQuery = `query Page {
-  homePage(where: {id: "cmeiatztyw3u307mokyk6cej7"}) {
+export const faqQuery = `query FAQ {
+  faq(where: {id: "${import.meta.env.ASTRO_HYGRAPH_FAQ_ID}"}) {
+    heading
+    jsonLd
     faq {
-      heading
-      question {
-        question
-        answer {
-          html
-        }
-      }
-    }
-  }
-}`
-
-export const aboutQuery = `query Page {
-  homePage(where: {id: "cmeiatztyw3u307mokyk6cej7"}) {
-    about {
-      body {
+      question
+      answer {
         html
       }
-      heading
-      id
-      cta {
-        link
-        title
-        id
-      }
     }
   }
-}`
+}`;
+
+export const aboutQuery = `query About {
+  aboutMe(where: {id: "${import.meta.env.ASTRO_HYGRAPH_ABOUT_ID}"}) {
+    heading
+      content {
+        html
+      }
+      schema
+  }
+}`;
 
 export const projectsQuery = `query Page {
-  homePage(where: {id: "cmeiatztyw3u307mokyk6cej7"}) {
+  homePage(where: {id: "${import.meta.env.ASTRO_HYGRAPH_HOMEPAGE_ID}"}) {
     projects {
       heading
       id
@@ -66,16 +58,13 @@ export const projectsQuery = `query Page {
       }
     }
   }
-}`
+}`;
 
-export const contactQuery = `query Page {
-  homePage(where: {id: "cmeiatztyw3u307mokyk6cej7"}) {
-    contact {
-      body {
-        html
-      }
-      heading
-      id
+export const contactQuery = `query Contact {
+  contact(where: {id: "${import.meta.env.ASTRO_HYGRAPH_CONTACT_ID}"}) {
+    heading
+    content {
+      html
     }
   }
-}`
+}`;
