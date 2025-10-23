@@ -24,24 +24,16 @@ export const faqQuery = `query FAQ {
       }
     }
   }
-}`
+}`;
 
-export const aboutQuery = `query Page {
-  homePage(where: {id: "${import.meta.env.ASTRO_HYGRAPH_HOMEPAGE_ID}"}) {
-    about {
-      body {
+export const aboutQuery = `query About {
+  aboutMe(where: {id: "${import.meta.env.ASTRO_HYGRAPH_ABOUT_ID}"}) {
+  heading
+      content {
         html
       }
-      heading
-      id
-      cta {
-        link
-        title
-        id
-      }
     }
-  }
-}`
+}`;
 
 export const projectsQuery = `query Page {
   homePage(where: {id: "${import.meta.env.ASTRO_HYGRAPH_HOMEPAGE_ID}"}) {
@@ -65,7 +57,7 @@ export const projectsQuery = `query Page {
       }
     }
   }
-}`
+}`;
 
 export const contactQuery = `query Contact {
   contact(where: {id: "${import.meta.env.ASTRO_HYGRAPH_CONTACT_ID}"}) {
@@ -74,4 +66,4 @@ export const contactQuery = `query Contact {
       html
     }
   }
-}`
+}`;

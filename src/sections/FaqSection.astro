@@ -3,33 +3,29 @@ import { Icon } from "astro-icon/components";
 import { getContent } from "@/utils/graphql-client";
 import { faqQuery } from "@/utils/queries";
 const response = await getContent(faqQuery);
-const {heading, faq} = response.faq;
+const { heading, faq } = response.faq;
 ---
 
-<div class="faq container" aria-labelledby="faq-heading">
-  <header>
-    <h2 id="faq-heading">{heading}</h2>
-  </header>
-  <div class="accordion_container container" data-container-md>
+<div class="faq container" data-parent-container data-cutout>
+  <div class="accordionWrapper container" data-container-md>
+    <header class="full-width">
+      <h2 class="h1">{heading}</h2>
+    </header>
     {
-      faq && faq.map((faq, index) => (
-          <div class="accordion_item">
-            <details
-              open={index === 0}
-              class="accordion_details"
-              data-index={index}
-              name="faq"
-            >
-              <summary class="accordion_summary flex-between">
-                <h3 class="accordion_title">{faq.question}</h3>
+      faq &&
+        faq.map((faq, index) => (
+          <div class="accordionItem">
+            <details open={index === 0} data-index={index} name="faq">
+              <summary class="flex-between">
+                <h3>{faq.question}</h3>
                 <Icon
                   name="mdi:caret"
-                  class="accordion_icon"
+                  class="accordionIcon"
                   aria-hidden="true"
                   focusable="false"
                 />
               </summary>
-              <div class="accordion_body">
+              <div class="accordionBody">
                 <slot set:html={faq.answer.html} />
               </div>
             </details>
@@ -40,23 +36,19 @@ const {heading, faq} = response.faq;
 </div>
 
 <style>
-  .faq,
-  .accordion_container {
-    padding-block: var(--container-padding-block);
+  header {
+    justify-self: end;
+    margin-bottom: var(--size-12);
   }
-  .accordion_item {
+
+  .accordionItem {
     align-items: center;
     &:not(:first-child) {
       border-top: 0.12rem solid var(--surface-neutral-subtle);
     }
   }
 
-  .accordion_title {
-    margin-block: 0;
-    max-width: 23ch;
-  }
-
-  .accordion_body {
+  .accordionBody {
     display: flex;
     flex-direction: column;
     row-gap: var(--size-4);
@@ -64,7 +56,7 @@ const {heading, faq} = response.faq;
     padding-top: var(--size-8);
   }
 
-  .accordion_icon {
+  .accordionIcon {
     color: var(--text-neutral-subtle);
     transition: transform var(--transition-micro-fast);
     font-size: var(--font-size-lg);
@@ -77,6 +69,11 @@ const {heading, faq} = response.faq;
     summary {
       color: var(--text-neutral-subtle);
       cursor: pointer;
+
+      h3 {
+        margin-block: 0;
+        max-width: 23ch;
+      }
     }
   }
 
@@ -96,7 +93,7 @@ const {heading, faq} = response.faq;
     summary {
       color: var(--text-neutral-default);
     }
-    .accordion_icon {
+    .accordionIcon {
       transform: rotate(180deg);
       color: var(--text-neutral-default);
       background-color: var(--surface-brand-subtle);
@@ -105,7 +102,7 @@ const {heading, faq} = response.faq;
   }
 
   @media (min-width: 768px) {
-    .accordion_title {
+    summary h3 {
       max-width: 65ch;
     }
   }

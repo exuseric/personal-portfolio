@@ -7,6 +7,7 @@ interface ImportMetaEnv {
   readonly ASTRO_HYGRAPH_HOMEPAGE_ID: string;
   readonly ASTRO_HYGRAPH_FAQ_ID: string;
   readonly ASTRO_HYGRAPH_CONTACT_ID: string;
+  readonly ASTRO_HYGRAPH_ABOUT_ID: string;
   // more env variables...
 }
 

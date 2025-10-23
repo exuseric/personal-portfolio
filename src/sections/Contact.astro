@@ -8,43 +8,45 @@ const { heading, content } = response.contact;
 ---
 
 <section
-    class="contact surface-brand-subtle container"
-    id="contact"
-    data-cutout
+  class="contact surface-brand-subtle container"
+  id="contact"
+  data-parent-container
+  data-cutout
 >
-    <div class="contact__wrapper container" data-container-md>
-        <header class="contact__header full-width">
-            <h2 class="h1 full-width">
-                {heading}
-            </h2>
-            <article>
-                <slot set:html={content.html} />
-            </article>
-        </header>
-        <div class="contact__formWrapper">
-            <Form />
-        </div>
+  <div class="contact__wrapper container" data-container-md>
+    <header class="contact__header full-width">
+      <h2 class="h1 full-width">
+        {heading}
+      </h2>
+      <article>
+        <slot set:html={content.html} />
+      </article>
+    </header>
+    <div class="contact__formWrapper">
+      <Form />
     </div>
+  </div>
 </section>
 
 <style>
-    .contact {
-        padding-block: var(--container-padding-block);
-    }
+  .contact {
+    padding-block: var(--container-padding-block);
+  }
 
-    .contact__header {
-        display: flex;
-        flex-direction: column;
-        gap: var(--size-2);
-    }
+  .contact__header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-2);
+  }
 
-    .contact__wrapper {
-        row-gap: var(--size-12);
-    }
+  .contact__wrapper {
+    row-gap: var(--size-12);
+  }
 
-    article {
-        display: flex;
-        flex-direction: column;
-        gap: var(--size-1);
-    }
+  article {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-1);
+    color: var(--text-neutral-default);
+  }
 </style>
