@@ -28,15 +28,14 @@ import Button from "@/components/Button/Button.astro";
     </ul>
 </nav>
 
-<style>
-    
-</style>
+<style></style>
 
 <script>
     window.addEventListener("ToggleMenu", (event) => {
         const menu = document.querySelector("[data-menu]") as HTMLElement;
+        if (!menu) return;
         const { detail } = event as CustomEvent;
-        console.log(detail)
+        console.log(detail);
 
         menu.dataset.isMenuOpen = String(detail.state);
     });

@@ -8,8 +8,8 @@ import NavActions from "./NavActions.astro";
 import "./navigation.css";
 ---
 
-<header class="nav container" data-active="false" data-navigation>
-    <div class="nav__container" data-navigation-container>
+<header class="nav container" data-navigation>
+    <div class="nav__container" data-active="false" data-navigation-container>
         <a href="/" class="nav__logo">
             <Image
                 src={LogoImage}
@@ -34,15 +34,23 @@ import "./navigation.css";
             "[data-navigation-container]",
         );
 
+        let ticking = false;
+
         window.addEventListener("scroll", (e) => {
-            const scrollY = window.scrollY;
-            if (scrollY > 10) {
-                nav?.toggleAttribute("data-container-md", true);
-                navContainer?.toggleAttribute("data-active", true);
-            } else {
-                nav?.toggleAttribute("data-container-md", false);
-                navContainer?.toggleAttribute("data-active", false);
-            }
+            if (ticking) return;
+            ticking = true;
+
+            requestAnimationFrame(() => {
+                const scrollY = window.scrollY;
+                if (scrollY > 10) {
+                    nav?.toggleAttribute("data-container-md", true);
+                    navContainer?.toggleAttribute("data-active", true);
+                } else {
+                    nav?.toggleAttribute("data-container-md", false);
+                    navContainer?.toggleAttribute("data-active", false);
+                }
+                ticking = false;
+            });
         });
     });
 </script>

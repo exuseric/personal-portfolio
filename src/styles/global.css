@@ -34,10 +34,8 @@
 
     --shadow-color: 0deg 0% 0%;
     --shadow-strength: 10%;
-    --shadow-sm: 0 2px 6px
-      hsl(var(--shadow-color) / calc(var(--shadow-strength)));
-    --shadow-md: 0 4px 8px
-      hsl(var(--shadow-color) / calc(var(--shadow-strength)));
+    --shadow-sm: 0 2px 6px hsl(var(--shadow-color) / calc(var(--shadow-strength)));
+    --shadow-md: 0 4px 8px hsl(var(--shadow-color) / calc(var(--shadow-strength)));
 
     /* Layout */
     --content-width: min(100% - 2rem, 50rem);
@@ -66,6 +64,7 @@
 }
 
 @layer elements {
+
   /* Typography */
   h1,
   h2,
@@ -151,22 +150,13 @@
     --padding-inline: 1rem;
     --content-max-width: var(--site-width);
     --breakout-max-width: calc(var(--content-max-width) * 0.2);
-    --breakout-size: calc(
-      (var(--breakout-max-width) - var(--content-max-width)) / 2
-    );
+    --breakout-size: calc((var(--breakout-max-width) - var(--content-max-width)) / 2);
 
     display: grid;
     grid-template-columns:
-      [full-width-start] minmax(var(--padding-inline), 1fr)
-      [breakout-start] minmax(0, var(--breakout-size)) [content-start] min(
-        100% - (var(--padding-inline) * 2),
-        var(--content-max-width)
-      )
-      [content-end] minmax(0, var(--breakout-size)) [breakout-end] minmax(
-        var(--padding-inline),
-        1fr
-      )
-      [full-width-end];
+      [full-width-start] minmax(var(--padding-inline), 1fr) [breakout-start] minmax(0, var(--breakout-size)) [content-start] min(100% - (var(--padding-inline) * 2),
+        var(--content-max-width)) [content-end] minmax(0, var(--breakout-size)) [breakout-end] minmax(var(--padding-inline),
+        1fr) [full-width-end];
     width: 100%;
   }
 
@@ -174,15 +164,15 @@
     --content-max-width: var(--content-width);
   }
 
-  .container > :not(.breakout, .full-width) {
+  .container> :not(.breakout, .full-width) {
     grid-column: content;
   }
 
-  .container > .breakout {
+  .container>.breakout {
     grid-column: breakout;
   }
 
-  .container > .full-width {
+  .container>.full-width {
     grid-column: full-width;
   }
 
@@ -236,18 +226,16 @@
 
       background-color: var(--surface-neutral-default);
       /* border-radius: var(--radius-round); */
-      clip-path: polygon(
-        0% 0%,
-        0% 100%,
-        25% 100%,
-        25% 25%,
-        75% 25%,
-        75% 75%,
-        25% 75%,
-        25% 100%,
-        100% 100%,
-        100% 0%
-      );
+      clip-path: polygon(0% 0%,
+          0% 100%,
+          25% 100%,
+          25% 25%,
+          75% 25%,
+          75% 75%,
+          25% 75%,
+          25% 100%,
+          100% 100%,
+          100% 0%);
 
       z-index: -1;
     }
@@ -271,12 +259,10 @@
     bottom: 0;
     left: 0;
     transform: translateX(-100%);
-    background: linear-gradient(
-      90deg,
-      transparent,
-      var(--color-neutral-200),
-      transparent
-    );
+    background: linear-gradient(90deg,
+        transparent,
+        var(--color-neutral-200),
+        transparent);
     animation: skeleton-loading 1.5s infinite;
   }
 
@@ -311,7 +297,8 @@
   }
 }
 
-@layer utility {
+@layer utilities {
+
   /*=================================*/
   /* Utility Theme Classes           */
   /*=================================*/

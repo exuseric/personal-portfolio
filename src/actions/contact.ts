@@ -15,29 +15,42 @@ export const contact = {
     accept: "form",
     input: contactFormValidation,
     handler: async (input) => {
-      const res = await fetch(import.meta.env.EMAIL_BASE_URL, {
-        ...options,
-        body: JSON.stringify({
-          to: [
-            {
-              name: import.meta.env.DEFAULT_NAME,
-              email: import.meta.env.DEFAULT_EMAIL,
-            },
-          ],
-          templateId: 2,
-          params: {
-            name: input.name,
-            email: input.email,
-            message: input.message,
-            inquiry: input.inquiry
-          },
-        }),
-      })
-        .then((res) => res.json())
-        .then((res) => ({ success: true, error: null }))
-        .catch((err) => ({ success: false, error: err }));
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
 
-      return res;
+        const res = await fetch(import.meta.env.EMAIL_BASE_URL, {
+          ...options,
+          signal: controller.signal,
+          body: JSON.stringify({
+            to: [
+              {
+                name: import.meta.env.DEFAULT_NAME,
+                email: import.meta.env.DEFAULT_EMAIL,
+              },
+            ],
+            templateId: 2,
+            params: {
+              name: input.name,
+              email: input.email,
+              message: input.message,
+              inquiry: input.inquiry
+            },
+          }),
+        });
+
+        clearTimeout(timeoutId);
+
+        if (!res.ok) {
+          const errorData = await res.json().catch(() => ({ message: res.statusText }));
+          return { success: false, error: errorData };
+        }
+
+        await res.json();
+        return { success: true, error: null };
+      } catch (err) {
+        return { success: false, error: err instanceof Error ? err.message : 'Unknown error' };
+      }
     },
   }),
 
@@ -45,23 +58,36 @@ export const contact = {
     accept: "form",
     input: contactFormValidation,
     handler: async (input) => {
-      const res = await fetch(import.meta.env.EMAIL_BASE_URL, {
-        ...options,
-        body: JSON.stringify({
-          to: [
-            {
-              name: input.name,
-              email: input.email,
-            },
-          ],
-          templateId: 1,
-        }),
-      })
-        .then((res) => res.json())
-        .then((res) => ({ success: true, error: null }))
-        .catch((err) => ({ success: false, error: err }));
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
 
-      return res;
+        const res = await fetch(import.meta.env.EMAIL_BASE_URL, {
+          ...options,
+          signal: controller.signal,
+          body: JSON.stringify({
+            to: [
+              {
+                name: input.name,
+                email: input.email,
+              },
+            ],
+            templateId: 1,
+          }),
+        });
+
+        clearTimeout(timeoutId);
+
+        if (!res.ok) {
+          const errorData = await res.json().catch(() => ({ message: res.statusText }));
+          return { success: false, error: errorData };
+        }
+
+        await res.json();
+        return { success: true, error: null };
+      } catch (err) {
+        return { success: false, error: err instanceof Error ? err.message : 'Unknown error' };
+      }
     },
   }),
 };

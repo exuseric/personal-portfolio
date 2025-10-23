@@ -19,7 +19,7 @@ const { heading, content } = response.contact;
         {heading}
       </h2>
       <article>
-        <slot set:html={content.html} />
+        <Fragment set:html={content.html} />
       </article>
     </header>
     <div class="contact__formWrapper">

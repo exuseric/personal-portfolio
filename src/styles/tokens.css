@@ -122,7 +122,7 @@
 
   /* Text elements */
   --lh-body-text: var(--lh-base);
-  --lh-small: 1.45; 
+  --lh-small: 1.45;
 
   /* Headings & Display */
   --lh-heading-medium: 1.35;
@@ -174,7 +174,7 @@
     /* ≈28.8px */
     --font-size-5xl: 2.027rem;
     /* ≈32.4px */
-  --font-size-display: 3.027rem;
+    --font-size-display: 3.027rem;
   }
 }
 
@@ -347,8 +347,8 @@
 
   /* Limit infinite / looping animations (spinners, loaders, marquee) */
   * {
-    animation-duration: 0.01ms !important;
+    animation-duration: 0ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    transition-duration: 0ms !important;
   }
 }

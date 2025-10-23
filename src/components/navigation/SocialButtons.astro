@@ -1,13 +1,32 @@
 ---
-import socialLinksData from "@/data/links.json";
 import Button from "@/components/Button/Button.astro";
-const { links: socialLinks } = socialLinksData;
 ---
 
 <div class="primary_nav__social">
-    <Button variant="ghost" as="icon-only" type="button" ariaLabel="Connect on github" iconName="ri:github-fill" href="https://github.com/exuseric"/>
-    <Button variant="ghost" as="icon-only" type="button" ariaLabel="Connect on behance" iconName="akar-icons:behance-fill" href="https://behance.net/exuseric"/>
-    <Button variant="ghost" as="icon-only" type="button" ariaLabel="Send an email" iconName="solar:letter-bold" href="mailto:hello@ericmaina.me"/>
+    <Button
+        variant="ghost"
+        as="icon-only"
+        type="button"
+        ariaLabel="Connect on github"
+        iconName="ri:github-fill"
+        href="https://github.com/exuseric"
+    />
+    <Button
+        variant="ghost"
+        as="icon-only"
+        type="button"
+        ariaLabel="Connect on behance"
+        iconName="akar-icons:behance-fill"
+        href="https://behance.net/exuseric"
+    />
+    <Button
+        variant="ghost"
+        as="icon-only"
+        type="button"
+        ariaLabel="Send an email"
+        iconName="solar:letter-bold"
+        href="mailto:hello@ericmaina.me"
+    />
 </div>
 
 <style>

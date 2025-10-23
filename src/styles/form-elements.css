@@ -38,7 +38,7 @@ select:disabled {
 
 /* Error / Valid States */
 input:invalid:not(:placeholder-shown),
-.textarea--error,
+textarea:invalid:not(:placeholder-shown),
 .select--error {
   border-color: var(--surface-error-default);
   outline-color: var(--surface-error-default);
@@ -51,21 +51,24 @@ input:valid:not(:placeholder-shown):focus-visible {
   outline-offset: calc(var(--size-1) * 0.5);
 }
 
-input:invalid:not(:placeholder-shown):focus-visible,
+input:invalid:not(:placeholder-shown):focus-visible {
+  border-color: var(--surface-error-default);
+}
+
 .textarea--error:focus,
 .select--error:focus {
   border-color: var(--surface-error-default);
 }
 
 input:valid:not(:placeholder-shown),
-.textarea--valid,
+textarea:valid,
 .select--valid {
   border-color: var(--surface-success-default);
   background-color: var(--surface-success-subtle);
 }
 
 input:valid:not(:placeholder-shown):focus-visible,
-.textarea--valid:focus,
+textarea:valid:focus,
 .select--valid:focus {
   border-color: var(--surface-success-default);
 }
@@ -133,11 +136,9 @@ input[type="checkbox"]:checked {
 input[type="radio"]:checked {
   background-color: var(--surface-brand-default);
   border-color: var(--surface-brand-default);
-  background-image: radial-gradient(
-    circle,
-    var(--text-on-brand-color) 40%,
-    transparent 50%
-  );
+  background-image: radial-gradient(circle,
+      var(--text-on-brand-color) 40%,
+      transparent 50%);
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -198,24 +199,24 @@ input[type="radio"]:disabled {
 }
 
 /* Checked state */
-.switch input:checked + .switch-slider {
+.switch input:checked+.switch-slider {
   background-color: var(--surface-brand-default);
 }
 
-.switch input:checked + .switch-slider::before {
+.switch input:checked+.switch-slider::before {
   content: url("src/images/solar--moon-bold.svg");
   transform: translateX(calc(var(--_switch-width) - var(--_switch-height)));
 }
 
 /* Disabled */
-.switch input:disabled + .switch-slider {
+.switch input:disabled+.switch-slider {
   background-color: var(--surface-neutral-subtle);
   cursor: not-allowed;
   opacity: 0.6;
 }
 
 .switch-slider:hover,
-.switch input:checked + .switch-slider:hover {
+.switch input:checked+.switch-slider:hover {
   background-color: var(--surface-brand-hover);
 }
 
@@ -253,11 +254,10 @@ input[type="radio"]:disabled {
   color: var(--text-neutral-subtle);
 }
 
-input:invalid,
-.textarea--error,
-.select--error,
-textarea:max {
-  ~ .form-helper {
+input:invalid:not(:placeholder-shown),
+select:invalid,
+textarea:invalid:not(:placeholder-shown) {
+  ~.form-helper {
     display: block;
   }
 }

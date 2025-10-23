@@ -19,7 +19,7 @@ const { heading, content } = res.aboutMe;
   </header>
 
   <div class="about__content" data-content-wrapper>
-    <slot set:html={content.html} />
+    <Fragment set:html={content.html} />
   </div>
 
   <style>

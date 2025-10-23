@@ -85,7 +85,7 @@ const mapAttributes = (attributesObject: Props["attributes"]) => {
     ][];
 
     for (const [attributeKey, attributes] of attributeEntries) {
-        if(!attributes) return
+        if (!attributes) continue;
 
         for (const [attribute, value] of Object.entries(attributes)) {
             const kebab = attribute.replace(
@@ -98,14 +98,14 @@ const mapAttributes = (attributesObject: Props["attributes"]) => {
         }
     }
 
-    return result
+    return result;
 };
 ---
 
 {
     props.href ? (
         <a
-            { ...mapAttributes(props.attributes) }
+            {...mapAttributes(props.attributes)}
             href={props.disabled ? undefined : props.href}
             class:list={classes}
             aria-disabled={props.disabled ? "true" : "false"}
@@ -121,7 +121,7 @@ const mapAttributes = (attributesObject: Props["attributes"]) => {
         </a>
     ) : (
         <button
-            { ...mapAttributes(props.attributes) }
+            {...mapAttributes(props.attributes)}
             class:list={classes}
             disabled={props.disabled || props.loading}
             type={props.type ?? "button"}
