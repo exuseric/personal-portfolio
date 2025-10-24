@@ -80,12 +80,12 @@
     }
 }
 
-.btn:not(.btn--outline),
+.btn,
 .btn--icon {
     --_border-gradient: var(--_border-color, transparent),
         oklch(from var(--_border-color, transparent) calc(l / 0.725) c h);
-    background: linear-gradient(var(--_background-color)) padding-box,
-        linear-gradient(15deg, var(--_border-gradient)) border-box;
+    background: linear-gradient(var(--_background-color) 0 0) padding-box,
+        linear-gradient(35deg, var(--_border-gradient)) border-box;
     border: 0.12rem solid transparent;
 }
 
@@ -120,7 +120,7 @@
 
 /* VARIANTS */
 .btn--outline {
-    --_background-color: transparent;
+    --_background-color: var(--surface-neutral-default);
     --_border-color: var(--surface-brand-default);
     --_color: var(--text-brand-default);
 
@@ -172,11 +172,12 @@
 }
 
 .btn--success {
-    --_background-color: var(--surface-success-default);
+    --_background-color: var(--surface-success-light);
+    --_border-color: var(--surface-success-default);
     --_color: var(--text-on-success-color);
 
     &:hover {
-        --_background-color: var(--surface-success-hover);
+        --_background-color: var(--surface-success-subtle);
     }
 }
 
