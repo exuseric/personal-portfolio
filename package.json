@@ -4,7 +4,7 @@
   "description": "Professional portfolio website for Eric Gathoni, a fullstack developer specializing in React, Astro, and web accessibility. Showcasing projects, skills, and professional experience.",
   "main": "index.js",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --host",
     "build": "astro check && astro build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "check": "astro check",
