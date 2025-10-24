@@ -46,6 +46,7 @@
 
   /* Success Colors */
   --surface-success-default: var(--color-success-500);
+  --surface-success-light: var(--color-success-50);
   --surface-success-subtle: var(--color-success-50);
   --surface-success-hover: var(--color-success-200);
 
