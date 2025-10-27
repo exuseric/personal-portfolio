@@ -1,21 +1,7 @@
----
-import Button from "@/components/Button/Button.astro"
-import { Icon } from "astro-iconify"
----
-
-<select name="theme" id="theme">
-    <option value="System" selected>
-        System
-        <Icon name="basil:desktop-solid" />
-    </option>
-    <option value="Light">
-        Light
-        <Icon name="basil:sun-solid" />
-    </option>
-    <option value="Dark">
-        Dark
-        <Icon name="basil:moon-solid" />
-    </option>
+<select name="theme" id="theme" data-theme-toggle>
+    <option value="System" selected> System </option>
+    <option value="Light"> Light </option>
+    <option value="Dark"> Dark </option>
 </select>
 <!--
 <div class="themeSwitcher">
@@ -98,7 +84,7 @@ import { Icon } from "astro-iconify"
     const themeKey = "theme-preference"
 
     const themeTarget = document.querySelector("[data-theme]") as HTMLElement
-    const themeToggle = document.querySelector("[data-theme-toggle]") as HTMLButtonElement
+    const themeToggle = document.querySelector("[data-theme-toggle]") as HTMLSelectElement
 
     class Theme {
         storageKey: string
@@ -136,9 +122,9 @@ import { Icon } from "astro-iconify"
     }
 
     // toggle the theme
-    themeToggle.addEventListener("click", () => {
-        const theme = setColorPreference()
-        themeToggle.ariaLabel = theme
+    themeToggle.addEventListener("change", (e) => {
+        const value = (e.target as HTMLSelectElement).value.toLowerCase()
+        setColorPreference(value === "system" ? new Theme(themeKey).getValue() : value)
     })
 
     // set early to "prevent" flashing
