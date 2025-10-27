@@ -17,8 +17,8 @@
         "description": "Frontend-focused Fullstack Developer building fast, accessible, and SEO-optimised web experiences using React, Next.js, and Astro.",
         "image": {
             "url": "https://ericmaina.me/images/og-image.png",
-            "width": 1200,
-            "height": 630,
+            "width": "1200",
+            "height": "630",
             "alt": "Eric Maina Gathoni – Frontend & Fullstack Developer Portfolio"
         }
     },
