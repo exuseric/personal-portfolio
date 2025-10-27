@@ -1,0 +1,214 @@
+---
+import Button from "@/components/Button/Button.astro"
+import { Icon } from "astro-iconify"
+---
+
+<select name="theme" id="theme">
+    <option value="System" selected>
+        System
+        <Icon name="basil:desktop-solid" />
+    </option>
+    <option value="Light">
+        Light
+        <Icon name="basil:sun-solid" />
+    </option>
+    <option value="Dark">
+        Dark
+        <Icon name="basil:moon-solid" />
+    </option>
+</select>
+<!--
+<div class="themeSwitcher">
+
+    <button class="themeToggle" title="Toggles light & dark" aria-label="auto" aria-live="polite" data-theme-toggle>
+       <Icon name="basil:desktop-solid" />
+       <Icon name="basil:desktop-solid" />
+    </button> -->
+<!-- <Button
+    as="icon-only"
+    iconName="basil:desktop-solid"
+    ariaLabel="follow system theme"
+  />
+  <Button as="icon-only" iconName="basil:sun-solid" ariaLabel="light theme" />
+  <Button as="icon-only" iconName="basil:moon-solid" ariaLabel="dark theme" />
+</div>
+-->
+
+<style>
+    /*.themeSwitcher {
+        display: grid;
+        place-content: center;
+
+        gap: var(--size-1);
+
+        height: max-content;
+        width: 100%;
+        align-self: center;
+    }*/
+
+    .themeToggle {
+        --size: var(--size-4);
+        --icon-fill: var(--text-neutral-default);
+        --icon-fill-hover: var(--text-brand-default);
+
+        display: grid;
+        place-content: center;
+
+        background: none;
+        border: 0.12rem solid transparent;
+        padding: 0;
+        color: var(--icon-fill);
+
+        inline-size: calc(var(--size) * 2);
+        block-size: calc(var(--size) * 2);
+        aspect-ratio: 1;
+        border-radius: 50%;
+
+        cursor: pointer;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+
+        outline-offset: var(--size-2);
+
+        transition: background var(--transition-micro-fast);
+
+        & > svg {
+            inline-size: var(--size);
+            block-size: var(--size);
+            stroke-linecap: round;
+            transition: scale var(--transition-anticipate-fast);
+        }
+
+        &:hover {
+            background:
+                linear-gradient(var(--surface-neutral-default) 0 0) padding-box,
+                linear-gradient(to right, var(--icon-fill-hover), var(--surface-accent-default)) border-box;
+        }
+
+        @media (hover: none) {
+            --size: var(--size-12);
+        }
+    }
+
+    .themeToggle[aria-label="dark"] {
+    }
+</style>
+
+<script>
+    const themeKey = "theme-preference"
+
+    const themeTarget = document.querySelector("[data-theme]") as HTMLElement
+    const themeToggle = document.querySelector("[data-theme-toggle]") as HTMLButtonElement
+
+    class Theme {
+        storageKey: string
+
+        constructor(storageKey: string) {
+            this.storageKey = storageKey
+        }
+
+        getValue() {
+            const value = localStorage.getItem(this.storageKey)
+            if (value) {
+                return value
+            }
+            // fallback to system preference if no stored value
+            return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+        }
+
+        setValue(value: string) {
+            localStorage.setItem(this.storageKey, value)
+        }
+    }
+
+    // themeTarget.setAttribute("data-theme", theme ?? "light")
+    const applyTheme = (theme: string | null) => (themeTarget.dataset.theme = theme ?? "light")
+
+    function setColorPreference(preference?: string) {
+        const theme = new Theme(themeKey)
+
+        const newTheme = preference ? preference : theme.getValue() === "dark" ? "light" : "dark"
+
+        theme.setValue(newTheme)
+        applyTheme(newTheme)
+
+        return newTheme
+    }
+
+    // toggle the theme
+    themeToggle.addEventListener("click", () => {
+        const theme = setColorPreference()
+        themeToggle.ariaLabel = theme
+    })
+
+    // set early to "prevent" flashing
+    setColorPreference(new Theme(themeKey).getValue())
+    window.onload = () => {
+        setColorPreference(new Theme(themeKey).getValue())
+    }
+    ;(() => {
+        // sync with system changes
+        window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches: isDark }) => {
+            setColorPreference(isDark ? "dark" : "light")
+        })
+    })()
+</script>
+
+<!-- <script>
+  const storageKey = "theme-preference";
+
+  const onClick = () => {
+    // flip current value
+    theme.value = theme.value === "light" ? "dark" : "light";
+
+    setPreference();
+  };
+
+  const getColorPreference = () => {
+    if (localStorage.getItem(storageKey))
+      return localStorage.getItem(storageKey);
+    else
+      return window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+  };
+
+  const setPreference = () => {
+    localStorage.setItem(storageKey, theme.value ?? "light");
+    reflectPreference();
+  };
+
+  const reflectPreference = () => {
+    document.firstElementChild!.setAttribute(
+      "data-theme",
+      theme.value ?? "light",
+    );
+
+    document
+      .querySelector("#theme-toggle")
+      ?.setAttribute("aria-label", theme.value ?? "light");
+  };
+
+  const theme = {
+    value: getColorPreference(),
+  };
+
+  // set early so no page flashes / CSS is made aware
+  reflectPreference();
+
+  window.onload = () => {
+    // set on load so screen readers can see latest value on the button
+    reflectPreference();
+
+    // now this script can find and listen for clicks on the control
+    document.querySelector("#theme-toggle")!.addEventListener("click", onClick);
+  };
+
+  // sync with system changes
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", ({ matches: isDark }) => {
+      theme.value = isDark ? "dark" : "light";
+      setPreference();
+    });
+</script> -->

@@ -1,128 +1,118 @@
 ---
-import { Icon } from "astro-icon/components";
-import { getContent } from "@/utils/graphql-client";
-import { faqQuery } from "@/utils/queries";
-const response = await getContent(faqQuery);
-const { heading, faq } = response.faq;
+import { Icon } from "astro-icon/components"
+import { getContent } from "@/utils/graphql-client"
+import { faqQuery } from "@/utils/queries"
+const response = await getContent(faqQuery)
+const { heading, faq } = response.faq
 ---
 
 <div class="faq container" data-parent-container data-cutout>
-  <div class="accordionWrapper container" data-container-md>
-    <header class="full-width">
-      <h2 class="h1">{heading}</h2>
-    </header>
-    {
-      faq &&
-        faq.map((faq, index) => (
-          <div class="accordionItem">
-            <details open={index === 0} data-index={index} name="faq">
-              <summary class="flex-between">
-                <h3>{faq.question}</h3>
-                <Icon
-                  name="mdi:caret"
-                  class="accordionIcon"
-                  aria-hidden="true"
-                  focusable="false"
-                />
-              </summary>
-              <div class="accordionBody">
-                <Fragment set:html={faq.answer.html} />
-              </div>
-            </details>
-          </div>
-        ))
-    }
-  </div>
+    <div class="accordionWrapper container" data-container-md>
+        <header class="full-width">
+            <h2 class="h1">{heading}</h2>
+        </header>
+        {
+            faq &&
+                faq.map((faq, index) => (
+                    <div class="accordionItem">
+                        <details open={index === 0} data-index={index} name="faq">
+                            <summary class="flex-between">
+                                <h3>{faq.question}</h3>
+                                <Icon name="mdi:caret" class="accordionIcon" aria-hidden="true" focusable="false" />
+                            </summary>
+                            <div class="accordionBody">
+                                <Fragment set:html={faq.answer.html} />
+                            </div>
+                        </details>
+                    </div>
+                ))
+        }
+    </div>
 </div>
 
 <style>
-  header {
-    justify-self: end;
-    margin-bottom: var(--size-12);
-  }
-
-  .accordionItem {
-    padding: var(--size-8) var(--size-4);
-    align-items: center;
-    border: 0.12rem solid transparent;
-
-    &:not(:first-child) {
-      border-top-color: var(--surface-neutral-subtle);
+    header {
+        justify-self: end;
+        margin-bottom: var(--size-12);
     }
 
-    &:has(details[open]) {
-      background:
-        linear-gradient(var(--surface-neutral-default) 0 0) padding-box,
-        linear-gradient(
-            35deg,
-            var(--surface-neutral-subtle),
-            var(--surface-brand-light)
-          )
-          border-box;
-      border-radius: var(--radius-lg);
+    .accordionItem {
+        padding: var(--size-8) var(--size-4);
+        align-items: center;
+        border: 0.12rem solid transparent;
 
-      &,
-      & + * {
-        border-top-color: transparent;
-      }
+        &:not(:first-child) {
+            border-top-color: var(--surface-neutral-subtle);
+        }
+
+        &:has(details[open]) {
+            background:
+                linear-gradient(var(--surface-neutral-default) 0 0) padding-box,
+                linear-gradient(35deg, var(--surface-neutral-subtle), var(--surface-neutral-hover)) border-box;
+            border-radius: var(--radius-lg);
+
+            &,
+            & + * {
+                border-top-color: transparent;
+            }
+        }
     }
-  }
 
-  .accordionBody {
-    display: flex;
-    flex-direction: column;
-    row-gap: var(--size-4);
+    .accordionBody {
+        display: flex;
+        flex-direction: column;
+        row-gap: var(--size-4);
 
-    padding-top: var(--size-8);
-  }
-
-  .accordionIcon {
-    color: var(--text-neutral-subtle);
-    transition: transform var(--transition-micro-fast);
-    font-size: var(--font-size-lg);
-  }
-
-  details {
-    overflow: hidden;
-
-    summary {
-      color: var(--text-neutral-subtle);
-      cursor: pointer;
-
-      h3 {
-        margin-block: 0;
-        max-width: 23ch;
-      }
+        padding-top: var(--size-8);
     }
-  }
 
-  details::details-content {
-    block-size: 0;
-    transition:
-      block-size var(--transition-anticipate-medium),
-      content-visibility var(--transition-anticipate-medium);
-    transition-behavior: allow-discrete;
-  }
-
-  details[open]::details-content {
-    block-size: auto;
-  }
-
-  details[open] {
-    summary {
-      color: var(--text-neutral-default);
-    }
     .accordionIcon {
-      transform: rotate(180deg);
-      color: var(--text-neutral-default);
-      background-color: var(--surface-brand-subtle);
-      border-radius: var(--radius-round);
+        color: var(--text-neutral-subtle);
+        transition: transform var(--transition-micro-fast);
+        font-size: var(--font-size-lg);
     }
-  }
 
-  @media (min-width: 768px) {
-    summary h3 {
-      max-width: 65ch;
+    details {
+        overflow: hidden;
+
+        summary {
+            color: var(--text-neutral-subtle);
+            cursor: pointer;
+
+            h3 {
+                margin-block: 0;
+                max-width: 23ch;
+            }
+        }
     }
-  }
+
+    details::details-content {
+        block-size: 0;
+        transition:
+            block-size var(--transition-anticipate-medium),
+            content-visibility var(--transition-anticipate-medium);
+        transition-behavior: allow-discrete;
+    }
+
+    details[open]::details-content {
+        block-size: auto;
+    }
+
+    details[open] {
+        summary {
+            color: var(--text-neutral-default);
+        }
+        .accordionIcon {
+            transform: rotate(180deg);
+            color: var(--text-neutral-default);
+            background-color: var(--surface-brand-subtle);
+            border-radius: var(--radius-round);
+        }
+    }
+
+    @media (min-width: 768px) {
+        summary h3 {
+            max-width: 65ch;
+        }
+    }
 </style>
