@@ -1,56 +1,49 @@
 ---
-import { Image } from "astro:assets";
-import data from "@/data/navigation.json";
-const { nav } = data;
-import LogoImage from "@/images/logo/white-horn-purple-bg.png";
-import NavMenu from "@/components/navigation/NavMenu.astro";
-import NavActions from "./NavActions.astro";
-import "./navigation.css";
+import { Image } from "astro:assets"
+import data from "@/data/navigation.json"
+const { nav } = data
+import LogoImage from "@/images/logo/white-horn-purple-bg.png"
+import NavMenu from "@/components/navigation/NavMenu.astro"
+import NavActions from "./NavActions.astro"
+import "./navigation.css"
 ---
 
 <header class="nav container" data-navigation>
-    <div class="nav__container" data-active="false" data-navigation-container>
-        <a href="/" class="nav__logo">
-            <Image
-                src={LogoImage}
-                width={LogoImage.width}
-                height={LogoImage.height}
-                alt={nav.logo.text}
-                loading="eager"
-                decoding="sync"
-                class="nav__logo__img"
-                layout="fixed"
-            />
-        </a>
-        <NavMenu />
-        <NavActions />
+    <div class="wrapper">
+        <div class="nav__container" data-active="false" data-navigation-container>
+            <a href="/" class="nav__logo">
+                <Image
+                    src={LogoImage}
+                    width={LogoImage.width}
+                    height={LogoImage.height}
+                    alt={nav.logo.text}
+                    loading="eager"
+                    decoding="sync"
+                    class="nav__logo__img"
+                    layout="fixed"
+                />
+            </a>
+            <NavMenu />
+            <NavActions />
+        </div>
     </div>
 </header>
 
 <script>
-    window.addEventListener("DOMContentLoaded", (e) => {
-        const nav = document.querySelector("[data-navigation]");
-        const navContainer = document.querySelector(
-            "[data-navigation-container]",
-        );
+    window.addEventListener("DOMContentLoaded", () => {
+        const navContainer = document.querySelector<HTMLElement>("[data-navigation-container]")
+        if (!navContainer) return
 
-        let ticking = false;
+        const updateNavState = () => {
+            navContainer.dataset.active = window.scrollY > 10 ? "true" : "false"
+        }
 
-        window.addEventListener("scroll", (e) => {
-            if (ticking) return;
-            ticking = true;
+        window.addEventListener("scroll", () => requestAnimationFrame(updateNavState), { passive: true })
 
-            requestAnimationFrame(() => {
-                const scrollY = window.scrollY;
-                if (scrollY > 10) {
-                    nav?.toggleAttribute("data-container-md", true);
-                    navContainer?.toggleAttribute("data-active", true);
-                } else {
-                    nav?.toggleAttribute("data-container-md", false);
-                    navContainer?.toggleAttribute("data-active", false);
-                }
-                ticking = false;
-            });
-        });
-    });
+        window.addEventListener("ToggleMenu", () => {
+            if (navContainer.dataset.active !== "true") {
+                navContainer.dataset.active = "true"
+            }
+        })
+    })
 </script>

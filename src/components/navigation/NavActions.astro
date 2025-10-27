@@ -1,95 +1,90 @@
 ---
-import SocialButtons from "./SocialButtons.astro";
-import Button from "@/components/Button/Button.astro";
+import SocialButtons from "./SocialButtons.astro"
+import Button from "@/components/Button/Button.astro"
 ---
 
-<div class:list={["nav__actions"]}>
-  <SocialButtons />
-  <div class:list={["nav__toggleWrapper"]}>
-    <Button
-      as="icon-only"
-      variant="default"
-      iconName="mingcute:menu-fill"
-      ariaLabel="Open menu"
-      classList={["nav__toggle"]}
-      attributes={{
-        dataset: {
-          toggleMenu: true,
-          isMenuVisible: false,
-          isVisible: true,
-          toggleAction: "open",
-        },
-        attributes: {
-          ariaExpanded: false,
-        },
-      }}
-    />
-    <Button
-      as="icon-only"
-      variant="default"
-      iconName="material-symbols:close-rounded"
-      ariaLabel="Close menu"
-      classList={["nav__toggle"]}
-      attributes={{
-        dataset: {
-          toggleMenu: true,
-          isMenuVisible: false,
-          isVisible: false,
-          toggleAction: "close",
-        },
-        attributes: {
-          ariaExpanded: false,
-        },
-      }}
-    />
-  </div>
+<div class="nav__actions">
+    <SocialButtons />
+    <div class:list={["nav__toggleWrapper"]}>
+        <Button
+            as="icon-only"
+            variant="default"
+            iconName="mingcute:menu-fill"
+            ariaLabel="Open menu"
+            classList={["nav__toggle"]}
+            attributes={{
+                dataset: {
+                    toggleMenu: true,
+                    isMenuVisible: false,
+                    isVisible: true,
+                    toggleAction: "open",
+                },
+                attributes: {
+                    ariaExpanded: false,
+                },
+            }}
+        />
+        <Button
+            as="icon-only"
+            variant="default"
+            iconName="material-symbols:close-rounded"
+            ariaLabel="Close menu"
+            classList={["nav__toggle"]}
+            attributes={{
+                dataset: {
+                    toggleMenu: true,
+                    isMenuVisible: false,
+                    isVisible: false,
+                    toggleAction: "close",
+                },
+                attributes: {
+                    ariaExpanded: false,
+                },
+            }}
+        />
+    </div>
 </div>
 
 <style></style>
 
 <script>
-  function toggleMenu(button: HTMLButtonElement) {
-    const isOpen = button.dataset.toggleAction === "open";
-    button.dataset.isMenuVisible = String(isOpen);
-    button.setAttribute("aria-expanded", String(isOpen));
+    function toggleMenu(button: HTMLButtonElement) {
+        const isOpen = button.dataset.toggleAction === "open"
+        button.dataset.isMenuVisible = String(isOpen)
+        button.setAttribute("aria-expanded", String(isOpen))
 
-    button.dispatchEvent(
-      new CustomEvent("ToggleMenu", {
-        bubbles: true,
-        cancelable: true,
-        detail: { state: isOpen },
-      }),
-    );
-  }
+        button.dispatchEvent(
+            new CustomEvent("ToggleMenu", {
+                bubbles: true,
+                cancelable: true,
+                detail: { state: isOpen },
+            }),
+        )
+    }
 
-  function toggleButtonVisibility(
-    buttons: NodeListOf<HTMLButtonElement>,
-    activeButton: HTMLButtonElement,
-  ) {
-    const newState = activeButton.dataset.isVisible !== "true";
+    function toggleButtonVisibility(buttons: NodeListOf<HTMLButtonElement>, activeButton: HTMLButtonElement) {
+        const newState = activeButton.dataset.isVisible !== "true"
 
-    buttons.forEach((btn) => {
-      const isActive = btn === activeButton;
-      btn.dataset.isVisible = String(isActive ? newState : !newState);
-    });
-  }
+        buttons.forEach((btn) => {
+            const isActive = btn === activeButton
+            btn.dataset.isVisible = String(isActive ? newState : !newState)
+        })
+    }
 
-  function toggleButtons(selector = '[data-toggle-menu="true"]') {
-    const buttons = document.querySelectorAll(
-      selector,
-    ) as NodeListOf<HTMLButtonElement>;
+    function toggleButtons(selector = '[data-toggle-menu="true"]') {
+        const buttons = document.querySelectorAll(selector) as NodeListOf<HTMLButtonElement>
 
-    if (!buttons.length) return;
+        if (!buttons.length) return
 
-    buttons.forEach((button) => {
-      button.addEventListener("click", () => {
-        toggleButtonVisibility(buttons, button);
-        toggleMenu(button);
-      });
-    });
-  }
+        buttons.forEach((button) => {
+            button.addEventListener("click", () => {
+                toggleButtonVisibility(buttons, button)
+                toggleMenu(button)
+            })
+        })
+    }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    toggleButtons();
-  });
+    document.addEventListener("DOMContentLoaded", () => {
+        toggleButtons()
+    })
 </script>

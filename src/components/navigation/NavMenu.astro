@@ -1,27 +1,16 @@
 ---
-import data from "@/data/navigation.json";
-const { nav } = data;
+import data from "@/data/navigation.json"
+const { nav } = data
 // import style from "./navigation.module.css";
-import Button from "@/components/Button/Button.astro";
+import Button from "@/components/Button/Button.astro"
 ---
 
-<nav
-    data-menu
-    data-is-menu-open="false"
-    class="nav__links"
-    aria-label="Main Navigation"
->
+<nav data-menu data-is-menu-open="false" class="nav__links" aria-label="Main Navigation">
     <ul class:list={["nav__list"]}>
         {
             nav.links.map((link) => (
                 <li class:list={["nav__listItem"]}>
-                    <Button
-                        as="default"
-                        href={link.url}
-                        label={link.label}
-                        variant="link"
-                        classList={["nav__link"]}
-                    />
+                    <Button as="default" href={link.url} label={link.label} variant="link" classList={["nav__link"]} />
                 </li>
             ))
         }
@@ -32,11 +21,11 @@ import Button from "@/components/Button/Button.astro";
 
 <script>
     window.addEventListener("ToggleMenu", (event) => {
-        const menu = document.querySelector("[data-menu]") as HTMLElement;
-        if (!menu) return;
-        const { detail } = event as CustomEvent;
-        console.log(detail);
+        const menu = document.querySelector("[data-menu]") as HTMLElement
+        if (!menu) return
+        const { detail } = event as CustomEvent
+        console.log(detail)
 
-        menu.dataset.isMenuOpen = String(detail.state);
-    });
+        menu.dataset.isMenuOpen = String(detail.state)
+    })
 </script>
