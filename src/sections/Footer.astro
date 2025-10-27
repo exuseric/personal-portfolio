@@ -1,23 +1,41 @@
----
-import { Image } from "astro:assets"
-
-import SocialButtons from "@/components/navigation/SocialButtons.astro"
-import LogoImage from "@/images/logo/purple-horn.png"
----
-
 <footer>
     <div class="container" data-container-md data-cutout>
-        <div class="footer-logo surface-neutral flex-center"></div>
-        <div class="footer-content flex-between">
-            <div class="footer-section">
-                <span class="copyright text-sm"
-                    >&copy;&nbsp;{new Date().getFullYear()}&nbsp;Eric Gathoni. All rights reserved.</span
+        <div class="footerContent">
+            <nav class="footerNav" aria-label="Footer navigation">
+                <a
+                    class="h1"
+                    href="https://github.com/exuseric"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="connect on github"
                 >
-            </div>
-            <nav class="footer-nav" aria-label="Footer navigation">
-                <SocialButtons />
-                <a href="http://github.com/exuseric" target="_blank" title="github">GITHUB</a>
+                    GITHUB
+                </a>
+                <a
+                    class="h1"
+                    href="https://behance.net/exuseric"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="connect on behance"
+                >
+                    BEHANCE
+                </a>
+                <a
+                    class="h1"
+                    href="https://linkedin.com/in/exuseric"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="email me"
+                >
+                    LINKEDIN
+                </a>
             </nav>
+            <div class="footerBottom">
+                <p class="copyright text-sm">
+                    &copy;&nbsp;{new Date().getFullYear()}&nbsp;Eric Gathoni. All rights reserved.
+                </p>
+                <p class="text-sm">Nairobi, Kenya</p>
+            </div>
         </div>
     </div>
 </footer>
@@ -25,10 +43,41 @@ import LogoImage from "@/images/logo/purple-horn.png"
 <style>
     footer {
         background: linear-gradient(to bottom, var(--surface-neutral-default), var(--surface-brand-light));
+        padding-bottom: var(--size-32);
+        padding-top: var(--size-8);
     }
-    .footer-content {
-        align-self: end;
-        padding-top: var(--size-32);
-        padding-bottom: var(--size-12);
+    .footerContent {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: flex-start;
+
+        gap: var(--size-16);
+        /*padding-top: var(--size-32);
+        padding-bottom: var(--size-12);*/
+    }
+
+    .footerNav {
+        display: flex;
+        flex-flow: var(--flex-direction, column nowrap);
+        align-items: var(--flex-align, flex-start);
+        justify-content: space-between;
+        gap: var(--flex-gap, var(--size-12));
+        width: 100%;
+
+        a {
+            color: currentColor;
+        }
+    }
+
+    @media (min-width: 768px) {
+        footer {
+            padding-block: var(--size-12);
+        }
+        .footerNav {
+            --flex-direction: row wrap;
+            --flex-gap: var(--size-6);
+            --flex-align: center;
+        }
     }
 </style>
