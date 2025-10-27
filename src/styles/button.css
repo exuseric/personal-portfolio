@@ -44,10 +44,12 @@
 
     text-decoration: none;
 
-    box-shadow: oklch(from var(--_background-color) calc(l * 0.1) c h / 0.1) 0 1px 3px 0,
+    box-shadow:
+        oklch(from var(--_background-color) calc(l * 0.1) c h / 0.1) 0 1px 3px 0,
         oklch(from var(--_background-color) calc(l * 0.06) c h / 0.06) 0 1px 2px 0;
 
-    transition: background-color var(--transition-anticipate-fast),
+    transition:
+        background-color var(--transition-anticipate-fast),
         background var(--transition-micro-fast),
         color var(--transition-micro-fast),
         border-color var(--transition-micro-fast),
@@ -82,11 +84,11 @@
 
 .btn,
 .btn--icon {
-    --_border-gradient: var(--_border-color, transparent),
-        oklch(from var(--_border-color, transparent) calc(l / 0.725) c h);
-    background: linear-gradient(var(--_background-color) 0 0) padding-box,
+    --_border-gradient:
+        var(--_border-color, transparent), oklch(from var(--_border-color, transparent) calc(l / 0.725) c h);
+    /*background: linear-gradient(var(--_background-color) 0 0) padding-box,
         linear-gradient(35deg, var(--_border-gradient)) border-box;
-    border: 0.12rem solid transparent;
+    border: 0.12rem solid transparent;*/
 }
 
 /* ICON BUTTONS */
@@ -225,7 +227,6 @@
     }
 }
 
-
 /* VISUAL STATES */
 .btn:disabled,
 .btn[aria-disabled="true"] {
@@ -298,7 +299,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-
     .btn,
     .btn__spinner {
         transition: none;
