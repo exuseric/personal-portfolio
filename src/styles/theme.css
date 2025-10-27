@@ -37,10 +37,11 @@
     /* Neutral Colors */
     --surface-neutral-default: var(--color-neutral-white);
     --surface-neutral-subtle: var(--color-neutral-50);
+    --surface-neutral-light: var(--color-neutral-100);
     --surface-neutral-hover: var(--color-brand-200);
 
     --text-neutral-default: var(--color-neutral-900);
-    --text-neutral-subtle: var(--color-neutral-400);
+    --text-neutral-subtle: var(--color-neutral-500);
     --text-neutral-hover: var(--color-brand-800);
     --text-on-neutral-color: var(--color-neutral-900);
 
@@ -89,7 +90,7 @@
 @media (prefers-color-scheme: dark) {
     :root {
         /* Brand Colors */
-        --surface-brand-default: oklch(from var(--color-brand-800) l calc(c - 0.08) h);
+        --surface-brand-default: oklch(from var(--color-brand-800) l calc(c - 0.15) h);
         --surface-brand-light: oklch(from var(--color-brand-950) l calc(c - 0.08) h);
         --surface-brand-subtle: oklch(from var(--color-brand-900) l calc(c - 0.08) h);
         --surface-brand-hover: oklch(from var(--color-brand-700) l calc(c - 0.09) h);
@@ -103,11 +104,23 @@
         /* Neutral Colors */
         --surface-neutral-default: var(--color-neutral-black);
         --surface-neutral-subtle: var(--color-neutral-950);
+        --surface-neutral-light: oklch(from var(--color-neutral-700) l calc(c - 0.03) h);
         --surface-neutral-hover: var(--color-neutral-900);
 
-        --text-neutral-default: var(--color-neutral-300);
-        --text-neutral-subtle: var(--color-neutral-600);
+        --text-neutral-default: oklch(from var(--color-neutral-300) l calc(c - 0.03) h);
+        --text-neutral-subtle: oklch(from var(--color-neutral-500) l calc(c - 0.03) h);
         --text-neutral-hover: oklch(from var(--color-brand-800) l calc(c - 0.08) h);
-        --text-on-neutral-color: var(--color-neutral-300);
+        --text-on-neutral-color: oklch(from var(--color-neutral-300) l calc(c - 0.03) h);
+
+        --surface-secondary-default: oklch(from var(--color-secondary-800) l calc(c - 0.03) h);
+        --surface-secondary-light: oklch(from var(--color-secondary-950) l calc(c - 0.08) h);
+        --surface-secondary-subtle: oklch(from var(--color-secondary-900) l calc(c - 0.08) h);
+        --surface-secondary-hover: oklch(from var(--color-secondary-700) l calc(c - 0.09) h);
+
+        --text-secondary-default: oklch(from var(--color-secondary-500) l calc(c - 0.15) h);
+        --text-secondary-subtle: oklch(from var(--color-secondary-100) l calc(c - 0.09) h);
+        --text-secondary-hover: oklch(from var(--color-secondary-100) l calc(c - 0.09) h);
+        --text-on-secondary-color: oklch(from var(--color-secondary-50) l calc(c - 0.09) h);
+        --text-on-subtle-color: oklch(from var(--color-brand-300) l calc(c - 0.09) h);
     }
 }

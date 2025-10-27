@@ -155,8 +155,9 @@
 }
 
 .btn--neutral {
-    --_background-color: var(--surface-neutral-default);
+    --_background-color: var(--surface-neutral-light);
     --_color: var(--text-on-neutral-color);
+    --_border-color: var(--surface-brand-light);
 
     &:hover {
         --_color: var(--text-neutral-hover);
