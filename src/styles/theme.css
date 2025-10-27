@@ -89,16 +89,16 @@
 @media (prefers-color-scheme: dark) {
     :root {
         /* Brand Colors */
-        --surface-brand-default: var(--color-brand-800);
-        --surface-brand-light: var(--color-brand-950);
-        --surface-brand-subtle: var(--color-brand-900);
-        --surface-brand-hover: var(--color-brand-700);
+        --surface-brand-default: oklch(from var(--color-brand-800) l calc(c - 0.08) h);
+        --surface-brand-light: oklch(from var(--color-brand-950) l calc(c - 0.08) h);
+        --surface-brand-subtle: oklch(from var(--color-brand-900) l calc(c - 0.08) h);
+        --surface-brand-hover: oklch(from var(--color-brand-700) l calc(c - 0.09) h);
 
-        --text-brand-default: var(--color-brand-500);
-        --text-brand-subtle: var(--color-brand-100);
-        --text-brand-hover: var(--color-brand-100);
-        --text-on-brand-color: var(--color-brand-50);
-        --text-on-subtle-color: var(--color-secondary-300);
+        --text-brand-default: oklch(from var(--color-brand-500) l calc(c - 0.09) h);
+        --text-brand-subtle: oklch(from var(--color-brand-100) l calc(c - 0.09) h);
+        --text-brand-hover: oklch(from var(--color-brand-100) l calc(c - 0.09) h);
+        --text-on-brand-color: oklch(from var(--color-brand-50) l calc(c - 0.09) h);
+        --text-on-subtle-color: oklch(from var(--color-brand-300) l calc(c - 0.09) h);
 
         /* Neutral Colors */
         --surface-neutral-default: var(--color-neutral-black);
@@ -107,7 +107,7 @@
 
         --text-neutral-default: var(--color-neutral-300);
         --text-neutral-subtle: var(--color-neutral-600);
-        --text-neutral-hover: var(--color-brand-800);
+        --text-neutral-hover: oklch(from var(--color-brand-800) l calc(c - 0.08) h);
         --text-on-neutral-color: var(--color-neutral-300);
     }
 }
