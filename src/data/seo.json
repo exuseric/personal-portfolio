@@ -1,39 +1,40 @@
 {
-  "title": "Eric Gathoni - Fullstack Developer",
-  "description": "Frontend heavy fullstack developer who cares about fast, accessible, and beautiful websites with 4+ years of experience crafting accessible, responsive interfaces. Specializing in React, Astro, and web accessibility.",
-  "author": "Eric Gathoni",
-  "siteUrl": "https://ericmaina.me",
-  "language": "en",
-  "themeColor": "#8937A4",
-  "keywords": "fullstack developer, frontend developer, web developer, React developer, Astro developer, web accessibility, UI/UX design, Kenya developer, Shopify developer, Pocketbase developer, performance optimization, responsive design",
-  "robots": "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
-  "openGraph": {
-    "type": "website",
-    "locale": "en_US",
-    "url": "https://ericmaina.me",
-    "siteName": "Eric Gathoni",
-    "title": "Eric Gathoni - Fullstack Developer",
-    "description": "Frontend heavy fullstack developer who cares about fast, accessible, and beautiful websites with 4+ years of experience crafting accessible, responsive interfaces. Specializing in React, Astro, and web accessibility.",
-    "image": {
-      "url": "https://ericmaina.me/images/og-image.png",
-      "width": "1200",
-      "height": "630",
-      "alt": "Eric Gathoni - Fullstack Developer Portfolio"
+    "title": "Eric Maina Gathoni | Frontend Developer",
+    "description": "Frontend-focused Fullstack Developer crafting fast, accessible, and SEO-optimised websites with React, Next.js, Astro, and headless CMS. Passionate about performance, accessibility, and clean, responsive design.",
+    "author": "Eric Maina Gathoni",
+    "siteUrl": "https://ericmaina.me",
+    "language": "en",
+    "themeColor": "#9b69f2",
+    "keywords": "frontend developer, fullstack developer, React developer, Next.js developer, Astro developer, headless CMS, web performance, SEO optimisation, accessibility, UI/UX design, Kenya developer, Shopify developer, Pocketbase developer, responsive web design",
+    "robots": "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+    "canonical": "https://ericmaina.me",
+    "openGraph": {
+        "type": "website",
+        "locale": "en_US",
+        "url": "https://ericmaina.me",
+        "siteName": "Eric Maina Gathoni",
+        "title": "Eric Maina Gathoni | Frontend Developer",
+        "description": "Frontend-focused Fullstack Developer building fast, accessible, and SEO-optimised web experiences using React, Next.js, and Astro.",
+        "image": {
+            "url": "https://ericmaina.me/images/og-image.png",
+            "width": 1200,
+            "height": 630,
+            "alt": "Eric Maina Gathoni – Frontend & Fullstack Developer Portfolio"
+        }
+    },
+    "twitter": {
+        "card": "summary_large_image",
+        "site": "@caramel_uncrn",
+        "creator": "@caramel_uncrn",
+        "title": "Eric Maina Gathoni | Frontend Developer",
+        "description": "Building fast, accessible, and SEO-friendly web experiences with React, Next.js, and Astro.",
+        "image": "https://ericmaina.me/images/og-image.png"
+    },
+    "additionalMeta": {
+        "viewport": "width=device-width, initial-scale=1, shrink-to-fit=no",
+        "formatDetection": "telephone=no",
+        "referrer": "origin-when-cross-origin",
+        "colorScheme": "light dark",
+        "supportedColorSchemes": "light dark"
     }
-  },
-  "twitter": {
-    "card": "summary_large_image",
-    "site": "@caramel_uncrn",
-    "creator": "@caramel_uncrn",
-    "title": "Eric Gathoni - Fullstack Developer",
-    "description": "Frontend heavy fullstack developer who cares about fast, accessible, and beautiful websites with 4+ years of experience crafting accessible, responsive interfaces. Specializing in React, Astro, and web accessibility.",
-    "image": "https://ericmaina.me/images/og-image.png"
-  },
-  "additionalMeta": {
-    "viewport": "width=device-width, initial-scale=1, shrink-to-fit=no",
-    "formatDetection": "telephone=no",
-    "referrer": "origin-when-cross-origin",
-    "colorScheme": "light dark",
-    "supportedColorSchemes": "light dark"
-  }
 }
