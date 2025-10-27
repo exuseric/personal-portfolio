@@ -18,7 +18,7 @@ const { heading, faq } = response.faq
                         <details open={index === 0} data-index={index} name="faq">
                             <summary class="flex-between">
                                 <h3>{faq.question}</h3>
-                                <Icon name="mdi:caret" class="accordionIcon" aria-hidden="true" focusable="false" />
+                                <!-- <Icon name="mdi:caret" class="accordionIcon" aria-hidden="true" focusable="false" /> -->
                             </summary>
                             <div class="accordionBody">
                                 <Fragment set:html={faq.answer.html} />
