@@ -1,38 +1,25 @@
 ---
-import { getContent } from "@/utils/graphql-client";
-import { heroQuery } from "@/utils/queries";
-import Button from "@/components/Button/Button.astro";
-const res = await getContent(heroQuery);
-const data = res.homePage.hero;
+import { getContent } from "@/utils/graphql-client"
+import { heroQuery } from "@/utils/queries"
+import Button from "@/components/Button/Button.astro"
+const res = await getContent(heroQuery)
+const data = res.homePage.hero
 ---
 
 <header class="hero container">
     <div class="hero__wrapper container" data-container-md>
         <div class="hero__heading full-width">
-            <div>
-                <h1>Eric Gathoni, Frontend Developer.</h1>
-            </div>
+            <h1 class="hero__title">Eric Gathoni, Frontend Developer.</h1>
         </div>
         <div class="hero__content">
-            <p class="h5">
+            <p class="h5 hero__paragraph">
                 <!-- {data.heading} -->
-                Most websites look good but perform poorly. I craft performant, accessible
-                frontends that grow traffic, improve retention, and make design systems
-                shine.
+                Most websites look good but perform poorly. I craft performant, accessible frontends that grow traffic, improve
+                retention, and make design systems shine.
             </p>
             <div class="flex-start">
-                <Button
-                    as="default"
-                    href="#projects"
-                    label="Explore My Projects"
-                    variant="primary"
-                />
-                <Button
-                    as="default"
-                    href="#contact"
-                    label="Get in Touch"
-                    variant="outline"
-                />
+                <Button as="default" href="#projects" label="Explore My Projects" variant="primary" />
+                <Button as="default" href="#contact" label="Get in Touch" variant="outline" />
             </div>
         </div>
     </div>
@@ -55,3 +42,36 @@ const data = res.homePage.hero;
         max-width: 45ch;
     }
 </style>
+
+<script>
+    import { gsap } from "gsap"
+
+    import { SplitText } from "gsap/all"
+
+    document.addEventListener("DOMContentLoaded", (e) => {
+        gsap.registerPlugin(SplitText)
+
+        let heroSplit = new SplitText(".hero__title", { type: "chars, lines" })
+        let paragraphSplit = new SplitText(".hero__paragraph", { type: "words" })
+
+        gsap.from(heroSplit.chars, {
+            yPercent: "random([-200, 200])",
+            rotation: "random([-10, 10])",
+            autoAlpha: 0,
+            ease: "back.out",
+            stagger: {
+                amount: 0.5,
+                from: "random",
+            },
+        })
+        gsap.from(paragraphSplit.words, {
+            yPercent: "random([-50, 50])",
+            autoAlpha: 0,
+            ease: "power1.out",
+            stagger: {
+                amount: 0.5,
+                from: "center",
+            },
+        })
+    })
+</script>

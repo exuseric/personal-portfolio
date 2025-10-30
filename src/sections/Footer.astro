@@ -1,41 +1,57 @@
-<footer>
-    <div class="container" data-container-md data-cutout>
-        <div class="footerContent">
-            <nav class="footerNav" aria-label="Footer navigation">
-                <a
-                    class="h1"
-                    href="https://github.com/exuseric"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title="connect on github"
-                >
-                    GITHUB
-                </a>
-                <a
-                    class="h1"
-                    href="https://behance.net/exuseric"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title="connect on behance"
-                >
-                    BEHANCE
-                </a>
-                <a
-                    class="h1"
-                    href="https://linkedin.com/in/exuseric"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title="email me"
-                >
-                    LINKEDIN
-                </a>
-            </nav>
-            <div class="footerBottom">
-                <p class="copyright text-sm">
-                    &copy;&nbsp;{new Date().getFullYear()}&nbsp;Eric Gathoni. All rights reserved.
-                </p>
-                <p class="text-sm">Nairobi, Kenya</p>
-            </div>
+---
+import { Icon } from "astro-iconify"
+
+const footerLinks = [
+    {
+        name: "github",
+        url: "https://github.com/exuseric",
+        icon: "clarity:arrow-line",
+        title: "connect on github",
+    },
+    {
+        name: "behance",
+        url: "https://behance.net/exuseric",
+        icon: "clarity:arrow-line",
+        title: "connect on behance",
+    },
+    {
+        name: "linkedin",
+        url: "https://linkedin.com/in/exuseric",
+        icon: "clarity:arrow-line",
+        title: "connect on linkedin",
+    },
+    {
+        name: "mail",
+        url: "mailto:hello@ericmaina.me",
+        icon: "clarity:arrow-line",
+        title: "email me at hello@ericmaina.me",
+    },
+]
+---
+
+<footer class="container">
+    <div class="footerContent">
+        <nav class="footerNav" aria-label="Footer navigation">
+            {
+                footerLinks.map((link) => (
+                    <a
+                        class="h2 footerLink"
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title={link.title}
+                    >
+                        <span>{link.name.toUpperCase()}</span>
+                        <Icon name={link.icon} aria-hidden="true" focusable="false" />
+                    </a>
+                ))
+            }
+        </nav>
+        <div class="footerBottom">
+            <p class="copyright text-sm">
+                &copy;&nbsp;{new Date().getFullYear()}&nbsp;Eric Gathoni. All rights reserved.
+            </p>
+            <p class="text-sm">Nairobi, Kenya</p>
         </div>
     </div>
 </footer>
@@ -64,9 +80,47 @@
         justify-content: space-between;
         gap: var(--flex-gap, var(--size-12));
         width: 100%;
+    }
 
-        a {
-            color: currentColor;
+    .footerLink {
+        --_arrow-angle: 45deg;
+        --_block-width: calc(100% - 1em);
+
+        position: relative;
+        isolation: isolate;
+
+        display: flex;
+        flex-direction: rows;
+        align-items: center;
+        gap: var(--size-1);
+        color: currentColor;
+        text-decoration: none;
+        transition: all var(--transition-elastic-medium);
+
+        svg {
+            width: 1em;
+            height: 1em;
+            transform: rotateZ(var(--_arrow-angle));
+            transition: transform var(--transition-elastic-medium);
+            transform-origin: center;
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: auto 0 0;
+            z-index: -1;
+            display: inline-block;
+            width: var(--_block-width);
+            height: 0.05em;
+            background-color: currentColor;
+            margin-right: var(--size-2);
+            transition: width var(--transition-elastic-medium);
+        }
+
+        &:hover {
+            --_arrow-angle: 90deg;
+            --_block-width: 100%;
         }
     }
 
