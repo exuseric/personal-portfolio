@@ -9,7 +9,7 @@ const { heading, faq } = response.faq
 <div class="faq container" data-parent-container data-cutout>
     <div class="accordionWrapper container" data-container-md>
         <header class="full-width">
-            <h2 class="h1">{heading}</h2>
+            <h2 class="h1 faqHeading">{heading}</h2>
         </header>
         {
             faq &&
@@ -116,3 +116,36 @@ const { heading, faq } = response.faq
         }
     }
 </style>
+
+<script>
+    import { gsap } from "gsap"
+    import { ScrollTrigger, SplitText } from "gsap/all"
+
+    document.addEventListener("DOMContentLoaded", (e) => {
+        gsap.registerPlugin(SplitText, ScrollTrigger)
+
+        let heading = new SplitText(".faqHeading", { type: "lines, chars" })
+
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".contact",
+                endTrigger: ".faqHeading",
+                start: "50% top",
+                end: "top 30%",
+                scrub: true,
+            },
+        })
+
+        tl.from(heading.chars, {
+            yPercent: "random([-200, 200])",
+            rotation: "random([-10, 10])",
+            autoAlpha: 0,
+            ease: "back.out",
+            color: "var(--text-brand-subtle)",
+            stagger: {
+                amount: 0.5,
+                from: "random",
+            },
+        })
+    })
+</script>

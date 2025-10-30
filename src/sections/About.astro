@@ -1,44 +1,98 @@
 ---
-import { getContent } from "@/utils/graphql-client";
-import { aboutQuery } from "@/utils/queries";
+import { getContent } from "@/utils/graphql-client"
+import { aboutQuery } from "@/utils/queries"
 
-const res = await getContent(aboutQuery);
-const { heading, content } = res.aboutMe;
+const res = await getContent(aboutQuery)
+const { heading, content } = res.aboutMe
 ---
 
-<div
-  class="aboutContainer container"
-  id="about"
-  data-parent-container
-  data-cutout
->
-  <header>
-    <h2 class="h1">
-      {heading}
-    </h2>
-  </header>
+<div class="aboutContainer container" id="about" data-parent-container data-cutout>
+    <header>
+        <h2 class="h1 aboutHeading">
+            {heading}
+        </h2>
+    </header>
 
-  <div class="about__content" data-content-wrapper>
-    <Fragment set:html={content.html} />
-  </div>
-
-  <style>
+    <div class="about__content" data-content-wrapper>
+        <Fragment set:html={content.html} />
+    </div>
+</div>
+<style>
     .aboutContainer {
-      height: 100%;
+        height: 100%;
 
-      header {
-        justify-self: end;
-      }
+        header {
+            justify-self: end;
+        }
     }
     .about__content {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
 
-      em {
-        font-weight: 450;
-        color: var(--text-secondary-default);
-      }
+        em {
+            font-weight: 450;
+            color: var(--text-secondary-default);
+        }
     }
-  </style>
-</div>
+
+    .words7,
+    .words5 {
+        display: inline-block;
+        font-weight: 500;
+        background-color: var(--surface-brand-default);
+    }
+</style>
+
+<script>
+    import { gsap } from "gsap"
+    import { ScrollTrigger, SplitText } from "gsap/all"
+
+    document.addEventListener("DOMContentLoaded", (e) => {
+        gsap.registerPlugin(SplitText, ScrollTrigger)
+
+        let aboutHeading = new SplitText(".aboutHeading", { type: "words, chars", wordsClass: "words++" })
+
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".hero",
+                endTrigger: ".aboutHeading",
+                start: "30% top",
+                end: "top 30%",
+                scrub: true,
+            },
+        })
+
+        tl.from(aboutHeading.words, {
+            yPercent: "random([-50, 50])",
+            rotation: "random([-10, 10])",
+            autoAlpha: 0,
+            ease: "back.out",
+            stagger: {
+                amount: 0.5,
+                from: "random",
+            },
+        })
+            .from(aboutHeading.chars, {
+                yPercent: "random([-200, 200])",
+                rotation: "random([-10, 10])",
+                autoAlpha: 0,
+                ease: "back.out",
+                stagger: {
+                    amount: 0.5,
+                    from: "random",
+                },
+            })
+            .to(".words5, .words7", {
+                backgroundColor: "var(--surface-brand-subtle)",
+                rotation: "-1",
+                paddingInline: "var(--size-4)",
+                borderRadius: "var(--radius-lg)",
+                width: "max-content",
+                ease: "power1.in",
+                stagger: {
+                    amount: 0.5,
+                },
+            })
+    })
+</script>

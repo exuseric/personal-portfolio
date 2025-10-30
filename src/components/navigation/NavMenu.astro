@@ -20,12 +20,25 @@ import Button from "@/components/Button/Button.astro"
 <style></style>
 
 <script>
+    import { gsap } from "gsap"
     window.addEventListener("ToggleMenu", (event) => {
         const menu = document.querySelector("[data-menu]") as HTMLElement
         if (!menu) return
         const { detail } = event as CustomEvent
-        console.log(detail)
 
         menu.dataset.isMenuOpen = String(detail.state)
+
+        let tl = gsap.timeline()
+
+        tl.from(".nav__link", {
+            xPercent: -50,
+            autoAlpha: 0,
+            ease: "back.out",
+            duration: 0.5,
+            stagger: {
+                amount: 0.2,
+                from: "center",
+            },
+        })
     })
 </script>

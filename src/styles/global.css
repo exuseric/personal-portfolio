@@ -64,6 +64,12 @@
         isolation: isolate;
         z-index: 1;
     }
+
+    @supports (corner-shape: squircle) {
+        * {
+            corner-shape: squircle;
+        }
+    }
 }
 
 @layer elements {

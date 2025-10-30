@@ -1,20 +1,22 @@
 ---
-import { Image } from "astro:assets";
-import ToastImage from "@/images/toast_or_ghost.png";
+import { Image } from "astro:assets"
+import ToastImage from "@/images/toast_or_ghost.png"
 
-import { projectsQuery } from "@/utils/queries";
-import { getContent } from "@/utils/graphql-client";
-import { Icon } from "astro-icon/components";
+import { projectsQuery } from "@/utils/queries"
+import { getContent } from "@/utils/graphql-client"
+import { Icon } from "astro-icon/components"
 
 const {
     homePage: { projects: data },
-} = await getContent(projectsQuery);
-const { id } = Astro.props;
+} = await getContent(projectsQuery)
+const { id } = Astro.props
 ---
 
 <div class="featured container" id={id} data-parent-container>
-    <header class="header">
-        <h2>{data.heading}</h2>
+    <header>
+        <h2 class="h1 featuredHeading">
+            {data.heading}
+        </h2>
     </header>
 
     <div class="projects">
@@ -113,7 +115,40 @@ const { id } = Astro.props;
         }
     }
 </style>
-<!-- 
+
+<script>
+    import { gsap } from "gsap"
+    import { ScrollTrigger, SplitText } from "gsap/all"
+
+    document.addEventListener("DOMContentLoaded", (e) => {
+        gsap.registerPlugin(SplitText, ScrollTrigger)
+
+        let featuredHeading = new SplitText(".featuredHeading", { type: "chars" })
+
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".aboutContainer",
+                endTrigger: ".featuredHeading",
+                start: "10% top",
+                end: "top 30%",
+                scrub: true,
+            },
+        })
+
+        tl.from(featuredHeading.chars, {
+            yPercent: "random([-200, 200])",
+            rotation: "random([-10, 10])",
+            autoAlpha: 0,
+            ease: "back.out",
+            color: "var(--text-brand-subtle)",
+            stagger: {
+                amount: 0.5,
+                from: "random",
+            },
+        })
+    })
+</script>
+<!--
 <div class="featured container" id={id} data-parent-container>
     <header class="header">
         <h2>{data.heading}</h2>
