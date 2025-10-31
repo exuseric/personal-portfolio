@@ -277,26 +277,25 @@
 
 .btn--md {
     font-size: var(--font-size-md);
+}
 
-    &:not(.btn--icon) {
-        padding: var(--size-2) var(--size-4);
-    }
+.btn--md:not(.btn--icon) {
+    padding: var(--size-2) var(--size-4);
 }
 
 .btn--lg {
     font-size: var(--font-size-md);
-
-    &:not(.btn--icon) {
-        padding: var(--size-3) var(--size-5);
-    }
+}
+.btn--lg:not(.btn--icon) {
+    padding: var(--size-3) var(--size-5);
 }
 
 .btn--xl {
     font-size: var(--font-size-lg);
+}
 
-    &:not(.btn--icon) {
-        padding: var(--size-4) var(--size-6);
-    }
+.btn--xl:not(.btn--icon) {
+    padding: var(--size-4) var(--size-6);
 }
 
 @media (prefers-reduced-motion: reduce) {
