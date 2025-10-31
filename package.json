@@ -1,66 +1,61 @@
 {
-  "name": "eric-gathoni-portfolio",
-  "version": "1.0.0",
-  "description": "Professional portfolio website for Eric Gathoni, a fullstack developer specializing in React, Astro, and web accessibility. Showcasing projects, skills, and professional experience.",
-  "main": "index.js",
-  "scripts": {
-    "dev": "astro dev --host",
-    "build": "astro check && astro build",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "check": "astro check",
-    "preview": "astro preview",
-    "lint": "astro check",
-    "hide": "astro preferences disable devToolbar",
-    "type-check": "tsc --noEmit"
-  },
-  "keywords": [
-    "portfolio",
-    "fullstack-developer",
-    "react",
-    "astro",
-    "web-development",
-    "frontend",
-    "accessibility",
-    "kenya",
-    "shopify",
-    "pocketbase",
-    "typescript",
-    "performance"
-  ],
-  "author": {
-    "name": "Eric Gathoni",
-    "email": "eric@ericmaina.me",
-    "url": "https://ericmaina.me"
-  },
-  "license": "MIT",
-  "type": "commonjs",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/exuseric/astro-portfolio"
-  },
-  "homepage": "https://ericmaina.me",
-  "dependencies": {
-    "@astrojs/check": "^0.9.4",
-    "@astrojs/netlify": "^6.5.10",
-    "@astrojs/react": "^4.3.1",
-    "@astrojs/sitemap": "^3.6.0",
-    "@astrojs/svelte": "^7.1.1",
-    "astro": "^5.15.0",
-    "astro-font": "^1.1.0",
-    "astro-google-fonts-optimizer": "^0.2.2",
-    "astro-icon": "^1.1.5",
-    "astro-purgecss": "^5.3.0",
-    "graphql-request": "^7.2.0",
-    "gsap": "^3.13.0",
-    "purgecss": "^7.0.2",
-    "typescript": "^5.9.2"
-  },
-  "devDependencies": {
-    "@iconify-json/mdi": "^1.2.3",
-    "@iconify-json/uil": "^1.2.3",
-    "astro-iconify": "^1.2.0",
-    "eslint-config-prettier": "^10.1.8",
-    "prettier": "3.6.2",
-    "prettier-plugin-astro": "^0.14.1"
-  }
+    "name": "eric-gathoni-portfolio",
+    "version": "1.0.0",
+    "description": "Professional portfolio website for Eric Gathoni, a fullstack developer specializing in React, Astro, and web accessibility. Showcasing projects, skills, and professional experience.",
+    "main": "index.js",
+    "scripts": {
+        "dev": "astro dev --host",
+        "build": "astro check && astro build",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "check": "astro check",
+        "preview": "astro preview",
+        "lint": "astro check",
+        "hide": "astro preferences disable devToolbar",
+        "type-check": "tsc --noEmit"
+    },
+    "keywords": [
+        "portfolio",
+        "fullstack-developer",
+        "react",
+        "astro",
+        "web-development",
+        "frontend",
+        "accessibility",
+        "kenya",
+        "shopify",
+        "pocketbase",
+        "typescript",
+        "performance"
+    ],
+    "author": {
+        "name": "Eric Gathoni",
+        "email": "hello@ericmaina.me",
+        "url": "https://ericmaina.me"
+    },
+    "license": "MIT",
+    "type": "commonjs",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/exuseric/astro-portfolio"
+    },
+    "homepage": "https://ericmaina.me",
+    "dependencies": {
+        "@astrojs/check": "^0.9.4",
+        "@astrojs/netlify": "^6.5.10",
+        "@astrojs/sitemap": "^3.6.0",
+        "astro": "^5.15.0",
+        "astro-font": "^1.1.0",
+        "astro-google-fonts-optimizer": "^0.2.2",
+        "astro-purgecss": "^5.3.0",
+        "graphql-request": "^7.2.0",
+        "gsap": "^3.13.0",
+        "purgecss": "^7.0.2",
+        "typescript": "^5.9.2"
+    },
+    "devDependencies": {
+        "astro-iconify": "^1.2.0",
+        "eslint-config-prettier": "^10.1.8",
+        "prettier": "3.6.2",
+        "prettier-plugin-astro": "^0.14.1"
+    }
 }
