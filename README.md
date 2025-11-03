@@ -111,10 +111,6 @@ The site is automatically deployed to Netlify with:
 - **Color Contrast** - WCAG AA compliant color schemes
 - **Focus Management** - Clear focus indicators
 
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -122,7 +118,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Contact
 
 - **Website**: [https://ericmaina.me](https://ericmaina.me)
-- **Email**: info@ericmaina.me
+- **Email**: hello@ericmaina.me
 - **LinkedIn**: [Eric Gathoni](https://linkedin.com/in/exuseric)
 - **GitHub**: [@exuseric](https://github.com/exuseric)
 
