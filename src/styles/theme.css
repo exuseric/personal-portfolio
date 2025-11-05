@@ -48,8 +48,8 @@
     /* Success Colors */
     --surface-success-default: var(--color-success-500);
     --surface-success-light: var(--color-success-50);
-    --surface-success-subtle: var(--color-success-50);
-    --surface-success-hover: var(--color-success-200);
+    --surface-success-subtle: var(--color-success-100);
+    --surface-success-hover: var(--color-success-400);
 
     --text-success-default: var(--color-success-700);
     --text-success-subtle: var(--color-success-400);
@@ -68,13 +68,13 @@
 
     /* Error Colors */
     --surface-error-default: var(--color-error-500);
-    --surface-error-subtle: var(--color-error-50);
-    --surface-error-hover: var(--color-error-200);
+    --surface-error-subtle: var(--color-error-100);
+    --surface-error-hover: var(--color-error-400);
 
     --text-error-default: var(--color-error-700);
-    --text-error-subtle: var(--color-error-400);
+    --text-error-subtle: var(--color-error-100);
     --text-error-hover: var(--color-error-800);
-    --text-on-error-color: var(--color-neutral-white);
+    --text-on-error-color: var(--color-error-900);
 
     /* Info Colors */
     --surface-info-default: var(--color-info-500);
@@ -122,5 +122,25 @@
         --text-secondary-hover: oklch(from var(--color-secondary-100) l calc(c - 0.09) h);
         --text-on-secondary-color: oklch(from var(--color-secondary-50) l calc(c - 0.09) h);
         --text-on-subtle-color: oklch(from var(--color-brand-300) l calc(c - 0.09) h);
+
+        --surface-success-default: oklch(from var(--color-success-800) l calc(c - 0.03) h);
+        --surface-success-light: oklch(from var(--color-success-950) l calc(c - 0.08) h);
+        --surface-success-subtle: oklch(from var(--color-success-900) l calc(c - 0.08) h);
+        --surface-success-hover: oklch(from var(--color-success-700) l calc(c - 0.09) h);
+
+        --text-success-default: oklch(from var(--color-success-500) l calc(c - 0.15) h);
+        --text-success-subtle: oklch(from var(--color-success-100) l calc(c - 0.09) h);
+        --text-success-hover: oklch(from var(--color-success-100) l calc(c - 0.09) h);
+        --text-on-success-color: oklch(from var(--color-success-50) l calc(c - 0.09) h);
+
+        --surface-error-default: oklch(from var(--color-error-800) l calc(c - 0.03) h);
+        --surface-error-light: oklch(from var(--color-error-950) l calc(c - 0.08) h);
+        --surface-error-subtle: oklch(from var(--color-error-900) l calc(c - 0.08) h);
+        --surface-error-hover: oklch(from var(--color-error-700) l calc(c - 0.09) h);
+
+        --text-error-default: oklch(from var(--color-error-500) l calc(c - 0.15) h);
+        --text-error-subtle: oklch(from var(--color-error-100) l calc(c - 0.09) h);
+        --text-error-hover: oklch(from var(--color-error-100) l calc(c - 0.09) h);
+        --text-on-error-color: oklch(from var(--color-error-50) l calc(c - 0.09) h);
     }
 }

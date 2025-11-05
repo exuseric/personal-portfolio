@@ -8,7 +8,7 @@
     width: 100%;
     z-index: 999;
     padding: var(--_nav-padding-block) 0;
-    border: 0.12rem solid transparent;
+    border: var(--stroke-1) solid transparent;
     border-radius: var(--size-1);
     transition: all var(--transition-elastic-fast);
 
@@ -52,7 +52,7 @@
 
 .nav__container[data-active="true"] {
     box-shadow: var(--shadow-md);
-    border: 0.12rem solid oklch(from var(--surface-neutral-hover) l c h / 0.6);
+    border: var(--stroke-1) solid oklch(from var(--surface-neutral-hover) l c h / 0.6);
     background: linear-gradient(
         135deg,
         var(--surface-neutral-subtle) 0%,

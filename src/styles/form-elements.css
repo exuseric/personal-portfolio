@@ -8,14 +8,16 @@ select {
     font-size: var(--font-size-md);
     line-height: var(--lh-base);
     padding: var(--size-2) var(--size-3);
-    border: 0.12rem solid var(--surface-neutral-hover);
+    border: var(--stroke-1) solid var(--surface-neutral-hover);
     border-radius: 0.375rem;
     background-color: var(--surface-neutral-default);
     color: var(--text-neutral-default);
     transition:
-        all var(--transition-medium),
+        border-color var(--transition-medium),
+        outline-color var(--transition-medium),
+        box-shadow var(--transition-medium),
         background-color var(--transition-anticipate-slow);
-    outline: 0.12rem solid transparent;
+    outline: var(--stroke-1) solid transparent;
 }
 
 input:focus,
@@ -42,6 +44,7 @@ textarea:invalid:not(:placeholder-shown),
 .select--error {
     border-color: var(--surface-error-default);
     outline-color: var(--surface-error-default);
+    color: var(--text-on-error);
     background-color: var(--surface-error-subtle);
 }
 
@@ -65,6 +68,7 @@ textarea:valid,
 .select--valid {
     border-color: var(--surface-success-default);
     background-color: var(--surface-success-subtle);
+    color: var(--text-on-success);
 }
 
 input:valid:not(:placeholder-shown):focus-visible,
@@ -99,12 +103,14 @@ input[type="radio"] {
     margin: 0;
     padding: 0;
     vertical-align: middle;
-    border: 0.12rem solid var(--surface-neutral-subtle);
+    border: var(--stroke-1) solid var(--surface-neutral-subtle);
     border-radius: 0.25rem;
-    /* square for checkbox, overridden for radio */
     background-color: var(--surface-neutral-default);
     cursor: pointer;
-    transition: all var(--transition-micro-medium);
+    transition:
+        background-color var(--transition-micro-medium),
+        border-color var(--transition-micro-medium),
+        outline-color var(--transition-micro-medium);
 }
 
 input[type="radio"] {
@@ -119,7 +125,7 @@ input[type="radio"]:hover {
 
 input[type="checkbox"]:focus,
 input[type="radio"]:focus {
-    outline: 0.12rem solid var(--surface-accent-default);
+    outline: var(--stroke-1) solid var(--surface-accent-default);
     outline-offset: 0.1rem;
 }
 
@@ -136,7 +142,7 @@ input[type="checkbox"]:checked {
 input[type="radio"]:checked {
     background-color: var(--surface-brand-default);
     border-color: var(--surface-brand-default);
-    background-image: radial-gradient(circle, var(--text-on-brand-color) 40%, transparent 50%);
+    background-image: radial-gradient(circle, var(--text-on-brand) 40%, transparent 50%);
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -176,24 +182,28 @@ input[type="radio"]:disabled {
     right: 0;
     bottom: 0;
     background-color: var(--surface-neutral-hover);
-    border-radius: calc(infinity * 1px);
+    border-radius: 9999px;
     transition: background-color var(--transition-anticipate-medium);
 }
 
 .switch-slider::before {
-    content: url("src/images/solar--sun-bold.svg");
+    content: "";
     position: absolute;
     height: 1rem;
     width: 1rem;
-    font-size: 0.5em;
     left: calc(var(--size-1) * 0.5);
     bottom: calc(var(--size-1) * 0.5);
     background-color: var(--surface-neutral-subtle);
     border-radius: 50%;
-    background-size: 0.5em;
+    /* Sun icon - light mode */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23666'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cpath d='M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 0.625rem;
     transition:
         transform var(--transition-spring-fast),
-        background-color var(--transition-anticipate-medium);
+        background-color var(--transition-anticipate-medium),
+        background-image var(--transition-anticipate-medium);
 }
 
 /* Checked state */
@@ -202,7 +212,8 @@ input[type="radio"]:disabled {
 }
 
 .switch input:checked + .switch-slider::before {
-    content: url("src/images/solar--moon-bold.svg");
+    /* Moon icon - dark mode */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23666'%3E%3Cpath d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'/%3E%3C/svg%3E");
     transform: translateX(calc(var(--_switch-width) - var(--_switch-height)));
 }
 
@@ -252,12 +263,10 @@ input[type="radio"]:disabled {
     color: var(--text-neutral-subtle);
 }
 
-input:invalid:not(:placeholder-shown),
-select:invalid,
-textarea:invalid:not(:placeholder-shown) {
-    ~ .form-helper {
-        display: block;
-    }
+input:invalid:not(:placeholder-shown) ~ .form-helper,
+select:invalid ~ .form-helper,
+textarea:invalid:not(:placeholder-shown) ~ .form-helper {
+    display: block;
 }
 
 /* Success / Error helper text */
@@ -267,6 +276,15 @@ textarea:invalid:not(:placeholder-shown) {
 
 .form-helper-error {
     color: var(--text-error-default);
+}
+.form-general-error {
+    display: none;
+    color: var(--text-on-error-color);
+    background-color: var(--surface-error-subtle);
+    margin-bottom: var(--size-1);
+    padding: var(--size-1) var(--size-2);
+    font-size: var(--font-size-xs);
+    border-radius: var(--radius-sm);
 }
 
 /* Checkbox / Radio Label Wrappers */
@@ -292,7 +310,7 @@ textarea:invalid:not(:placeholder-shown) {
     cursor: not-allowed;
 }
 
-/* Switch Label Wrappers  */
+/* Switch Label Wrappers */
 .form-switch {
     display: flex;
     align-items: center;
