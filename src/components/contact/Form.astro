@@ -1,218 +1,260 @@
 ---
-import Button from "@/components/Button/Button.astro";
+import Button from "@/components/Button/Button.astro"
 ---
 
 <form class="contact__form" id="contactForm">
-  <div class="form-group">
-    <label for="name" class="form-label">Full name</label>
-    <input
-      id="name"
-      name="name"
-      type="text"
-      class="input"
-      placeholder="Enter your name"
-      autocomplete="name"
-      minlength="2"
-      required
-      transition:persist
-    />
-    <p class="form-helper form-helper-error" data-error-for="name">
-      Name must be at least 2 characters.
-    </p>
-  </div>
-  <div class="form-group">
-    <label for="email" class="form-label">Email Address</label>
-    <input
-      id="email"
-      name="email"
-      type="email"
-      class="input"
-      pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-      placeholder="mail@example.com"
-      autocomplete="email"
-      required
-      transition:persist
-    />
-    <p class="form-helper form-helper-error" data-error-for="email">
-      Invalid email address; mail@example.com
-    </p>
-  </div>
-  <div class="form-group">
-    <label for="inquiry" class="form-label">Inquiry</label>
-    <select name="inquiry" id="inquiry" transition:persist>
-      <option value="General Inquiry" selected>General Inquiry</option>
-      <option value="Project Inquiry">Project Inquiry</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="message" class="form-label">Your Message</label>
-    <textarea
-      id="message"
-      name="message"
-      class="textarea"
-      rows="4"
-      maxlength="1000"
-      minlength="10"
-      required
-      placeholder="Write your message..."
-      transition:persist></textarea>
-    <p class="form-helper form-helper-error" data-error-for="message">
-      Your message must be at least 10 characters long
-    </p>
-  </div>
+    <p class="form-helper form-general-error"></p>
+    <div class="form-group">
+        <label for="name" class="form-label">Full name</label>
+        <input
+            id="name"
+            name="name"
+            type="text"
+            class="input"
+            placeholder="Enter your name"
+            autocomplete="name"
+            minlength="2"
+            required
+            transition:persist
+        />
+        <p class="form-helper form-helper-error" data-error-for="name">Name must be at least 2 characters.</p>
+    </div>
+    <div class="form-group">
+        <label for="email" class="form-label">Email Address</label>
+        <input
+            id="email"
+            name="email"
+            type="email"
+            class="input"
+            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+            placeholder="mail@example.com"
+            autocomplete="email"
+            required
+            transition:persist
+        />
+        <p class="form-helper form-helper-error" data-error-for="email">Invalid email address; mail@example.com</p>
+    </div>
+    <div class="form-group">
+        <label for="inquiry" class="form-label">Inquiry</label>
+        <select name="inquiry" id="inquiry" transition:persist>
+            <option value="General Inquiry" selected>General Inquiry</option>
+            <option value="Project Inquiry">Project Inquiry</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="message" class="form-label">Your Message</label>
+        <textarea
+            id="message"
+            name="message"
+            class="textarea"
+            rows="4"
+            maxlength="1000"
+            minlength="10"
+            required
+            placeholder="Write your message..."
+            transition:persist></textarea>
+        <p class="form-helper form-helper-error" data-error-for="message">
+            Your message must be at least 10 characters long
+        </p>
+    </div>
 
-  <div class="form-group">
-    <Button
-      type="submit"
-      variant="default"
-      as="default"
-      label="Send Message"
-      attributes={{
-        dataset: {
-          isSubmitting: false,
-          isSuccess: false,
-          isError: false,
-        },
-      }}
-    />
-  </div>
+    <div class="form-group">
+        <Button
+            type="submit"
+            variant="primary"
+            as="default"
+            label="Send Message"
+            attributes={{
+                dataset: {
+                    isSubmitting: false,
+                    isSuccess: false,
+                    isError: false,
+                },
+            }}
+        />
+    </div>
 </form>
 
 <style></style>
 
 <script>
-  import { actions, isInputError } from "astro:actions";
+    import { actions, isInputError } from "astro:actions"
 
-  const form = document.querySelector("#contactForm") as HTMLFormElement;
-  if (!form) throw new Error("Contact form not found");
+    const form = document.querySelector("#contactForm") as HTMLFormElement
+    if (!form) throw new Error("Contact form not found")
 
-  const submitButton = form.querySelector(
-    "button[type='submit']",
-  ) as HTMLButtonElement;
-  if (!submitButton) throw new Error("Submit button not found");
+    const submitButton = form.querySelector("button[type='submit']") as HTMLButtonElement
+    if (!submitButton) throw new Error("Submit button not found")
 
-  type SubmitButtonState = {
-    isSubmitting?: boolean;
-    isSuccess?: boolean;
-    isError?: boolean;
-  };
-
-  type FormInputs = {
-    name?: string[];
-    email?: string[];
-    inquiry?: string[];
-    message?: string[];
-  };
-
-  const toggleSubmitButtonState = ({
-    isSubmitting = false,
-    isSuccess = false,
-    isError = false,
-  }: SubmitButtonState) => {
-    submitButton.dataset.isSubmitting = isSubmitting.toString();
-    submitButton.dataset.isSuccess = isSuccess.toString();
-    submitButton.dataset.isError = isError.toString();
-
-    submitButton.classList.toggle("btn--success", isSuccess);
-    submitButton.classList.toggle("btn--danger", isError);
-
-    if (isSubmitting) {
-      submitButton.textContent = "Sending Message...";
-    } else if (isSuccess) {
-      submitButton.textContent = "Message Sent!";
-    } else if (isError) {
-      submitButton.textContent = "Error Sending Message";
-    } else {
-      submitButton.textContent = "Send Message";
-    }
-  };
-
-  const sendMessage = async (formData: FormData) => {
-    toggleSubmitButtonState({ isSubmitting: true });
-    const data = await actions.contact.sendToMe(formData);
-    return data;
-  };
-
-  const sendAutoReply = async (formData: FormData) => {
-    const data = await actions.contact.sendAutoReply(formData);
-    console.log("Auto-reply sent:", data);
-
-    if (!data?.error) {
-      toggleSubmitButtonState({ isSuccess: true });
+    type FormInputsData = {
+        name?: string[]
+        email?: string[]
+        inquiry?: string[]
+        message?: string[]
     }
 
-    return data;
-  };
-  const handleInputErrors = ({
-    fields,
-    form,
-  }: {
-    fields: FormInputs;
-    form: HTMLFormElement;
-  }) => {
-    Object.keys(fields).forEach((fieldName) => {
-      const errorElement = form.querySelector(
-        `[data-error-for="${fieldName}"]`,
-      ) as HTMLElement;
+    const ERROR_MESSAGES = {
+        VALIDATION: "Please check your input and try again",
+        NETWORK: "Network error. Check your connection and retry",
+        TIMEOUT: "Request timed out. Please try again",
+        SERVER: "Server error. Please try again later",
+        UNKNOWN: "Something went wrong. Please try again",
+    } as const
 
-      if (fields[fieldName]) {
-        errorElement.textContent = fields[fieldName].join(", ");
-      }
+    // Track timeouts for cleanup
+    let stateResetTimeout: ReturnType<typeof setTimeout> | null = null
 
-      errorElement.style.display = "block";
-    });
-  };
-
-  const clearInputErrors = (form: HTMLFormElement) => {
-    const errorElements = form.querySelectorAll(
-      ".form-helper-error",
-    ) as NodeListOf<HTMLElement>;
-
-    errorElements.forEach((el) => {
-      el.style.display = "none";
-    });
-  };
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(form);
-
-    const { data: messageSent, error } = await sendMessage(formData);
-
-    if (isInputError(error)) {
-      handleInputErrors({ fields: error.fields, form });
-      toggleSubmitButtonState({ isError: true, isSubmitting: false });
-
-      setTimeout(() => {
-        toggleSubmitButtonState({
-          isSubmitting: false,
-          isError: false,
-        });
-      }, 3000);
-    } else {
-      clearInputErrors(form);
+    const clearStateTimeout = () => {
+        if (stateResetTimeout) {
+            clearTimeout(stateResetTimeout)
+            stateResetTimeout = null
+        }
     }
 
-    if (messageSent?.success) {
-      const { data: autoReplySent, error } = await sendAutoReply(formData);
+    const setButtonState = (state: "idle" | "submitting" | "success" | "error") => {
+        const states = {
+            idle: { text: "Send Message", disabled: false, classes: [] },
+            submitting: { text: "Sending Message...", disabled: true, classes: ["btn--outline"] },
+            success: { text: "Message Sent!", disabled: false, classes: ["btn--success"] },
+            error: { text: "Try Again", disabled: false, classes: ["btn--danger"] },
+        }
 
-      error && toggleSubmitButtonState({ isError: true });
-      autoReplySent?.success &&
-        toggleSubmitButtonState({
-          isSuccess: true,
-          isSubmitting: false,
-          isError: false,
-        });
-
-      setTimeout(() => {
-        toggleSubmitButtonState({
-          isSubmitting: false,
-          isSuccess: false,
-          isError: false,
-        });
-        form.reset();
-      }, 3000);
+        const config = states[state]
+        submitButton.textContent = config.text
+        submitButton.disabled = config.disabled
+        submitButton.className = submitButton.className.replace(/btn--(success|danger)/g, "")
+        config.classes.forEach((cls) => submitButton.classList.add(cls))
     }
-  });
+
+    const setFormFieldsDisabled = (disabled: boolean = false) => {
+        const formElements = form.querySelectorAll('input:not([type="hidden"]), textarea, select') as NodeListOf<
+            HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+        >
+        formElements.forEach((el) => {
+            el.disabled = disabled
+        })
+    }
+
+    const handleInputErrors = ({ fields, form }: { fields: FormInputsData; form: HTMLFormElement }) => {
+        Object.keys(fields).forEach((fieldName) => {
+            const errorElement = form.querySelector(`[data-error-for="${fieldName}"]`) as HTMLElement
+            if (errorElement && fields[fieldName]) {
+                errorElement.textContent = fields[fieldName]!.join(", ")
+                errorElement.style.display = "block"
+            }
+        })
+    }
+
+    const clearInputErrors = (form: HTMLFormElement) => {
+        const errorElements = form.querySelectorAll(".form-helper-error") as NodeListOf<HTMLElement>
+        errorElements.forEach((el) => {
+            el.style.display = "none"
+            el.textContent = ""
+        })
+    }
+
+    const showGeneralError = (message: string) => {
+        // Look for a general error message element
+        let generalError = form.querySelector(".form-general-error") as HTMLElement
+        generalError.textContent = message
+        generalError.style.display = "block"
+    }
+
+    const hideGeneralError = () => {
+        const generalError = form.querySelector(".form-general-error") as HTMLElement
+        if (generalError) {
+            generalError.style.display = "none"
+            generalError.textContent = ""
+        }
+    }
+
+    const resetAfterDelay = (state: "success" | "error", delay: number = 4000) => {
+        if (stateResetTimeout) clearTimeout(stateResetTimeout)
+        stateResetTimeout = setTimeout(() => {
+            setButtonState("idle")
+            hideGeneralError()
+            if (state === "success") form.reset()
+        }, delay)
+    }
+
+    form.addEventListener("submit", async (e: SubmitEvent) => {
+        e.preventDefault()
+
+        // Clear any existing timeouts
+        clearStateTimeout()
+
+        // Clear previous errors
+        clearInputErrors(form)
+        hideGeneralError()
+
+        const formData = new FormData(form)
+
+        // Update UI to submitting state
+        setButtonState("submitting")
+        setFormFieldsDisabled(true)
+
+        try {
+            const { data: messageSent, error } = await actions.contact.sendMessage(formData)
+
+            // Handle input validation errors
+            if (isInputError(error)) {
+                handleInputErrors({ fields: error.fields, form })
+                showGeneralError(ERROR_MESSAGES.VALIDATION)
+                setButtonState("error")
+                setFormFieldsDisabled(false)
+                resetAfterDelay("error")
+
+                return
+            }
+
+            // Handle unexpected errors from action
+            if (error) {
+                console.error("Unexpected error:", error)
+                showGeneralError(ERROR_MESSAGES.UNKNOWN)
+                setButtonState("error")
+                setFormFieldsDisabled(false)
+                resetAfterDelay("error")
+
+                return
+            }
+
+            // Handle email sending results
+            if (messageSent?.success) {
+                setButtonState("success")
+                setFormFieldsDisabled(false)
+                resetAfterDelay("success")
+            } else {
+                // Email sending failed
+                const errorMessage = messageSent?.error?.message || ERROR_MESSAGES.UNKNOWN
+
+                // Try to categorize the error
+                let displayMessage: string = ERROR_MESSAGES.UNKNOWN
+
+                if (errorMessage.toLowerCase().includes("timeout")) {
+                    displayMessage = ERROR_MESSAGES.TIMEOUT
+                } else if (errorMessage.toLowerCase().includes("network")) {
+                    displayMessage = ERROR_MESSAGES.NETWORK
+                } else if (errorMessage.toLowerCase().includes("server")) {
+                    displayMessage = ERROR_MESSAGES.SERVER
+                }
+
+                showGeneralError(displayMessage)
+                setButtonState("error")
+                setFormFieldsDisabled(false)
+                resetAfterDelay("error")
+            }
+        } catch (err) {
+            // Catch any unexpected runtime errors
+            console.error("Form submission error:", err)
+            showGeneralError(ERROR_MESSAGES.UNKNOWN)
+            setButtonState("error")
+            setFormFieldsDisabled(false)
+            resetAfterDelay("error")
+        }
+    })
+
+    // Cleanup on page unload
+    window.addEventListener("beforeunload", () => {
+        if (stateResetTimeout) clearTimeout(stateResetTimeout)
+    })
 </script>
