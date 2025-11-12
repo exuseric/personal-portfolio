@@ -48,9 +48,10 @@ const { heading, faq } = response.faq
         --_radius: var(--radius-lg);
         overflow: hidden;
         transition:
-            height var(--transition-elastic-fast),
-            border-radius var(--transition-micro-slow),
-            margin var(--transition-elastic-medium);
+            height var(--transition-elastic-medium),
+            border-radius var(--transition-elastic-slow),
+            margin var(--transition-elastic-medium),
+            border-color var(--transition-elastic-slow);
         transition-behavior: allow-discrete;
         border: var(--stroke-1) solid var(--surface-neutral-light);
         padding: var(--size-4);
@@ -116,8 +117,8 @@ const { heading, faq } = response.faq
         border-top-right-radius: var(--_radius);
     }
     /*removes the double border between details*/
-    details:not(:first-child, details[open], details[open] + details) {
-        border-top: none;
+    details:not(:last-child, details[open], :has(+ details[open])) {
+        border-bottom-color: transparent;
         /*background: yellow;*/
     }
 
@@ -128,7 +129,7 @@ const { heading, faq } = response.faq
     }
 </style>
 
-<script>
+<!-- <script>
     import { gsap } from "gsap"
     import { ScrollTrigger, SplitText } from "gsap/all"
 
@@ -143,20 +144,20 @@ const { heading, faq } = response.faq
                 endTrigger: ".faqHeading",
                 start: "50% top",
                 end: "top 30%",
-                scrub: true,
+                scrub: false,
             },
         })
 
         tl.from(heading.chars, {
-            yPercent: "random([-200, 200])",
-            rotation: "random([-10, 10])",
-            autoAlpha: 0,
+            // yPercent: "random([-200, 200])",
+            // rotation: "random([-10, 10])",
+            // autoAlpha: 0,
             ease: "back.out",
-            color: "var(--text-brand-subtle)",
+            color: "var(--text-neutral-subtle)",
             stagger: {
                 amount: 0.5,
                 from: "random",
             },
         })
     })
-</script>
+</script> -->
