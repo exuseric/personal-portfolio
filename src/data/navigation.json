@@ -1,37 +1,36 @@
 {
     "nav": {
-      "logo": {
-        "text": "Eric Gathoni",
-        "url": "/",
-        "img": "/images/logo.png"
-      },
-      "links": [
-        {
-          "label": "Home",
-          "url": "/",
-          "type": "internal"
+        "logo": {
+            "text": "Eric Gathoni",
+            "url": "/",
+            "img": "/images/logo.png"
         },
-        {
-          "label": "Projects",
-          "url": "#projects",
-          "type": "internal"
+        "links": [
+            {
+                "label": "Home",
+                "url": "/",
+                "type": "internal"
+            },
+            {
+                "label": "Contact",
+                "url": "#contact",
+                "type": "internal"
+            },
+            {
+                "label": "About",
+                "url": "#about",
+                "type": "internal"
+            }
+        ],
+        "cta": {
+            "label": "Get in Touch",
+            "url": "#contact",
+            "type": "internal",
+            "style": "brand"
         },
-        {
-          "label": "About",
-          "url": "#about",
-          "type": "internal"
+        "mobile": {
+            "menuLabel": "Menu",
+            "closeLabel": "Close"
         }
-      ],
-      "cta": {
-        "label": "Get in Touch",
-        "url": "#contact",
-        "type": "internal",
-        "style": "brand" 
-      },
-      "mobile": {
-        "menuLabel": "Menu",
-        "closeLabel": "Close"
-      }
     }
-  }
-  
+}
