@@ -11,22 +11,22 @@ const { heading, faq } = response.faq
         <header class="full-width">
             <h2 class="h1 faqHeading">{heading}</h2>
         </header>
-        {
-            faq &&
-                faq.map((faq, index) => (
-                    <div class="accordionItem">
+        <div class="accordionItem full-width">
+            {
+                faq &&
+                    faq.map((faq, index) => (
                         <details open={index === 0} data-index={index} name="faq">
-                            <summary class="flex-between">
+                            <summary>
                                 <h3>{faq.question}</h3>
-                                <!-- <Icon name="mdi:caret" class="accordionIcon" aria-hidden="true" focusable="false" /> -->
+                                <Icon name="mdi:caret" class="icon" aria-hidden="true" focusable="false" />
                             </summary>
-                            <div class="accordionBody">
+                            <div>
                                 <Fragment set:html={faq.answer.html} />
                             </div>
                         </details>
-                    </div>
-                ))
-        }
+                    ))
+            }
+        </div>
     </div>
 </div>
 
@@ -36,78 +36,90 @@ const { heading, faq } = response.faq
         margin-bottom: var(--size-12);
     }
 
-    .accordionItem {
-        padding: var(--size-8) var(--size-4);
-        align-items: center;
-        border: var(--stroke-1) solid transparent;
-
-        &:not(:first-child) {
-            border-top-color: var(--surface-neutral-subtle);
-        }
-
-        &:has(details[open]) {
-            background:
-                linear-gradient(var(--surface-neutral-default) 0 0) padding-box,
-                linear-gradient(35deg, var(--surface-neutral-subtle), var(--surface-neutral-hover)) border-box;
-            border-radius: var(--radius-lg);
-
-            &,
-            & + * {
-                border-top-color: transparent;
-            }
-        }
-    }
-
-    .accordionBody {
+    details > div {
         display: flex;
         flex-direction: column;
-        row-gap: var(--size-4);
+        gap: var(--size-4);
 
         padding-top: var(--size-8);
     }
 
-    .accordionIcon {
-        color: var(--text-neutral-subtle);
-        transition: transform var(--transition-micro-fast);
-        font-size: var(--font-size-lg);
+    details {
+        --_radius: var(--radius-lg);
+        overflow: hidden;
+        transition:
+            height var(--transition-elastic-medium),
+            border-radius var(--transition-elastic-slow),
+            margin var(--transition-elastic-medium),
+            border-color var(--transition-elastic-slow);
+        transition-behavior: allow-discrete;
+        border: var(--stroke-1) solid var(--surface-neutral-light);
+        padding: var(--size-4);
+
+        &::details-content {
+            block-size: 0;
+            transition:
+                block-size var(--transition-elastic-medium),
+                content-visibility var(--transition-micro-slow);
+            transition-behavior: allow-discrete;
+        }
     }
 
-    details {
-        overflow: hidden;
+    summary {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-items: center;
 
+        color: var(--text-neutral-subtle);
+        cursor: pointer;
+        margin-bottom: var(--size-2);
+
+        h3 {
+            margin-block: 0;
+            max-width: 23ch;
+        }
+
+        .icon {
+            color: currentColor;
+            max-width: var(--size-5);
+        }
+    }
+
+    details[open] {
+        border-radius: var(--_radius);
+        margin-block: var(--size-8);
+
+        &::details-content {
+            block-size: auto;
+        }
         summary {
-            color: var(--text-neutral-subtle);
-            cursor: pointer;
-
-            h3 {
-                margin-block: 0;
-                max-width: 23ch;
+            color: var(--text-brand-default);
+            .icon {
+                transform: rotate(180deg);
             }
         }
     }
 
-    details::details-content {
-        block-size: 0;
-        transition:
-            block-size var(--transition-anticipate-medium),
-            content-visibility var(--transition-anticipate-medium);
-        transition-behavior: allow-discrete;
+    /*previous sibling*/
+    details:has(+ details[open]),
+    details:last-child {
+        /*background: red;*/
+        border-bottom-left-radius: var(--_radius);
+        border-bottom-right-radius: var(--_radius);
     }
 
-    details[open]::details-content {
-        block-size: auto;
+    /*next sibling*/
+    details[open] + details,
+    details:first-child {
+        /*background: blue;*/
+        border-top-left-radius: var(--_radius);
+        border-top-right-radius: var(--_radius);
     }
-
-    details[open] {
-        summary {
-            color: var(--text-neutral-default);
-        }
-        .accordionIcon {
-            transform: rotate(180deg);
-            color: var(--text-neutral-default);
-            background-color: var(--surface-brand-subtle);
-            border-radius: var(--radius-round);
-        }
+    /*removes the double border between details*/
+    details:not(:last-child, details[open], :has(+ details[open])) {
+        border-bottom-color: transparent;
+        /*background: yellow;*/
     }
 
     @media (min-width: 768px) {
@@ -117,7 +129,7 @@ const { heading, faq } = response.faq
     }
 </style>
 
-<script>
+<!-- <script>
     import { gsap } from "gsap"
     import { ScrollTrigger, SplitText } from "gsap/all"
 
@@ -132,20 +144,20 @@ const { heading, faq } = response.faq
                 endTrigger: ".faqHeading",
                 start: "50% top",
                 end: "top 30%",
-                scrub: true,
+                scrub: false,
             },
         })
 
         tl.from(heading.chars, {
-            yPercent: "random([-200, 200])",
-            rotation: "random([-10, 10])",
-            autoAlpha: 0,
+            // yPercent: "random([-200, 200])",
+            // rotation: "random([-10, 10])",
+            // autoAlpha: 0,
             ease: "back.out",
-            color: "var(--text-brand-subtle)",
+            color: "var(--text-neutral-subtle)",
             stagger: {
                 amount: 0.5,
                 from: "random",
             },
         })
     })
-</script>
+</script> -->

@@ -9,9 +9,9 @@
     --transition-exit-slow: calc(var(--duration-content-slow) * var(--exit-multiplier)) var(--ease-exit);
 
     /* Elastic transitions */
-    --transition-elastic-fast: var(--duration-content-fast) var(--ease-elastic-out);
-    --transition-elastic-medium: var(--duration-content-medium) var(--ease-elastic-out);
-    --transition-elastic-slow: var(--duration-content-slow) var(--ease-elastic-out);
+    --transition-elastic-fast: var(--duration-cinematic-fast) var(--ease-elastic);
+    --transition-elastic-medium: var(--duration-cinematic-medium) var(--ease-elastic);
+    --transition-elastic-slow: var(--duration-cinematic-slow) var(--ease-elastic);
 
     --transition-elastic-in-fast: var(--duration-content-fast) var(--ease-elastic-in);
     --transition-elastic-in-medium: var(--duration-content-medium) var(--ease-elastic-in);
@@ -40,7 +40,6 @@
     --transition-anticipate-fast: var(--duration-content-fast) var(--ease-anticipate);
     --transition-anticipate-medium: var(--duration-content-medium) var(--ease-anticipate);
     --transition-anticipate-slow: var(--duration-content-slow) var(--ease-anticipate);
-
 
     /* Property-specific */
     --transition-opacity: var(--transition-medium);
@@ -99,7 +98,6 @@
     }
 }
 
-
 @keyframes fade-in-top {
     0% {
         translate: 0 -50px;
@@ -141,7 +139,6 @@
 }
 
 @keyframes fade-out-bottom {
-
     0% {
         opacity: 1;
         translate: 0 0;

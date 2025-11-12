@@ -112,7 +112,9 @@ ul.nav__list {
     border-radius: var(--radius-lg);
     overflow: hidden;
     background-color: transparent;
-    transition: height var(--transition-micro-fast);
+    transition: height var(--transition-elastic-fast);
+    transition-behavior: allow-discrete;
+
     .nav__link {
         --_justify-content: flex-start;
         --_min-height: 3.8rem;
@@ -121,6 +123,12 @@ ul.nav__list {
         width: 100%;
         font-size: var(--font-size-5xl);
         padding-inline: var(--size-4);
+    }
+}
+@starting-style {
+    .nav__links {
+        height: 0;
+        background-color: transparent;
     }
 }
 
