@@ -44,34 +44,34 @@ const data = res.homePage.hero
 </style>
 
 <script>
-    import { gsap } from "gsap"
+    // import { gsap } from "gsap"
 
-    import { SplitText } from "gsap/all"
+    // import { SplitText } from "gsap/all"
 
-    document.addEventListener("DOMContentLoaded", (e) => {
-        gsap.registerPlugin(SplitText)
+    // document.addEventListener("DOMContentLoaded", (e) => {
+    //     gsap.registerPlugin(SplitText)
 
-        let heroSplit = new SplitText(".hero__title", { type: "chars, lines" })
-        let paragraphSplit = new SplitText(".hero__paragraph", { type: "words" })
+    //     let heroSplit = new SplitText(".hero__title", { type: "chars, lines" })
+    //     let paragraphSplit = new SplitText(".hero__paragraph", { type: "words" })
 
-        gsap.from(heroSplit.chars, {
-            yPercent: "random([-200, 200])",
-            rotation: "random([-10, 10])",
-            autoAlpha: 0,
-            ease: "back.out",
-            stagger: {
-                amount: 0.5,
-                from: "random",
-            },
-        })
-        gsap.from(paragraphSplit.words, {
-            yPercent: "random([-50, 50])",
-            autoAlpha: 0,
-            ease: "power1.out",
-            stagger: {
-                amount: 0.5,
-                from: "center",
-            },
-        })
-    })
+    //     gsap.from(heroSplit.chars, {
+    //         yPercent: "random([-200, 200])",
+    //         rotation: "random([-10, 10])",
+    //         autoAlpha: 0,
+    //         ease: "back.out",
+    //         stagger: {
+    //             amount: 0.5,
+    //             from: "random",
+    //         },
+    //     })
+    //     gsap.from(paragraphSplit.words, {
+    //         yPercent: "random([-50, 50])",
+    //         autoAlpha: 0,
+    //         ease: "power1.out",
+    //         stagger: {
+    //             amount: 0.5,
+    //             from: "center",
+    //         },
+    //     })
+    // })
 </script>
