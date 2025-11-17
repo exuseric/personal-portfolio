@@ -5,11 +5,11 @@ const { nav } = data
 import Button from "@/components/Button/Button.astro"
 ---
 
-<nav data-menu data-is-menu-open="false" class="nav__links" aria-label="Main Navigation">
-    <ul class:list={["nav__list"]}>
+<nav class="nav__menu" aria-label="Main Navigation">
+    <ul>
         {
             nav.links.map((link) => (
-                <li class:list={["nav__listItem"]}>
+                <li>
                     <Button as="default" href={link.url} label={link.label} variant="link" classList={["nav__link"]} />
                 </li>
             ))

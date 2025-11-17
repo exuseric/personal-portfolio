@@ -17,9 +17,9 @@
     --transition-elastic-in-medium: var(--duration-content-medium) var(--ease-elastic-in);
     --transition-elastic-in-slow: var(--duration-content-slow) var(--ease-elastic-in);
 
-    --transition-elastic-out-fast: var(--duration-content-fast) var(--ease-elastic-out);
-    --transition-elastic-out-medium: var(--duration-content-medium) var(--ease-elastic-out);
-    --transition-elastic-out-slow: var(--duration-content-slow) var(--ease-elastic-out);
+    --transition-elastic-out-fast: var(--duration-cinematic-fast) var(--ease-elastic-out);
+    --transition-elastic-out-medium: var(--duration-cinematic-medium) var(--ease-elastic-out);
+    --transition-elastic-out-slow: var(--duration-cinematic-slow) var(--ease-elastic-out);
 
     /* Bounce */
     --transition-bounce-fast: var(--duration-content-fast) var(--ease-bounce);
@@ -177,5 +177,40 @@
 @keyframes slide-to-left {
     to {
         transform: translateX(-30px);
+    }
+}
+
+@keyframes scale-in {
+    from {
+        height: 0;
+        visibility: hidden;
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    to {
+        height: auto;
+        visibility: visible;
+    }
+}
+
+@keyframes scale-out {
+    from {
+        height: auto;
+        visibility: visible;
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    to {
+        height: 0;
+        visibility: hidden;
+        transform: scale(0);
+        opacity: 0;
     }
 }

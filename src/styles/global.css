@@ -6,6 +6,7 @@
 @import "./form-elements.css" layer(components);
 @import "./animations.css" layer(animations);
 @import "./button.css" layer(components);
+@import "./navigation.css" layer(components);
 
 @layer utilities {
     .flex-between {
@@ -25,6 +26,18 @@
 
     .section-heading {
         text-transform: uppercase;
+    }
+
+    .glass {
+        color: var(--text-neutral-default);
+        background-color: var(--surface-brand-light);
+        border-color: var(--surface-brand-subtle);
+
+        @supports (backdrop-filter: blur(20px)) {
+            backdrop-filter: blur(20px);
+            background-color: oklch(from var(--surface-brand-light) l c h / 0.4);
+            border-color: oklch(from var(--surface-brand-light) l c h / 0.6);
+        }
     }
 }
 
@@ -74,6 +87,7 @@
 }
 
 @layer elements {
+
     /* Typography */
     h1,
     h2,
@@ -163,10 +177,7 @@
 
         display: grid;
         grid-template-columns:
-            [full-width-start] minmax(var(--padding-inline), 1fr) [breakout-start] minmax(0, var(--breakout-size))
-            [content-start] min(100% - (var(--padding-inline) * 2), var(--content-max-width))
-            [content-end] minmax(0, var(--breakout-size)) [breakout-end] minmax(var(--padding-inline), 1fr)
-            [full-width-end];
+            [full-width-start] minmax(var(--padding-inline), 1fr) [breakout-start] minmax(0, var(--breakout-size)) [content-start] min(100% - (var(--padding-inline) * 2), var(--content-max-width)) [content-end] minmax(0, var(--breakout-size)) [breakout-end] minmax(var(--padding-inline), 1fr) [full-width-end];
         width: 100%;
     }
 
@@ -174,15 +185,15 @@
         --content-max-width: var(--content-width);
     }
 
-    .container > :not(.breakout, .full-width) {
+    .container> :not(.breakout, .full-width) {
         grid-column: content;
     }
 
-    .container > .breakout {
+    .container>.breakout {
         grid-column: breakout;
     }
 
-    .container > .full-width {
+    .container>.full-width {
         grid-column: full-width;
     }
 
@@ -236,22 +247,52 @@
 
             background-color: var(--surface-neutral-default);
             /* border-radius: var(--radius-round); */
-            clip-path: polygon(
-                0% 0%,
-                0% 100%,
-                25% 100%,
-                25% 25%,
-                75% 25%,
-                75% 75%,
-                25% 75%,
-                25% 100%,
-                100% 100%,
-                100% 0%
-            );
+            clip-path: polygon(0% 0%,
+                    0% 100%,
+                    25% 100%,
+                    25% 25%,
+                    75% 25%,
+                    75% 75%,
+                    25% 75%,
+                    25% 100%,
+                    100% 100%,
+                    100% 0%);
 
             z-index: -1;
         }
     }
+
+    .grid-cols-12 {
+        --_inline-padding: var(--size-4);
+        --_column-gap: 3rem;
+        /* min + max column width (in px) */
+        --col-min: 2;
+        --col-max: 5.8;
+
+        /* fluid interpolation between 320px → 1280px */
+        --col-size: calc(var(--col-min) * 1rem + (var(--col-max) - var(--col-min)) * ((100vw - 768px) / (1300 - 768)));
+
+        width: 100%;
+        /* max-width: min(100% - var(--_inline-padding), 1300px); */
+        /* margin: 0 auto; */
+
+        display: grid;
+        grid-template-columns: repeat(6, minmax(var(--col-size), 1fr));
+        gap: var(--size-2);
+
+    }
+
+    @media (min-width: 768px) {
+        .grid-cols-12 {
+            --_inline-padding: var(--size-8);
+
+            display: grid;
+            grid-template-columns: repeat(12, minmax(var(--col-size), 1fr));
+            gap: var(--size-8);
+        }
+    }
+
+
 }
 
 @layer components {
@@ -307,6 +348,7 @@
 }
 
 @layer utilities {
+
     /*=================================*/
     /* Utility Theme Classes           */
     /*=================================*/

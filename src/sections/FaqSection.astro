@@ -18,10 +18,12 @@ const { heading, faq } = response.faq
                         <details open={index === 0} data-index={index} name="faq">
                             <summary>
                                 <h3>{faq.question}</h3>
-                                <Icon name="mdi:caret" class="icon" aria-hidden="true" focusable="false" />
+                                {/* <Icon name="mdi:caret" class="icon" aria-hidden="true" focusable="false" /> */}
                             </summary>
-                            <div>
-                                <Fragment set:html={faq.answer.html} />
+                            <div class="details-content-wrapper">
+                                <div class="details-content-inner">
+                                    <Fragment set:html={faq.answer.html} />
+                                </div>
                             </div>
                         </details>
                     ))
@@ -36,41 +38,11 @@ const { heading, faq } = response.faq
         margin-bottom: var(--size-12);
     }
 
-    details > div {
-        display: flex;
-        flex-direction: column;
-        gap: var(--size-4);
-
-        padding-top: var(--size-8);
-    }
-
-    details {
-        --_radius: var(--radius-lg);
-        overflow: hidden;
-        transition:
-            height var(--transition-elastic-medium),
-            border-radius var(--transition-elastic-slow),
-            margin var(--transition-elastic-medium),
-            border-color var(--transition-elastic-slow);
-        transition-behavior: allow-discrete;
-        border: var(--stroke-1) solid var(--surface-neutral-light);
-        padding: var(--size-4);
-
-        &::details-content {
-            block-size: 0;
-            transition:
-                block-size var(--transition-elastic-medium),
-                content-visibility var(--transition-micro-slow);
-            transition-behavior: allow-discrete;
-        }
-    }
-
     summary {
         display: flex;
         flex-flow: row wrap;
         justify-content: space-between;
         align-items: center;
-
         color: var(--text-neutral-subtle);
         cursor: pointer;
         margin-bottom: var(--size-2);
@@ -83,16 +55,43 @@ const { heading, faq } = response.faq
         .icon {
             color: currentColor;
             max-width: var(--size-5);
+            transition: transform var(--transition-anticipate-medium);
         }
+    }
+
+    .details-content-inner {
+        display: flex;
+        flex-direction: column;
+        gap: var(--size-4);
+        padding-top: var(--size-8);
+        min-height: 0;
+    }
+
+    .details-content-wrapper {
+        display: grid;
+        grid-template-rows: 0fr;
+        overflow: hidden;
+        transition: grid-template-rows var(--transition-anticipate-fast);
+    }
+
+    details {
+        --_radius: var(--radius-lg);
+        overflow: hidden;
+
+        transition:
+            border-radius var(--transition-micro-fast),
+            margin var(--transition-elastic-fast),
+            border-color var(--transition-micro-slow),
+            border-bottom-width var(--transition-micro-slow);
+
+        border: var(--stroke-1) solid var(--surface-neutral-light);
+        padding: var(--size-4);
     }
 
     details[open] {
         border-radius: var(--_radius);
         margin-block: var(--size-8);
 
-        &::details-content {
-            block-size: auto;
-        }
         summary {
             color: var(--text-brand-default);
             .icon {
@@ -101,25 +100,24 @@ const { heading, faq } = response.faq
         }
     }
 
-    /*previous sibling*/
+    details[open] .details-content-wrapper {
+        grid-template-rows: 1fr;
+    }
+
     details:has(+ details[open]),
     details:last-child {
-        /*background: red;*/
         border-bottom-left-radius: var(--_radius);
         border-bottom-right-radius: var(--_radius);
     }
 
-    /*next sibling*/
     details[open] + details,
     details:first-child {
-        /*background: blue;*/
         border-top-left-radius: var(--_radius);
         border-top-right-radius: var(--_radius);
     }
-    /*removes the double border between details*/
+
     details:not(:last-child, details[open], :has(+ details[open])) {
-        border-bottom-color: transparent;
-        /*background: yellow;*/
+        border-bottom-width: 0;
     }
 
     @media (min-width: 768px) {
@@ -128,36 +126,3 @@ const { heading, faq } = response.faq
         }
     }
 </style>
-
-<!-- <script>
-    import { gsap } from "gsap"
-    import { ScrollTrigger, SplitText } from "gsap/all"
-
-    document.addEventListener("DOMContentLoaded", (e) => {
-        gsap.registerPlugin(SplitText, ScrollTrigger)
-
-        let heading = new SplitText(".faqHeading", { type: "lines, chars" })
-
-        let tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: ".contact",
-                endTrigger: ".faqHeading",
-                start: "50% top",
-                end: "top 30%",
-                scrub: false,
-            },
-        })
-
-        tl.from(heading.chars, {
-            // yPercent: "random([-200, 200])",
-            // rotation: "random([-10, 10])",
-            // autoAlpha: 0,
-            ease: "back.out",
-            color: "var(--text-neutral-subtle)",
-            stagger: {
-                amount: 0.5,
-                from: "random",
-            },
-        })
-    })
-</script> -->

@@ -3,29 +3,43 @@ import { Image } from "astro:assets"
 import data from "@/data/navigation.json"
 const { nav } = data
 import LogoImage from "@/images/logo/white-horn-purple-bg.png"
+import SocialButtons from "./SocialButtons.astro"
 import NavMenu from "@/components/navigation/NavMenu.astro"
 import NavActions from "./NavActions.astro"
-import "./navigation.css"
+// import "./navigation.css"
 ---
 
 <header class="nav container" data-navigation>
-    <div class="wrapper">
-        <div class="nav__container" data-active="false" data-navigation-container>
-            <a href="/" class="nav__logo">
-                <Image
-                    src={LogoImage}
-                    width={LogoImage.width}
-                    height={LogoImage.height}
-                    alt={nav.logo.text}
-                    loading="eager"
-                    decoding="sync"
-                    class="nav__logo__img"
-                    layout="fixed"
-                />
-            </a>
+    <div class="nav-wrapper grid-cols-12 glass full-width" data-active="false" data-navigation-container>
+        <a href="/" class="nav__logo">
+            <Image
+                src={LogoImage}
+                width={LogoImage.width}
+                height={LogoImage.height}
+                alt={nav.logo.text}
+                loading="eager"
+                decoding="sync"
+                class="nav__logo__img"
+                layout="constrained"
+                format="webp"
+                fit="contain"
+            />
+        </a>
+
+        <div class="desktop-menu">
             <NavMenu />
+        </div>
+
+        <div class="nav-action-wrapper">
             <NavActions />
         </div>
+
+        <div class="social-wrapper">
+            <SocialButtons />
+        </div>
+    </div>
+    <div class="mobile-menu glass" data-menu data-is-menu-open="false">
+        <NavMenu />
     </div>
 </header>
 
