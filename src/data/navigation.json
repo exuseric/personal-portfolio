@@ -12,6 +12,11 @@
                 "type": "internal"
             },
             {
+                "label": "Projects",
+                "url": "/#projects",
+                "type": "internal"
+            },
+            {
                 "label": "Contact",
                 "url": "#contact",
                 "type": "internal"

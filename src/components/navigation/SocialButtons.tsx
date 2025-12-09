@@ -1,0 +1,99 @@
+import { Link } from "react-aria-components"
+
+const links = [
+    {
+        href: "https://github.com/exuseric",
+        icon: (
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="-2 -2 24 24">
+                <g fill="currentColor">
+                    <path d="M8.18 15.008q.18 0 .271-.012a.32.32 0 0 0 .18-.107q.09-.094.09-.274l-.004-.557q-.004-.533-.004-.844l-.188.033a2.4 2.4 0 0 1-.455.028a3.5 3.5 0 0 1-.57-.057a1.3 1.3 0 0 1-.548-.246a1.04 1.04 0 0 1-.36-.503l-.082-.189a2 2 0 0 0-.258-.417a1 1 0 0 0-.357-.312l-.057-.04a.6.6 0 0 1-.106-.1a.5.5 0 0 1-.074-.114q-.024-.057.04-.094a.5.5 0 0 1 .238-.037l.164.025q.165.032.406.196q.24.164.397.426q.189.336.455.512a.96.96 0 0 0 .536.176q.27 0 .467-.04a1.6 1.6 0 0 0 .369-.124q.073-.548.4-.843a5.6 5.6 0 0 1-.839-.148a3.4 3.4 0 0 1-.77-.32a2.2 2.2 0 0 1-.66-.548q-.26-.328-.43-.86a4.1 4.1 0 0 1-.167-1.229q0-.99.647-1.687q-.303-.745.057-1.671q.239-.075.705.11q.467.184.684.316q.217.13.348.22a5.8 5.8 0 0 1 1.573-.212q.81 0 1.573.213l.31-.197q.32-.196.754-.36q.435-.165.664-.09q.37.926.065 1.67q.648.697.648 1.688q0 .696-.168 1.233t-.434.86a2.3 2.3 0 0 1-.664.545a3.3 3.3 0 0 1-.77.32a5.6 5.6 0 0 1-.84.147q.426.368.426 1.163v1.957q0 .14.041.226a.23.23 0 0 0 .131.119q.09.032.16.04t.2.009z" />
+                    <path d="M4 2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm0-2h12a4 4 0 0 1 4 4v12a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4" />
+                </g>
+            </svg>
+        ),
+        label: "Github",
+    },
+    {
+        href: "https://linkedin.com/in/exuseric",
+        icon: (
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="-2 -2 24 24">
+                <g fill="currentColor">
+                    <path d="M15 11.13v3.697h-2.143v-3.45c0-.866-.31-1.457-1.086-1.457c-.592 0-.945.398-1.1.784c-.056.138-.071.33-.071.522v3.601H8.456s.029-5.842 0-6.447H10.6v.913l-.014.021h.014v-.02c.285-.44.793-1.066 1.932-1.066c1.41 0 2.468.922 2.468 2.902M6.213 5.271C5.48 5.271 5 5.753 5 6.385c0 .62.466 1.115 1.185 1.115h.014c.748 0 1.213-.496 1.213-1.115c-.014-.632-.465-1.114-1.199-1.114m-1.086 9.556h2.144V8.38H5.127z" />
+                    <path d="M4 2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm0-2h12a4 4 0 0 1 4 4v12a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4" />
+                </g>
+            </svg>
+        ),
+        label: "LinkedIn",
+    },
+    {
+        href: "https://behance.net/exuseric",
+        icon: (
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="-2 -2 24 24">
+                <g fill="currentColor">
+                    <path d="M14.03 7.88h-2.505v-.622h2.506v.623zm-4.173 2.553q.243.375.242.911q.002.554-.276.993a1.72 1.72 0 0 1-1.142.801a4.3 4.3 0 0 1-.879.084H5V7h3.005q1.136.017 1.611.663q.285.396.285.95q0 .57-.288.916q-.16.195-.473.354q.475.173.717.55m-3.422-.98h1.317q.405 0 .657-.154q.253-.154.253-.547q0-.435-.334-.574a2.4 2.4 0 0 0-.735-.098H6.435zm2.354 1.802q0-.485-.396-.666q-.223-.102-.622-.106H6.435v1.658H7.75q.405.001.63-.109q.409-.202.409-.777m6.171-1.012q.046.306.039.885h-3.245q.026.672.466.94q.264.169.642.168q.397.001.647-.205a1 1 0 0 0 .239-.306h1.19q-.047.397-.432.806q-.6.65-1.677.65a2.43 2.43 0 0 1-1.57-.548q-.679-.548-.68-1.785q0-1.16.614-1.777q.615-.619 1.595-.618q.58 0 1.048.208q.466.21.769.66q.274.398.355.922m-1.17.116q-.033-.465-.312-.704a1.02 1.02 0 0 0-.69-.242q-.45.001-.696.256q-.247.255-.31.69z" />
+                    <path d="M4 2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm0-2h12a4 4 0 0 1 4 4v12a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4" />
+                </g>
+            </svg>
+        ),
+        label: "Behance",
+    },
+]
+
+export default function SocialButtons() {
+    return (
+        <div className="flex flex-row items-center justify-between gap-x-2">
+            {links.map((link) => (
+                <Link
+                    key={link.href}
+                    className={`${({ isPressed }) => (isPressed ? "text-brand-default" : "text-current")} flex items-center justify-start gap-1 hover:text-brand-default focus-visible:bg-surface-brand-default focus-visible:text-on-brand-default px-3 py-2`}
+                    href={link.href}
+                    target="_blank"
+                >
+                    <span className="icon" aria-hidden="true">
+                        {link.icon}
+                    </span>
+                    <span className="text">{link.label}</span>
+                </Link>
+            ))}
+        </div>
+    )
+}
+
+// import Button from "@/components/Button/Button.astro"
+// ---
+
+// <div class="flex flex-row items-center justify-between gap-x-1">
+//     <Button
+//         variant="ghost"
+//         as="icon-only"
+//         type="button"
+//         ariaLabel="Connect on github"
+//         iconName="ri:github-fill"
+//         href="https://github.com/exuseric"
+//     />
+//     <Button
+//         variant="ghost"
+//         as="icon-only"
+//         type="button"
+//         ariaLabel="Connect on behance"
+//         iconName="akar-icons:behance-fill"
+//         href="https://behance.net/exuseric"
+//     />
+//     <Button
+//         variant="ghost"
+//         as="icon-only"
+//         type="button"
+//         ariaLabel="Connect on linkedin"
+//         iconName="ri:linkedin-fill"
+//         href="https://linkedin.com/in/exuseric"
+//     />
+// </div>
+
+// <style>
+//     .primary_nav__social {
+//         display: flex;
+//         flex-flow: row wrap;
+//         align-items: center;
+//         gap: var(--size-1);
+//     }
+// </style>

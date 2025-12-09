@@ -1,0 +1,32 @@
+---
+import NavMenu from "@/components/navigation/NavMenu.tsx"
+import LogoImage from "@/images/logo/white-horn-purple-bg.png"
+import { Image } from "astro:assets"
+---
+
+<header class="glass w-full h-20 sticky top-0 z-50 inset-x-0 hidden md:block">
+    <div class="container h-full">
+        <div class="flex flex-row items-center justify-between">
+            <a
+                href="/"
+                class="nav__logo flex flex-row items-center justify-baseline gap-x-2 text-brand-default font-semibold w-fit min-w-fit"
+            >
+                <Image
+                    src={LogoImage}
+                    width={LogoImage.width}
+                    height={LogoImage.height}
+                    alt="Eric Maina Gathoni"
+                    loading="eager"
+                    decoding="sync"
+                    class="nav__logo__img max-h-12 w-auto aspect-square"
+                    layout="constrained"
+                    format="webp"
+                    fit="contain"
+                />
+                <span>Eric Gathoni.</span>
+            </a>
+
+            <NavMenu />
+        </div>
+    </div>
+</header>

@@ -3,11 +3,16 @@ import { Image } from "astro:assets"
 import data from "@/data/navigation.json"
 const { nav } = data
 import LogoImage from "@/images/logo/white-horn-purple-bg.png"
-import SocialButtons from "./SocialButtons.astro"
-import NavMenu from "@/components/navigation/NavMenu.astro"
+import NavMenu from "@/components/navigation/NavMenu.tsx"
 import NavActions from "./NavActions.astro"
+import DesktopNavigation from "./DesktopNavigation.astro"
+
 // import "./navigation.css"
 ---
+
+<DesktopNavigation />
+
+<!--
 
 <header class="nav container" data-navigation>
     <div class="nav-wrapper grid-cols-12 glass full-width" data-active="false" data-navigation-container>
@@ -60,4 +65,4 @@ import NavActions from "./NavActions.astro"
             }
         })
     })
-</script>
+</script> -->

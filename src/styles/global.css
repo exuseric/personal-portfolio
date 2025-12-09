@@ -256,7 +256,7 @@
     }
 }
 
-@layer components {
+@layer utilities {
     .container {
         --padding-inline: 1rem;
         --content-max-width: var(--site-width);
