@@ -42,7 +42,11 @@
     "dependencies": {
         "@astrojs/check": "^0.9.4",
         "@astrojs/netlify": "^6.5.10",
+        "@astrojs/react": "^4.4.2",
         "@astrojs/sitemap": "^3.6.0",
+        "@tailwindcss/vite": "^4.1.17",
+        "@types/react": "^19.2.7",
+        "@types/react-dom": "^19.2.3",
         "astro": "^5.15.6",
         "astro-font": "^1.1.0",
         "astro-google-fonts-optimizer": "^0.2.2",
@@ -50,6 +54,10 @@
         "graphql-request": "^7.2.0",
         "gsap": "^3.13.0",
         "purgecss": "^7.0.2",
+        "react": "^19.2.1",
+        "react-aria-components": "^1.13.0",
+        "react-dom": "^19.2.1",
+        "tailwindcss": "^4.1.17",
         "typescript": "^5.9.2"
     },
     "devDependencies": {

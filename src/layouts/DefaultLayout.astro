@@ -1,157 +1,134 @@
 ---
-import seo from "@/data/seo.json";
-import { AstroFont } from "astro-font";
-import Navigation from "@/components/navigation/Navigation.astro";
-import "@/styles/global.css";
-import Footer from "@/sections/Footer.astro";
-import FaqSection from "@/sections/FaqSection.astro";
+import seo from "@/data/seo.json"
+import { AstroFont } from "astro-font"
+import Navigation from "@/components/navigation/Navigation.astro"
+import "@/styles/global.css"
+import Footer from "@/sections/Footer.astro"
+import FaqSection from "@/sections/FaqSection.astro"
 
-import { getContent } from "@/utils/graphql-client";
-import { faqQuery, aboutQuery } from "@/utils/queries";
-const { faq } = await getContent(faqQuery);
-const { aboutMe } = await getContent(aboutQuery);
-const { schema: aboutSchema } = aboutMe;
-const { jsonLd: faqJsonLd } = faq;
+import { getContent } from "@/utils/graphql-client"
+import { faqQuery, aboutQuery } from "@/utils/queries"
+const { faq } = await getContent(faqQuery)
+const { aboutMe } = await getContent(aboutQuery)
+const { schema: aboutSchema } = aboutMe
+const { jsonLd: faqJsonLd } = faq
 ---
 
 <html lang={seo.language} data-theme="light">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content={seo.additionalMeta.viewport} />
-    <title>{seo.title}</title>
-    <meta name="description" content={seo.description} />
-    <meta name="author" content={seo.author} />
-    <meta name="keywords" content={seo.keywords} />
-    <meta name="robots" content={seo.robots} />
-    <meta name="language" content={seo.language} />
-    <meta
-      name="format-detection"
-      content={seo.additionalMeta.formatDetection}
-    />
-    <meta name="referrer" content={seo.additionalMeta.referrer} />
-    <meta name="color-scheme" content={seo.additionalMeta.colorScheme} />
-    <meta
-      name="supported-color-schemes"
-      content={seo.additionalMeta.supportedColorSchemes}
-    />
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content={seo.additionalMeta.viewport} />
+        <title>{seo.title}</title>
+        <meta name="description" content={seo.description} />
+        <meta name="author" content={seo.author} />
+        <meta name="keywords" content={seo.keywords} />
+        <meta name="robots" content={seo.robots} />
+        <meta name="language" content={seo.language} />
+        <meta name="format-detection" content={seo.additionalMeta.formatDetection} />
+        <meta name="referrer" content={seo.additionalMeta.referrer} />
+        <meta name="color-scheme" content={seo.additionalMeta.colorScheme} />
+        <meta name="supported-color-schemes" content={seo.additionalMeta.supportedColorSchemes} />
 
-    <!-- Canonical and Sitemap -->
-    <link rel="canonical" href={seo.siteUrl} />
-    <link rel="sitemap" href="/sitemap-index.xml" />
+        <!-- Canonical and Sitemap -->
+        <link rel="canonical" href={seo.siteUrl} />
+        <link rel="sitemap" href="/sitemap-index.xml" />
 
-    <!-- DNS Prefetch for external domains -->
-    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
-    <link rel="dns-prefetch" href="//eu-west-2.graphassets.com" />
+        <!-- DNS Prefetch for external domains -->
+        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+        <link rel="dns-prefetch" href="//eu-west-2.graphassets.com" />
 
-    <!-- Standard favicon -->
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <!-- Standard favicon -->
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 
-    <!-- PNG favicons -->
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="/favicon/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/favicon/favicon-16x16.png"
-    />
+        <!-- PNG favicons -->
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
 
-    <!-- Apple Touch Icon (for iOS bookmarks) -->
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/favicon/apple-touch-icon.png"
-    />
+        <!-- Apple Touch Icon (for iOS bookmarks) -->
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
 
-    <!-- Web App Manifest (if you're pretending your site is an app) -->
-    <link rel="manifest" href="/site.webmanifest" />
+        <!-- Web App Manifest (if you're pretending your site is an app) -->
+        <link rel="manifest" href="/site.webmanifest" />
 
-    <meta name="theme-color" content={seo.themeColor} />
-    <meta name="msapplication-TileColor" content={seo.themeColor} />
+        <meta name="theme-color" content={seo.themeColor} />
+        <meta name="msapplication-TileColor" content={seo.themeColor} />
 
-    <!-- Security Headers -->
-    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-    <meta http-equiv="X-Frame-Options" content="DENY" />
-    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
-    <meta
-      http-equiv="Permissions-Policy"
-      content="camera=(), microphone=(), geolocation=()"
-    />
+        <!-- Security Headers -->
+        <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+        <meta http-equiv="X-Frame-Options" content="DENY" />
+        <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+        <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
 
-    <!-- Performance and Caching -->
-    <meta http-equiv="Cache-Control" content="public, max-age=31536000" />
+        <!-- Performance and Caching -->
+        <meta http-equiv="Cache-Control" content="public, max-age=31536000" />
 
-    <!-- Enhanced Person Schema -->
-    <script type="application/ld+json" set:html={JSON.stringify(aboutSchema)} />
+        <!-- Enhanced Person Schema -->
+        <script type="application/ld+json" set:html={JSON.stringify(aboutSchema)} />
 
-    <!-- FAQ Schema -->
-    <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+        <!-- FAQ Schema -->
+        <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
 
-    <!-- Website Schema -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "@id": "https://ericmaina.me",
-        "url": "https://ericmaina.me",
-        "name": "Eric Maina Gathoni | Frontend Developer",
-        "description": "The official website and portfolio of Eric Maina Gathoni, a Frontend Developer specialising in React, Next.js, and Astro. Building fast, accessible, and SEO-optimised web experiences.",
-        "publisher": {
-          "@type": "Person",
-          "@id": "https://ericmaina.me#about"
-        }
-      }
-    </script>
+        <!-- Website Schema -->
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                "@id": "https://ericmaina.me",
+                "url": "https://ericmaina.me",
+                "name": "Eric Maina Gathoni | Frontend Developer",
+                "description": "The official website and portfolio of Eric Maina Gathoni, a Frontend Developer specialising in React, Next.js, and Astro. Building fast, accessible, and SEO-optimised web experiences.",
+                "publisher": {
+                    "@type": "Person",
+                    "@id": "https://ericmaina.me#about"
+                }
+            }
+        </script>
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content={seo.openGraph.type} />
-    <meta property="og:url" content={seo.openGraph.url} />
-    <meta property="og:title" content={seo.openGraph.title} />
-    <meta property="og:description" content={seo.openGraph.description} />
-    <meta property="og:image" content={seo.openGraph.image.url} />
-    <meta property="og:image:width" content={seo.openGraph.image.width} />
-    <meta property="og:image:height" content={seo.openGraph.image.height} />
-    <meta property="og:image:alt" content={seo.openGraph.image.alt} />
-    <meta property="og:locale" content={seo.openGraph.locale} />
-    <meta property="og:site_name" content={seo.openGraph.siteName} />
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content={seo.openGraph.type} />
+        <meta property="og:url" content={seo.openGraph.url} />
+        <meta property="og:title" content={seo.openGraph.title} />
+        <meta property="og:description" content={seo.openGraph.description} />
+        <meta property="og:image" content={seo.openGraph.image.url} />
+        <meta property="og:image:width" content={seo.openGraph.image.width} />
+        <meta property="og:image:height" content={seo.openGraph.image.height} />
+        <meta property="og:image:alt" content={seo.openGraph.image.alt} />
+        <meta property="og:locale" content={seo.openGraph.locale} />
+        <meta property="og:site_name" content={seo.openGraph.siteName} />
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content={seo.twitter.card} />
-    <meta name="twitter:site" content={seo.twitter.site} />
-    <meta name="twitter:creator" content={seo.twitter.creator} />
-    <meta name="twitter:title" content={seo.twitter.title} />
-    <meta name="twitter:description" content={seo.twitter.description} />
-    <meta name="twitter:image" content={seo.twitter.image} />
+        <!-- Twitter -->
+        <meta name="twitter:card" content={seo.twitter.card} />
+        <meta name="twitter:site" content={seo.twitter.site} />
+        <meta name="twitter:creator" content={seo.twitter.creator} />
+        <meta name="twitter:title" content={seo.twitter.title} />
+        <meta name="twitter:description" content={seo.twitter.description} />
+        <meta name="twitter:image" content={seo.twitter.image} />
 
-    <!-- Fonts with performance optimization -->
-    <AstroFont
-      config={[
-        {
-          src: [],
-          name: "DM Sans",
-          preload: true,
-          display: "swap",
-          selector: "body",
-          fallback: "sans-serif",
-          cssVariable: "font-family-sans",
-          googleFontsURL:
-            "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap",
-        },
-      ]}
-    />
-  </head>
+        <!-- Fonts with performance optimization -->
+        <AstroFont
+            config={[
+                {
+                    src: [],
+                    name: "DM Sans",
+                    preload: true,
+                    display: "swap",
+                    selector: "body",
+                    fallback: "sans-serif",
+                    cssVariable: "font-family-sans",
+                    googleFontsURL:
+                        "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap",
+                },
+            ]}
+        />
+    </head>
 
-  <body>
-    <Navigation />
-    <main id="main-content" class="page-wrapper">
-      <slot />
-      <FaqSection />
-    </main>
-    <Footer />
-  </body>
+    <body class="bg-surface-neutral-default text-neutral-default">
+        <Navigation />
+        <main id="main-content" class="page-wrapper">
+            <slot />
+            <FaqSection />
+        </main>
+        <Footer />
+    </body>
 </html>

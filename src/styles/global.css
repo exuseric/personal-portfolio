@@ -1,12 +1,100 @@
-@layer framework, global, elements, components, utilities, animations;
-
-@import "./reset.css" layer(framework);
+@import "tailwindcss";
 @import "./tokens.css" layer(global);
-@import "./theme.css" layer(components);
+@import "./theme.css";
+/*@layer framework, global, elements, components, utilities, animations;*/
+
+@theme inline {
+    /* Brand */
+    --color-surface-brand-default: var(--surface-brand-default);
+    --color-surface-brand-light: var(--surface-brand-light);
+    --color-surface-brand-subtle: var(--surface-brand-subtle);
+    --color-surface-brand-hover: var(--surface-brand-hover);
+
+    --color-brand-default: var(--text-brand-default);
+    --color-brand-subtle: var(--text-brand-subtle);
+    --color-brand-hover: var(--text-brand-hover);
+    --color-on-brand-default: var(--text-on-brand-color);
+    --color-on-brand-subtle: var(--text-on-subtle-color);
+
+    /* Secondary */
+    --color-surface-secondary-default: var(--surface-secondary-default);
+    --color-surface-secondary-subtle: var(--surface-secondary-subtle);
+    --color-surface-secondary-hover: var(--surface-secondary-hover);
+
+    --color-secondary-default: var(--text-secondary-default);
+    --color-secondary-subtle: var(--text-secondary-subtle);
+    --color-secondary-hover: var(--text-secondary-hover);
+    --color-on-secondary-default: var(--text-on-secondary-color);
+
+    /* Accent */
+    --color-surface-accent-default: var(--surface-accent-default);
+    --color-surface-accent-subtle: var(--surface-accent-subtle);
+    --color-surface-accent-hover: var(--surface-accent-hover);
+
+    --color-accent-default: var(--text-accent-default);
+    --color-accent-subtle: var(--text-accent-subtle);
+    --color-accent-hover: var(--text-accent-hover);
+    --color-on-accent-default: var(--text-on-accent-color);
+
+    /* Neutral */
+    --color-surface-neutral-default: var(--surface-neutral-default);
+    --color-surface-neutral-subtle: var(--surface-neutral-subtle);
+    --color-surface-neutral-light: var(--surface-neutral-light);
+    --color-surface-neutral-hover: var(--surface-neutral-hover);
+
+    --color-neutral-default: var(--text-neutral-default);
+    --color-neutral-subtle: var(--text-neutral-subtle);
+    --color-neutral-hover: var(--text-neutral-hover);
+    --color-on-neutral-default: var(--text-on-neutral-color);
+
+    /* Success */
+    --color-surface-success-default: var(--surface-success-default);
+    --color-surface-success-light: var(--surface-success-light);
+    --color-surface-success-subtle: var(--surface-success-subtle);
+    --color-surface-success-hover: var(--surface-success-hover);
+
+    --color-success-default: var(--text-success-default);
+    --color-success-subtle: var(--text-success-subtle);
+    --color-success-hover: var(--text-success-hover);
+    --color-on-success-default: var(--text-on-success-color);
+
+    /* Warning */
+    --color-surface-warning-default: var(--surface-warning-default);
+    --color-surface-warning-subtle: var(--surface-warning-subtle);
+    --color-surface-warning-hover: var(--surface-warning-hover);
+
+    --color-warning-default: var(--text-warning-default);
+    --color-warning-subtle: var(--text-warning-subtle);
+    --color-warning-hover: var(--text-warning-hover);
+    --color-on-warning-default: var(--text-on-warning-color);
+
+    /* Error */
+    --color-surface-error-default: var(--surface-error-default);
+    --color-surface-error-subtle: var(--surface-error-subtle);
+    --color-surface-error-hover: var(--surface-error-hover);
+
+    --color-error-default: var(--text-error-default);
+    --color-error-subtle: var(--text-error-subtle);
+    --color-error-hover: var(--text-error-hover);
+    --color-on-error-default: var(--text-on-error-color);
+
+    /* Info */
+    --color-surface-info-default: var(--surface-info-default);
+    --color-surface-info-subtle: var(--surface-info-subtle);
+    --color-surface-info-hover: var(--surface-info-hover);
+
+    --color-info-default: var(--text-info-default);
+    --color-info-subtle: var(--text-info-subtle);
+    --color-info-hover: var(--text-info-hover);
+    --color-on-info-default: var(--text-on-info-color);
+}
+
+/*
+@import "./reset.css" layer(framework);
 @import "./form-elements.css" layer(components);
 @import "./animations.css" layer(animations);
 @import "./button.css" layer(components);
-@import "./navigation.css" layer(components);
+@import "./navigation.css" layer(components);*/
 
 @layer utilities {
     .flex-between {
@@ -30,13 +118,14 @@
 
     .glass {
         color: var(--text-neutral-default);
-        background-color: var(--surface-brand-light);
+        background-color: var(--surface-neutral-default);
         border-color: var(--surface-brand-subtle);
 
-        @supports (backdrop-filter: blur(20px)) {
-            backdrop-filter: blur(20px);
-            background-color: oklch(from var(--surface-brand-light) l c h / 0.4);
-            border-color: oklch(from var(--surface-brand-light) l c h / 0.6);
+        @supports (backdrop-filter: blur(30px)) {
+            backdrop-filter: blur(30px);
+            background-color: oklch(from var(--surface-neutral-default) l c h / 0.6);
+            mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+            border-color: oklch(from var(--surface-neutral-default) l c h / 0.6);
         }
     }
 }
@@ -62,7 +151,7 @@
     body {
         font-family: var(--font-family-base), sans-serif;
         color: var(--text-neutral-default);
-        background-color: var(--surface-neutral-default);
+        /*background-color: var(--surface-neutral-default);*/
         line-height: var(--lh-body-text);
         font-weight: 400;
         scroll-behavior: smooth;
@@ -87,7 +176,6 @@
 }
 
 @layer elements {
-
     /* Typography */
     h1,
     h2,
@@ -177,7 +265,12 @@
 
         display: grid;
         grid-template-columns:
-            [full-width-start] minmax(var(--padding-inline), 1fr) [breakout-start] minmax(0, var(--breakout-size)) [content-start] min(100% - (var(--padding-inline) * 2), var(--content-max-width)) [content-end] minmax(0, var(--breakout-size)) [breakout-end] minmax(var(--padding-inline), 1fr) [full-width-end];
+            [full-width-start] minmax(var(--padding-inline), 1fr) [breakout-start] minmax(0, var(--breakout-size))
+            [content-start] min(100% - (var(--padding-inline) * 2), var(--content-max-width)) [content-end] minmax(
+                0,
+                var(--breakout-size)
+            )
+            [breakout-end] minmax(var(--padding-inline), 1fr) [full-width-end];
         width: 100%;
     }
 
@@ -185,15 +278,15 @@
         --content-max-width: var(--content-width);
     }
 
-    .container> :not(.breakout, .full-width) {
+    .container > :not(.breakout, .full-width) {
         grid-column: content;
     }
 
-    .container>.breakout {
+    .container > .breakout {
         grid-column: breakout;
     }
 
-    .container>.full-width {
+    .container > .full-width {
         grid-column: full-width;
     }
 
@@ -247,16 +340,18 @@
 
             background-color: var(--surface-neutral-default);
             /* border-radius: var(--radius-round); */
-            clip-path: polygon(0% 0%,
-                    0% 100%,
-                    25% 100%,
-                    25% 25%,
-                    75% 25%,
-                    75% 75%,
-                    25% 75%,
-                    25% 100%,
-                    100% 100%,
-                    100% 0%);
+            clip-path: polygon(
+                0% 0%,
+                0% 100%,
+                25% 100%,
+                25% 25%,
+                75% 25%,
+                75% 75%,
+                25% 75%,
+                25% 100%,
+                100% 100%,
+                100% 0%
+            );
 
             z-index: -1;
         }
@@ -279,7 +374,6 @@
         display: grid;
         grid-template-columns: repeat(6, minmax(var(--col-size), 1fr));
         gap: var(--size-2);
-
     }
 
     @media (min-width: 768px) {
@@ -291,8 +385,6 @@
             gap: var(--size-8);
         }
     }
-
-
 }
 
 @layer components {
@@ -348,7 +440,6 @@
 }
 
 @layer utilities {
-
     /*=================================*/
     /* Utility Theme Classes           */
     /*=================================*/
