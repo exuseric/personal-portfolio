@@ -124,7 +124,6 @@
         @supports (backdrop-filter: blur(30px)) {
             backdrop-filter: blur(30px);
             background-color: oklch(from var(--surface-neutral) l c h / 0.6);
-            mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
             border-color: oklch(from var(--surface-neutral) l c h / 0.6);
         }
     }
