@@ -57,7 +57,7 @@
 
     &:active,
     &:focus-visible {
-        --_border-color: var(--surface-accent-default);
+        --_border-color: var(--surface-accent);
         --_background-color: var(--surface-accent-subtle);
         --_color: var(--text-accent-hover);
         box-shadow: inset 1px 1px 4px oklch(from var(--_background-color) calc(l * 0.06) c h / 0.06);
@@ -123,9 +123,9 @@
 
 /* VARIANTS */
 .btn--outline {
-    --_background-color: var(--surface-neutral-default);
-    --_border-color: var(--surface-brand-default);
-    --_color: var(--text-brand-default);
+    --_background-color: var(--surface-neutral);
+    --_border-color: var(--surface-brand);
+    --_color: var(--text-brand);
 
     &:hover {
         --_background-color: var(--surface-brand-subtle);
@@ -135,7 +135,7 @@
 
 .btn--primary {
     --_background-color: var(--surface-brand-light);
-    --_border-color: var(--surface-brand-default);
+    --_border-color: var(--surface-brand);
     --_color: var(--text-on-brand-color);
 
     &:hover {
@@ -146,8 +146,8 @@
 
 .btn--secondary {
     --_color: var(--text-on-secondary-color);
-    --_background-color: var(--surface-secondary-default);
-    --_border-color: var(--surface-secondary-default);
+    --_background-color: var(--surface-secondary);
+    --_border-color: var(--surface-secondary);
 
     &:hover {
         --_color: var(--text-secondary-hover);
@@ -167,7 +167,7 @@
 }
 
 .btn--danger {
-    --_background-color: var(--surface-error-default);
+    --_background-color: var(--surface-error);
     --_color: var(--text-on-error-color);
 
     &:hover {
@@ -177,7 +177,7 @@
 
 .btn--success {
     --_background-color: var(--surface-success-light);
-    --_border-color: var(--surface-success-default);
+    --_border-color: var(--surface-success);
     --_color: var(--text-on-success-color);
 
     &:hover {
@@ -187,7 +187,7 @@
 
 .btn--ghost {
     --_background-color: var(--surface-brand-light);
-    --_color: var(--text-neutral-default);
+    --_color: var(--text-neutral);
     --_border-color: var(--surface-brand-hover);
     box-shadow: none;
 
@@ -199,7 +199,7 @@
 
 .btn--link {
     --_background-color: transparent;
-    --_color: var(--text-neutral-default);
+    --_color: var(--text-neutral);
     --_border-color: transparent;
     padding: 0;
     box-shadow: none;
@@ -213,7 +213,7 @@
 
 .btn--text {
     --_background-color: transparent;
-    --_color: var(--text-neutral-default);
+    --_color: var(--text-neutral);
     --_border-color: transparent;
     --_min-width: auto;
     --_min-height: auto;
@@ -224,7 +224,7 @@
 
     &:hover {
         --_color: var(--text-on-brand-color);
-        --_background-color: var(--surface-brand-default);
+        --_background-color: var(--surface-brand);
         padding: 0 var(--size-2);
     }
 }
@@ -299,7 +299,6 @@
 }*/
 
 @media (prefers-reduced-motion: reduce) {
-
     .btn,
     .btn__spinner {
         transition: none;

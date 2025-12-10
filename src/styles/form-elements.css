@@ -10,8 +10,8 @@ select {
     padding: var(--size-2) var(--size-3);
     border: var(--stroke-1) solid var(--surface-neutral-hover);
     border-radius: 0.375rem;
-    background-color: var(--surface-neutral-default);
-    color: var(--text-neutral-default);
+    background-color: var(--surface-neutral);
+    color: var(--text-neutral);
     transition:
         border-color var(--transition-medium),
         outline-color var(--transition-medium),
@@ -24,8 +24,8 @@ input:focus,
 textarea:focus,
 select:focus {
     border-color: transparent;
-    box-shadow: 0 0 0 3px oklch(from var(--surface-accent-default) l c h / 5%);
-    outline-color: var(--surface-accent-default);
+    box-shadow: 0 0 0 3px oklch(from var(--surface-accent) l c h / 5%);
+    outline-color: var(--surface-accent);
 }
 
 /* Disabled */
@@ -42,31 +42,31 @@ select:disabled {
 input:invalid:not(:placeholder-shown),
 textarea:invalid:not(:placeholder-shown),
 .select--error {
-    border-color: var(--surface-error-default);
-    outline-color: var(--surface-error-default);
+    border-color: var(--surface-error);
+    outline-color: var(--surface-error);
     color: var(--text-on-error);
     background-color: var(--surface-error-subtle);
 }
 
 input:invalid:not(:placeholder-shown):focus-visible,
 input:valid:not(:placeholder-shown):focus-visible {
-    outline-color: var(--surface-accent-default);
+    outline-color: var(--surface-accent);
     outline-offset: calc(var(--size-1) * 0.5);
 }
 
 input:invalid:not(:placeholder-shown):focus-visible {
-    border-color: var(--surface-error-default);
+    border-color: var(--surface-error);
 }
 
 .textarea--error:focus,
 .select--error:focus {
-    border-color: var(--surface-error-default);
+    border-color: var(--surface-error);
 }
 
 input:valid:not(:placeholder-shown),
 textarea:valid,
 .select--valid {
-    border-color: var(--surface-success-default);
+    border-color: var(--surface-success);
     background-color: var(--surface-success-subtle);
     color: var(--text-on-success);
 }
@@ -74,7 +74,7 @@ textarea:valid,
 input:valid:not(:placeholder-shown):focus-visible,
 textarea:valid:focus,
 .select--valid:focus {
-    border-color: var(--surface-success-default);
+    border-color: var(--surface-success);
 }
 
 /* Textarea Specific */
@@ -105,7 +105,7 @@ input[type="radio"] {
     vertical-align: middle;
     border: var(--stroke-1) solid var(--surface-neutral-subtle);
     border-radius: 0.25rem;
-    background-color: var(--surface-neutral-default);
+    background-color: var(--surface-neutral);
     cursor: pointer;
     transition:
         background-color var(--transition-micro-medium),
@@ -125,14 +125,14 @@ input[type="radio"]:hover {
 
 input[type="checkbox"]:focus,
 input[type="radio"]:focus {
-    outline: var(--stroke-1) solid var(--surface-accent-default);
+    outline: var(--stroke-1) solid var(--surface-accent);
     outline-offset: 0.1rem;
 }
 
 /* Checked State */
 input[type="checkbox"]:checked {
-    background-color: var(--surface-brand-default);
-    border-color: var(--surface-brand-default);
+    background-color: var(--surface-brand);
+    border-color: var(--surface-brand);
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='white' d='M6.173 11.414l-3.95-3.95 1.414-1.414L6.173 8.586l6.364-6.364 1.414 1.414z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: center;
@@ -140,8 +140,8 @@ input[type="checkbox"]:checked {
 }
 
 input[type="radio"]:checked {
-    background-color: var(--surface-brand-default);
-    border-color: var(--surface-brand-default);
+    background-color: var(--surface-brand);
+    border-color: var(--surface-brand);
     background-image: radial-gradient(circle, var(--text-on-brand) 40%, transparent 50%);
     background-position: center;
     background-repeat: no-repeat;
@@ -208,7 +208,7 @@ input[type="radio"]:disabled {
 
 /* Checked state */
 .switch input:checked + .switch-slider {
-    background-color: var(--surface-brand-default);
+    background-color: var(--surface-brand);
 }
 
 .switch input:checked + .switch-slider::before {
@@ -230,7 +230,7 @@ input[type="radio"]:disabled {
 }
 
 .switch-slider:hover::before {
-    background-color: var(--surface-neutral-default);
+    background-color: var(--surface-neutral);
 }
 
 /* Form Group */
@@ -246,7 +246,7 @@ input[type="radio"]:disabled {
     font-size: var(--font-size-sm);
     font-weight: 500;
     line-height: var(--lh-tight);
-    color: var(--text-neutral-default);
+    color: var(--text-neutral);
 }
 
 /* Disabled label */
@@ -271,11 +271,11 @@ textarea:invalid:not(:placeholder-shown) ~ .form-helper {
 
 /* Success / Error helper text */
 .form-helper-success {
-    color: var(--text-success-default);
+    color: var(--text-success);
 }
 
 .form-helper-error {
-    color: var(--text-error-default);
+    color: var(--text-error);
 }
 .form-general-error {
     display: none;
@@ -301,7 +301,7 @@ textarea:invalid:not(:placeholder-shown) ~ .form-helper {
 
 .form-check-label {
     font-size: var(--font-size-sm);
-    color: var(--text-neutral-default);
+    color: var(--text-neutral);
     cursor: pointer;
 }
 
@@ -319,7 +319,7 @@ textarea:invalid:not(:placeholder-shown) ~ .form-helper {
 
 .form-switch-label {
     font-size: var(--font-size-sm);
-    color: var(--text-neutral-default);
+    color: var(--text-neutral);
     cursor: pointer;
 }
 

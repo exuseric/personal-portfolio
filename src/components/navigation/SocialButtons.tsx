@@ -45,7 +45,7 @@ export default function SocialButtons() {
             {links.map((link) => (
                 <Link
                     key={link.href}
-                    className={`${({ isPressed }) => (isPressed ? "text-brand-default" : "text-current")} flex items-center justify-start gap-1 hover:text-brand-default focus-visible:bg-surface-brand-default focus-visible:text-on-brand-default px-3 py-2`}
+                    className={`${({ isPressed }) => (isPressed ? "text-brand" : "text-current")} flex items-center justify-start gap-1 hover:text-accent focus-visible:bg-surface-accent focus-visible:text-on-accent focus-visible:outline-accent outline-offset-2 px-3 py-2`}
                     href={link.href}
                     target="_blank"
                 >

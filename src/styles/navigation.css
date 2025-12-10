@@ -9,7 +9,6 @@
     z-index: 999;
     /* isolation: isolate; */
 
-
     @media (min-width: 768px) {
         --_nav-padding-block: var(--size-2);
 
@@ -44,7 +43,6 @@
     grid-column: 1 / span 1;
     grid-row: 1 / -1;
 
-
     img {
         max-height: var(--_max-logo-height);
         --fit: "contain";
@@ -63,7 +61,7 @@
     display: grid;
     place-items: center;
 
-    >* {
+    > * {
         grid-column: 1 / -1;
         grid-row: 1 / -1;
     }
@@ -75,7 +73,7 @@
     justify-self: center;
     height: 100%;
 
-    @media(min-width: 768px) {
+    @media (min-width: 768px) {
         grid-column: 11 / span 2;
         height: max-content;
         justify-self: end;
@@ -122,8 +120,7 @@
     transform-origin: center bottom;
     transition-behavior: allow-discrete;
 
-
-    @media(min-width: 768px) {
+    @media (min-width: 768px) {
         display: none;
         visibility: hidden;
     }
@@ -140,7 +137,7 @@
         margin: 0;
         padding: 0;
 
-        @media(min-width: 768px) {
+        @media (min-width: 768px) {
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -150,7 +147,7 @@
         }
     }
 
-    @media(min-width: 768px) {
+    @media (min-width: 768px) {
         width: max-content;
         height: max-content;
     }
@@ -165,7 +162,6 @@
 }
 
 .nav-toggle {
-
     &[data-is-visible="false"] {
         display: none;
         visibility: hidden;
@@ -178,13 +174,11 @@
 }
 
 .mobile-menu[data-is-menu-open="false"] {
-
     animation: scale-out var(--transition-anticipate-fast) forwards;
 
     @media (min-width: 768px) {
         animation: none;
     }
-
 }
 
 .mobile-menu[data-is-menu-open="true"] {
@@ -194,7 +188,6 @@
         animation: none;
     }
 }
-
 
 /* .nav {
     --_max-logo-height: var(--size-12);
@@ -265,7 +258,7 @@
             backdrop-filter: blur(30px);
             background: repeating-radial-gradient(circle,
                     oklch(from var(--surface-brand-light) l c h / 1) 0%,
-                    oklch(from var(--surface-neutral-default) l c h / 0.2) 100%);
+                    oklch(from var(--surface-neutral) l c h / 0.2) 100%);
         }
     }
 }

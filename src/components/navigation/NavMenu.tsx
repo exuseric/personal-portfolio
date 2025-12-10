@@ -12,15 +12,16 @@ export default function NavMenu() {
         <nav className="nav__menu flex items-center justify-end gap-x-2 w-full" aria-label="Main Navigation">
             {nav.links.map((link) => (
                 <Link
+                    key={link.url}
                     href={link.url}
-                    className={`${({ isPressed }) => (isPressed ? "text-brand-default" : "text-current")} flex items-center justify-start gap-1 hover:text-brand-default py-2 px-3 focus-visible:bg-surface-brand-default focus-visible:text-on-brand-default`}
+                    className={`${({ isPressed }) => (isPressed ? "text-brand" : "text-current")} flex items-center justify-start gap-1 hover:text-accent py-2 px-3 focus-visible:bg-surface-brand focus-visible:text-on-brand`}
                 >
                     {link.label}
                 </Link>
             ))}
-            <div className="social-wrapper w-fit border-l-2 border-l-surface-neutral-hover pl-4">
+            {/*<div className="social-wrapper w-fit border-l-2 border-l-surface-neutral-hover pl-4">
                 <SocialButtons />
-            </div>
+            </div>*/}
         </nav>
     )
 }

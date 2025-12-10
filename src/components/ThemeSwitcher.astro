@@ -7,8 +7,8 @@
 <style>
     .themeToggle {
         --size: var(--size-4);
-        --icon-fill: var(--text-neutral-default);
-        --icon-fill-hover: var(--text-brand-default);
+        --icon-fill: var(--text-neutral);
+        --icon-fill-hover: var(--text-brand);
 
         display: grid;
         place-content: center;
@@ -40,8 +40,8 @@
 
         &:hover {
             background:
-                linear-gradient(var(--surface-neutral-default) 0 0) padding-box,
-                linear-gradient(to right, var(--icon-fill-hover), var(--surface-accent-default)) border-box;
+                linear-gradient(var(--surface-neutral) 0 0) padding-box,
+                linear-gradient(to right, var(--icon-fill-hover), var(--surface-accent)) border-box;
         }
 
         @media (hover: none) {
