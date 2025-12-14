@@ -1,7 +1,6 @@
 import data from "@/data/navigation.json"
 import { Link } from "react-aria-components"
 const { nav } = data
-import SocialButtons from "./SocialButtons.tsx"
 
 export default function NavMenu() {
     return (

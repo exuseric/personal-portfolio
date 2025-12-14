@@ -41,7 +41,7 @@ const links = [
 
 export default function SocialButtons() {
     return (
-        <div className="flex flex-row items-center justify-between gap-x-2">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(80px,1fr))] items-center justify-between gap-x-1 w-full md:w-fit md:flex md:flex-row">
             {links.map((link) => (
                 <Link key={link.href} className="button button--ghost" href={link.href} target="_blank">
                     <span className="text">{link.label}</span>
@@ -53,42 +53,3 @@ export default function SocialButtons() {
         </div>
     )
 }
-
-// import Button from "@/components/Button/Button.astro"
-// ---
-
-// <div class="flex flex-row items-center justify-between gap-x-1">
-//     <Button
-//         variant="ghost"
-//         as="icon-only"
-//         type="button"
-//         ariaLabel="Connect on github"
-//         iconName="ri:github-fill"
-//         href="https://github.com/exuseric"
-//     />
-//     <Button
-//         variant="ghost"
-//         as="icon-only"
-//         type="button"
-//         ariaLabel="Connect on behance"
-//         iconName="akar-icons:behance-fill"
-//         href="https://behance.net/exuseric"
-//     />
-//     <Button
-//         variant="ghost"
-//         as="icon-only"
-//         type="button"
-//         ariaLabel="Connect on linkedin"
-//         iconName="ri:linkedin-fill"
-//         href="https://linkedin.com/in/exuseric"
-//     />
-// </div>
-
-// <style>
-//     .primary_nav__social {
-//         display: flex;
-//         flex-flow: row wrap;
-//         align-items: center;
-//         gap: var(--size-1);
-//     }
-// </style>

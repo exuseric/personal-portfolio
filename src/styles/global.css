@@ -2,8 +2,9 @@
 @import "./tokens.css" layer(global);
 @import "./theme.css";
 @import "./animations.css";
-/*@layer framework, global, elements, components, utilities, animations;*/
+@import "./form-elements.css";
 
+/*@layer framework, global, elements, components, utilities, animations;*/
 @theme inline {
     /* Brand */
     --color-surface-brand: var(--surface-brand-default);
@@ -35,7 +36,6 @@
 
 /*
 @import "./reset.css" layer(framework);
-@import "./form-elements.css" layer(components);
 @import "./button.css" layer(components);
 @import "./navigation.css" layer(components);*/
 @layer global {

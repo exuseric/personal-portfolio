@@ -1,4 +1,4 @@
-import SocialButtons from "@/components/navigation/SocialButtons"
+import SocialButtons from "@/components/shared/SocialButtons.tsx"
 import { Link } from "react-aria-components"
 
 export default function Hero() {
