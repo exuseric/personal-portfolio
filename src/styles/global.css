@@ -250,3 +250,72 @@
             300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
     }
 }
+
+@scope (.faq) {
+    summary {
+        @apply flex flex-row flex-wrap justify-between items-center text-foreground cursor-pointer mb-2;
+
+        h3 {
+            @apply my-0 max-w-[23ch];
+        }
+
+        .icon {
+            transition: transform var(--transition-anticipate-medium);
+            @apply text-current size-5;
+        }
+    }
+
+    .details-content-inner {
+        @apply flex flex-col gap-y-4 pt-8 min-h-0;
+    }
+
+    .details-content-wrapper {
+        transition: grid-template-rows var(--transition-anticipate-fast);
+        @apply grid grid-rows-[0] overflow-hidden;
+    }
+
+    details {
+        --_radius: var(--radius-lg);
+        transition:
+            border-radius var(--transition-micro-fast),
+            margin var(--transition-elastic-fast),
+            border-color var(--transition-micro-slow),
+            border-bottom-width var(--transition-micro-slow);
+        @apply overflow-hidden border border-border-default p-4;
+    }
+
+    details[open] {
+        @apply rounded-lg my-8 border-border-brand;
+
+        summary {
+            @apply text-brand;
+            .icon {
+                @apply rotate-z-180;
+            }
+        }
+    }
+
+    details[open] .details-content-wrapper {
+        @apply grid grid-rows-1 overflow-hidden;
+    }
+
+    details:has(+ details[open]),
+    details:last-child {
+        @apply rounded-b-lg;
+    }
+
+    details[open] + details,
+    details:first-child {
+        @apply rounded-t-lg;
+    }
+
+    details:not(:last-child, details[open], :has(+ details[open])) {
+        @apply border-b-0;
+    }
+
+    @media (min-width: 768px) {
+        summary h3 {
+            @apply max-w-prose;
+        }
+    }
+}

@@ -2,7 +2,7 @@ import { Link } from "react-aria-components"
 
 export default function Projects() {
     return (
-        <section className="layout-grid py-container-block rounded-t-[12rem] rounded-b-[12rem] squircle bg-surface-brand-light">
+        <section className="layout-grid py-container-block rounded-t-[6rem] rounded-b-[6rem] md:rounded-t-[12rem] md:rounded-b-[12rem] squircle bg-surface-brand-subtle">
             <h2 className="mb-8 flex flex-row items-center justify-start gap-x-3">
                 <span className="text-base text-neutral-subtle animate-pulse">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1.29em" height="1.2em" viewBox="0 0 18 14">

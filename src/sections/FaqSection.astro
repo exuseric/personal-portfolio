@@ -6,19 +6,24 @@ const response = await getContent(faqQuery)
 const { heading, faq } = response.faq
 ---
 
-<div class="faq layout-grid" data-parent-layout-grid data-cutout>
-    <div class="accordionWrapper layout-grid" data-layout-grid-md>
-        <header class="full-width">
-            <h2 class="h1 faqHeading">{heading}</h2>
-        </header>
-        <div class="accordionItem full-width">
+<div
+    class="py-container-block rounded-t-[6rem] rounded-b-[6rem] md:rounded-t-[12rem] md:rounded-b-[12rem] squircle bg-surface-brand-subtle layout-grid faq"
+>
+    <header>
+        <h2 class="mb-8 flex flex-row items-center justify-start gap-x-3">
+            <Icon name="bi:question" class="size-6 animate-pulse" />
+            Some Q&A
+        </h2>
+    </header>
+    <div class="accordionWrapper">
+        <div class="accordionItem">
             {
                 faq &&
                     faq.map((faq, index) => (
                         <details open={index === 0} data-index={index} name="faq">
                             <summary>
                                 <h3>{faq.question}</h3>
-                                {/* <Icon name="mdi:caret" class="icon" aria-hidden="true" focusable="false" /> */}
+                                <Icon name="mdi:caret" class="icon" aria-hidden="true" focusable="false" />
                             </summary>
                             <div class="details-content-wrapper">
                                 <div class="details-content-inner">
@@ -31,98 +36,3 @@ const { heading, faq } = response.faq
         </div>
     </div>
 </div>
-
-<style>
-    header {
-        justify-self: end;
-        margin-bottom: var(--size-12);
-    }
-
-    summary {
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: space-between;
-        align-items: center;
-        color: var(--text-neutral-subtle);
-        cursor: pointer;
-        margin-bottom: var(--size-2);
-
-        h3 {
-            margin-block: 0;
-            max-width: 23ch;
-        }
-
-        .icon {
-            color: currentColor;
-            max-width: var(--size-5);
-            transition: transform var(--transition-anticipate-medium);
-        }
-    }
-
-    .details-content-inner {
-        display: flex;
-        flex-direction: column;
-        gap: var(--size-4);
-        padding-top: var(--size-8);
-        min-height: 0;
-    }
-
-    .details-content-wrapper {
-        display: grid;
-        grid-template-rows: 0fr;
-        overflow: hidden;
-        transition: grid-template-rows var(--transition-anticipate-fast);
-    }
-
-    details {
-        --_radius: var(--radius-lg);
-        overflow: hidden;
-
-        transition:
-            border-radius var(--transition-micro-fast),
-            margin var(--transition-elastic-fast),
-            border-color var(--transition-micro-slow),
-            border-bottom-width var(--transition-micro-slow);
-
-        border: var(--stroke-1) solid var(--surface-neutral-light);
-        padding: var(--size-4);
-    }
-
-    details[open] {
-        border-radius: var(--_radius);
-        margin-block: var(--size-8);
-
-        summary {
-            color: var(--text-brand);
-            .icon {
-                transform: rotate(180deg);
-            }
-        }
-    }
-
-    details[open] .details-content-wrapper {
-        grid-template-rows: 1fr;
-    }
-
-    details:has(+ details[open]),
-    details:last-child {
-        border-bottom-left-radius: var(--_radius);
-        border-bottom-right-radius: var(--_radius);
-    }
-
-    details[open] + details,
-    details:first-child {
-        border-top-left-radius: var(--_radius);
-        border-top-right-radius: var(--_radius);
-    }
-
-    details:not(:last-child, details[open], :has(+ details[open])) {
-        border-bottom-width: 0;
-    }
-
-    @media (min-width: 768px) {
-        summary h3 {
-            max-width: 65ch;
-        }
-    }
-</style>
