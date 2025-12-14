@@ -1,146 +1,50 @@
 @import "tailwindcss";
 @import "./tokens.css" layer(global);
 @import "./theme.css";
+@import "./animations.css";
 /*@layer framework, global, elements, components, utilities, animations;*/
 
 @theme inline {
     /* Brand */
-    --color-surface-brand: var(--surface-brand);
+    --color-surface-brand: var(--surface-brand-default);
     --color-surface-brand-light: var(--surface-brand-light);
     --color-surface-brand-subtle: var(--surface-brand-subtle);
     --color-surface-brand-hover: var(--surface-brand-hover);
+    --color-surface-brand-active: var(--surface-brand-active);
 
-    --color-brand: var(--text-brand);
-    --color-brand-subtle: var(--text-brand-subtle);
-    --color-brand-hover: var(--text-brand-hover);
+    --color-brand: var(--text-brand-default);
     --color-on-brand: var(--text-on-brand-color);
-    --color-on-brand-subtle: var(--text-on-subtle-color);
-
-    /* Secondary */
-    --color-surface-secondary: var(--surface-secondary);
-    --color-surface-secondary-subtle: var(--surface-secondary-subtle);
-    --color-surface-secondary-hover: var(--surface-secondary-hover);
-
-    --color-secondary: var(--text-secondary);
-    --color-secondary-subtle: var(--text-secondary-subtle);
-    --color-secondary-hover: var(--text-secondary-hover);
-    --color-on-secondary: var(--text-on-secondary-color);
-
-    /* Accent */
-    --color-surface-accent: var(--surface-accent);
-    --color-surface-accent-subtle: var(--surface-accent-subtle);
-    --color-surface-accent-hover: var(--surface-accent-hover);
-
-    --color-accent: var(--text-accent);
-    --color-accent-subtle: var(--text-accent-subtle);
-    --color-accent-hover: var(--text-accent-hover);
-    --color-on-accent: var(--text-on-accent-color);
 
     /* Neutral */
-    --color-surface-neutral: var(--surface-neutral);
-    --color-surface-neutral-subtle: var(--surface-neutral-subtle);
-    --color-surface-neutral-light: var(--surface-neutral-light);
-    --color-surface-neutral-hover: var(--surface-neutral-hover);
+    --color-surface-background: var(--surface-background);
+    --color-surface-card: var(--surface-card);
+    --color-surface-subtle: var(--surface-subtle);
+    --color-surface-overlay: var(--surface-overlay);
 
-    --color-neutral: var(--text-neutral);
-    --color-neutral-subtle: var(--text-neutral-subtle);
-    --color-neutral-hover: var(--text-neutral-hover);
-    --color-on-neutral: var(--text-on-neutral-color);
+    --color-foreground: var(--text-foreground);
+    --color-secondary: var(--text-secondary);
+    --color-disabled: var(--text-disabled);
+    --color-on-dark: var(--text-on-dark);
 
-    /* Success */
-    --color-surface-success: var(--surface-success);
-    --color-surface-success-light: var(--surface-success-light);
-    --color-surface-success-subtle: var(--surface-success-subtle);
-    --color-surface-success-hover: var(--surface-success-hover);
+    --color-border-brand: var(--border-brand);
+    --color-border-default: var(--border-default);
+    --color-border-subtle: var(--border-subtle);
 
-    --color-success: var(--text-success);
-    --color-success-subtle: var(--text-success-subtle);
-    --color-success-hover: var(--text-success-hover);
-    --color-on-success: var(--text-on-success-color);
-
-    /* Warning */
-    --color-surface-warning: var(--surface-warning);
-    --color-surface-warning-subtle: var(--surface-warning-subtle);
-    --color-surface-warning-hover: var(--surface-warning-hover);
-
-    --color-warning: var(--text-warning);
-    --color-warning-subtle: var(--text-warning-subtle);
-    --color-warning-hover: var(--text-warning-hover);
-    --color-on-warning: var(--text-on-warning-color);
-
-    /* Error */
-    --color-surface-error: var(--surface-error);
-    --color-surface-error-subtle: var(--surface-error-subtle);
-    --color-surface-error-hover: var(--surface-error-hover);
-
-    --color-error: var(--text-error);
-    --color-error-subtle: var(--text-error-subtle);
-    --color-error-hover: var(--text-error-hover);
-    --color-on-error: var(--text-on-error-color);
-
-    /* Info */
-    --color-surface-info: var(--surface-info);
-    --color-surface-info-subtle: var(--surface-info-subtle);
-    --color-surface-info-hover: var(--surface-info-hover);
-
-    --color-info: var(--text-info);
-    --color-info-subtle: var(--text-info-subtle);
-    --color-info-hover: var(--text-info-hover);
-    --color-on-info: var(--text-on-info-color);
+    --spacing-container-block: calc(var(--spacing) * 24);
 }
 
 /*
 @import "./reset.css" layer(framework);
 @import "./form-elements.css" layer(components);
-@import "./animations.css" layer(animations);
 @import "./button.css" layer(components);
 @import "./navigation.css" layer(components);*/
-
-@layer utilities {
-    .flex-between {
-        display: flex;
-        flex-flow: row wrap;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .flex-start {
-        display: flex;
-        flex-flow: row wrap;
-        align-items: center;
-        justify-content: flex-start;
-        gap: var(--size-2);
-    }
-
-    .section-heading {
-        text-transform: uppercase;
-    }
-
-    .glass {
-        color: var(--text-neutral);
-        background-color: var(--surface-neutral);
-        border-color: var(--surface-brand-subtle);
-
-        @supports (backdrop-filter: blur(30px)) {
-            backdrop-filter: blur(30px);
-            background-color: oklch(from var(--surface-neutral) l c h / 0.6);
-            border-color: oklch(from var(--surface-neutral) l c h / 0.6);
-        }
-    }
-}
-
 @layer global {
     :root {
         interpolate-size: allow-keywords;
         overscroll-behavior: none;
 
-        --shadow-color: 0deg 0% 0%;
-        --shadow-strength: 10%;
-        --shadow-sm: 0 2px 6px hsl(var(--shadow-color) / calc(var(--shadow-strength)));
-        --shadow-md: 0 4px 8px hsl(var(--shadow-color) / calc(var(--shadow-strength)));
-
         /* Layout */
-        --content-width: min(100% - 2rem, 50rem);
+        --content-width: min(100% - 2rem, 47rem);
         /*800px*/
         --site-width: min(100% - 2rem, 75rem);
         /*1200px*/
@@ -148,11 +52,6 @@
 
     html,
     body {
-        font-family: var(--font-family-base), sans-serif;
-        color: var(--text-neutral);
-        /*background-color: var(--surface-neutral);*/
-        line-height: var(--lh-body-text);
-        font-weight: 400;
         scroll-behavior: smooth;
         interpolate-size: allow-keywords;
         -webkit-font-smoothing: antialiased;
@@ -168,20 +67,6 @@
         z-index: 1;
     }
 
-    button,
-    a,
-    .clickable {
-        @apply focus-visible:bg-surface-accent focus-visible:text-on-accent rounded-full;
-    }
-
-    @supports (corner-shape: squircle) {
-        * {
-            corner-shape: squircle;
-        }
-    }
-}
-
-@layer global {
     /* Typography */
     h1,
     h2,
@@ -195,24 +80,22 @@
     }
     h2,
     .h2 {
-        font-size: var(--font-size-4xl);
-        line-height: var(--lh-heading-large);
+        @apply text-3xl leading-tight;
     }
 
     h3,
     .h3 {
-        font-size: var(--font-size-xl);
-        line-height: var(--lh-heading-medium);
+        @apply text-xl leading-tight;
     }
 
     h4,
     .h4 {
-        font-size: var(--font-size-lg);
+        @apply text-lg leading-normal;
     }
 
     h5,
     .h5 {
-        font-size: var(--font-size-md);
+        @apply text-base leading-normal;
     }
 
     h2,
@@ -226,21 +109,13 @@
         max-width: 40ch;
     }
 
-    p,
-    ul,
-    ol {
-        margin-bottom: var(--size-4);
-        font-size: var(--font-size-md);
-    }
-
     small {
         font-size: var(--font-size-sm);
         color: var(--text-neutral-subtle);
     }
 
     p {
-        max-width: 65ch;
-        margin: 0;
+        @apply max-w-prose m-0;
     }
 
     img {
@@ -255,644 +130,18 @@
 }
 
 @layer utilities {
-    .container {
-        --padding-inline: 1rem;
-        --content-max-width: var(--site-width);
-        --breakout-max-width: calc(var(--content-max-width) * 0.2);
-        --breakout-size: calc((var(--breakout-max-width) - var(--content-max-width)) / 2);
-
-        display: grid;
-        grid-template-columns:
-            [full-width-start] minmax(var(--padding-inline), 1fr) [breakout-start] minmax(0, var(--breakout-size))
-            [content-start] min(100% - (var(--padding-inline) * 2), var(--content-max-width)) [content-end] minmax(
-                0,
-                var(--breakout-size)
-            )
-            [breakout-end] minmax(var(--padding-inline), 1fr) [full-width-end];
-        width: 100%;
-    }
-
-    .container[data-container-md] {
-        --content-max-width: var(--content-width);
-    }
-
-    .container > :not(.breakout, .full-width) {
-        grid-column: content;
-    }
-
-    .container > .breakout {
-        grid-column: breakout;
-    }
-
-    .container > .full-width {
-        grid-column: full-width;
-    }
-
-    .page-wrapper {
-        display: flex;
-        flex-direction: column;
-
-        min-height: 100vh;
-        row-gap: var(--size-2);
-    }
-
-    [data-parent-container] {
-        padding-block: var(--container-padding-block);
-    }
-
-    [data-parent-container] h2 {
-        margin: 0 0 var(--size-4);
-    }
-
-    [data-content-wrapper] {
-        width: var(--content-width);
-        margin-inline: auto;
-        display: flex;
-        flex-direction: column;
-        gap: var(--size-4);
-        align-items: flex-start;
-    }
-
-    [data-offscreen] {
-        content-visibility: auto;
-        contain-intrinsic-size: auto 31.25rem;
-    }
-
-    [data-cutout] {
-        position: relative;
-        isolation: isolate;
-        overflow: hidden;
-
-        &::after {
-            /* content: ""; */
-            position: absolute;
-            top: 80%;
-            right: 0;
-            bottom: 0;
-            left: 80%;
-            translate: -50% -50%;
-            /* width: var(--size-24);
-            height: var(--size-24); */
-            width: var(--size-32);
-            height: var(--size-32);
-
-            background-color: var(--surface-neutral);
-            /* border-radius: var(--radius-round); */
-            clip-path: polygon(
-                0% 0%,
-                0% 100%,
-                25% 100%,
-                25% 25%,
-                75% 25%,
-                75% 75%,
-                25% 75%,
-                25% 100%,
-                100% 100%,
-                100% 0%
-            );
-
-            z-index: -1;
-        }
-    }
-
-    .grid-cols-12 {
-        --_inline-padding: var(--size-4);
-        --_column-gap: 3rem;
-        /* min + max column width (in px) */
-        --col-min: 2;
-        --col-max: 5.8;
-
-        /* fluid interpolation between 320px → 1280px */
-        --col-size: calc(var(--col-min) * 1rem + (var(--col-max) - var(--col-min)) * ((100vw - 768px) / (1300 - 768)));
-
-        width: 100%;
-        /* max-width: min(100% - var(--_inline-padding), 1300px); */
-        /* margin: 0 auto; */
-
-        display: grid;
-        grid-template-columns: repeat(6, minmax(var(--col-size), 1fr));
-        gap: var(--size-2);
-    }
-
-    @media (min-width: 768px) {
-        .grid-cols-12 {
-            --_inline-padding: var(--size-8);
-
-            display: grid;
-            grid-template-columns: repeat(12, minmax(var(--col-size), 1fr));
-            gap: var(--size-8);
-        }
-    }
-}
-
-@layer components {
-    .skeleton {
-        width: 100%;
-        height: 1em;
-        background-color: var(--surface-neutral-subtle);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .skeleton::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        transform: translateX(-100%);
-        background: linear-gradient(90deg, transparent, var(--color-neutral-200), transparent);
-        animation: skeleton-loading 1.5s infinite;
-    }
-
-    @keyframes skeleton-loading {
-        100% {
-            transform: translateX(100%);
-        }
-    }
-
-    .skeleton-text {
-        display: flex;
-        flex-direction: column;
-        gap: var(--size-2);
-    }
-
-    .skeleton-text .skeleton:nth-child(3) {
-        width: 75%;
-    }
-}
-
-@layer animations {
-    ::view-transition-old(root) {
-        animation:
-            90ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
-            300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
-    }
-
-    ::view-transition-new(root) {
-        animation:
-            210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
-            300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
-    }
-}
-
-@layer utilities {
-    /*=================================*/
-    /* Utility Theme Classes           */
-    /*=================================*/
-    /*  Neutral  */
-    .surface-neutral {
+    .glass {
+        color: var(--text-neutral);
         background-color: var(--surface-neutral);
-        color: var(--text-neutral);
-        border-color: var(--surface-neutral);
-    }
-
-    .surface-neutral-subtle {
-        background-color: var(--surface-neutral-subtle);
-        color: var(--text-neutral);
-        border-color: var(--surface-neutral-subtle);
-    }
-
-    /*  Brand */
-    .surface-brand {
-        background-color: var(--surface-brand);
-        color: var(--text-on-brand-color);
-        border-color: var(--surface-brand);
-    }
-
-    .surface-brand-subtle {
-        background-color: var(--surface-brand-subtle);
-        color: var(--text-on-subtle-color);
         border-color: var(--surface-brand-subtle);
-    }
-
-    /*  Secondary  */
-    .surface-secondary {
-        background-color: var(--surface-secondary);
-        color: var(--text-on-secondary-color);
-        border-color: var(--surface-secondary);
-    }
-
-    .surface-secondary-subtle {
-        background-color: var(--surface-secondary-subtle);
-        color: var(--text-secondary);
-        border-color: var(--surface-secondary-subtle);
-    }
-
-    /*  Accent  */
-    .surface-accent {
-        background-color: var(--surface-accent);
-        color: var(--text-on-accent-color);
-        border-color: var(--surface-accent);
-    }
-
-    .surface-accent-subtle {
-        background-color: var(--surface-accent-subtle);
-        color: var(--text-accent);
-        border-color: var(--surface-accent-subtle);
-    }
-
-    /*  Success */
-    .surface-success {
-        background-color: var(--surface-success);
-        color: var(--text-on-success-color);
-        border-color: var(--surface-success);
-    }
-
-    .surface-success-subtle {
-        background-color: var(--surface-success-subtle);
-        color: var(--text-success);
-        border-color: var(--surface-success-subtle);
-    }
-
-    /*  Warning  */
-    .surface-warning {
-        background-color: var(--surface-warning);
-        color: var(--text-on-warning-color);
-        border-color: var(--surface-warning);
-    }
-
-    .surface-warning-subtle {
-        background-color: var(--surface-warning-subtle);
-        color: var(--text-warning);
-        border-color: var(--surface-warning-subtle);
-    }
-
-    /*  Error  */
-    .surface-error {
-        background-color: var(--surface-error);
-        color: var(--text-on-error-color);
-        border-color: var(--surface-error);
-    }
-
-    .surface-error-subtle {
-        background-color: var(--surface-error-subtle);
-        color: var(--text-error);
-        border-color: var(--surface-error-subtle);
-    }
-
-    /*  Info  */
-    .surface-info {
-        background-color: var(--surface-info);
-        color: var(--text-on-info-color);
-        border-color: var(--surface-info);
-    }
-
-    .surface-info-subtle {
-        background-color: var(--surface-info-subtle);
-        color: var(--text-info);
-        border-color: var(--surface-info-subtle);
-    }
-
-    /* Disabled */
-    .surface-disabled {
-        background-color: var(--surface-neutral-subtle);
-        color: var(--text-neutral-subtle);
-        border-color: var(--surface-neutral-subtle);
-        cursor: not-allowed;
-        opacity: 0.6;
-        pointer-events: none;
-    }
-
-    /*=================================*/
-    /* Outline / Ghost Surfaces                */
-    /*=================================*/
-    /* Neutral */
-    .outline-neutral {
-        background-color: transparent;
-        color: var(--text-neutral);
-        border: var(--stroke-1) solid var(--surface-neutral);
-    }
-
-    .outline-neutral:hover {
-        background-color: var(--surface-neutral-hover);
-        color: var(--text-neutral);
-        border-color: var(--surface-neutral-hover);
-    }
-
-    /* Brand */
-    .outline-brand {
-        background-color: transparent;
-        color: var(--text-brand);
-        border: var(--stroke-1) solid var(--surface-brand);
-    }
-
-    .outline-brand:hover {
-        background-color: var(--surface-brand);
-        color: var(--text-on-brand-color);
-        border-color: var(--surface-brand);
-    }
-
-    /* Secondary */
-    .outline-secondary {
-        background-color: transparent;
-        color: var(--text-secondary);
-        border: var(--stroke-1) solid var(--surface-secondary);
-    }
-
-    .outline-secondary:hover {
-        background-color: var(--surface-secondary);
-        color: var(--text-on-secondary-color);
-        border-color: var(--surface-secondary);
-    }
-
-    /* Accent */
-    .outline-accent {
-        background-color: transparent;
-        color: var(--text-accent);
-        border: var(--stroke-1) solid var(--surface-accent);
-    }
-
-    .outline-accent:hover {
-        background-color: var(--surface-accent);
-        color: var(--text-on-accent-color);
-        border-color: var(--surface-accent);
-    }
-
-    /* Success */
-    .outline-success {
-        background-color: transparent;
-        color: var(--text-success);
-        border: var(--stroke-1) solid var(--surface-success);
-    }
-
-    .outline-success:hover {
-        background-color: var(--surface-success);
-        color: var(--text-on-success-color);
-        border-color: var(--surface-success);
-    }
-
-    /* Warning */
-    .outline-warning {
-        background-color: transparent;
-        color: var(--text-warning);
-        border: var(--stroke-1) solid var(--surface-warning);
-    }
-
-    .outline-warning:hover {
-        background-color: var(--surface-warning);
-        color: var(--text-on-warning-color);
-        border-color: var(--surface-warning);
-    }
-
-    /* Error */
-    .outline-error {
-        background-color: transparent;
-        color: var(--text-error);
-        border: var(--stroke-1) solid var(--surface-error);
-    }
-
-    .outline-error:hover {
-        background-color: var(--surface-error);
-        color: var(--text-on-error-color);
-        border-color: var(--surface-error);
-    }
-
-    /* Info */
-    .outline-info {
-        background-color: transparent;
-        color: var(--text-info);
-        border: var(--stroke-1) solid var(--surface-info);
-    }
-
-    .outline-info:hover {
-        background-color: var(--surface-info);
-        color: var(--text-on-info-color);
-        border-color: var(--surface-info);
-    }
-
-    /* Disabled */
-    .outline-disabled {
-        background-color: transparent;
-        color: var(--text-neutral-subtle);
-        border: var(--stroke-1) solid var(--surface-neutral-subtle);
-        cursor: not-allowed;
-        opacity: 0.6;
-        pointer-events: none;
-    }
-
-    /*=================================*/
-    /* Subtle Outline / Ghost Surfaces         */
-    /*=================================*/
-    /* Neutral */
-    .outline-neutral-subtle {
-        background-color: transparent;
-        color: var(--text-neutral-subtle);
-        border: var(--stroke-1) solid var(--surface-neutral-subtle);
-    }
-
-    .outline-neutral-subtle:hover {
-        background-color: var(--surface-neutral-subtle);
-        color: var(--text-neutral);
-        border-color: var(--surface-neutral-subtle);
-    }
-
-    /* Brand */
-    .outline-brand-subtle {
-        background-color: transparent;
-        color: var(--text-brand-subtle);
-        border: var(--stroke-1) solid var(--surface-brand-subtle);
-    }
-
-    .outline-brand-subtle:hover {
-        background-color: var(--surface-brand-subtle);
-        color: var(--text-on-brand-color);
-        border-color: var(--surface-brand-subtle);
-    }
-
-    /* Secondary */
-    .outline-secondary-subtle {
-        background-color: transparent;
-        color: var(--text-secondary-subtle);
-        border: var(--stroke-1) solid var(--surface-secondary-subtle);
-    }
-
-    .outline-secondary-subtle:hover {
-        background-color: var(--surface-secondary-subtle);
-        color: var(--text-on-secondary-color);
-        border-color: var(--surface-secondary-subtle);
-    }
-
-    /* Accent */
-    .outline-accent-subtle {
-        background-color: transparent;
-        color: var(--text-accent-subtle);
-        border: var(--stroke-1) solid var(--surface-accent-subtle);
-    }
-
-    .outline-accent-subtle:hover {
-        background-color: var(--surface-accent-subtle);
-        color: var(--text-on-accent-color);
-        border-color: var(--surface-accent-subtle);
-    }
-
-    /* Success */
-    .outline-success-subtle {
-        background-color: transparent;
-        color: var(--text-success-subtle);
-        border: var(--stroke-1) solid var(--surface-success-subtle);
-    }
-
-    .outline-success-subtle:hover {
-        background-color: var(--surface-success-subtle);
-        color: var(--text-on-success-color);
-        border-color: var(--surface-success-subtle);
-    }
-
-    /* Warning */
-    .outline-warning-subtle {
-        background-color: transparent;
-        color: var(--text-warning-subtle);
-        border: var(--stroke-1) solid var(--surface-warning-subtle);
-    }
-
-    .outline-warning-subtle:hover {
-        background-color: var(--surface-warning-subtle);
-        color: var(--text-on-warning-color);
-        border-color: var(--surface-warning-subtle);
-    }
-
-    /* Error */
-    .outline-error-subtle {
-        background-color: transparent;
-        color: var(--text-error-subtle);
-        border: var(--stroke-1) solid var(--surface-error-subtle);
-    }
-
-    .outline-error-subtle:hover {
-        background-color: var(--surface-error-subtle);
-        color: var(--text-on-error-color);
-        border-color: var(--surface-error-subtle);
-    }
-
-    /* Info */
-    .outline-info-subtle {
-        background-color: transparent;
-        color: var(--text-info-subtle);
-        border: var(--stroke-1) solid var(--surface-info-subtle);
-    }
-
-    .outline-info-subtle:hover {
-        background-color: var(--surface-info-subtle);
-        color: var(--text-on-info-color);
-        border-color: var(--surface-info-subtle);
-    }
-
-    /* Disabled */
-    .outline-disabled-subtle {
-        background-color: transparent;
-        color: var(--text-neutral-subtle);
-        border: var(--stroke-1) solid var(--surface-neutral-subtle);
-        cursor: not-allowed;
-        opacity: 0.6;
-        pointer-events: none;
-    }
-
-    /*=================================*/
-    /* Text Utilities (no background)  */
-    /*=================================*/
-    /* Brand */
-    .text-brand {
-        color: var(--text-brand);
-    }
-
-    .text-brand-subtle {
-        color: var(--text-brand-subtle);
-    }
-
-    .text-on-brand-color {
-        color: var(--text-on-brand-color);
-    }
-
-    /* Secondary */
-    .text-secondary {
-        color: var(--text-secondary);
-    }
-
-    .text-secondary-subtle {
-        color: var(--text-secondary-subtle);
-    }
-
-    .text-on-secondary-color {
-        color: var(--text-on-secondary-color);
-    }
-
-    /* Success */
-    .text-success {
-        color: var(--text-success);
-    }
-
-    .text-success-subtle {
-        color: var(--text-success-subtle);
-    }
-
-    .text-on-success-color {
-        color: var(--text-on-success-color);
-    }
-
-    /* Warning */
-    .text-warning {
-        color: var(--text-warning);
-    }
-
-    .text-warning-subtle {
-        color: var(--text-warning-subtle);
-    }
-
-    .text-on-warning-color {
-        color: var(--text-on-warning-color);
-    }
-
-    /* Error */
-    .text-error {
-        color: var(--text-error);
-    }
-
-    .text-error-subtle {
-        color: var(--text-error-subtle);
-    }
-
-    .text-on-error-color {
-        color: var(--text-on-error-color);
-    }
-
-    /* Info */
-    .text-info {
-        color: var(--text-info);
-    }
-
-    .text-info-subtle {
-        color: var(--text-info-subtle);
-    }
-
-    .text-on-info-color {
-        color: var(--text-on-info-color);
-    }
-
-    /* Neutral */
-    .text-neutral {
-        color: var(--text-neutral);
-    }
-
-    .text-neutral-subtle {
-        color: var(--text-neutral-subtle);
-    }
-
-    .text-on-neutral-color {
-        color: var(--text-on-neutral-color);
-    }
 
-    /* Disabled */
-    .text-disabled {
-        color: var(--text-neutral-subtle);
-        opacity: 0.6;
-        pointer-events: none;
+        @supports (backdrop-filter: blur(30px)) {
+            backdrop-filter: blur(30px);
+            background-color: oklch(from var(--surface-neutral) l c h / 0.6);
+            border-color: oklch(from var(--surface-neutral) l c h / 0.6);
+        }
     }
 
-    /*=================================*/
-    /* State Variations                */
-    /*=================================*/
     .is-disabled {
         opacity: 0.6;
         pointer-events: none;
@@ -911,15 +160,93 @@
         border-color: var(--surface-success);
     }
 
-    .sr-only {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        white-space: nowrap;
-        border-width: 0;
+    .layout-grid {
+        --padding-inline: 1rem;
+        --content-max-width: var(--site-width);
+        --breakout-max-width: calc(var(--site-width) + 6rem);
+        --breakout-size: calc((var(--breakout-max-width) - var(--content-max-width)) / 2);
+
+        display: grid;
+        grid-template-columns:
+            [full-width-start] minmax(var(--padding-inline), 1fr) [breakout-start] minmax(0, var(--breakout-size))
+            [content-start] min(100% - (var(--padding-inline) * 2), var(--content-max-width)) [content-end] minmax(
+                0,
+                var(--breakout-size)
+            )
+            [breakout-end] minmax(var(--padding-inline), 1fr) [full-width-end];
+        width: 100%;
+    }
+
+    @media (min-width: 768px) and (max-width: 1200px) {
+        .layout-grid {
+            --content-max-width: var(--content-width);
+        }
+    }
+
+    .layout-grid > :not(.breakout, .full-width) {
+        grid-column: content;
+    }
+
+    .layout-grid > .breakout {
+        grid-column: breakout;
+    }
+
+    .layout-grid > .full-width {
+        grid-column: full-width;
+    }
+
+    .page-wrapper {
+        @apply flex flex-col gap-y-0 min-h-screen items-center;
+    }
+
+    [data-offscreen] {
+        content-visibility: auto;
+        contain-intrinsic-size: auto 31.25rem;
+    }
+
+    .button {
+        @apply flex items-center justify-center gap-x-3 capitalize py-3 pl-5 pr-4 w-full md:w-fit text-center rounded-2xl border-2 border-border-default hover:bg-surface-brand-subtle hover:text-foreground  hover:border-border-brand;
+    }
+
+    .icon-button {
+        @apply flex items-center justify-center w-8 h-8 rounded-full;
+    }
+
+    @supports (corner-shape: squircle) {
+        .button,
+        .squircle {
+            corner-shape: squircle;
+        }
+    }
+
+    .button--neutral {
+        @apply bg-surface-subtle;
+    }
+
+    .button--primary {
+        @apply bg-surface-brand text-on-brand border;
+    }
+
+    .button--ghost {
+        @apply bg-transparent border-transparent border-2;
+    }
+
+    .button--pressed {
+        scale: 0.95;
+        @apply bg-surface-brand-subtle text-on-brand;
+    }
+}
+
+@layer animations {
+    ::view-transition-old(root) {
+        animation:
+            90ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
+            300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
+    }
+
+    ::view-transition-new(root) {
+        animation:
+            210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
+            300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
     }
 }

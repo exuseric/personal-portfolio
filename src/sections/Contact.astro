@@ -7,8 +7,8 @@ const response = await getContent(contactQuery)
 const { heading, content } = response.contact
 ---
 
-<section class="contact container" id="contact" data-parent-container data-cutout>
-    <div class="contact__wrapper container" data-container-md>
+<section class="contact layout-grid" id="contact" data-parent-layout-grid data-cutout>
+    <div class="contact__wrapper layout-grid" data-layout-grid-md>
         <header class="contact__header full-width">
             <h2 class="h1 full-width contactHeading">
                 {heading}
@@ -25,7 +25,7 @@ const { heading, content } = response.contact
 
 <style>
     .contact {
-        padding-block: var(--container-padding-block);
+        padding-block: var(--layout-grid-padding-block);
     }
 
     .contact__header {

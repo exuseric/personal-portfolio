@@ -6,8 +6,8 @@ const response = await getContent(faqQuery)
 const { heading, faq } = response.faq
 ---
 
-<div class="faq container" data-parent-container data-cutout>
-    <div class="accordionWrapper container" data-container-md>
+<div class="faq layout-grid" data-parent-layout-grid data-cutout>
+    <div class="accordionWrapper layout-grid" data-layout-grid-md>
         <header class="full-width">
             <h2 class="h1 faqHeading">{heading}</h2>
         </header>

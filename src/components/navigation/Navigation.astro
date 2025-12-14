@@ -14,8 +14,8 @@ import DesktopNavigation from "./DesktopNavigation.astro"
 
 <!--
 
-<header class="nav container" data-navigation>
-    <div class="nav-wrapper grid-cols-12 glass full-width" data-active="false" data-navigation-container>
+<header class="nav layout-grid" data-navigation>
+    <div class="nav-wrapper grid-cols-12 glass full-width" data-active="false" data-navigation-layout-grid>
         <a href="/" class="nav__logo">
             <Image
                 src={LogoImage}
@@ -50,18 +50,18 @@ import DesktopNavigation from "./DesktopNavigation.astro"
 
 <script>
     window.addEventListener("DOMContentLoaded", () => {
-        const navContainer = document.querySelector<HTMLElement>("[data-navigation-container]")
-        if (!navContainer) return
+        const navlayout-grid = document.querySelector<HTMLElement>("[data-navigation-layout-grid]")
+        if (!navlayout-grid) return
 
         const updateNavState = () => {
-            navContainer.dataset.active = window.scrollY > 10 ? "true" : "false"
+            navlayout-grid.dataset.active = window.scrollY > 10 ? "true" : "false"
         }
 
         window.addEventListener("scroll", () => requestAnimationFrame(updateNavState), { passive: true })
 
         window.addEventListener("ToggleMenu", () => {
-            if (navContainer.dataset.active !== "true") {
-                navContainer.dataset.active = "true"
+            if (navlayout-grid.dataset.active !== "true") {
+                navlayout-grid.dataset.active = "true"
             }
         })
     })

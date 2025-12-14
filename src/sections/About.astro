@@ -6,7 +6,7 @@ const res = await getContent(aboutQuery)
 const { heading, content } = res.aboutMe
 ---
 
-<div class="aboutContainer container" id="about" data-parent-container data-cutout>
+<div class="aboutlayout-grid layout-grid" id="about" data-parent-layout-grid data-cutout>
     <header>
         <h2 class="h1 aboutHeading">
             {heading}
@@ -18,7 +18,7 @@ const { heading, content } = res.aboutMe
     </div>
 </div>
 <style>
-    .aboutContainer {
+    .aboutlayout-grid {
         height: 100%;
 
         header {
