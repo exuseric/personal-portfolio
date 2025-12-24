@@ -32,6 +32,8 @@
     --color-border-subtle: var(--border-subtle);
 
     --spacing-container-block: calc(var(--spacing) * 24);
+    --spacing-safe-bottom: calc(1em + env(safe-area-inset-bottom));
+    --spacing-safe-top: calc(1em + env(safe-area-inset-top));
 }
 
 /*
@@ -205,7 +207,7 @@
     }
 
     .button {
-        @apply flex items-center justify-center gap-x-3 capitalize py-3 pl-5 pr-4 w-full md:w-fit text-center rounded-2xl border-2 border-border-default hover:bg-surface-brand-subtle hover:text-foreground  hover:border-border-brand;
+        @apply flex items-center justify-center gap-x-3 capitalize py-3 pl-5 pr-4 w-full md:w-fit text-center rounded-2xl border-2 border-border-default/70 hover:bg-surface-brand-subtle hover:text-foreground  hover:border-border-brand/70;
     }
 
     .icon-button {
@@ -260,11 +262,11 @@
         @apply flex flex-row flex-wrap justify-between items-center text-foreground cursor-pointer mb-2;
 
         h3 {
-            @apply my-0 max-w-[23ch];
+            @apply my-0 max-w-[25ch];
         }
 
         .icon {
-            transition: transform var(--transition-micro-medium);
+            transition: transform var(--transition-micro-fast);
             @apply text-current size-5;
         }
     }
@@ -274,22 +276,22 @@
     }
 
     .details-content-wrapper {
-        transition: grid-template-rows var(--transition-anticipate-fast);
+        transition: grid-template-rows var(--transition-anticipate-slow);
         @apply grid grid-rows-[0] overflow-hidden;
     }
 
     details {
         --_radius: var(--radius-lg);
         transition:
-            border-radius var(--transition-micro-fast),
+            border-radius var(--transition-medium),
             margin var(--transition-fast),
-            border-color var(--transition-micro-fast),
-            border-bottom-width var(--transition-micro-fast);
+            border-color var(--transition-medium),
+            border-bottom-width var(--transition-fast);
         @apply overflow-hidden border border-border-default p-4;
     }
 
     details[open] {
-        @apply rounded-lg my-8 border-border-brand bg-surface-brand-light;
+        @apply rounded-lg my-2 border-border-brand bg-surface-brand-light;
 
         summary {
             .icon {

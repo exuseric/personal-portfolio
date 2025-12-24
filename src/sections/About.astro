@@ -6,9 +6,9 @@ const res = await getContent(aboutQuery)
 const { heading, content } = res.aboutMe
 ---
 
-<article class="" id="about">
+<article class="h-fit" id="about">
     <header>
-        <h3 class="font-semibold">
+        <h3 class="h2 font-semibold">
             {heading}
         </h3>
     </header>
@@ -17,56 +17,3 @@ const { heading, content } = res.aboutMe
         <Fragment set:html={content.html} class="about-content" />
     </div>
 </article>
-
-<script>
-    // import { gsap } from "gsap"
-    // import { ScrollTrigger, SplitText } from "gsap/all"
-
-    // document.addEventListener("DOMContentLoaded", (e) => {
-    //     gsap.registerPlugin(SplitText, ScrollTrigger)
-
-    //     let aboutHeading = new SplitText(".aboutHeading", { type: "words, chars", wordsClass: "words++" })
-
-    //     let tl = gsap.timeline({
-    //         scrollTrigger: {
-    //             trigger: ".hero",
-    //             endTrigger: ".aboutHeading",
-    //             start: "30% top",
-    //             end: "top 30%",
-    //             scrub: true,
-    //         },
-    //     })
-
-    //     tl.from(aboutHeading.words, {
-    //         yPercent: "random([-50, 50])",
-    //         rotation: "random([-10, 10])",
-    //         autoAlpha: 0,
-    //         ease: "back.out",
-    //         stagger: {
-    //             amount: 0.5,
-    //             from: "random",
-    //         },
-    //     })
-    //         .from(aboutHeading.chars, {
-    //             yPercent: "random([-200, 200])",
-    //             rotation: "random([-10, 10])",
-    //             autoAlpha: 0,
-    //             ease: "back.out",
-    //             stagger: {
-    //                 amount: 0.5,
-    //                 from: "random",
-    //             },
-    //         })
-    //         .to(".words5, .words7", {
-    //             backgroundColor: "var(--surface-brand-subtle)",
-    //             rotation: "-1",
-    //             paddingInline: "var(--size-4)",
-    //             borderRadius: "var(--radius-lg)",
-    //             width: "max-content",
-    //             ease: "power1.in",
-    //             stagger: {
-    //                 amount: 0.5,
-    //             },
-    //         })
-    // })
-</script>

@@ -11,7 +11,7 @@ const { heading, faq } = response.faq
 >
     <header>
         <h2 class="mb-8 flex flex-row items-center justify-start gap-x-3">
-            <Icon name="bi:question" class="size-6 animate-pulse" />
+            <Icon name="hugeicons:help-square" class="size-6 animate-pulse" />
             Some Q&A
         </h2>
     </header>
@@ -23,7 +23,12 @@ const { heading, faq } = response.faq
                         <details open={index === 0} data-index={index} name="faq">
                             <summary>
                                 <h3>{faq.question}</h3>
-                                <Icon name="mdi:caret" class="icon" aria-hidden="true" focusable="false" />
+                                <Icon
+                                    name="hugeicons:arrow-down-01"
+                                    class="icon"
+                                    aria-hidden="true"
+                                    focusable="false"
+                                />
                             </summary>
                             <div class="details-content-wrapper">
                                 <div class="details-content-inner">

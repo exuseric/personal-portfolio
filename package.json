@@ -44,6 +44,8 @@
         "@astrojs/netlify": "^6.6.3",
         "@astrojs/react": "^4.4.2",
         "@astrojs/sitemap": "^3.6.0",
+        "@hugeicons/core-free-icons": "^3.1.0",
+        "@hugeicons/react": "^1.1.4",
         "@tailwindcss/vite": "^4.1.18",
         "@types/react": "^19.2.7",
         "@types/react-dom": "^19.2.3",
@@ -61,6 +63,8 @@
         "typescript": "^5.9.3"
     },
     "devDependencies": {
+        "@iconify/react": "^6.0.2",
+        "@iconify/tailwind4": "^1.2.0",
         "astro-iconify": "^1.2.0",
         "eslint-config-prettier": "^10.1.8",
         "prettier": "3.6.2",

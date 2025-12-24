@@ -1,6 +1,6 @@
 import data from "@/data/navigation.json"
-import { Link } from "react-aria-components"
 const { nav } = data
+import { Link } from "react-aria-components"
 
 export default function NavMenu() {
     return (

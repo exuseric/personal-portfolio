@@ -9,22 +9,26 @@
             {
                 "label": "Home",
                 "url": "/",
-                "type": "internal"
+                "type": "internal",
+                "icon": "hugeicons:home-01"
             },
             {
                 "label": "Projects",
                 "url": "/#projects",
-                "type": "internal"
+                "type": "internal",
+                "icon": "hugeicons:code-folder"
             },
             {
                 "label": "Contact",
                 "url": "#contact",
-                "type": "internal"
+                "type": "internal",
+                "icon": "hugeicons:message-01"
             },
             {
                 "label": "About",
                 "url": "#about",
-                "type": "internal"
+                "type": "internal",
+                "icon": "hugeicons:user-03"
             }
         ],
         "cta": {

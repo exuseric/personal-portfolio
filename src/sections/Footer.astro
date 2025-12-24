@@ -42,7 +42,12 @@ const footerLinks = [
                         title={link.title}
                     >
                         <span>{link.name.toUpperCase()}</span>
-                        <Icon name={link.icon} aria-hidden="true" focusable="false" class="link-icon p-1" />
+                        <Icon
+                            name="hugeicons:arrow-up-right-01"
+                            aria-hidden="true"
+                            focusable="false"
+                            class="link-icon p-1"
+                        />
                     </a>
                 ))
             }
@@ -58,7 +63,7 @@ const footerLinks = [
 
 <style>
     .footerLink {
-        --_arrow-angle: 45deg;
+        --_arrow-angle: 0deg;
         --_block-width: calc(100% - 1em);
 
         text-decoration: none;
@@ -86,7 +91,7 @@ const footerLinks = [
         }
 
         &:hover {
-            --_arrow-angle: 90deg;
+            --_arrow-angle: 45deg;
             --_block-width: 100%;
         }
     }
