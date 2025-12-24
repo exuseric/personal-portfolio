@@ -260,7 +260,7 @@
         }
 
         .icon {
-            transition: transform var(--transition-anticipate-medium);
+            transition: transform var(--transition-micro-medium);
             @apply text-current size-5;
         }
     }
@@ -278,17 +278,16 @@
         --_radius: var(--radius-lg);
         transition:
             border-radius var(--transition-micro-fast),
-            margin var(--transition-elastic-fast),
-            border-color var(--transition-micro-slow),
-            border-bottom-width var(--transition-micro-slow);
+            margin var(--transition-fast),
+            border-color var(--transition-micro-fast),
+            border-bottom-width var(--transition-micro-fast);
         @apply overflow-hidden border border-border-default p-4;
     }
 
     details[open] {
-        @apply rounded-lg my-8 border-border-brand;
+        @apply rounded-lg my-8 border-border-brand bg-surface-brand-light;
 
         summary {
-            @apply text-brand;
             .icon {
                 @apply rotate-z-180;
             }
