@@ -29,20 +29,20 @@ const footerLinks = [
 ]
 ---
 
-<footer class="layout-grid">
-    <div class="footerContent">
-        <nav class="footerNav" aria-label="Footer navigation">
+<footer class="layout-grid py-container-block">
+    <div class="flex flex-col flex-wrap items-start justify-start gap-y-24">
+        <nav class="flex flex-col md:flex-row flex-wrap items-start justify-start md:justify-between gap-y-8 w-full">
             {
                 footerLinks.map((link) => (
                     <a
-                        class="h2 footerLink"
+                        class="h2 footerLink relative isolate flex flex-row items-center gap-0 text-current hover:text-brand"
                         href={link.url}
                         target="_blank"
                         rel="noopener noreferrer"
                         title={link.title}
                     >
                         <span>{link.name.toUpperCase()}</span>
-                        <Icon name={link.icon} aria-hidden="true" focusable="false" />
+                        <Icon name={link.icon} aria-hidden="true" focusable="false" class="link-icon p-1" />
                     </a>
                 ))
             }
@@ -57,51 +57,18 @@ const footerLinks = [
 </footer>
 
 <style>
-    footer {
-        background: linear-gradient(to bottom, var(--surface-neutral), var(--surface-brand-light));
-        padding-bottom: var(--size-32);
-        padding-top: var(--size-8);
-    }
-    .footerContent {
-        display: flex;
-        flex-flow: row wrap;
-        align-items: center;
-        justify-content: flex-start;
-
-        gap: var(--size-16);
-        /*padding-top: var(--size-32);
-        padding-bottom: var(--size-12);*/
-    }
-
-    .footerNav {
-        display: flex;
-        flex-flow: var(--flex-direction, column nowrap);
-        align-items: var(--flex-align, flex-start);
-        justify-content: space-between;
-        gap: var(--flex-gap, var(--size-12));
-        width: 100%;
-    }
-
     .footerLink {
         --_arrow-angle: 45deg;
         --_block-width: calc(100% - 1em);
 
-        position: relative;
-        isolation: isolate;
-
-        display: flex;
-        flex-direction: rows;
-        align-items: center;
-        gap: var(--size-1);
-        color: currentColor;
         text-decoration: none;
-        transition: all var(--transition-elastic-medium);
+        /*transition: all var(--transition-fast);*/
 
-        svg {
-            width: 1em;
-            height: 1em;
+        .link-icon {
+            width: 1.2em;
+            height: 1.2em;
             transform: rotateZ(var(--_arrow-angle));
-            transition: transform var(--transition-elastic-medium);
+            transition: transform var(--transition-fast);
             transform-origin: center;
         }
 
@@ -115,23 +82,12 @@ const footerLinks = [
             height: 0.05em;
             background-color: currentColor;
             margin-right: var(--size-2);
-            transition: width var(--transition-elastic-medium);
+            transition: width var(--transition-fast);
         }
 
         &:hover {
             --_arrow-angle: 90deg;
             --_block-width: 100%;
-        }
-    }
-
-    @media (min-width: 768px) {
-        footer {
-            padding-block: var(--size-12);
-        }
-        .footerNav {
-            --flex-direction: row wrap;
-            --flex-gap: var(--size-6);
-            --flex-align: center;
         }
     }
 </style>
