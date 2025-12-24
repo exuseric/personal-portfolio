@@ -23,7 +23,7 @@ export default function Projects() {
                                 <p className="status-badge bg-surface-brand/20 text-brand px-4 rounded-full text-sm!">
                                     In Progress
                                 </p>
-                                <h3 className="text-lg font-bold mb-0!">Restaurant Website</h3>
+                                <h3 className="text-lg font-bold mb-0!">Fullstack Restaurant Website</h3>
                                 <div className="grid grid-cols-[1fr_auto] md:flex md:flex-row items-center gap-x-2 w-full">
                                     <Link href="https://example.com" className="button button--neutral" target="_blank">
                                         <span>Live Demo</span>

@@ -6,43 +6,17 @@ const res = await getContent(aboutQuery)
 const { heading, content } = res.aboutMe
 ---
 
-<div class="aboutlayout-grid layout-grid" id="about" data-parent-layout-grid data-cutout>
+<article class="" id="about">
     <header>
-        <h2 class="h1 aboutHeading">
+        <h3 class="font-semibold">
             {heading}
-        </h2>
+        </h3>
     </header>
 
-    <div class="about__content" data-content-wrapper>
-        <Fragment set:html={content.html} />
+    <div class="about-content flex flex-col items-start justify-start gap-y-3">
+        <Fragment set:html={content.html} class="about-content" />
     </div>
-</div>
-<style>
-    .aboutlayout-grid {
-        height: 100%;
-
-        header {
-            justify-self: end;
-        }
-    }
-    .about__content {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-
-        em {
-            font-weight: 450;
-            color: var(--text-secondary);
-        }
-    }
-
-    .words7,
-    .words5 {
-        display: inline-block;
-        font-weight: 500;
-        background-color: var(--surface-brand);
-    }
-</style>
+</article>
 
 <script>
     // import { gsap } from "gsap"

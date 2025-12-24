@@ -235,6 +235,10 @@
         scale: 0.95;
         @apply bg-surface-brand-subtle text-on-brand;
     }
+
+    .about-content ul {
+        @apply list-disc pl-8;
+    }
 }
 
 @layer animations {

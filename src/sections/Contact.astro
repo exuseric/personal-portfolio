@@ -4,6 +4,7 @@ import { contactQuery } from "@/utils/queries"
 import Form from "@/components/contact/Form.astro"
 import { Icon } from "astro-iconify"
 import SocialButtons from "@/components/shared/SocialButtons.tsx"
+import About from "@/sections/About.astro"
 
 const response = await getContent(contactQuery)
 const { heading, content } = response.contact
@@ -21,8 +22,9 @@ const { heading, content } = response.contact
         </p>
         <SocialButtons />
     </article>
-    <div class="contact__formWrapper">
+    <div class="contact__formWrapper grid grid-rows-2 md:grid-cols-2 md:grid-rows-1 gap-x-12 md:items-start py-8">
         <Form />
+        <About />
     </div>
 </section>
 
