@@ -10,11 +10,11 @@
                 "label": "Home",
                 "url": "/",
                 "type": "internal",
-                "icon": "hugeicons:home-01"
+                "icon": "Home01Icon"
             },
             {
                 "label": "Projects",
-                "url": "/#projects",
+                "url": "#projects",
                 "type": "internal",
                 "icon": "hugeicons:code-folder"
             },

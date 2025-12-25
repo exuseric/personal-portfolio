@@ -4,7 +4,10 @@ import { Link } from "react-aria-components"
 
 export default function Projects() {
     return (
-        <section className="layout-grid py-container-block rounded-t-[6rem] rounded-b-[6rem] md:rounded-t-[12rem] md:rounded-b-[12rem] squircle bg-surface-brand-subtle">
+        <section
+            id="projects"
+            className="layout-grid py-container-block rounded-t-[6rem] rounded-b-[6rem] md:rounded-t-[12rem] md:rounded-b-[12rem] squircle bg-surface-brand-subtle"
+        >
             <h2 className="mb-8 flex flex-row items-center justify-start gap-x-3">
                 <span className="text-base text-neutral-subtle animate-pulse">
                     <HugeiconsIcon icon={CodeFolderIcon} />

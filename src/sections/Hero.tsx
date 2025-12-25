@@ -2,6 +2,8 @@ import SocialButtons from "@/components/shared/SocialButtons.tsx"
 import { CodeFolderIcon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { Link } from "react-aria-components"
+import { usePress } from "react-aria"
+import { useState } from "react"
 
 export default function Hero() {
     return (
@@ -21,8 +23,9 @@ export default function Hero() {
                 <div className="flex flex-col md:flex-row items-center justify-start gap-x-2 gap-y-2 mt-8 w-full">
                     <Link
                         href="/#projects"
-                        className={({ isPressed }) => (isPressed ? "button button--primary" : "button button--neutral")}
-                        onPressStart={(e) => e.target.classList.add("button--pressed")}
+                        className={({ isPressed }) =>
+                            isPressed ? "button button--primary scale-[0.95]" : "button button--neutral scale-[1]"
+                        }
                     >
                         Let's build something
                         <span>
