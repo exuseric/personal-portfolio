@@ -6,8 +6,9 @@ const response = await getContent(faqQuery)
 const { heading, faq } = response.faq
 ---
 
-<div
+<section
     class="py-container-block rounded-t-[6rem] rounded-b-[6rem] md:rounded-t-[12rem] md:rounded-b-[12rem] squircle bg-surface-brand-subtle layout-grid faq"
+    id="faq"
 >
     <header>
         <h2 class="mb-8 flex flex-row items-center justify-start gap-x-3">
@@ -40,4 +41,4 @@ const { heading, faq } = response.faq
             }
         </div>
     </div>
-</div>
+</section>

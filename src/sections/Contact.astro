@@ -10,7 +10,33 @@ const response = await getContent(contactQuery)
 const { heading, content } = response.contact
 ---
 
-<section class="py-container-block layout-grid" id="contact">
+<div class="py-container-block" id="contact">
+    <div class="grid grid-rows-[auto] md:grid-cols-2 md:grid-rows-1 gap-x-0 md:gap-y-0 md:items-start py-8">
+        <article class="bg-surface-brand-subtle px-1 py-12 layout-grid md:p-12 w-full h-full squircle rounded-[6em]">
+            <header class="mb-4">
+                <h2 class="mb-8 flex flex-row items-center justify-start gap-x-3">
+                    <Icon name="hugeicons:earth" class="size-6 animate-pulse" />
+                    Let's Connect
+                </h2>
+                <p class="flex flex-row items-center gap-x-1">
+                    <Icon name="emojione-v1:flag-for-kenya" class="size-6" />
+                    Nairobi, Kenya
+                </p>
+            </header>
+            <div class="my-12">
+                <About />
+            </div>
+        </article>
+        <div class="layout-grid md:p-12 flex flex-col items-center justify-center">
+            <SocialButtons />
+            <div class="my-12 w-full">
+                <Form />
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <section class="py-container-block layout-grid" id="contact">
     <article>
         <header class="mb-4">
             <h2 class="mb-8 flex flex-row items-center justify-start gap-x-3">
@@ -30,4 +56,4 @@ const { heading, content } = response.contact
         <Form />
         <About />
     </div>
-</section>
+</section> -->

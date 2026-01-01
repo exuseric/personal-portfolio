@@ -107,6 +107,11 @@
     --color-info-800: #0d625e;
     --color-info-900: #10514d;
     --color-info-950: #023131;
+
+    --scrollbar-color-thumb: var(--color-brand-500);
+    --scrollbar-color-track: var(--color-brand-100);
+    --scrollbar-width: thin;
+    --scrollbar-width-legacy: 0.5rem;
 }
 
 /* ======================================= */

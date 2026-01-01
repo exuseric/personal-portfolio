@@ -1,4 +1,76 @@
 ---
+import Icon from "astro-iconify"
+import type { HTMLAttributes } from "astro/types"
+
+interface Props extends HTMLAttributes<"button" | "a" | "link"> {
+    variant?: keyof typeof utilityClasses
+    disabled?: boolean
+    loading?: boolean
+    iconName?: string
+    href?: string
+    size?: keyof typeof sizeClasses
+    type?: "button" | "submit" | "reset"
+    className?: string
+    target?: string
+}
+
+const {
+    variant = "default",
+    disabled = false,
+    loading,
+    iconName = null,
+    href = null,
+    size = "md",
+    type = "button",
+    className = "",
+    ...rest
+} = Astro.props
+
+const utilityClasses = {
+    default: "button--neutral",
+    primary: "button--primary",
+    secondary: "button--secondary",
+    destructive: "button--danger",
+    success: "button--success",
+    link: "button--link",
+    text: "button--text",
+    outline: "button--outline",
+    ghost: "button--ghost",
+} as const
+
+const sizeClasses = {
+    xs: "button--xs",
+    sm: "button--sm",
+    md: "button--md",
+    lg: "button--lg",
+    xl: "button--xl",
+}
+
+const classes = [
+    "button active:button--pressed cursor-pointer group",
+    utilityClasses[variant ?? "default"],
+    sizeClasses[variant !== "text" ? size : "button--tiny"],
+    loading && "button--loading",
+    className ?? "",
+]
+---
+
+{
+    href ? (
+        <a href={href} class:list={classes} {...rest}>
+            {loading && <Icon name="hugeicons:loading-03" class="animate-spin size-6" />}
+            <slot />
+            {iconName && <Icon name={iconName} class="size-6" />}
+        </a>
+    ) : (
+        <button type={type} class:list={classes} disabled={disabled} {...rest}>
+            <Icon name="hugeicons:loading-03" class="animate-spin size-6 hidden group-data-loading:block" />
+            <slot />
+            {iconName && <Icon name={iconName} class="size-6" />}
+        </button>
+    )
+}
+<!-- ---
 import "@/styles/button.css"
 import { Icon } from "astro-iconify"
 
@@ -21,7 +93,7 @@ interface BaseProps {
     href?: string
     size?: "xs" | "sm" | "md" | "lg" | "xl"
     type?: "button" | "submit" | "reset"
-    classList?: string[]
+    className?: string
     as: "icon-only" | "default"
     attributes?: {
         dataset?: Record<string, string | number | boolean>
@@ -67,12 +139,12 @@ const sizeClasses: Record<NonNullable<Props["size"]>, string> = {
 }
 
 const classes = [
-    "button",
+    "button active:button--pressed",
     props.as === "icon-only" && "button--icon",
     utilityClasses[props.variant ?? "default"],
     sizeClasses[props.variant !== "text" ? "md" : "button--tiny"],
     props.loading && "button--loading",
-    ...(props.classList ?? []),
+    props.className ?? "",
 ]
 
 const mapAttributes = (attributesObject: Props["attributes"]) => {
@@ -125,4 +197,4 @@ const mapAttributes = (attributesObject: Props["attributes"]) => {
             {props.iconName && props.iconPosition === "right" && <Icon name={props.iconName} />}
         </button>
     )
-}
+} -->

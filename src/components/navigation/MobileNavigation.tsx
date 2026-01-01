@@ -1,36 +1,7 @@
-import data from "@/data/navigation.json"
-import { CodeFolderIcon, Home01Icon, Message01Icon, User03Icon } from "@hugeicons/core-free-icons"
+import links from "@/components/navigation/menu-links"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { useEffect, useState } from "react"
 import { Link } from "react-aria-components"
-const { nav } = data
-
-const links = [
-    {
-        label: "Home",
-        url: "/",
-        type: "internal",
-        icon: Home01Icon,
-    },
-    {
-        label: "Projects",
-        url: "#projects",
-        type: "internal",
-        icon: CodeFolderIcon,
-    },
-    {
-        label: "Contact",
-        url: "#contact",
-        type: "internal",
-        icon: Message01Icon,
-    },
-    {
-        label: "About",
-        url: "#about",
-        type: "internal",
-        icon: User03Icon,
-    },
-]
 
 export default function MobileNavigation() {
     const [hash, setHash] = useState<string>("")

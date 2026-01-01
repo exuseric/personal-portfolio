@@ -113,7 +113,7 @@
     margin: 0;
     padding: var(--size-8) 0;
 
-    background: red;
+    background: var(--surface-container);
 
     border-radius: var(--radius-lg);
     overflow: hidden;

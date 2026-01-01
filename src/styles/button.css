@@ -1,307 +1,39 @@
-@property --_align-items {
-    initial-value: center;
-    syntax: "*";
-    inherits: false;
+@utility button {
+    @apply flex items-center justify-center gap-x-3 capitalize py-3 pl-5 pr-4 w-full md:w-fit text-center rounded-2xl border-2 border-border-default/70 hover:bg-surface-brand-subtle hover:text-foreground  hover:border-border-brand/70;
 }
 
-@property --_justify-content {
-    initial-value: center;
-    syntax: "*";
-    inherits: false;
+@utility button--neutral {
+    @apply bg-surface-subtle;
 }
 
-@property --_outline-color {
-    initial-value: transparent;
-    syntax: "<color>";
-    inherits: false;
+@utility button--primary {
+    @apply bg-surface-brand text-on-brand border;
 }
 
-.btn,
-.btn--icon {
-    display: inline-flex;
-    align-items: var(--_align-items, center);
-    justify-content: var(--_justify-content, center);
-    gap: var(--size-2);
-
-    position: relative;
-    isolation: isolate;
-    z-index: 1;
-
-    color: var(--_color, var(--text-on-neutral-color));
-    background-color: var(--_background-color, transparent);
-    border: var(--stroke-1) solid var(--_border-color);
-    /* background: linear-gradient(var(--_background-color)) padding-box,
-            linear-gradient(15deg, var(--_border-gradient)) border-box; */
-
-    font-family: var(--font-family-base), sans-serif;
-    font-size: var(--font-size-sm);
-    line-height: var(--lh-base);
-    font-weight: 600;
-
-    cursor: pointer;
-    user-select: none;
-    outline: var(--stroke-1) solid var(--_outline-color, transparent);
-
-    text-decoration: none;
-
-    box-shadow:
-        oklch(from var(--_background-color) calc(l * 0.1) c h / 0.1) 0 1px 3px 0,
-        oklch(from var(--_background-color) calc(l * 0.06) c h / 0.06) 0 1px 2px 0;
-
-    transition:
-        background-color var(--transition-anticipate-fast),
-        background var(--transition-micro-fast),
-        color var(--transition-micro-fast),
-        border-color var(--transition-micro-fast),
-        scale var(--transition-micro-fast);
-
-    &:active,
-    &:focus-visible {
-        --_border-color: var(--surface-accent);
-        --_background-color: var(--surface-accent-subtle);
-        --_color: var(--text-accent-hover);
-        box-shadow: inset 1px 1px 4px oklch(from var(--_background-color) calc(l * 0.06) c h / 0.06);
-        /* scale: 0.98 0.99; */
-        animation: var(--animate-squash);
-    }
+@utility button--ghost {
+    @apply bg-transparent border-transparent border-2;
 }
 
-.btn:not(.btn--icon) {
-    border-radius: var(--radius-md);
-
-    width: var(--_width, max-content);
-    height: max-content;
-    min-width: var(--_min-width, 4.6rem);
-    min-height: var(--_min-height, 3rem);
-    padding: var(--size-2) var(--size-4);
-
-    @supports (corner-shape: squircle) {
-        & {
-            border-radius: var(--radius-lg);
-            corner-shape: squircle;
-        }
-    }
+@utility button--danger {
+    @apply bg-surface-error text-error border border-border-error/50;
 }
 
-.btn,
-.btn--icon {
-    --_border-gradient:
-        var(--_border-color, transparent), oklch(from var(--_border-color, transparent) calc(l / 0.725) c h);
-    /*background: linear-gradient(var(--_background-color) 0 0) padding-box,
-        linear-gradient(35deg, var(--_border-gradient)) border-box;
-    border: var(--stroke-1) solid transparent;*/
+@utility button--success {
+    @apply bg-surface-success text-on-success border border-border-success/50;
 }
 
-/* ICON BUTTONS */
-.btn--icon {
-    --_size: 2em;
-    --_radius: var(--radius-md);
-
-    width: var(--_min-width, 3rem);
-    height: var(--_min-height, 3rem);
-    aspect-ratio: 1 / 1;
-    padding: 0;
-
-    border-radius: var(--_radius);
-
-    & [astro-icon] {
-        width: var(--font-size-lg);
-        height: var(--font-size-lg);
-    }
-
-    @supports (corner-shape: squircle) {
-        & {
-            --_radius: var(--radius-lg);
-            corner-shape: squircle;
-        }
-    }
+@utility button--warning {
+    @apply bg-surface-warning text-on-warning border border-border-warning/50;
 }
 
-.btn--icon .btn__label {
-    display: none;
+@utility button--pressed {
+    @apply bg-surface-brand-subtle text-brand scale-[0.95];
 }
 
-/* VARIANTS */
-.btn--outline {
-    --_background-color: var(--surface-neutral);
-    --_border-color: var(--surface-brand);
-    --_color: var(--text-brand);
-
-    &:hover {
-        --_background-color: var(--surface-brand-subtle);
-        --_color: var(--text-brand-hover);
-    }
+@utility icon-button {
+    @apply flex items-center justify-center w-8 h-8 rounded-full;
 }
 
-.btn--primary {
-    --_background-color: var(--surface-brand-light);
-    --_border-color: var(--surface-brand);
-    --_color: var(--text-on-brand-color);
-
-    &:hover {
-        --_color: var(--text-brand-hover);
-        --_background-color: var(--surface-brand-subtle);
-    }
-}
-
-.btn--secondary {
-    --_color: var(--text-on-secondary-color);
-    --_background-color: var(--surface-secondary);
-    --_border-color: var(--surface-secondary);
-
-    &:hover {
-        --_color: var(--text-secondary-hover);
-        --_background-color: var(--surface-secondary-hover);
-    }
-}
-
-.btn--neutral {
-    --_background-color: var(--surface-neutral-light);
-    --_color: var(--text-on-neutral-color);
-    --_border-color: var(--surface-neutral-hover);
-
-    &:hover {
-        --_color: var(--text-neutral-hover);
-        --_background-color: var(--surface-neutral-hover);
-    }
-}
-
-.btn--danger {
-    --_background-color: var(--surface-error);
-    --_color: var(--text-on-error-color);
-
-    &:hover {
-        --_background-color: var(--surface-error-hover);
-    }
-}
-
-.btn--success {
-    --_background-color: var(--surface-success-light);
-    --_border-color: var(--surface-success);
-    --_color: var(--text-on-success-color);
-
-    &:hover {
-        --_background-color: var(--surface-success-subtle);
-    }
-}
-
-.btn--ghost {
-    --_background-color: var(--surface-brand-light);
-    --_color: var(--text-neutral);
-    --_border-color: var(--surface-brand-hover);
-    box-shadow: none;
-
-    &:hover {
-        --_color: var(--text-brand-hover);
-        --_background-color: var(--surface-brand-subtle);
-    }
-}
-
-.btn--link {
-    --_background-color: transparent;
-    --_color: var(--text-neutral);
-    --_border-color: transparent;
-    padding: 0;
-    box-shadow: none;
-
-    &:hover {
-        --_color: var(--text-brand-hover);
-        --_background-color: var(--surface-brand-subtle);
-        --_border-color: var(--surface-brand-hover);
-    }
-}
-
-.btn--text {
-    --_background-color: transparent;
-    --_color: var(--text-neutral);
-    --_border-color: transparent;
-    --_min-width: auto;
-    --_min-height: auto;
-    padding: 0;
-    box-shadow: none;
-    text-decoration: underline;
-    transition: padding var(--transition-micro-fast);
-
-    &:hover {
-        --_color: var(--text-on-brand-color);
-        --_background-color: var(--surface-brand);
-        padding: 0 var(--size-2);
-    }
-}
-
-/* VISUAL STATES */
-.btn:disabled,
-.btn[aria-disabled="true"] {
-    opacity: 0.6;
-    pointer-events: none;
-    cursor: not-allowed;
-}
-
-/* LOADING STATE */
-.btn--loading {
-    position: relative;
-    pointer-events: none;
-    opacity: 0.85;
-}
-
-.btn__spinner {
-    width: 1em;
-    height: 1em;
-    border: 2px solid currentColor;
-    border-right-color: transparent;
-    border-radius: 50%;
-    animation: spin 0.7s linear infinite;
-}
-
-.btn--tiny {
-    &:not(.btn--icon) {
-        padding: 0;
-    }
-}
-
-/* SIZE VARIANTS */
-.btn--xs {
-    font-size: var(--font-size-xs);
-
-    &:not(.btn--icon) {
-        padding: var(--size-1) var(--size-2);
-    }
-}
-
-.btn--sm {
-    font-size: var(--font-size-sm);
-
-    &:not(.btn--icon) {
-        padding: var(--size-2) var(--size-3);
-    }
-}
-
-.btn--md {
-    font-size: var(--font-size-md);
-}
-
-.btn--lg {
-    font-size: var(--font-size-md);
-}
-
-.btn--xl {
-    font-size: var(--font-size-lg);
-}
-
-/*.btn--md:not(.btn--icon) {
-    padding: var(--size-2) var(--size-4);
-}
-.btn--lg:not(.btn--icon) {
-    padding: var(--size-3) var(--size-5);
-}
-.btn--xl:not(.btn--icon) {
-    padding: var(--size-4) var(--size-6);
-}*/
-
-@media (prefers-reduced-motion: reduce) {
-    .btn,
-    .btn__spinner {
-        transition: none;
-        animation: none;
-    }
+@utility button--active {
+    @apply bg-surface-background text-brand border border-brand/50;
 }

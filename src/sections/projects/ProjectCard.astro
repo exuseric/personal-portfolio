@@ -1,0 +1,61 @@
+---
+import Button from "@/components/Button/Button.astro"
+import cardImage from "@/images/in-progress.jpg"
+import { Icon } from "astro-iconify"
+import { Image } from "astro:assets"
+---
+
+<div class="w-full min-h-96 grid grid-rows-2 md:grid-cols-2 md:grid-rows-1 items-center auto-rows-min gap-8">
+    <div class="w-full h-96 rounded-2xl bg-surface-subtle overflow-hidden">
+        <Image
+            src={cardImage}
+            alt="In Progress"
+            width={cardImage.width}
+            height={cardImage.height}
+            class="object-cover w-full h-full max-w-full max-h-full"
+        />
+    </div>
+    <article class="flex flex-col gap-y-4 h-max">
+        <header class="flex flex-col gap-y-3 items-start justify-start">
+            <p class="status-badge bg-surface-brand/20 text-brand px-4 rounded-full text-sm!">In Progress</p>
+            <h3 class="text-lg font-bold mb-0!">Fullstack Restaurant Website</h3>
+            <div class="grid grid-cols-2 md:flex md:flex-row items-center gap-x-1 w-full">
+                <!-- <Button
+                    href="https://example.com"
+                    className="button button--neutral active:button--pressed"
+                    target="_blank"
+                >
+                    <span>Live Demo</span>
+                    <span>
+                        <Icon name="hugeicons:link-square-01" class="size-6" />
+                    </span>
+                </Button> -->
+                <Button
+                    href="https://github.com/exuseric/fullstack-restaurant-website"
+                    class="button button--ghost active:button--pressed"
+                    target="_blank"
+                    variant="ghost"
+                >
+                    <span>Github</span>
+                    <span>
+                        <Icon name="hugeicons:github-01" class="size-6" />
+                    </span>
+                </Button>
+            </div>
+        </header>
+        <p class="text-base">
+            This Next.js/TypeScript restaurant website prioritizes performance and scalability, utilizing PostgreSQL for
+            data management.
+        </p>
+        <p>
+            It employs a Fluent Repository Pattern for clean data access and integrates PostgreSQL's native tsvector for
+            delivering high-speed, efficient full-text search functionality.
+        </p>
+        <ul aria-label="Project Technologies" class="flex flex-row items-center justify-start flex-wrap gap-2 text-sm">
+            <li class="py-1 px-4 bg-surface-brand-subtle border-border-default border rounded-full">React</li>
+            <li class="py-1 px-4 bg-surface-brand-subtle border-border-default border rounded-full">Typescript</li>
+            <li class="py-1 px-4 bg-surface-brand-subtle border-border-default border rounded-full">Next.js</li>
+            <li class="py-1 px-4 bg-surface-brand-subtle border-border-default border rounded-full">PostgreSQL</li>
+        </ul>
+    </article>
+</div>

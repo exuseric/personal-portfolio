@@ -7,14 +7,14 @@
 <style>
     .themeToggle {
         --size: var(--size-4);
-        --icon-fill: var(--text-neutral);
+        --icon-fill: var(--text-primary);
         --icon-fill-hover: var(--text-brand);
 
         display: grid;
         place-content: center;
 
         background: none;
-        border: var(--stroke-1) solid transparent;
+        border: var(--border-width-thin) solid transparent;
         padding: 0;
         color: var(--icon-fill);
 
@@ -40,7 +40,7 @@
 
         &:hover {
             background:
-                linear-gradient(var(--surface-neutral) 0 0) padding-box,
+                linear-gradient(var(--surface-container) 0 0) padding-box,
                 linear-gradient(to right, var(--icon-fill-hover), var(--surface-accent)) border-box;
         }
 

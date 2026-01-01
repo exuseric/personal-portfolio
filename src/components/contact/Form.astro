@@ -2,10 +2,13 @@
 import Button from "@/components/Button/Button.astro"
 ---
 
-<form class="contact__form max-w-prose" id="contactForm">
-    <p class="form-helper form-general-error"></p>
+<form class="contact__form max-w-prose" id="contactForm" novalidate>
+    <p class="form-general-error" role="alert" aria-live="polite"></p>
+
     <div class="form-group">
-        <label for="name" class="form-label">Full name</label>
+        <label for="name" class="form-label">
+            Your Name <sup aria-label="required">*</sup>
+        </label>
         <input
             id="name"
             name="name"
@@ -15,12 +18,20 @@ import Button from "@/components/Button/Button.astro"
             autocomplete="name"
             minlength="2"
             required
+            aria-required="true"
+            aria-invalid="false"
+            aria-describedby="name-error"
             transition:persist
         />
-        <p class="form-helper form-helper-error" data-error-for="name">Name must be at least 2 characters.</p>
+        <p id="name-error" class="form-helper form-helper-error" data-error-for="name" role="alert">
+            Name must be at least 2 characters.
+        </p>
     </div>
+
     <div class="form-group">
-        <label for="email" class="form-label">Email Address</label>
+        <label for="email" class="form-label">
+            Your Email Address <sup aria-label="required">*</sup>
+        </label>
         <input
             id="email"
             name="email"
@@ -30,48 +41,54 @@ import Button from "@/components/Button/Button.astro"
             placeholder="mail@example.com"
             autocomplete="email"
             required
+            aria-required="true"
+            aria-invalid="false"
+            aria-describedby="email-error"
             transition:persist
         />
-        <p class="form-helper form-helper-error" data-error-for="email">Invalid email address; mail@example.com</p>
+        <p id="email-error" class="form-helper form-helper-error" data-error-for="email" role="alert">
+            Invalid email address; mail@example.com
+        </p>
     </div>
-    <div class="form-group">
-        <label for="inquiry" class="form-label">Inquiry</label>
-        <select name="inquiry" id="inquiry" transition:persist>
+
+    <!-- <div class="form-group">
+        <label for="inquiry" class="form-label">Inquiry Type</label>
+        <select name="inquiry" id="inquiry" class="input" aria-describedby="inquiry-helper" transition:persist>
             <option value="General Inquiry" selected>General Inquiry</option>
             <option value="Project Inquiry">Project Inquiry</option>
+            <option value="Support">Support</option>
+            <option value="Partnership">Partnership</option>
         </select>
-    </div>
+        <p id="inquiry-helper" class="form-helper">Select the type of inquiry</p>
+    </div> -->
+
     <div class="form-group">
-        <label for="message" class="form-label">Your Message</label>
+        <label for="message" class="form-label">
+            Your Message <sup aria-label="required">*</sup>
+        </label>
         <textarea
             id="message"
             name="message"
             class="textarea"
             rows="4"
-            maxlength="1000"
+            maxlength="500"
             minlength="10"
             required
             placeholder="Write your message..."
+            aria-required="true"
+            aria-invalid="false"
+            aria-describedby="message-error message-count"
             transition:persist></textarea>
-        <p class="form-helper form-helper-error" data-error-for="message">
-            Your message must be at least 10 characters long
-        </p>
+        <div class="form-helper-row">
+            <p id="message-error" class="form-helper form-helper-error" data-error-for="message" role="alert">
+                Your message must be at least 10 characters long
+            </p>
+            <p id="message-count" class="text-sm text-tertiary p-2" aria-live="polite"></p>
+        </div>
     </div>
 
     <div class="form-group">
-        <Button
-            type="submit"
-            variant="primary"
-            as="default"
-            label="Send Message"
-            attributes={{
-                dataset: {
-                    isSubmitting: false,
-                    isSuccess: false,
-                    isError: false,
-                },
-            }}
-        />
+        <Button type="submit" variant="primary" className="w-full sm:w-auto" id="submitButton"> Send Message </Button>
     </div>
 </form>
 
@@ -83,6 +100,9 @@ import Button from "@/components/Button/Button.astro"
 
     const submitButton = form.querySelector("button[type='submit']") as HTMLButtonElement
     if (!submitButton) throw new Error("Submit button not found")
+
+    const messageTextarea = form.querySelector("#message") as HTMLTextAreaElement
+    const charCountElement = form.querySelector("#message-count") as HTMLElement
 
     type FormInputsData = {
         name?: string[]
@@ -99,8 +119,24 @@ import Button from "@/components/Button/Button.astro"
         UNKNOWN: "Something went wrong. Please try again",
     } as const
 
-    // Track timeouts for cleanup
     let stateResetTimeout: ReturnType<typeof setTimeout> | null = null
+
+    // Character counter for message field
+    const updateCharCount = () => {
+        if (messageTextarea && charCountElement) {
+            const count = messageTextarea.value.length
+            const max = messageTextarea.maxLength
+            charCountElement.textContent = `${count} / ${max}`
+
+            if (count > max / 1.1) {
+                charCountElement.style.color = "var(--text-error)"
+            } else {
+                charCountElement.style.color = "var(--text-tertiary)"
+            }
+        }
+    }
+
+    messageTextarea?.addEventListener("input", updateCharCount)
 
     const clearStateTimeout = () => {
         if (stateResetTimeout) {
@@ -111,17 +147,46 @@ import Button from "@/components/Button/Button.astro"
 
     const setButtonState = (state: "idle" | "submitting" | "success" | "error") => {
         const states = {
-            idle: { text: "Send Message", disabled: false, classes: [] },
-            submitting: { text: "Sending Message...", disabled: true, classes: ["btn--outline"] },
-            success: { text: "Message Sent!", disabled: false, classes: ["btn--success"] },
-            error: { text: "Try Again", disabled: false, classes: ["btn--danger"] },
+            idle: {
+                text: "Send Message",
+                disabled: false,
+                loading: false,
+                variant: "button--primary",
+            },
+            submitting: {
+                text: "Sending your message...",
+                disabled: true,
+                loading: true,
+                variant: "button--outline",
+            },
+            success: {
+                text: "Message Sent!",
+                disabled: false,
+                loading: false,
+                variant: "button--success",
+            },
+            error: {
+                text: "Try Again",
+                disabled: false,
+                loading: false,
+                variant: "button--danger",
+            },
         }
 
         const config = states[state]
+
         submitButton.textContent = config.text
+
         submitButton.disabled = config.disabled
-        submitButton.className = submitButton.className.replace(/btn--(success|danger)/g, "")
-        config.classes.forEach((cls) => submitButton.classList.add(cls))
+
+        submitButton.setAttribute("data-loading", "true")
+        submitButton.setAttribute("aria-busy", String(config.loading))
+
+        // Remove all variant classes
+        submitButton.classList.remove("button--primary", "button--outline", "button--success", "button--danger")
+
+        // Add the appropriate variant class
+        submitButton.classList.add(config.variant)
     }
 
     const setFormFieldsDisabled = (disabled: boolean = false) => {
@@ -135,10 +200,17 @@ import Button from "@/components/Button/Button.astro"
 
     const handleInputErrors = ({ fields, form }: { fields: FormInputsData; form: HTMLFormElement }) => {
         Object.keys(fields).forEach((fieldName) => {
+            const inputElement = form.querySelector(`#${fieldName}`) as HTMLInputElement | HTMLTextAreaElement
             const errorElement = form.querySelector(`[data-error-for="${fieldName}"]`) as HTMLElement
+
             if (errorElement && fields[fieldName]) {
                 errorElement.textContent = fields[fieldName]!.join(", ")
-                errorElement.style.display = "block"
+                errorElement.classList.remove("hidden")
+                errorElement.classList.add("block")
+
+                if (inputElement) {
+                    inputElement.setAttribute("aria-invalid", "true")
+                }
             }
         })
     }
@@ -146,86 +218,106 @@ import Button from "@/components/Button/Button.astro"
     const clearInputErrors = (form: HTMLFormElement) => {
         const errorElements = form.querySelectorAll(".form-helper-error") as NodeListOf<HTMLElement>
         errorElements.forEach((el) => {
-            el.style.display = "none"
-            el.textContent = ""
+            el.classList.remove("block")
+            el.classList.add("hidden")
+        })
+
+        // Clear error states from inputs
+        const inputElements = form.querySelectorAll("input, textarea, select") as NodeListOf<HTMLElement>
+        inputElements.forEach((el) => {
+            el.setAttribute("aria-invalid", "false")
         })
     }
 
     const showGeneralError = (message: string) => {
-        // Look for a general error message element
-        let generalError = form.querySelector(".form-general-error") as HTMLElement
-        generalError.textContent = message
-        generalError.style.display = "block"
+        const generalError = form.querySelector(".form-general-error") as HTMLElement
+
+        if (generalError) {
+            generalError.textContent = message
+            generalError.classList.remove("hidden")
+            generalError.classList.add("block")
+        }
     }
 
     const hideGeneralError = () => {
         const generalError = form.querySelector(".form-general-error") as HTMLElement
+
         if (generalError) {
-            generalError.style.display = "none"
+            generalError.classList.remove("block")
+            generalError.classList.add("hidden")
             generalError.textContent = ""
         }
     }
 
     const resetAfterDelay = (state: "success" | "error", delay: number = 4000) => {
-        if (stateResetTimeout) clearTimeout(stateResetTimeout)
+        clearStateTimeout()
         stateResetTimeout = setTimeout(() => {
             setButtonState("idle")
             hideGeneralError()
-            if (state === "success") form.reset()
+            if (state === "success") {
+                form.reset()
+                updateCharCount()
+            }
         }, delay)
     }
+
+    // Real-time validation
+    const validateField = (field: HTMLInputElement | HTMLTextAreaElement) => {
+        const errorElement = form.querySelector(`[data-error-for="${field.id}"]`) as HTMLElement
+
+        if (!errorElement) return
+
+        if (field.validity.valid) {
+            errorElement.classList.remove("block")
+            errorElement.classList.add("hidden")
+            field.setAttribute("aria-invalid", "false")
+        }
+    }
+
+    // Add blur event listeners for real-time validation
+    form.querySelectorAll("input[required], textarea[required]").forEach((field) => {
+        field.addEventListener("blur", () => validateField(field as HTMLInputElement | HTMLTextAreaElement))
+    })
 
     form.addEventListener("submit", async (e: SubmitEvent) => {
         e.preventDefault()
 
-        // Clear any existing timeouts
         clearStateTimeout()
-
-        // Clear previous errors
         clearInputErrors(form)
         hideGeneralError()
 
         const formData = new FormData(form)
 
-        // Update UI to submitting state
         setButtonState("submitting")
         setFormFieldsDisabled(true)
 
         try {
             const { data: messageSent, error } = await actions.contact.sendMessage(formData)
 
-            // Handle input validation errors
             if (isInputError(error)) {
                 handleInputErrors({ fields: error.fields, form })
                 showGeneralError(ERROR_MESSAGES.VALIDATION)
                 setButtonState("error")
                 setFormFieldsDisabled(false)
                 resetAfterDelay("error")
-
                 return
             }
 
-            // Handle unexpected errors from action
             if (error) {
                 console.error("Unexpected error:", error)
                 showGeneralError(ERROR_MESSAGES.UNKNOWN)
                 setButtonState("error")
                 setFormFieldsDisabled(false)
                 resetAfterDelay("error")
-
                 return
             }
 
-            // Handle email sending results
             if (messageSent?.success) {
                 setButtonState("success")
                 setFormFieldsDisabled(false)
                 resetAfterDelay("success")
             } else {
-                // Email sending failed
                 const errorMessage = messageSent?.error?.message || ERROR_MESSAGES.UNKNOWN
-
-                // Try to categorize the error
                 let displayMessage: string = ERROR_MESSAGES.UNKNOWN
 
                 if (errorMessage.toLowerCase().includes("timeout")) {
@@ -242,7 +334,6 @@ import Button from "@/components/Button/Button.astro"
                 resetAfterDelay("error")
             }
         } catch (err) {
-            // Catch any unexpected runtime errors
             console.error("Form submission error:", err)
             showGeneralError(ERROR_MESSAGES.UNKNOWN)
             setButtonState("error")
@@ -251,8 +342,8 @@ import Button from "@/components/Button/Button.astro"
         }
     })
 
-    // Cleanup on page unload
-    window.addEventListener("beforeunload", () => {
-        if (stateResetTimeout) clearTimeout(stateResetTimeout)
+    window.addEventListener("beforeunload", clearStateTimeout)
+    document.addEventListener("DOMContentLoaded", () => {
+        updateCharCount()
     })
 </script>

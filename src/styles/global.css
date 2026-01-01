@@ -3,33 +3,54 @@
 @import "./theme.css";
 @import "./animations.css";
 @import "./form-elements.css";
+@import "./button.css";
 
-/*@layer framework, global, elements, components, utilities, animations;*/
 @theme inline {
     /* Brand */
+    --color-brand: var(--text-brand);
+    --color-on-brand: var(--text-on-brand);
+    --color-on-error: var(--text-on-error);
+    --color-on-success: var(--text-on-success);
+    --color-on-warning: var(--text-on-warning);
+
+    /* Text */
+    --color-foreground: var(--text-primary);
+    --color-secondary: var(--text-secondary);
+    --color-tertiary: var(--text-tertiary);
+    --color-error: var(--text-error-strong);
+    --color-success: var(--text-success-strong);
+    --color-disabled: var(--text-disabled);
+    --color-placeholder: var(--text-placeholder);
+    --color-on-dark: var(--text-on-dark);
+
+    /* Surfaces */
+    --color-surface-background: var(--surface-background);
+    --color-surface-card: var(--surface-card);
+    --color-surface-subtle: var(--surface-background-alt);
+    --color-surface-overlay: var(--surface-scrim);
+
+    /* Brand Surfaces */
     --color-surface-brand: var(--surface-brand-default);
-    --color-surface-brand-light: var(--surface-brand-light);
     --color-surface-brand-subtle: var(--surface-brand-subtle);
     --color-surface-brand-hover: var(--surface-brand-hover);
     --color-surface-brand-active: var(--surface-brand-active);
+    --color-surface-brand-disabled: var(--surface-brand-disabled);
 
-    --color-brand: var(--text-brand-default);
-    --color-on-brand: var(--text-on-brand-color);
+    /* Semantic Surfaces */
+    --color-surface-error: var(--surface-error);
+    --color-surface-error-emphasis: var(--surface-error-emphasis);
+    --color-surface-warning: var(--surface-warning);
+    --color-surface-success: var(--surface-success);
+    --color-surface-info: var(--surface-info);
 
-    /* Neutral */
-    --color-surface-background: var(--surface-background);
-    --color-surface-card: var(--surface-card);
-    --color-surface-subtle: var(--surface-subtle);
-    --color-surface-overlay: var(--surface-overlay);
-
-    --color-foreground: var(--text-foreground);
-    --color-secondary: var(--text-secondary);
-    --color-disabled: var(--text-disabled);
-    --color-on-dark: var(--text-on-dark);
-
-    --color-border-brand: var(--border-brand);
+    /* Borders */
     --color-border-default: var(--border-default);
     --color-border-subtle: var(--border-subtle);
+    --color-border-brand: var(--border-brand);
+    --color-border-error: var(--border-error);
+    --color-border-warning: var(--border-warning);
+    --color-border-success: var(--border-success);
+    --color-border-info: var(--border-info);
 
     --spacing-container-block: calc(var(--spacing) * 24);
     --spacing-safe-bottom: calc(1em + env(safe-area-inset-bottom));
@@ -38,13 +59,9 @@
 
 /*
 @import "./reset.css" layer(framework);
-@import "./button.css" layer(components);
 @import "./navigation.css" layer(components);*/
 @layer global {
     :root {
-        interpolate-size: allow-keywords;
-        overscroll-behavior: none;
-
         /* Layout */
         --content-width: min(100% - 2rem, 47rem);
         /*800px*/
@@ -56,6 +73,7 @@
     body {
         scroll-behavior: smooth;
         interpolate-size: allow-keywords;
+        overscroll-behavior: none;
         -webkit-font-smoothing: antialiased;
         text-wrap: pretty;
         transition:
@@ -64,9 +82,27 @@
     }
 
     body {
-        position: relative;
-        isolation: isolate;
-        z-index: 1;
+        @apply pt-safe-top relative isolate z-1;
+    }
+
+    @supports (scrollbar-width: auto) {
+        html {
+            scrollbar-color: var(--scrollbar-color-thumb) var(--scrollbar-color-track);
+            scrollbar-width: var(--scrollbar-width);
+        }
+    }
+
+    @supports selector(::-webkit-scrollbar) {
+        html::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-color-thumb);
+        }
+        html::-webkit-scrollbar-track {
+            background: var(--scrollbar-color-track);
+        }
+        html::-webkit-scrollbar {
+            max-width: var(--scrollbar-width-legacy);
+            max-height: var(--scrollbar-width-legacy);
+        }
     }
 
     /* Typography */
@@ -112,8 +148,7 @@
     }
 
     small {
-        font-size: var(--font-size-sm);
-        color: var(--text-neutral-subtle);
+        @apply text-sm text-secondary;
     }
 
     p {
@@ -131,37 +166,17 @@
     }
 }
 
+@utility glass {
+    @apply text-foreground bg-surface-subtle border border-border-subtle;
+
+    @supports (backdrop-filter: blur(30px)) {
+        backdrop-filter: blur(30px);
+        background-color: oklch(from var(--color-surface-subtle) l c h / 0.6);
+        border-color: oklch(from var(--color-surface-subtle) l c h / 0.6);
+    }
+}
+
 @layer utilities {
-    .glass {
-        color: var(--text-neutral);
-        background-color: var(--surface-neutral);
-        border-color: var(--surface-brand-subtle);
-
-        @supports (backdrop-filter: blur(30px)) {
-            backdrop-filter: blur(30px);
-            background-color: oklch(from var(--surface-neutral) l c h / 0.6);
-            border-color: oklch(from var(--surface-neutral) l c h / 0.6);
-        }
-    }
-
-    .is-disabled {
-        opacity: 0.6;
-        pointer-events: none;
-    }
-
-    .is-active {
-        outline: 2px solid var(--surface-brand);
-        outline-offset: 2px;
-    }
-
-    .is-invalid {
-        border-color: var(--surface-error);
-    }
-
-    .is-valid {
-        border-color: var(--surface-success);
-    }
-
     .layout-grid {
         --padding-inline: 1rem;
         --content-max-width: var(--site-width);
@@ -176,6 +191,7 @@
                 var(--breakout-size)
             )
             [breakout-end] minmax(var(--padding-inline), 1fr) [full-width-end];
+        grid-auto-rows: max-content;
         width: 100%;
     }
 
@@ -206,36 +222,11 @@
         contain-intrinsic-size: auto 31.25rem;
     }
 
-    .button {
-        @apply flex items-center justify-center gap-x-3 capitalize py-3 pl-5 pr-4 w-full md:w-fit text-center rounded-2xl border-2 border-border-default/70 hover:bg-surface-brand-subtle hover:text-foreground  hover:border-border-brand/70;
-    }
-
-    .icon-button {
-        @apply flex items-center justify-center w-8 h-8 rounded-full;
-    }
-
     @supports (corner-shape: squircle) {
         .button,
         .squircle {
             corner-shape: squircle;
         }
-    }
-
-    .button--neutral {
-        @apply bg-surface-subtle;
-    }
-
-    .button--primary {
-        @apply bg-surface-brand text-on-brand border;
-    }
-
-    .button--ghost {
-        @apply bg-transparent border-transparent border-2;
-    }
-
-    .button--pressed {
-        scale: 0.95;
-        @apply bg-surface-brand-subtle text-on-brand;
     }
 
     .about-content ul {
@@ -260,60 +251,52 @@
 @scope (.faq) {
     summary {
         @apply flex flex-row flex-wrap justify-between items-center text-foreground cursor-pointer mb-2;
-
         h3 {
             @apply my-0 max-w-[25ch];
         }
-
         .icon {
-            transition: transform var(--transition-micro-fast);
             @apply text-current size-5;
         }
     }
-
     .details-content-inner {
         @apply flex flex-col gap-y-4 pt-8 min-h-0;
     }
-
-    .details-content-wrapper {
-        transition: grid-template-rows var(--transition-anticipate-slow);
-        @apply grid grid-rows-[0] overflow-hidden;
-    }
-
     details {
         --_radius: var(--radius-lg);
-        transition:
-            border-radius var(--transition-medium),
-            margin var(--transition-fast),
-            border-color var(--transition-medium),
-            border-bottom-width var(--transition-fast);
         @apply overflow-hidden border border-border-default p-4;
     }
 
-    details[open] {
-        @apply rounded-lg my-2 border-border-brand bg-surface-brand-light;
+    /* Icon rotation animation */
+    details[open] summary .icon {
+        animation: iconRotate var(--transition-fast) forwards;
+    }
+    details:not([open]) summary .icon {
+        animation: iconRotateReverse var(--transition-fast) forwards;
+    }
 
-        summary {
-            .icon {
-                @apply rotate-z-180;
-            }
-        }
+    /* Details expansion animation */
+    details[open] {
+        animation: detailsExpand var(--transition-elastic-slow) forwards;
+        @apply rounded-lg my-4 border-border-brand bg-surface-background;
     }
 
     details[open] .details-content-wrapper {
-        @apply grid grid-rows-1 overflow-hidden;
+        animation: contentReveal var(--transition-medium) forwards;
+    }
+
+    details:not([open]) .details-content-wrapper {
+        animation: contentHide var(--transition-medium) forwards;
+        @apply grid overflow-hidden;
     }
 
     details:has(+ details[open]),
     details:last-child {
         @apply rounded-b-lg;
     }
-
     details[open] + details,
     details:first-child {
         @apply rounded-t-lg;
     }
-
     details:not(:last-child, details[open], :has(+ details[open])) {
         @apply border-b-0;
     }
@@ -321,6 +304,70 @@
     @media (min-width: 768px) {
         summary h3 {
             @apply max-w-prose;
+        }
+    }
+
+    @keyframes iconRotate {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(180deg);
+        }
+    }
+
+    @keyframes iconRotateReverse {
+        from {
+            transform: rotate(180deg);
+        }
+        to {
+            transform: rotate(0deg);
+        }
+    }
+
+    @keyframes detailsExpand {
+        0% {
+            border-radius: 0;
+            margin-block: 0;
+        }
+        100% {
+            border-radius: var(--_radius);
+            margin-block: 1rem;
+        }
+    }
+
+    @keyframes contentReveal {
+        from {
+            grid-template-rows: 0fr;
+            opacity: 0;
+        }
+        to {
+            grid-template-rows: 1fr;
+            opacity: 1;
+        }
+    }
+
+    @keyframes contentHide {
+        from {
+            grid-template-rows: 1fr;
+            opacity: 1;
+        }
+        to {
+            grid-template-rows: 0fr;
+            opacity: 0;
+        }
+    }
+}
+
+#desktop-nav,
+#mobile-nav {
+    scroll-target-group: auto;
+
+    a {
+        transition: all var(--transition-micro-fast);
+
+        &:target-current {
+            @apply text-brand;
         }
     }
 }

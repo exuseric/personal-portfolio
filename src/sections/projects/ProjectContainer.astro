@@ -1,0 +1,21 @@
+---
+import ProjectCard from "./ProjectCard.astro"
+import { Icon } from "astro-iconify"
+---
+
+<section
+    id="projects"
+    class="layout-grid py-container-block rounded-t-[6rem] rounded-b-[6rem] md:rounded-t-[12rem] md:rounded-b-[12rem] squircle bg-surface-brand-subtle"
+>
+    <h2 class="mb-8 flex flex-row items-center justify-start gap-x-3">
+        <span class="text-base text-secondary animate-pulse">
+            <Icon name="hugeicons:code-folder" class="size-6" />
+        </span>
+        Projects
+    </h2>
+    <ul class="flex flex-col gap-y-4 items-start my-8">
+        <li class="w-full">
+            <ProjectCard />
+        </li>
+    </ul>
+</section>

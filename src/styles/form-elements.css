@@ -8,7 +8,7 @@ select {
 input:focus,
 textarea:focus,
 select:focus {
-    @apply border border-border-default rounded-md bg-surface-card text-foreground outline outline-transparent;
+    @apply border border-border-default rounded-md bg-surface-background text-foreground outline outline-transparent;
 }
 
 /* Disabled */
@@ -22,7 +22,7 @@ select:disabled {
 input:invalid:not(:placeholder-shown),
 textarea:invalid:not(:placeholder-shown),
 .select--error {
-    @apply border border-red-400 rounded-md bg-red-50 cursor-none outline-red-400 border-red-400;
+    @apply border border-border-error rounded-md bg-surface-error text-error;
 }
 
 input:invalid:not(:placeholder-shown):focus-visible,
@@ -31,24 +31,24 @@ input:valid:not(:placeholder-shown):focus-visible {
 }
 
 input:invalid:not(:placeholder-shown):focus-visible {
-    @apply border border-red-800;
+    @apply border border-border-error;
 }
 
 .textarea--error:focus,
 .select--error:focus {
-    @apply border-red-800;
+    @apply border border-border-error;
 }
 
 input:valid:not(:placeholder-shown),
 textarea:valid,
 .select--valid {
-    @apply border-green-400 bg-green-50 text-green-800;
+    @apply border border-border-success text-success bg-surface-success;
 }
 
 input:valid:not(:placeholder-shown):focus-visible,
 textarea:valid:focus,
 .select--valid:focus {
-    @apply border-green-400;
+    @apply border border-border-success;
 }
 
 /* Textarea Specific */
@@ -65,7 +65,6 @@ select {
     background-size: 1em;
     padding-right: var(--size-8);
 }
-
 /* Form Group */
 .form-group {
     @apply mb-8;
@@ -94,12 +93,13 @@ textarea:invalid:not(:placeholder-shown) ~ .form-helper {
 
 /* Success / Error helper text */
 .form-helper-success {
-    @apply text-green-800;
+    @apply text-success;
 }
 
 .form-helper-error {
-    @apply text-red-800;
+    @apply text-error;
 }
+
 .form-general-error {
-    @apply hidden text-red-50 bg-red-400 mb-1 px-2 py-1 text-xs rounded-sm;
+    @apply hidden mb-1 px-2 py-1 text-xs rounded-sm text-on-error bg-surface-error-emphasis;
 }
