@@ -1,12 +1,12 @@
 ---
 import DefaultLayout from "@/layouts/DefaultLayout.astro"
-import Hero from "@/sections/Hero.tsx"
+import Hero from "@/sections/Hero.astro"
 import Projects from "@/sections/projects/ProjectContainer.astro"
 import ContactSection from "@/sections/Contact.astro"
 ---
 
 <DefaultLayout>
-    <Hero client:idle />
+    <Hero />
     <Projects />
     <ContactSection />
 </DefaultLayout>

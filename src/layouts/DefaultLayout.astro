@@ -64,13 +64,13 @@ const { jsonLd: faqJsonLd } = faq
         <meta http-equiv="Cache-Control" content="public, max-age=31536000" />
 
         <!-- Enhanced Person Schema -->
-        <script type="application/ld+json" set:html={JSON.stringify(aboutSchema)} />
+        <script is:inline type="application/ld+json" set:html={JSON.stringify(aboutSchema)} />
 
         <!-- FAQ Schema -->
-        <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+        <script is:inline type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
 
         <!-- Website Schema -->
-        <script type="application/ld+json">
+        <script is:inline type="application/ld+json">
             {
                 "@context": "https://schema.org",
                 "@type": "WebSite",

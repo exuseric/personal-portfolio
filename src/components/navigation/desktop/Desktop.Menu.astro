@@ -1,0 +1,33 @@
+---
+import links from "@/components/navigation/menu-links"
+---
+
+<nav id="desktopNav" class="flex flex-row flex-wrap items-center justify-end gap-x-2 w-full">
+    {
+        links.map((link) => (
+            <a href={link.url} class="button button--ghost active:button--pressed data-active:button--active">
+                {link.label}
+            </a>
+        ))
+    }
+</nav>
+
+<script>
+const desktopNav = document.querySelector("#desktopNav");
+
+    function setHash(hash) {
+      if(!desktopNav) throw new Error("Desktop navigation not found");
+        const navLinks = desktopNav.querySelectorAll("a")
+
+        navLinks.forEach((link) => {
+            link.removeAttribute("data-active")
+
+            if (link.getAttribute("href") === hash) {
+                link.setAttribute("data-active", "")
+            }
+        })
+    }
+    const updateHash = () => setHash(window.location.hash || "/")
+    updateHash()
+    window.addEventListener("hashchange", updateHash)
+</script>

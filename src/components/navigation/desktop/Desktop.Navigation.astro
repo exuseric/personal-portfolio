@@ -1,10 +1,10 @@
 ---
-import NavMenu from "@/components/navigation/NavMenu.tsx"
+import NavMenu from "@/components/navigation/desktop/Desktop.Menu.astro"
 import LogoImage from "@/images/logo/white-horn-purple-bg.png"
 import { Image } from "astro:assets"
 ---
 
-<header class="glass w-full h-20 sticky top-0 z-50 inset-x-0 hidden md:block pt-safe-top">
+<header class="glass w-full h-20 sticky top-0 z-50 inset-x-0 hidden md:block py-safe-top">
     <div class="layout-grid h-full">
         <div class="flex flex-row items-center justify-between">
             <a
@@ -23,10 +23,10 @@ import { Image } from "astro:assets"
                     format="webp"
                     fit="contain"
                 />
-                <span>Eric Gathoni.</span>
+                <!-- <span>Eric Gathoni.</span> -->
             </a>
 
-            <NavMenu client:idle />
+            <NavMenu />
         </div>
     </div>
 </header>

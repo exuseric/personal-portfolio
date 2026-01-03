@@ -1,0 +1,45 @@
+---
+import links from "@/components/navigation/menu-links"
+import { Icon } from "astro-iconify"
+---
+
+<header class="md:hidden fixed z-50 h-20 inset-x-0 bottom-0 w-full border-t border-t-gray-300/50 overflow-hidden">
+    <nav
+        id="mobileNav"
+        class="flex flex-row items-center justify-between gap-4 glass px-4 pt-4 pb-safe-bottom h-full w-full"
+    >
+        {
+            links.map((link) => (
+                <a
+                    href={link.url}
+                    class="flex flex-col items-center justify-center text-sm data-active:text-brand data-active:font-medium group active:button--pressed"
+                >
+                    <span class="group-data-active:bg-surface-brand-subtle group-data-active:border group-data-active:border-brand/50 group-data-active:text-brand py-1 px-3 flex place-content-center w-full squircle rounded-full">
+                        <Icon name={link.icon} class="w-6 h-6" />
+                    </span>
+                    {link.label}
+                </a>
+            ))
+        }
+    </nav>
+</header>
+
+<script>
+const mobileNav = document.querySelector("#mobileNav");
+
+function setHash(hash) {
+  if(!mobileNav) throw new Error("Mobile navigation not found");
+  const navLinks = mobileNav.querySelectorAll("a");
+
+    navLinks.forEach(link => {
+      link.removeAttribute("data-active");
+
+      if (link.getAttribute("href") === hash) {
+        link.setAttribute("data-active", "");
+      }
+    });
+  }
+    const updateHash = () => setHash(window.location.hash || "/")
+    updateHash()
+    window.addEventListener("hashchange", updateHash)
+</script>

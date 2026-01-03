@@ -1,29 +1,27 @@
-import { CodeFolderIcon, HelpSquareIcon, Home01Icon, Message01Icon } from "@hugeicons/core-free-icons"
-
 const links = [
     {
         label: "Home",
         url: "/",
         type: "internal",
-        icon: Home01Icon,
+        icon: "hugeicons:home-01",
     },
     {
         label: "Projects",
         url: "#projects",
         type: "internal",
-        icon: CodeFolderIcon,
+        icon: "hugeicons:code-folder",
     },
     {
         label: "Contact",
         url: "#contact",
         type: "internal",
-        icon: Message01Icon,
+        icon: "hugeicons:message-01",
     },
     {
         label: "Q&A",
         url: "#faq",
         type: "internal",
-        icon: HelpSquareIcon,
+        icon: "hugeicons:help-square",
     },
 ]
 

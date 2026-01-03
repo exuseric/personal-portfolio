@@ -3,7 +3,7 @@ import { getContent } from "@/utils/graphql-client"
 import { contactQuery } from "@/utils/queries"
 import Form from "@/components/contact/Form.astro"
 import { Icon } from "astro-iconify"
-import SocialButtons from "@/components/shared/SocialButtons.tsx"
+import SocialLinks from "@/components/shared/SocialLinks.astro"
 import About from "@/sections/About.astro"
 
 const response = await getContent(contactQuery)
@@ -28,7 +28,7 @@ const { heading, content } = response.contact
             </div>
         </article>
         <div class="layout-grid md:p-12 flex flex-col items-center justify-center">
-            <SocialButtons />
+            <SocialLinks />
             <div class="my-12 w-full">
                 <Form />
             </div>
@@ -48,7 +48,7 @@ const { heading, content } = response.contact
                 Nairobi, Kenya
             </p>
         </header>
-        <SocialButtons />
+        <SocialLinks />
     </article>
     <div
         class="contact__formWrapper grid grid-rows-[auto] md:grid-cols-2 md:grid-rows-1 gap-x-12 md:gap-y-12 md:items-start py-8"

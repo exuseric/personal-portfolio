@@ -1,9 +1,7 @@
 ---
-import data from "@/data/navigation.json"
-import DesktopNavigation from "./DesktopNavigation.astro"
-import MobileNavigation from "./MobileNavigation.tsx"
-const { nav } = data
+import DesktopNavigation from "@/components/navigation/desktop/Desktop.Navigation.astro"
+import MobileNavigation from "@/components/navigation/mobile/Mobile.Navigation.astro"
 ---
 
 <DesktopNavigation />
-<MobileNavigation client:idle />
+<MobileNavigation />

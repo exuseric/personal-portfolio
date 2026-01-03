@@ -1,6 +1,6 @@
 import { contactFormValidation } from "@/utils/zod-validation-objects"
 import { defineAction } from "astro:actions"
-import sendEmail from "./utils/send-email"
+import sendEmail from "@/actions/utils/send-email"
 
 export const contact = {
     sendMessage: defineAction({

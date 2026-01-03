@@ -1,0 +1,38 @@
+---
+import {Icon} from "astro-iconify";
+
+const links = [
+    {
+        href: "https://github.com/exuseric",
+        icon: "hugeicons:github-01",
+        label: "Github",
+    },
+    {
+        href: "https://linkedin.com/in/exuseric",
+        icon: "hugeicons:linkedin-01",
+        label: "LinkedIn",
+    },
+    {
+        href: "https://behance.net/exuseric",
+        icon: "hugeicons:behance-02",
+        label: "Behance",
+    },
+]
+---
+
+<ul class="grid grid-cols-[repeat(auto-fit,minmax(80px,1fr))] items-center justify-between gap-x-1 w-full md:w-fit md:flex md:flex-row">
+    {links.map((link) => (
+        <li>
+            <a
+                class="button button--ghost active:button--pressed"
+                href={link.href}
+                target="_blank"
+            >
+                <span class="text">{link.label}</span>
+                <span class="icon" aria-hidden="true">
+                    <Icon name={link.icon} class="w-6 h-6" />
+                </span>
+            </a>
+        </li>
+    ))}
+</div>

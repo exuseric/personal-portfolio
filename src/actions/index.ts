@@ -1,4 +1,4 @@
-import { contact } from "./contact";
+import { contact } from "@/actions/contact";
 
 export const server = {
   contact,

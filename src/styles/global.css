@@ -82,7 +82,7 @@
     }
 
     body {
-        @apply pt-safe-top relative isolate z-1;
+        @apply relative isolate z-1;
     }
 
     @supports (scrollbar-width: auto) {
@@ -359,8 +359,8 @@
     }
 }
 
-#desktop-nav,
-#mobile-nav {
+#desktopNav,
+#mobileNav {
     scroll-target-group: auto;
 
     a {
