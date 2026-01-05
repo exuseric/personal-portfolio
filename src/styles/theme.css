@@ -35,7 +35,7 @@
     --surface-backdrop: rgba(27, 24, 34, 0.48);
 
     --surface-brand-default: var(--color-brand-500);
-    --surface-brand-subtle: var(--color-brand-50);
+    --surface-brand-subtle: var(--color-brand-100);
     --surface-brand-muted: var(--color-brand-100);
     --surface-brand-emphasis: var(--color-brand-600);
     --surface-brand-hover: var(--color-brand-600);
