@@ -6,6 +6,8 @@ import purgecss from "astro-purgecss"
 
 import tailwindcss from "@tailwindcss/vite"
 
+import react from "@astrojs/react";
+
 // https://astro.build/config
 export default defineConfig({
     site: "https://ericmaina.me",
@@ -33,14 +35,11 @@ export default defineConfig({
         domains: ["eu-west-2.graphassets.com"],
     },
 
-    integrations: [
-        sitemap(),
-        purgecss({
-            variables: true,
-            keyframes: true,
-            fontFace: true,
-        }),
-    ],
+    integrations: [sitemap(), purgecss({
+        variables: true,
+        keyframes: true,
+        fontFace: true,
+    }), react()],
 
     vite: {
         plugins: [tailwindcss()],
