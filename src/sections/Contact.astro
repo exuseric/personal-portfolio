@@ -3,8 +3,8 @@ import { getContent } from "@/utils/graphql-client"
 import { contactQuery } from "@/utils/queries"
 import Form from "@/components/contact/Form.astro"
 import { Icon } from "astro-iconify"
-import SocialLinks from "@/components/shared/SocialLinks.astro"
 import About from "@/sections/About.astro"
+import SocialLinks from "@/shared/components/social-links/SocialLinks.astro"
 
 const response = await getContent(contactQuery)
 const { heading, content } = response.contact

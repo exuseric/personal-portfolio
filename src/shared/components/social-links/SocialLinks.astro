@@ -1,0 +1,37 @@
+---
+import { ICONS } from "@/shared/lib/icons"
+import { Icon } from "astro-iconify"
+
+const links = [
+    {
+        href: "https://github.com/exuseric",
+        icon: ICONS.github,
+        label: "Github",
+    },
+    {
+        href: "https://linkedin.com/in/exuseric",
+        icon: ICONS.linkedin,
+        label: "LinkedIn",
+    },
+    {
+        href: "https://behance.net/exuseric",
+        icon: ICONS.behance,
+        label: "Behance",
+    },
+]
+---
+
+<ul class="flex-row-start flex-wrap gap-2">
+    {
+        links.map((link) => (
+            <li>
+                <a class="btn-text" href={link.href} target="_blank">
+                    <span class="text">{link.label}</span>
+                    <span class="icon" aria-hidden="true">
+                        <Icon name={link.icon} class="size-5" />
+                    </span>
+                </a>
+            </li>
+        ))
+    }
+</ul>

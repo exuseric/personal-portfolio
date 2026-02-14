@@ -1,26 +1,28 @@
+import { ICONS } from "@/shared/lib/icons.ts"
+
 export const links = [
     // {
     //     label: "Home",
     //     url: "/",
     //     type: "internal",
-    //     icon: "hugeicons:home-01",
+    //     icon: ICONS.home,
     // },
     {
         label: "Projects",
         url: "#projects",
         type: "internal",
-        icon: "hugeicons:code-folder",
+        icon: ICONS.projects,
     },
     {
         label: "Contact",
         url: "#contact",
         type: "internal",
-        icon: "hugeicons:message-01",
+        icon: ICONS.contact,
     },
     {
         label: "Q&A",
         url: "#faq",
         type: "internal",
-        icon: "hugeicons:help-square",
+        icon: ICONS.faq,
     },
 ]

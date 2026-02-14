@@ -1,5 +1,5 @@
 ---
-import SocialLinks from "@/components/shared/SocialLinks.astro"
+import SocialLinks from "@/shared/components/social-links/SocialLinks.astro"
 ---
 
 <header class="w-full h-fit py-container-block layout-grid">
@@ -15,19 +15,6 @@ import SocialLinks from "@/components/shared/SocialLinks.astro"
         </p>
 
         <div class="flex flex-col md:flex-row items-center justify-start gap-x-2 gap-y-2 mt-8 w-full">
-            {
-                /*<Link
-                        href="/#projects"
-                        class={({ isPressed }) =>
-                            isPressed ? "button button--primary scale-[0.95]" : "button button--neutral scale-[1]"
-                        }
-                    >
-                        Let's build something
-                        <span>
-                            <HugeiconsIcon icon={CodeFolderIcon} />
-                        </span>
-                    </Link>*/
-            }
             <SocialLinks />
         </div>
     </article>
