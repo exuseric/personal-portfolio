@@ -82,7 +82,7 @@
 }
 
 @utility btn-text {
-    @apply inline-flex items-center justify-center gap-2 px-3 py-2.5 font-medium text-sm leading-5 tracking-[0.00625rem] rounded-[1.25rem] border-none cursor-pointer select-none whitespace-nowrap min-h-10 bg-transparent text-primary transition-[background-color,transform] duration-200 ease-in-out;
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 font-medium text-sm leading-5 tracking-[0.00625rem] rounded-[1.25rem] border-none cursor-pointer select-none whitespace-nowrap min-h-10 bg-transparent text-primary transition-[background-color,transform,color] duration-200 ease-in-out;
 
     &:hover {
         background-color: color-mix(in srgb, var(--color-primary) 8%, transparent);

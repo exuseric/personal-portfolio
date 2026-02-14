@@ -1,13 +1,14 @@
 @import "tailwindcss";
-/*@import "./tokens.css" layer(global);*/
 @import "./theme.css";
 @import "./animations.css";
-/*@import "./form-elements.css";*/
 @import "./button.css";
+
+/*---break---*/
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
     --font-mono: "Geist Mono", sans-serif;
-    --font-sans: "DM Sans", sans-serif;
+    --font-sans: "Google Sans Flex", sans-serif;
 
     /* Primary Colors */
     --color-primary: var(--md-sys-color-primary);
@@ -140,8 +141,8 @@
     --shadow-level-5: 0px 4px 4px 0px rgb(var(--color-shadow) / 0.3),
     0px 8px 12px 6px rgb(var(--color-shadow) / 0.15);
 
-    --spacing-safe-bottom: calc(1em + env(safe-area-inset-bottom));
-    --spacing-safe-top: calc(1em + env(safe-area-inset-top));
+    --spacing-safe-bottom: calc(0.3em + env(safe-area-inset-bottom, 1em));
+    --spacing-safe-top: calc(0.3em + env(safe-area-inset-top, 1em));
     --spacing-container-block: theme('spacing.32');
     --spacing-nav-height: theme('spacing.12');
 }
@@ -151,7 +152,6 @@
     --content-width: min(100% - 2rem, 47rem);
     /*800px*/
     --site-width: min(100% - 2rem, 75rem);
-    /*1200px*/
 }
 
 html,
@@ -292,7 +292,7 @@ h3,
 h4,
 h5 {
     orphans: 1;
-    @apply font-mono text-balance font-medium mb-4;
+    @apply font-sans text-balance font-medium mb-4;
 }
 
 h2,
@@ -345,12 +345,9 @@ img {
 }
 
 @utility glass {
-    @apply text-on-surface bg-background;
-
+    @apply text-on-surface bg-background border border-scrim;
     @supports (backdrop-filter: blur(30px)) {
-        backdrop-filter: blur(30px);
-        background-color: oklch(from var(--md-sys-color-surface) l c h / 0.6);
-        border-color: oklch(from var(--md-sys-color-surface) l c h / 0.6);
+        @apply backdrop-blur-[30px] bg-surface/60 border border-scrim/10;
     }
 }
 
@@ -401,8 +398,9 @@ img {
     }
 
     @supports (corner-shape: squircle) {
-        .button,
-        .squircle {
+        .squircle,
+        button,
+        a {
             corner-shape: squircle;
         }
     }
@@ -537,15 +535,14 @@ img {
     }
 }
 
-#desktopNav,
-#mobileNav {
+[data-page-menu] {
     scroll-target-group: auto;
 
     a {
-        @apply transition-colors duration-300;
+        @apply transition-colors duration-200;
 
         &:target-current {
-            @apply text-primary;
+            @apply underline;
         }
     }
 }
