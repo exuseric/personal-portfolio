@@ -1,0 +1,23 @@
+---
+import LogoImage from "@/images/logo/white-horn-purple-bg.png"
+import { Image } from "astro:assets"
+---
+
+<a
+    href="/"
+    class="btn-text flex-col-center md:flex-row-center py-2 px-4 data-active:text-on-primary data-active:bg-primary"
+>
+    <Image
+        src={LogoImage}
+        width={LogoImage.width}
+        height={LogoImage.height}
+        alt="Eric Maina Gathoni"
+        loading="eager"
+        decoding="sync"
+        class="size-5 p-0"
+        layout="constrained"
+        format="webp"
+        fit="contain"
+    />
+    <span>Eric.</span>
+</a>

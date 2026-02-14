@@ -1,13 +1,13 @@
 ---
 import seo from "@/data/seo.json"
 import { AstroFont } from "astro-font"
-import Navigation from "@/components/navigation/Navigation.astro"
 import "@/styles/global.css"
 import Footer from "@/sections/Footer.astro"
 import FaqSection from "@/sections/FaqSection.astro"
 
 import { getContent } from "@/utils/graphql-client"
 import { faqQuery, aboutQuery } from "@/utils/queries"
+import PageNavigation from "@/features/page-navigation/PageNavigation.astro"
 const { faq } = await getContent(faqQuery)
 const { aboutMe } = await getContent(aboutQuery)
 const { schema: aboutSchema } = aboutMe
@@ -53,15 +53,6 @@ const { jsonLd: faqJsonLd } = faq
 
         <meta name="theme-color" content={seo.themeColor} />
         <meta name="msapplication-TileColor" content={seo.themeColor} />
-
-        <!-- Security Headers -->
-        <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-        <meta http-equiv="X-Frame-Options" content="DENY" />
-        <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
-        <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
-
-        <!-- Performance and Caching -->
-        <meta http-equiv="Cache-Control" content="public, max-age=31536000" />
 
         <!-- Enhanced Person Schema -->
         <script is:inline type="application/ld+json" set:html={JSON.stringify(aboutSchema)} />
@@ -124,7 +115,7 @@ const { jsonLd: faqJsonLd } = faq
     </head>
 
     <body class="bg-surface-background text-foreground">
-        <Navigation />
+        <PageNavigation />
         <main id="main-content" class="page-wrapper">
             <slot />
             <FaqSection />
