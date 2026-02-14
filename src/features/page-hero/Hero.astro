@@ -2,9 +2,11 @@
 import SocialLinks from "@/shared/components/social-links/SocialLinks.astro"
 ---
 
-<header class="w-full h-fit py-container-block layout-grid">
-    <article class="flex-col-start gap-y-3">
-        <h1 class="text-5xl font-semibold text-primary max-w-prose">Hey! I'm Eric Gathoni</h1>
+<section id="hero" class="w-full h-fit py-container-block layout-grid gap-y-4">
+    <header class="max-w-prose">
+        <h1 class="text-5xl font-semibold text-primary">Hey! I'm Eric Gathoni</h1>
+    </header>
+    <article class="flex-col-start gap-y-3 max-w-prose">
         <p>
             I am a Full Stack Developer <em>(Front End Focused)</em> based in Nairobi, Kenya with three years of professional
             experience building performant, SEO-driven applications using TypeScript, Next.js, and Astro.
@@ -14,9 +16,6 @@ import SocialLinks from "@/shared/components/social-links/SocialLinks.astro"
             Core Web Vitals and maintain WCAG compliance to ensure inclusive, cross-device usability and high search
             visibility.
         </p>
-
-        <div class="mt-4">
-            <SocialLinks />
-        </div>
     </article>
-</header>
+    <SocialLinks />
+</section>

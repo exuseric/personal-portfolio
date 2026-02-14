@@ -26,10 +26,8 @@ const links = [
         links.map((link) => (
             <li>
                 <a class="btn-text" href={link.href} target="_blank">
-                    <span class="text">{link.label}</span>
-                    <span class="icon" aria-hidden="true">
-                        <Icon name={link.icon} class="size-5" />
-                    </span>
+                    <Icon name={link.icon} class="size-5" />
+                    {link.label}
                 </a>
             </li>
         ))
