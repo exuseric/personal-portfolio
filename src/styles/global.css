@@ -352,7 +352,7 @@ img {
 @utility glass {
     @apply text-on-surface bg-background border border-scrim;
     @supports (backdrop-filter: blur(20px)) {
-        @apply backdrop-blur-[20px] bg-surface/60 border border-scrim/10;
+        @apply backdrop-blur-[20px] bg-surface/40 border border-scrim/10;
     }
 }
 

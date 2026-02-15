@@ -24,7 +24,7 @@ const links = [
 <ul class="flex-row-start flex-wrap gap-2">
     {
         links.map((link) => (
-            <li>
+            <li class="[&:not(:last-child)]:border-r border-scrim/20">
                 <a class="btn-text" href={link.href} target="_blank">
                     <Icon name={link.icon} class="size-5" />
                     {link.label}

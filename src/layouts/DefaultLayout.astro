@@ -65,15 +65,72 @@ const { jsonLd: faqJsonLd } = faq
         <script is:inline type="application/ld+json">
             {
                 "@context": "https://schema.org",
-                "@type": "WebSite",
-                "@id": "https://ericmaina.me",
-                "url": "https://ericmaina.me",
-                "name": "Eric Gathoni | Fullstack Developer",
-                "description": "The official website and portfolio of Eric Maina Gathoni, a Fullstack Developer specialising in React, Next.js, and Astro. Building fast, accessible, and SEO-optimised web experiences.",
-                "publisher": {
-                    "@type": "Person",
-                    "@id": "https://ericmaina.me#about"
-                }
+                "@graph": [
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://ericmaina.me/#website",
+                        "url": "https://ericmaina.me",
+                        "name": "Eric Maina Gathoni | Full Stack Developer",
+                        "description": "Portfolio of Eric Maina Gathoni, a Full Stack Developer specializing in Next.js, Astro, and scalable backend architectures.",
+                        "publisher": {
+                            "@id": "https://ericmaina.me/about"
+                        },
+                        "inLanguage": "en"
+                    },
+                    {
+                        "@type": "Person",
+                        "@id": "https://ericmaina.me/#person",
+                        "name": "Eric Maina Gathoni",
+                        "url": "https://ericmaina.me/about",
+                        "jobTitle": "Full Stack Developer",
+                        "mainEntityOfPage": "https://ericmaina.me",
+                        "address": {
+                            "@type": "PostalAddress",
+                            "addressLocality": "Nairobi",
+                            "addressCountry": "Kenya"
+                        },
+                        "email": "ericmaina.gathoni@gmail.com",
+                        "image": "https://ericmaina.me/images/og-image.png",
+                        "description": "Full Stack Developer with 3+ years of experience building high-performance applications. Expert in React, Next.js, Astro, and serverless infrastructure.",
+                        "sameAs": ["https://linkedin.com/in/exuseric", "https://github.com/exuseric"],
+                        "knowsAbout": [
+                            "Full Stack Development",
+                            "Technical SEO",
+                            "Next.js",
+                            "Astro",
+                            "TypeScript",
+                            "PostgreSQL",
+                            "Supabase",
+                            "Cloudflare Workers",
+                            "Payload CMS",
+                            "Shopify Development",
+                            "Web Performance Optimization",
+                            "Infrastructure Optimization"
+                        ],
+                        "alumniOf": {
+                            "@type": "EducationalOrganization",
+                            "name": "Kenya Christian Industrial Training Institute",
+                            "url": "https://kciti.edu/"
+                        },
+                        "hasCredential": [
+                            {
+                                "@type": "EducationalOccupationalCredential",
+                                "name": "Diploma in Information Communication Technology",
+                                "credentialCategory": "Diploma"
+                            }
+                        ],
+                        "worksFor": [
+                            {
+                                "@type": "Organization",
+                                "name": "Yellow Pages Kenya"
+                            },
+                            {
+                                "@type": "Organization",
+                                "name": "Optica Limited"
+                            }
+                        ]
+                    }
+                ]
             }
         </script>
 

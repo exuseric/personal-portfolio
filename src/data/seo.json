@@ -1,11 +1,11 @@
 {
-    "title": "Eric Maina Gathoni | Frontend Developer",
-    "description": "Frontend-focused Fullstack Developer crafting fast, accessible, and SEO-optimised websites with React, Next.js, Astro, and headless CMS. Passionate about performance, accessibility, and clean, responsive design.",
+    "title": "Eric Maina Gathoni | Full Stack Developer",
+    "description": "Full Stack Developer with 3+ years of experience specializing in high-performance applications using Next.js, Astro, and TypeScript. Expert in scalable backend architecture, infrastructure optimization, and SEO-driven development.",
     "author": "Eric Maina Gathoni",
     "siteUrl": "https://ericmaina.me",
     "language": "en",
-    "themeColor": "#9b69f2",
-    "keywords": "frontend developer, fullstack developer, React developer, Next.js developer, Astro developer, headless CMS, web performance, SEO optimisation, accessibility, UI/UX design, Kenya developer, Shopify developer, Pocketbase developer, responsive web design",
+    "themeColor": "rgb(111 56 205)",
+    "keywords": "Full Stack Developer, Frontend Developer, React Developer, Next.js, Astro, TypeScript, PostgreSQL, Supabase, Cloudflare Workers, Serverless, Headless CMS, Payload CMS, SEO optimization, Web Performance, Nairobi Developer, Kenya Tech",
     "robots": "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
     "canonical": "https://ericmaina.me",
     "openGraph": {
@@ -13,21 +13,21 @@
         "locale": "en_US",
         "url": "https://ericmaina.me",
         "siteName": "Eric Maina Gathoni",
-        "title": "Eric Maina Gathoni | Frontend Developer",
-        "description": "Frontend-focused Fullstack Developer building fast, accessible, and SEO-optimised web experiences using React, Next.js, and Astro.",
+        "title": "Eric Maina Gathoni | Full Stack Developer & Infrastructure Specialist",
+        "description": "Building scalable, SEO-optimized web solutions with a focus on speed and performance. Specialist in React, Next.js, and serverless architectures.",
         "image": {
             "url": "https://ericmaina.me/images/og-image.png",
             "width": "1200",
             "height": "630",
-            "alt": "Eric Maina Gathoni – Frontend & Fullstack Developer Portfolio"
+            "alt": "Eric Maina Gathoni – Full Stack Developer Portfolio"
         }
     },
     "twitter": {
         "card": "summary_large_image",
         "site": "@caramel_uncrn",
         "creator": "@caramel_uncrn",
-        "title": "Eric Maina Gathoni | Frontend Developer",
-        "description": "Building fast, accessible, and SEO-friendly web experiences with React, Next.js, and Astro.",
+        "title": "Eric Maina Gathoni | Full Stack Developer",
+        "description": "Architecting high-performance web solutions and scalable backend systems using Astro, React, and Node.js.",
         "image": "https://ericmaina.me/images/og-image.png"
     },
     "additionalMeta": {
