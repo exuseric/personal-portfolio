@@ -8,6 +8,7 @@ import FaqSection from "@/sections/FaqSection.astro"
 import { getContent } from "@/utils/graphql-client"
 import { faqQuery, aboutQuery } from "@/utils/queries"
 import PageNavigation from "@/features/page-navigation/PageNavigation.astro"
+import Separator from "@/shared/components/Separator.astro"
 const { faq } = await getContent(faqQuery)
 const { aboutMe } = await getContent(aboutQuery)
 const { schema: aboutSchema } = aboutMe
@@ -114,7 +115,7 @@ const { jsonLd: faqJsonLd } = faq
         />
     </head>
 
-    <body class="bg-surface-background text-foreground">
+    <body class="bg-swirl text-on-surface">
         <PageNavigation />
         <main id="main-content" class="page-wrapper">
             <slot />

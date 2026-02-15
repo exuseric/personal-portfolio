@@ -7,4 +7,5 @@ export const ICONS = {
     linkedin: "mage:linkedin",
     behance: "mage:behance",
     link: "mage:arrow-up-right-square-fill",
+    tag: "mage:tag-fill",
 }

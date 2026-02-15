@@ -10,7 +10,7 @@ export interface Props extends HTMLAttributes<"div"> {
 const { variant = "tertiary", href, class: className, ...props } = Astro.props
 
 const baseStyles = cn(
-    "inline-flex items-center gap-1 rounded-sm px-2.5 py-0.5 text-xs font-medium transition-colors squircle duration-200",
+    "inline-flex items-center gap-1 rounded-sm px-2.5 py-0.5 text-xs font-medium transition-colors squircle rounded-full duration-200",
     "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
     // Icon styling
     "[&_svg]:pointer-events-none [&_svg]:size-3 [&_svg]:shrink-0",

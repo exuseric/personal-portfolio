@@ -7,8 +7,13 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-    --font-mono: "Geist Mono", sans-serif;
-    --font-sans: "Google Sans Flex", sans-serif;
+    --font-mono: var(--font-family-mono);
+    --font-sans: var(--font-family-sans);
+
+    --radius-sm: var(--radius-sm);
+    --radius-md: var(--radius-md);
+    --radius-lg: var(--radius-lg);
+    --radius-round: var(--radius-round);
 
     /* Primary Colors */
     --color-primary: var(--md-sys-color-primary);
@@ -122,24 +127,24 @@
     --shadow-level-0: none;
 
     /* Elevation Level 1 - 1dp (e.g., cards at rest) */
-    --shadow-level-1: 0px 1px 2px 0px rgb(var(--color-shadow) / 0.3),
-    0px 1px 3px 1px rgb(var(--color-shadow) / 0.15);
+    --shadow-level-1: 0px 1px 2px 0px color-mix(in srgb, var(--color-shadow), transparent 70%),
+    0px 1px 3px 1px color-mix(in srgb, var(--color-shadow), transparent 85%);
 
     /* Elevation Level 2 - 3dp (e.g., buttons, FAB at rest) */
-    --shadow-level-2: 0px 1px 2px 0px rgb(var(--color-shadow) / 0.3),
-    0px 2px 6px 2px rgb(var(--color-shadow) / 0.15);
+    --shadow-level-2: 0px 1px 2px 0px color-mix(in srgb, var(--color-shadow), transparent 70%),
+    0px 2px 6px 2px color-mix(in srgb, var(--color-shadow), transparent 85%);
 
     /* Elevation Level 3 - 6dp (e.g., cards on hover, menus) */
-    --shadow-level-3: 0px 1px 3px 0px rgb(var(--color-shadow) / 0.3),
-    0px 4px 8px 3px rgb(var(--color-shadow) / 0.15);
+    --shadow-level-3: 0px 1px 3px 0px color-mix(in srgb, var(--color-shadow), transparent 70%),
+    0px 4px 8px 3px color-mix(in srgb, var(--color-shadow), transparent 85%);
 
     /* Elevation Level 4 - 8dp (e.g., dialogs) */
-    --shadow-level-4: 0px 2px 3px 0px rgb(var(--color-shadow) / 0.3),
-    0px 6px 10px 4px rgb(var(--color-shadow) / 0.15);
+    --shadow-level-4: 0px 2px 3px 0px color-mix(in srgb, var(--color-shadow), transparent 70%),
+    0px 6px 10px 4px color-mix(in srgb, var(--color-shadow), transparent 85%);
 
     /* Elevation Level 5 - 12dp (e.g., navigation drawer) */
-    --shadow-level-5: 0px 4px 4px 0px rgb(var(--color-shadow) / 0.3),
-    0px 8px 12px 6px rgb(var(--color-shadow) / 0.15);
+    --shadow-level-5: 0px 4px 4px 0px color-mix(in srgb, var(--color-shadow), transparent 70%),
+    0px 8px 12px 6px color-mix(in srgb, var(--color-shadow), transparent 85%);
 
     --spacing-safe-bottom: calc(0.3em + env(safe-area-inset-bottom, 1em));
     --spacing-safe-top: calc(0.3em + env(safe-area-inset-top, 1em));
@@ -346,8 +351,8 @@ img {
 
 @utility glass {
     @apply text-on-surface bg-background border border-scrim;
-    @supports (backdrop-filter: blur(30px)) {
-        @apply backdrop-blur-[30px] bg-surface/60 border border-scrim/10;
+    @supports (backdrop-filter: blur(20px)) {
+        @apply backdrop-blur-[20px] bg-surface/60 border border-scrim/10;
     }
 }
 
@@ -409,6 +414,58 @@ img {
         @apply list-disc pl-8;
     }
 }
+
+@utility stamp-strip {
+    /* Configuration Variables */
+    --circle-radius: 8px;
+    --circle-gap: 6px;
+    --total-step: calc((var(--circle-radius) * 2) + var(--circle-gap));
+    --mask-pattern: radial-gradient(
+            circle at center,
+            transparent var(--circle-radius),
+            black calc(var(--circle-radius) + 0.5px)
+    );
+
+    @apply relative w-full h-container-block flex items-center overflow-hidden bg-surface-container;
+
+    &::before {
+        content: "";
+        background-image: repeating-radial-gradient(
+                circle at center,
+                white
+        );
+        @apply absolute top-0 inset-x-0 w-full h-12;
+    }
+
+    /*!* The Mask: Punches holes in the top and bottom *!*/
+    /*-webkit-mask-image: var(--mask-pattern), var(--mask-pattern), linear-gradient(black, black);*/
+    /*!* Position one mask at the top, one at the bottom, and one for the middle fill *!*/
+    /*-webkit-mask-position: top center, bottom center, center;*/
+    /*mask-position: top center, bottom center, center;*/
+    /*-webkit-mask-size: var(--total-step) var(--total-step), var(--total-step) var(--total-step), 100% 100%;*/
+    /*mask-size: var(--total-step) var(--total-step), var(--total-step) var(--total-step), 100% 100%;*/
+    /*-webkit-mask-repeat: repeat-x, repeat-x, no-repeat;*/
+    /*mask-repeat: repeat-x, repeat-x, no-repeat;*/
+    /*!* Subtract the circles from the solid middle *!*/
+    /*-webkit-mask-composite: source-out, source-out, source-over;*/
+    /*mask-composite: subtract;*/
+}
+
+@utility bg-swirl {
+    --s: 70px; /* control the size*/
+    --c1: oklch(from var(--md-sys-color-primary-fixed) l c h / .01);
+    --c2: var(--md-sys-color-surface);
+
+    --_l: #0000 46%,var(--c1) 47% 53%,#0000 54%;
+    background:
+            radial-gradient(100% 100% at 100% 100%,var(--_l)) var(--s) var(--s),
+            radial-gradient(100% 100% at 0    0   ,var(--_l)) var(--s) var(--s),
+            radial-gradient(100% 100%,#0000 22%,var(--c1) 23% 29%, #0000 30% 34%,var(--c1) 35% 41%,#0000 42%),
+            var(--c2);
+    background-size: calc(var(--s)*2) calc(var(--s)*2);
+    background-attachment: fixed;
+}
+
 
 @layer animations {
     ::view-transition-old(root) {

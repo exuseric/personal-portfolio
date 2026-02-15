@@ -3,7 +3,7 @@ export type Project = {
     description: string
     techStack: string[]
     status: "Work in Progress" | "Completed" | "Beta" | "Learning"
-    highlights: string[]
+    highlights?: string[]
     githubLink?: string
     demoLink?: string
 }
