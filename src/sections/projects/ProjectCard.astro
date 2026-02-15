@@ -23,7 +23,7 @@ const { project } = Astro.props
         <div class="flex-row-start gap-x-2">
             {
                 project.githubLink && (
-                    <a class="btn-text" href={project.githubLink}>
+                    <a class="btn-text" href={project.githubLink} target="_blank">
                         Github
                         <Icon name={ICONS.github} class="size-5" />
                     </a>
@@ -31,7 +31,7 @@ const { project } = Astro.props
             }
             {
                 project.demoLink && (
-                    <a class="btn-filled" href={project.demoLink}>
+                    <a class="btn-filled" href={project.demoLink} target="_blank">
                         Visit
                         <Icon name={ICONS.link} class="size-5" />
                     </a>
@@ -53,41 +53,4 @@ const { project } = Astro.props
             ))
         }
     </ul>
-    <!--<article class="flex flex-col gap-y-4 h-max">-->
-    <!--    <header class="flex flex-col gap-y-3 items-start justify-start">-->
-    <!--        <Badge> In Progress </Badge>
-    -->
-    <!--        <h3 class="text-lg font-bold mb-0!">Fullstack Restaurant Website</h3>-->
-    <!--        <div class="md:flex md:flex-row items-center gap-x-1 w-full">-->
-    <!--            &lt;!&ndash; <Button-->
-    <!--                href="https://example.com"-->
-    <!--                className="button button&#45;&#45;neutral active:button&#45;&#45;pressed"-->
-    <!--                target="_blank"-->
-    <!--            >-->
-    <!--                <span>Live Demo</span>-->
-    <!--                <span>-->
-    <!--                    <Icon name="hugeicons:link-square-01" class="size-6" />-->
-    <!--                </span>-->
-    <!--            </Button> &ndash;&gt;-->
-    <!--            <a href="https://github.com/exuseric/fullstack-restaurant-website" target="_blank" class="btn-text">-->
-    <!--                <Icon name={ICONS.github} class="size-5" />-->
-    <!--                <span>Github</span>-->
-    <!--            </a>-->
-    <!--        </div>-->
-    <!--    </header>-->
-    <!--    <p class="text-base">-->
-    <!--        This Next.js/TypeScript restaurant website prioritizes performance and scalability, utilizing PostgreSQL for-->
-    <!--        data management.-->
-    <!--    </p>-->
-    <!--    <p>-->
-    <!--        It employs a Fluent Repository Pattern for clean data access and integrates PostgreSQL's native tsvector for-->
-    <!--        delivering high-speed, efficient full-text search functionality.-->
-    <!--    </p>-->
-    <!--    <ul aria-label="Project Technologies" class="flex flex-row items-center justify-start flex-wrap gap-2 text-sm">-->
-    <!--        <li class="py-1 px-4 bg-surface-brand-subtle border-border-default border rounded-full">React</li>-->
-    <!--        <li class="py-1 px-4 bg-surface-brand-subtle border-border-default border rounded-full">Typescript</li>-->
-    <!--        <li class="py-1 px-4 bg-surface-brand-subtle border-border-default border rounded-full">Next.js</li>-->
-    <!--        <li class="py-1 px-4 bg-surface-brand-subtle border-border-default border rounded-full">PostgreSQL</li>-->
-    <!--    </ul>-->
-    <!--</article>-->
 </article>
