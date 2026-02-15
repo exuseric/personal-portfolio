@@ -1,4 +1,4 @@
-import { ICONS } from "@/shared/lib/icons.ts"
+import { ICONS, SECTION_IDS } from "@/shared/lib/constants.ts"
 
 export const links = [
     // {
@@ -9,19 +9,19 @@ export const links = [
     // },
     {
         label: "Projects",
-        url: "#projects",
+        url: `#${SECTION_IDS.projects}`,
         type: "internal",
         icon: ICONS.projects,
     },
     {
         label: "Contact",
-        url: "#contact",
+        url: `#${SECTION_IDS.contact}`,
         type: "internal",
         icon: ICONS.contact,
     },
     {
         label: "Q&A",
-        url: "#faq",
+        url: `#${SECTION_IDS.faq}`,
         type: "internal",
         icon: ICONS.faq,
     },

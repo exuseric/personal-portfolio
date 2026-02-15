@@ -9,3 +9,10 @@ export const ICONS = {
     link: "mage:arrow-up-right-square-fill",
     tag: "mage:tag-fill",
 }
+
+export const SECTION_IDS = {
+    home: "home",
+    projects: "projects",
+    contact: "contact",
+    faq: "faq",
+}
