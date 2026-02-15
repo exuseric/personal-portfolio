@@ -6,4 +6,5 @@ export const ICONS = {
     github: "mage:github",
     linkedin: "mage:linkedin",
     behance: "mage:behance",
+    link: "mage:arrow-up-right-square-fill",
 }
