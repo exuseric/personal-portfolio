@@ -13,7 +13,7 @@ import icon from "astro-icon"
 // https://astro.build/config
 export default defineConfig({
     site: "https://ericmaina.me",
-    output: "static",
+    output: "server",
     build: {
         inlineStylesheets: "never",
     },
@@ -32,7 +32,7 @@ export default defineConfig({
     integrations: [
         sitemap(),
         purgecss({
-            variables: true,
+            variables: false,
             keyframes: true,
             fontFace: true,
         }),

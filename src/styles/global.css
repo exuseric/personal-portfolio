@@ -493,9 +493,5 @@ img {
 
     a {
         @apply transition-colors duration-200;
-
-        &:target-current {
-            @apply underline;
-        }
     }
 }
