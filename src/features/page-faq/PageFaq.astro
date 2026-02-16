@@ -1,0 +1,52 @@
+---
+import { Icon } from "astro-iconify"
+import { getContent } from "@/utils/graphql-client"
+import { faqQuery } from "@/utils/queries"
+import { ICONS } from "@/shared/lib/constants"
+import Question from "@/features/page-faq/components/Question.astro"
+const response = await getContent(faqQuery)
+const { heading, faq } = response.faq
+
+const faqs = [
+    {
+        id: 1,
+        question: "What is your primary technical focus?",
+        answer: "I am a frontend-focused Full Stack Developer specializing in building high-performance web applications. My core stack revolves around TypeScript, Next.js, and Astro, supported by scalable backend solutions like PostgreSQL, Supabase, and Cloudflare Workers.",
+        defaultOpen: true,
+    },
+    {
+        id: 2,
+        question: "How do you approach performance and SEO?",
+        answer: "I treat performance as a core feature. By optimizing Core Web Vitals and implementing technical SEO improvements, I previously drove a 37% increase in organic traffic and reduced deployment turnaround times by 45% using Astro and Payload CMS.",
+        defaultOpen: false,
+    },
+    {
+        id: 3,
+        question: "I see you're learning Android Development—how does that add value?",
+        answer: "I am expanding into Native Android Development to bridge the gap between web and mobile ecosystems. This allows me to bring my expertise in UI/UX and state management to mobile platforms, ensuring a seamless and high-performance user experience across all devices.",
+        defaultOpen: false,
+    },
+    {
+        id: 4,
+        question: "What is your experience with E-commerce and CMS architecture?",
+        answer: "I have extensive experience with Shopify (Liquid), WordPress, and Headless CMS (Payload). Notably, I engineered a caching strategy for Google APIs that reduced external service costs by 43% while maintaining real-time inventory sync for multi-branch operations.",
+        defaultOpen: false,
+    },
+    {
+        id: 5,
+        question: "How do you handle data telemetry and analytics?",
+        answer: "I build with a data-driven mindset. I have overhauled data telemetry using GA4 and GTM data layers, which increased marketing attribution accuracy by 92% for previous employers, enabling more precise business decision-making.",
+        defaultOpen: false,
+    },
+    {
+        id: 6,
+        question: "Are you comfortable with both team collaboration and solo projects?",
+        answer: "Yes. I have three years of experience as a freelancer translating client requirements into custom solutions, as well as significant experience working within modern Agile React workflows in agency and corporate environments.",
+        defaultOpen: false,
+    },
+]
+---
+
+<div class="flex-col-start">
+    {faqs.map((faq) => <Question faq={faq} />)}
+</div>

@@ -3,11 +3,13 @@ import seo from "@/data/seo.json"
 import { AstroFont } from "astro-font"
 import "@/styles/global.css"
 import Footer from "@/sections/Footer.astro"
-import FaqSection from "@/sections/FaqSection.astro"
 
 import { getContent } from "@/utils/graphql-client"
 import { faqQuery, aboutQuery } from "@/utils/queries"
 import PageNavigation from "@/features/page-navigation/PageNavigation.astro"
+import PageFaq from "@/features/page-faq/PageFaq.astro"
+import PageSection from "@/shared/components/PageSection.astro"
+import { ICONS, SECTION_IDS } from "@/shared/lib/constants.ts"
 import Separator from "@/shared/components/Separator.astro"
 const { faq } = await getContent(faqQuery)
 const { aboutMe } = await getContent(aboutQuery)
@@ -59,7 +61,55 @@ const { jsonLd: faqJsonLd } = faq
         <script is:inline type="application/ld+json" set:html={JSON.stringify(aboutSchema)} />
 
         <!-- FAQ Schema -->
-        <script is:inline type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+        <!--<script is:inline type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />-->
+        <script is:inline type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "What is your primary technical focus?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "I am a frontend-focused Full Stack Developer specializing in building high-performance web applications using TypeScript, Next.js, and Astro, supported by scalable backend solutions like PostgreSQL, Supabase, and Cloudflare Workers."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "How do you approach performance and SEO?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "I treat performance as a core feature. By optimizing Core Web Vitals and implementing technical SEO improvements, I previously drove a 37% increase in organic traffic and reduced deployment turnaround times by 45% using Astro and Payload CMS."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "How does your Android development journey add value to your web expertise?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "I am expanding into Native Android Development to bridge the gap between web and mobile ecosystems. This allows me to apply my expertise in UI/UX and state management to mobile platforms, ensuring a seamless user experience across all devices."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "What is your experience with E-commerce and CMS architecture?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "I have extensive experience with Shopify (Liquid), WordPress, and Headless CMS (Payload). I notably engineered a caching strategy for Google APIs that reduced external service costs by 43% while maintaining real-time inventory sync."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "How do you handle data telemetry and analytics?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "I build with a data-driven mindset, having overhauled data telemetry using GA4 and GTM data layers. This increased marketing attribution accuracy by 92% for previous employers, enabling more precise business decision-making."
+                        }
+                    }
+                ]
+            }
+        </script>
 
         <!-- Website Schema -->
         <script is:inline type="application/ld+json">
@@ -176,7 +226,10 @@ const { jsonLd: faqJsonLd } = faq
         <PageNavigation />
         <main id="main-content" class="page-wrapper">
             <slot />
-            <FaqSection />
+            <Separator />
+            <PageSection title="Some Q&A" icon={ICONS.faq} id={SECTION_IDS.faq}>
+                <PageFaq />
+            </PageSection>
         </main>
         <Footer />
     </body>

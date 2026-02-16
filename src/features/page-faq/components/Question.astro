@@ -1,0 +1,46 @@
+---
+import { ICONS } from "@/shared/lib/constants.ts"
+import { Icon } from "astro-iconify"
+interface Props {
+    faq: {
+        question: string
+        answer: string
+        defaultOpen: boolean
+    }
+}
+
+const { faq } = Astro.props
+---
+
+<details
+    open={faq.defaultOpen}
+    name="faq"
+    class="overflow-hidden border border-outline p-4 group open:bg-surface-container flex-col-start gap-y-2 squircle open:my-4 open:rounded-lg"
+>
+    <summary class="flex-row-between items-center cursor-pointer text-secondary group-open:text-primary">
+        <h3 class="text-current! my-0! max-w-[25ch]! text-base! md:max-w-prose!">{faq.question}</h3>
+        <Icon
+            name={ICONS.chevronDown}
+            class="size-5 group-open:rotate-180 transition-transform ease-transition-in-out ease-transition-in-out"
+        />
+    </summary>
+    <div class="details-content-wrapper transition-transform ease-transition-in-out max-w-prose">
+        {faq.answer}
+    </div>
+</details>
+
+<style>
+    @reference "tailwindcss";
+
+    details:has(+ details[open]),
+    details:last-child {
+        @apply rounded-b-lg;
+    }
+    details[open] + details,
+    details:first-child {
+        @apply rounded-t-lg;
+    }
+    details:not(:last-child, details[open], :has(+ details[open])) {
+        @apply border-b-0;
+    }
+</style>

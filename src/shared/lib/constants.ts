@@ -8,6 +8,7 @@ export const ICONS = {
     behance: "mage:behance",
     link: "mage:arrow-up-right-square-fill",
     tag: "mage:tag-fill",
+    chevronDown: "mage:chevron-down-square-fill",
 }
 
 export const SECTION_IDS = {
