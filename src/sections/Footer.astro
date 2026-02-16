@@ -1,98 +1,61 @@
 ---
+import { ICONS } from "@/shared/lib/constants"
 import { Icon } from "astro-iconify"
+import SocialLinks from "@/shared/components/social-links/SocialLinks.astro"
 
 const footerLinks = [
     {
         name: "github",
         url: "https://github.com/exuseric",
-        icon: "clarity:arrow-line",
+        icon: ICONS.github,
         title: "connect on github",
     },
     {
         name: "behance",
         url: "https://behance.net/exuseric",
-        icon: "clarity:arrow-line",
+        icon: ICONS.behance,
         title: "connect on behance",
     },
     {
         name: "linkedin",
         url: "https://linkedin.com/in/exuseric",
-        icon: "clarity:arrow-line",
+        icon: ICONS.linkedin,
         title: "connect on linkedin",
     },
     {
         name: "mail",
         url: "mailto:hello@ericmaina.me",
-        icon: "clarity:arrow-line",
-        title: "email me at hello@ericmaina.me",
+        icon: ICONS.contact,
+        title: "hello@ericmaina.me",
     },
 ]
+
+const email = footerLinks.find((link) => link.name === "mail")
 ---
 
-<footer class="layout-grid py-container-block">
-    <div class="flex flex-col flex-wrap items-start justify-start gap-y-24">
+<footer class="layout-grid">
+    <div class="bg-primary breakout layout-grid py-16 text-on-primary rounded-xl">
         <nav class="flex flex-col md:flex-row flex-wrap items-start justify-start md:justify-between gap-y-8 w-full">
             {
                 footerLinks.map((link) => (
                     <a
-                        class="h2 footerLink relative isolate flex flex-row items-center gap-0 text-current hover:text-brand"
+                        class="btn-filled-tonal text-xl w-full md:w-fit"
                         href={link.url}
                         target="_blank"
                         rel="noopener noreferrer"
                         title={link.title}
                     >
                         <span>{link.name.toUpperCase()}</span>
-                        <Icon
-                            name="hugeicons:arrow-up-right-01"
-                            aria-hidden="true"
-                            focusable="false"
-                            class="link-icon p-1"
-                        />
+                        <Icon name={link.icon} aria-hidden="true" focusable="false" class="size-5 text-current" />
                     </a>
                 ))
             }
         </nav>
-        <div class="footerBottom">
+        <div class="flex-row-between flex-wrap items-center gap-4">
             <p class="copyright text-sm">
-                &copy;&nbsp;{new Date().getFullYear()}&nbsp;Eric Gathoni. All rights reserved.
+                &copy;&nbsp;{new Date().getFullYear()}&nbsp;Eric Gathoni. All rights reserved. Nairobi, Kenya
             </p>
-            <p class="text-sm">Nairobi, Kenya</p>
+            <a class="btn-text text-current" href={email?.url} target="_blank">{email?.title}</a>
         </div>
     </div>
 </footer>
-
-<style>
-    .footerLink {
-        --_arrow-angle: 0deg;
-        --_block-width: calc(100% - 1em);
-
-        text-decoration: none;
-        /*transition: all var(--transition-fast);*/
-
-        .link-icon {
-            width: 1.2em;
-            height: 1.2em;
-            transform: rotateZ(var(--_arrow-angle));
-            transition: transform var(--transition-fast);
-            transform-origin: center;
-        }
-
-        &::before {
-            content: "";
-            position: absolute;
-            inset: auto 0 0;
-            z-index: -1;
-            display: inline-block;
-            width: var(--_block-width);
-            height: 0.05em;
-            background-color: currentColor;
-            margin-right: var(--size-2);
-            transition: width var(--transition-fast);
-        }
-
-        &:hover {
-            --_arrow-angle: 45deg;
-            --_block-width: 100%;
-        }
-    }
-</style>
