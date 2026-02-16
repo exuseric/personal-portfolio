@@ -1,23 +1,20 @@
+@reference "tailwindcss";
 :root {
-    --font-family-heading: "Geist Mono", sans-serif;
-    --font-family-base: "DM Sans", sans-serif;
-}
+    --space-page-gutter: clamp(1rem, 4vw, 2rem);
+    --space-section: clamp(theme("spacing.7"), 8vw, theme("spacing.10"));
 
-:root {
-    /* Base */
-    --stroke-base: 0.12rem;
-    /* replaces 1px */
+    /* Maximum site width — fluid between 65rem and 75rem */
+    --width-site-max: clamp(65rem, 80vw, 75rem);
 
-    /* Scale */
-    --stroke-0: 0;
-    --stroke-1: var(--stroke-base);
-    --stroke-2: calc(var(--stroke-base) * 2);
-    --stroke-3: calc(var(--stroke-base) * 3);
-    --stroke-4: calc(var(--stroke-base) * 4);
+    /* Content (prose) column — never exceeds 47rem (~752px) */
+    --width-content: min(100% - var(--space-page-gutter) * 2, 47rem);
 
-    --radius-none: 0;
-    --radius-sm: 0.25rem;
-    --radius-md: 0.5rem;
-    --radius-lg: 1rem;
-    --radius-round: calc(infinity * 1px);
+    /* Full site shell — edge-to-edge with side gutters */
+    --width-site: min(100% - var(--space-page-gutter) * 2, var(--width-site-max));
+
+    /* Narrow variant — forms, modals, focused reading */
+    --width-narrow: min(100% - var(--space-page-gutter) * 2, 32rem);
+
+    /* Wide variant — dashboards, galleries, data-heavy UIs */
+    --width-wide: min(100% - var(--space-page-gutter) * 2, 90rem);
 }

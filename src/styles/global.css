@@ -3,18 +3,13 @@
 @import "./animations.css";
 @import "./button.css";
 @import "./form.css";
+@import "./tokens.css";
 
 /*---break---*/
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-    --font-mono: var(--font-family-mono);
     --font-sans: var(--font-family-sans);
-
-    --radius-sm: var(--radius-sm);
-    --radius-md: var(--radius-md);
-    --radius-lg: var(--radius-lg);
-    --radius-round: var(--radius-round);
 
     /* Primary Colors */
     --color-primary: var(--md-sys-color-primary);
@@ -366,24 +361,31 @@ img {
 }
 
 @utility layout-grid {
-    --padding-inline: 1rem;
-    --content-max-width: var(--site-width);
-    --breakout-max-width: calc(var(--site-width) + 6rem);
+    --padding-inline: var(--space-page-gutter);
+    --content-max-width: var(--width-site);
+    --breakout-max-width: var(--width-wide);
     --breakout-size: calc((var(--breakout-max-width) - var(--content-max-width)) / 2);
+    --section-spacing: var(--space-section);
 
     display: grid;
     grid-template-columns:
-            [full-width-start] minmax(var(--padding-inline), 1fr) [breakout-start] minmax(0, var(--breakout-size))
-            [content-start] min(100% - (var(--padding-inline) * 2), var(--content-max-width)) [content-end] minmax(
-                0,
-                var(--breakout-size)
-            )
-            [breakout-end] minmax(var(--padding-inline), 1fr) [full-width-end];
+        [full-width-start] minmax(var(--padding-inline), 1fr)
+        [breakout-start] minmax(0, var(--breakout-size))
+        [content-start] min(100% - (var(--padding-inline) * 2), var(--content-max-width))
+        [content-end] minmax(0, var(--breakout-size))
+        [breakout-end] minmax(var(--padding-inline), 1fr)
+        [full-width-end];
     grid-auto-rows: max-content;
+    row-gap: var(--section-spacing);
     width: 100%;
 
-    & > :not(.breakout, .full-width) {
+    & > :not(.breakout, .full-width, .full-width-padded) {
         grid-column: content;
+    }
+
+    /* Collapse breakout to content on small screens */
+    @media (width < 640px) {
+        --breakout-size: 0px;
     }
 }
 
@@ -393,6 +395,16 @@ img {
 
 @utility breakout {
     grid-column: breakout;
+}
+
+@utility full-width-padded {
+    grid-column: full-width;
+    display: grid;
+    grid-template-columns: subgrid;
+
+    & > * {
+        grid-column: content;
+    }
 }
 
 @layer utilities {
