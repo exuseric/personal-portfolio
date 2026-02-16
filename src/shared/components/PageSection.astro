@@ -1,0 +1,23 @@
+---
+import { ICONS } from "@/shared/lib/constants.ts"
+import { Icon } from "astro-iconify"
+
+interface Props {
+    id: string
+    icon: string
+    title: string
+}
+
+const props = Astro.props
+---
+
+<section id={props.id} class="layout-grid">
+    <header>
+        <h2 class="mb-8 flex-row-start items-center gap-x-3 text-primary">
+            <Icon name={props.icon} class="size-5 animate-pulse text-current" />
+            {props.title}
+        </h2>
+    </header>
+
+    <slot />
+</section>

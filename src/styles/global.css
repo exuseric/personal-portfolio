@@ -2,6 +2,7 @@
 @import "./theme.css";
 @import "./animations.css";
 @import "./button.css";
+@import "./form.css";
 
 /*---break---*/
 @custom-variant dark (&:is(.dark *));
@@ -153,11 +154,19 @@
 }
 
 :root {
+    --site-width-max: clamp(65rem, 10vw, 75rem);
     /* Layout */
     --content-width: min(100% - 2rem, 47rem);
     /*800px*/
-    --site-width: min(100% - 2rem, 75rem);
+    --site-width: min(100% - 2rem, var(--site-width-max));
 }
+
+/*@media (min-width: 768px) and (max-width: 1200px) {*/
+/*    :root {*/
+/*        !*--site-width-max: 65rem;*!*/
+/*    }*/
+/*}*/
+
 
 html,
 body {
@@ -356,43 +365,37 @@ img {
     }
 }
 
-@layer utilities {
-    .layout-grid {
-        --padding-inline: 1rem;
-        --content-max-width: var(--site-width);
-        --breakout-max-width: calc(var(--site-width) + 6rem);
-        --breakout-size: calc((var(--breakout-max-width) - var(--content-max-width)) / 2);
+@utility layout-grid {
+    --padding-inline: 1rem;
+    --content-max-width: var(--site-width);
+    --breakout-max-width: calc(var(--site-width) + 6rem);
+    --breakout-size: calc((var(--breakout-max-width) - var(--content-max-width)) / 2);
 
-        display: grid;
-        grid-template-columns:
+    display: grid;
+    grid-template-columns:
             [full-width-start] minmax(var(--padding-inline), 1fr) [breakout-start] minmax(0, var(--breakout-size))
             [content-start] min(100% - (var(--padding-inline) * 2), var(--content-max-width)) [content-end] minmax(
                 0,
                 var(--breakout-size)
             )
             [breakout-end] minmax(var(--padding-inline), 1fr) [full-width-end];
-        grid-auto-rows: max-content;
-        width: 100%;
-    }
+    grid-auto-rows: max-content;
+    width: 100%;
 
-    @media (min-width: 768px) and (max-width: 1200px) {
-        .layout-grid {
-            --content-max-width: var(--content-width);
-        }
-    }
-
-    .layout-grid > :not(.breakout, .full-width) {
+    & > :not(.breakout, .full-width) {
         grid-column: content;
     }
+}
 
-    .layout-grid > .breakout {
-        grid-column: breakout;
-    }
+@utility full-width {
+    grid-column: full-width;
+}
 
-    .layout-grid > .full-width {
-        grid-column: full-width;
-    }
+@utility breakout {
+    grid-column: breakout;
+}
 
+@layer utilities {
     .page-wrapper {
         @apply flex flex-col gap-y-0 min-h-screen items-center;
     }
@@ -403,7 +406,6 @@ img {
     }
 
     @supports (corner-shape: squircle) {
-        .squircle,
         button,
         a {
             corner-shape: squircle;
@@ -413,6 +415,10 @@ img {
     .about-content ul {
         @apply list-disc pl-8;
     }
+}
+
+@utility squircle {
+    corner-shape: squircle;
 }
 
 @utility stamp-strip {
@@ -436,19 +442,6 @@ img {
         );
         @apply absolute top-0 inset-x-0 w-full h-12;
     }
-
-    /*!* The Mask: Punches holes in the top and bottom *!*/
-    /*-webkit-mask-image: var(--mask-pattern), var(--mask-pattern), linear-gradient(black, black);*/
-    /*!* Position one mask at the top, one at the bottom, and one for the middle fill *!*/
-    /*-webkit-mask-position: top center, bottom center, center;*/
-    /*mask-position: top center, bottom center, center;*/
-    /*-webkit-mask-size: var(--total-step) var(--total-step), var(--total-step) var(--total-step), 100% 100%;*/
-    /*mask-size: var(--total-step) var(--total-step), var(--total-step) var(--total-step), 100% 100%;*/
-    /*-webkit-mask-repeat: repeat-x, repeat-x, no-repeat;*/
-    /*mask-repeat: repeat-x, repeat-x, no-repeat;*/
-    /*!* Subtract the circles from the solid middle *!*/
-    /*-webkit-mask-composite: source-out, source-out, source-over;*/
-    /*mask-composite: subtract;*/
 }
 
 @utility bg-swirl {
@@ -456,13 +449,12 @@ img {
     --c1: oklch(from var(--md-sys-color-primary-fixed) l c h / .01);
     --c2: var(--md-sys-color-surface);
 
-    --_l: #0000 46%,var(--c1) 47% 53%,#0000 54%;
-    background:
-            radial-gradient(100% 100% at 100% 100%,var(--_l)) var(--s) var(--s),
-            radial-gradient(100% 100% at 0    0   ,var(--_l)) var(--s) var(--s),
-            radial-gradient(100% 100%,#0000 22%,var(--c1) 23% 29%, #0000 30% 34%,var(--c1) 35% 41%,#0000 42%),
-            var(--c2);
-    background-size: calc(var(--s)*2) calc(var(--s)*2);
+    --_l: #0000 46%, var(--c1) 47% 53%, #0000 54%;
+    background: radial-gradient(100% 100% at 100% 100%, var(--_l)) var(--s) var(--s),
+    radial-gradient(100% 100% at 0 0, var(--_l)) var(--s) var(--s),
+    radial-gradient(100% 100%, #0000 22%, var(--c1) 23% 29%, #0000 30% 34%, var(--c1) 35% 41%, #0000 42%),
+    var(--c2);
+    background-size: calc(var(--s) * 2) calc(var(--s) * 2);
     background-attachment: fixed;
 }
 

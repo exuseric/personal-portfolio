@@ -1,0 +1,5 @@
+@reference "tailwindcss";
+
+.form-group {
+    @apply flex-col-start gap-y-1;
+}

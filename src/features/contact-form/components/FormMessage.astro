@@ -1,0 +1,20 @@
+---
+import { cn } from "@/utils/cn.ts"
+interface props extends HTMLParagraphElement {
+    message: string
+    type: "error" | "success"
+}
+
+const { message, type = "error", class: className, ...props } = Astro.props
+
+const baseStyles = cn("p-1 px-3 overflow-hidden w-full", "rounded-sm supports-[corner-shape:squircle]:rounded-lg")
+const variantStyles = {
+    error: "bg-error-container text-error",
+    success: "bg-surface-container text-tertiary",
+}
+const classes = cn(baseStyles, variantStyles[type], className)
+---
+
+<p class={classes} {...props}>
+    {message}
+</p>

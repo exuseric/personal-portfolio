@@ -8,9 +8,6 @@ export const contactFormValidation = z.object({
         .max(100, "Name must be under 100 characters."),
 
     email: z.string().trim().email("Please enter a valid email address (e.g., mail@example.com)."),
-
-    inquiry: z.string().optional(),
-
     message: z
         .string()
         .trim()

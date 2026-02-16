@@ -1,0 +1,38 @@
+---
+import Input from "@/features/contact-form/components/Input.astro"
+import Textarea from "@/features/contact-form/components/Textarea.astro"
+import { FORM_MESSAGES } from "@/shared/lib/constants.ts"
+import FormMessage from "@/features/contact-form/components/FormMessage.astro"
+import { actions, isInputError, type ActionReturnType } from "astro:actions"
+
+interface Props {
+    result?: ActionReturnType<typeof actions.contact.sendMessage>
+    success: boolean
+}
+
+const { result, success } = Astro.props
+const inputErrors = isInputError(result?.error) ? result.error.fields : {}
+---
+
+<form class="max-w-prose w-full flex-col-start gap-y-4" method="post" action={actions.contact.sendMessage}>
+    {result?.error && !isInputError(result.error) && <FormMessage message={FORM_MESSAGES.incomplete} />}
+    {success && <FormMessage type="success" message={FORM_MESSAGES.success} />}
+    <div class="form-group">
+        <label for="name">Name</label>
+        <Input type="text" placeholder="Enter your name" name="name" id="name" required minlength="2" />
+        {inputErrors.name && <FormMessage message={inputErrors.name.join(", ")} />}
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <Input type="email" placeholder="Enter your email" name="email" id="email" required />
+        {inputErrors.email && <FormMessage message={inputErrors.email.join(", ")} />}
+    </div>
+    <div class="form-group">
+        <label for="message">Message</label>
+        <Textarea placeholder="Write your message" name="message" id="message" minlength="10" required />
+        {inputErrors.message && <FormMessage message={inputErrors.message.join(", ")} />}
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn-filled">Send Message</button>
+    </div>
+</form>

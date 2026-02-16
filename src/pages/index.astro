@@ -4,6 +4,19 @@ import Projects from "@/sections/projects/ProjectContainer.astro"
 import ContactSection from "@/sections/Contact.astro"
 import Hero from "@/features/page-hero/Hero.astro"
 import Separator from "@/shared/components/Separator.astro"
+import PageSection from "@/shared/components/PageSection.astro"
+import { ICONS, SECTION_IDS } from "@/shared/lib/constants.ts"
+import ContactForm from "@/features/contact-form/ContactForm.astro"
+import { actions } from "astro:actions"
+import About from "@/sections/About.astro"
+
+export const prerender = false
+
+const result = Astro.getActionResult(actions.contact.sendMessage)
+const success = result && !result.error
+if (success) {
+    return Astro.redirect(`/#${SECTION_IDS.contact}`)
+}
 ---
 
 <DefaultLayout>
@@ -11,5 +24,7 @@ import Separator from "@/shared/components/Separator.astro"
     <Separator />
     <Projects />
     <Separator />
-    <ContactSection />
+    <PageSection icon={ICONS.contact} id={SECTION_IDS.contact} title="Let's Connect">
+        <ContactForm success={success ?? false} result={result} />
+    </PageSection>
 </DefaultLayout>

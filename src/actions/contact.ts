@@ -21,7 +21,6 @@ export const contact = {
                         name: input.name,
                         email: input.email,
                         message: input.message,
-                        inquiry: input.inquiry,
                     },
                 })
                 if (!adminResult.success) {
