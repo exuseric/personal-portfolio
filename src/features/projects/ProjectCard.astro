@@ -1,6 +1,6 @@
 ---
 import Badge from "@/shared/components/badge/Badge.astro"
-import { Icon } from "astro-icon/components"
+import Icon from "@/shared/components/Icon.astro"
 import { ICONS } from "@/shared/lib/constants.ts"
 import type { Project } from "@/shared/lib/types"
 interface Props {
@@ -20,7 +20,13 @@ const { project } = Astro.props
         <div class="flex-row-start gap-x-2">
             {
                 project.githubLink && (
-                    <a class="btn-text" href={project.githubLink} target="_blank">
+                    <a 
+                        class="btn-text" 
+                        href={project.githubLink} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        aria-label={`View ${project.title} source code on GitHub (opens in a new tab)`}
+                    >
                         Github
                         <Icon name={ICONS.github} class="size-5" />
                     </a>
@@ -28,7 +34,13 @@ const { project } = Astro.props
             }
             {
                 project.demoLink && (
-                    <a class="btn-filled" href={project.demoLink} target="_blank">
+                    <a 
+                        class="btn-filled" 
+                        href={project.demoLink} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        aria-label={`Visit ${project.title} live demo (opens in a new tab)`}
+                    >
                         Visit
                         <Icon name={ICONS.link} class="size-5" />
                     </a>
@@ -41,7 +53,9 @@ const { project } = Astro.props
     </p>
 
     <ul aria-label="tech stack" class="flex-row-start flex-wrap gap-x-2 items-center">
-        <Icon name={ICONS.tag} class="size-5 text-tertiary" />
+        <li>
+            <Icon name={ICONS.tag} class="size-5 text-tertiary" />
+        </li>
         {
             project.techStack.map((stack) => (
                 <li>

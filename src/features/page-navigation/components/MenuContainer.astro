@@ -1,6 +1,6 @@
 ---
 import { links } from "@/features/page-navigation/lib/get-menu-links.ts"
-import { Icon } from "astro-icon/components"
+import Icon from "@/shared/components/Icon.astro"
 ---
 
 <nav class="flex-row-center md:flex-row-end gap-x-2 w-full" data-page-menu>
@@ -26,9 +26,11 @@ import { Icon } from "astro-icon/components"
             const links = menu.querySelectorAll("a")
             links.forEach((link) => {
                 link.removeAttribute("data-active")
+                link.removeAttribute("aria-current")
 
-                if (link.getAttribute("href") === hash) {
+                if (link.getAttribute("href") === hash || (hash === "" && link.getAttribute("href") === "/")) {
                     link.setAttribute("data-active", "")
+                    link.setAttribute("aria-current", "page")
                 }
             })
         })

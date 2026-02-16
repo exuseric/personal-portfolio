@@ -18,6 +18,12 @@ export const SECTION_IDS = {
     faq: "faq",
 }
 
+export const SOCIAL_LINKS = {
+    github: "https://github.com/exuseric",
+    linkedin: "https://linkedin.com/in/exuseric",
+    behance: "https://behance.net/exuseric",
+}
+
 export const FORM_MESSAGES = {
     // Validation Errors
     incomplete: "Oops! It looks like some required fields are missing. Please check the highlighted areas.",

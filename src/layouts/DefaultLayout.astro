@@ -36,7 +36,12 @@ const { jsonLd: faqJsonLd } = faq
         <link rel="canonical" href={seo.siteUrl} />
         <link rel="sitemap" href="/sitemap-index.xml" />
 
-        <!-- DNS Prefetch for external domains -->
+        <!-- Preconnect for external domains -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://eu-west-2.graphassets.com" />
+
+        <!-- DNS Prefetch as fallback -->
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
         <link rel="dns-prefetch" href="//fonts.gstatic.com" />
         <link rel="dns-prefetch" href="//eu-west-2.graphassets.com" />
@@ -223,8 +228,9 @@ const { jsonLd: faqJsonLd } = faq
     </head>
 
     <body class="bg-swirl text-on-surface">
+        <a href="#main-content" class="skip-link">Skip to content</a>
         <PageNavigation />
-        <main id="main-content" class="page-wrapper">
+        <main id="main-content" class="page-wrapper" tabindex="-1">
             <slot />
             <Separator />
             <PageSection title="Some Q&A" icon={ICONS.faq} id={SECTION_IDS.faq}>

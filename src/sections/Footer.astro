@@ -1,24 +1,23 @@
 ---
-import { ICONS } from "@/shared/lib/constants"
-import { Icon } from "astro-icon/components"
-import SocialLinks from "@/shared/components/social-links/SocialLinks.astro"
+import { ICONS, SOCIAL_LINKS } from "@/shared/lib/constants"
+import Icon from "@/shared/components/Icon.astro"
 
 const footerLinks = [
     {
         name: "github",
-        url: "https://github.com/exuseric",
+        url: SOCIAL_LINKS.github,
         icon: ICONS.github,
         title: "connect on github",
     },
     {
         name: "behance",
-        url: "https://behance.net/exuseric",
+        url: SOCIAL_LINKS.behance,
         icon: ICONS.behance,
         title: "connect on behance",
     },
     {
         name: "linkedin",
-        url: "https://linkedin.com/in/exuseric",
+        url: SOCIAL_LINKS.linkedin,
         icon: ICONS.linkedin,
         title: "connect on linkedin",
     },
@@ -35,7 +34,7 @@ const email = footerLinks.find((link) => link.name === "mail")
 
 <footer class="layout-grid">
     <div class="bg-primary breakout layout-grid py-16 text-on-primary rounded-xl">
-        <nav class="flex flex-col md:flex-row flex-wrap items-start justify-start md:justify-between gap-y-8 w-full">
+        <nav class="flex flex-col md:flex-row flex-wrap items-start justify-start md:justify-between gap-y-8 w-full" aria-label="Footer social links">
             {
                 footerLinks.map((link) => (
                     <a
@@ -43,10 +42,10 @@ const email = footerLinks.find((link) => link.name === "mail")
                         href={link.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        title={link.title}
+                        aria-label={`${link.title} (opens in a new tab)`}
                     >
                         <span>{link.name.toUpperCase()}</span>
-                        <Icon name={link.icon} aria-hidden="true" focusable="false" class="size-5 text-current" />
+                        <Icon name={link.icon} class="size-5 text-current" />
                     </a>
                 ))
             }
@@ -55,7 +54,7 @@ const email = footerLinks.find((link) => link.name === "mail")
             <p class="copyright text-sm">
                 &copy;&nbsp;{new Date().getFullYear()}&nbsp;Eric Gathoni. All rights reserved. Nairobi, Kenya
             </p>
-            <a class="btn-text text-current" href={email?.url} target="_blank">{email?.title}</a>
+            <a class="btn-text text-current" href={email?.url} target="_blank" rel="noopener noreferrer" aria-label="Send an email to Eric (opens in a new tab)">{email?.title}</a>
         </div>
     </div>
 </footer>

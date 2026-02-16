@@ -1,0 +1,21 @@
+---
+import { Icon as AstroIcon } from "astro-icon/components"
+import type { HTMLAttributes } from "astro/types"
+import { cn } from "@/utils/cn.ts"
+
+interface Props {
+    name: string
+    title?: string
+    class?: string
+    ["aria-hidden"]?: boolean | "true" | "false" | null | undefined
+}
+
+const { name, title, "aria-hidden": ariaHidden = "true", class: className, ...props } = Astro.props
+
+const baseStyle = cn("size-5")
+
+const classes = cn(baseStyle, className)
+---
+
+{title && <span class="sr-only">{title}</span>}
+<AstroIcon class={classes} name={name} aria-hidden={ariaHidden} {...props} />

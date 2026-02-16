@@ -7,7 +7,7 @@ import { FORM_MESSAGES } from "@/shared/lib/constants.ts"
 ---
 
 <form id="contact-form" class="max-w-prose w-full flex-col-start gap-y-4">
-    <div id="form-messages">
+    <div id="form-messages" aria-live="polite">
         <FormMessage data-form-message="success" type="success" message={FORM_MESSAGES.success} class="hidden mb-4" />
         <FormMessage data-form-message="error" type="error" message={FORM_MESSAGES.incomplete} class="hidden mb-4" />
         <FormMessage data-form-message="server-error" type="error" message={FORM_MESSAGES.serverError} class="hidden mb-4" />
@@ -15,20 +15,20 @@ import { FORM_MESSAGES } from "@/shared/lib/constants.ts"
     
     <div class="form-group">
         <label for="name">Name</label>
-        <Input type="text" placeholder="Enter your name" name="name" id="name" required minlength="2" />
-        <FormMessage data-field-error="name" message="" class="hidden mt-1" />
+        <Input type="text" placeholder="Enter your name" name="name" id="name" required minlength="2" aria-describedby="error-name" />
+        <FormMessage id="error-name" data-field-error="name" message="" class="hidden mt-1" />
     </div>
     
     <div class="form-group">
         <label for="email">Email</label>
-        <Input type="email" placeholder="Enter your email" name="email" id="email" required />
-        <FormMessage data-field-error="email" message="" class="hidden mt-1" />
+        <Input type="email" placeholder="Enter your email" name="email" id="email" required aria-describedby="error-email" />
+        <FormMessage id="error-email" data-field-error="email" message="" class="hidden mt-1" />
     </div>
     
     <div class="form-group">
         <label for="message">Message</label>
-        <Textarea placeholder="Write your message" name="message" id="message" minlength="10" required />
-        <FormMessage data-field-error="message" message="" class="hidden mt-1" />
+        <Textarea placeholder="Write your message" name="message" id="message" minlength="10" required aria-describedby="error-message" />
+        <FormMessage id="error-message" data-field-error="message" message="" class="hidden mt-1" />
     </div>
     
     <div class="form-group">

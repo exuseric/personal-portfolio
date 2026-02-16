@@ -1,20 +1,20 @@
 ---
-import { ICONS } from "@/shared/lib/constants.ts"
-import { Icon } from "astro-icon/components"
+import { ICONS, SOCIAL_LINKS } from "@/shared/lib/constants.ts"
+import Icon from "@/shared/components/Icon.astro"
 
 const links = [
     {
-        href: "https://github.com/exuseric",
+        href: SOCIAL_LINKS.github,
         icon: ICONS.github,
         label: "Github",
     },
     {
-        href: "https://linkedin.com/in/exuseric",
+        href: SOCIAL_LINKS.linkedin,
         icon: ICONS.linkedin,
         label: "LinkedIn",
     },
     {
-        href: "https://behance.net/exuseric",
+        href: SOCIAL_LINKS.behance,
         icon: ICONS.behance,
         label: "Behance",
     },
@@ -25,7 +25,7 @@ const links = [
     {
         links.map((link) => (
             <li class="[&:not(:last-child)]:border-r border-scrim/20">
-                <a class="btn-text" href={link.href} target="_blank">
+                <a class="btn-text" href={link.href} target="_blank" rel="noopener noreferrer" aria-label={`Visit Eric's ${link.label} profile (opens in a new tab)`}>
                     <Icon name={link.icon} class="size-5" />
                     {link.label}
                 </a>
