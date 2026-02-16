@@ -8,12 +8,12 @@ import tailwindcss from "@tailwindcss/vite"
 
 import react from "@astrojs/react"
 
-import icon from "astro-icon";
+import icon from "astro-icon"
 
 // https://astro.build/config
 export default defineConfig({
     site: "https://ericmaina.me",
-    output: "server",
+    output: "hybrid",
     build: {
         inlineStylesheets: "never",
     },
@@ -21,14 +21,6 @@ export default defineConfig({
     adapter: netlify({
         imageCDN: false,
         functionPerRoute: false,
-        _redirects: [
-            // Security headers
-            "/*    /.netlify/functions/entry    200",
-            // Redirect www to non-www
-            "https://www.ericmaina.me/* https://ericmaina.me/:splat 301!",
-            // Force HTTPS
-            "http://ericmaina.me/* https://ericmaina.me/:splat 301!",
-        ],
     }),
 
     image: {
@@ -37,11 +29,16 @@ export default defineConfig({
         domains: ["eu-west-2.graphassets.com"],
     },
 
-    integrations: [sitemap(), purgecss({
-        variables: true,
-        keyframes: true,
-        fontFace: true,
-    }), react(), icon()],
+    integrations: [
+        sitemap(),
+        purgecss({
+            variables: true,
+            keyframes: true,
+            fontFace: true,
+        }),
+        react(),
+        icon(),
+    ],
 
     vite: {
         plugins: [tailwindcss()],

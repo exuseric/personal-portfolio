@@ -1,0 +1,11 @@
+[[redirects]]
+  from = "https://www.ericmaina.me/*"
+  to = "https://ericmaina.me/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://ericmaina.me/*"
+  to = "https://ericmaina.me/:splat"
+  status = 301
+  force = true
