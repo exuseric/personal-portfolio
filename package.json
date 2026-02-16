@@ -10,6 +10,7 @@
         "check": "astro check",
         "preview": "astro preview",
         "lint": "astro check",
+        "lint:fix": "astro check --fix",
         "hide": "astro preferences disable devToolbar",
         "type-check": "tsc --noEmit"
     },
