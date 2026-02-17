@@ -10,7 +10,7 @@ const { project } = Astro.props
 ---
 
 <article
-    class="w-full h-full border border-on-surface/20 squircle rounded-3xl supports-[corner-shape:squircle]:rounded-4xl p-4 flex-col-start gap-y-4 glass"
+    class="h-full border border-on-surface/20 squircle rounded-3xl supports-[corner-shape:squircle]:rounded-4xl p-4 flex-col-start gap-y-4 glass hover:shadow-level-1 transition-shadow ease-transition-in-out hover:bg-surface-container-high"
 >
     <header class="flex-row-between items-center flex-wrap gap-y-2">
         <h3 class="flex-col-start gap-y-2 mb-0!">
@@ -20,10 +20,10 @@ const { project } = Astro.props
         <div class="flex-row-start gap-x-2">
             {
                 project.githubLink && (
-                    <a 
-                        class="btn-text" 
-                        href={project.githubLink} 
-                        target="_blank" 
+                    <a
+                        class="btn-text"
+                        href={project.githubLink}
+                        target="_blank"
                         rel="noopener noreferrer"
                         aria-label={`View ${project.title} source code on GitHub (opens in a new tab)`}
                     >
@@ -34,10 +34,10 @@ const { project } = Astro.props
             }
             {
                 project.demoLink && (
-                    <a 
-                        class="btn-filled" 
-                        href={project.demoLink} 
-                        target="_blank" 
+                    <a
+                        class="btn-filled"
+                        href={project.demoLink}
+                        target="_blank"
                         rel="noopener noreferrer"
                         aria-label={`Visit ${project.title} live demo (opens in a new tab)`}
                     >

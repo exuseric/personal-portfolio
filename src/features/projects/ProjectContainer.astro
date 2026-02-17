@@ -31,10 +31,10 @@ const projects: Project[] = [
             Projects
         </h2>
     </header>
-    <ul class="grid grid-cols-[repeat(auto-fill,minmax(min(500px,100%),1fr))] auto-rows-max gap-2 my-8 breakout w-full">
+    <ul class="column-grid auto-rows-max gap-2 my-8 w-full">
         {
             projects.map((project) => (
-                <li class="w-full h-full">
+                <li class="w-full h-full ">
                     <ProjectCard project={project} />
                 </li>
             ))

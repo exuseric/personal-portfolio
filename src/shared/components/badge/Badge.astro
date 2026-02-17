@@ -38,8 +38,8 @@ const classes = cn(baseStyles, variantStyles[variant], className)
             <slot />
         </a>
     ) : (
-        <div class={classes} {...props}>
+        <span class={classes} {...props}>
             <slot />
-        </div>
+        </span>
     )
 }
